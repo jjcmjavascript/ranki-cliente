@@ -174,9 +174,11 @@
                 }
             },
             login: function() {
-                loading();
+                loading(this);
                 this.success = [];
                 this.error = [];
+
+                //loaded();
 
                 if (this.$root.noScript(this.usuario) && this.$root.noScript(this.password)) {
                     let request = new FormData;
