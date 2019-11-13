@@ -17,4 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('loginvue', function () {
+    return view('vue');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');

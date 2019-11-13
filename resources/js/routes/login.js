@@ -1,7 +1,7 @@
 const routes = [
     {
-        path: '/login',
-        component: () =>  import(/* webpackChunkName: 'login' */ '_app/Login'),
+        path: '/loginvue',
+        component: () =>  import(/* webpackChunkName: 'login' */ '../app/Login'),
     },
 ];
 export default routes;

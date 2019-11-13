@@ -1,21 +1,35 @@
-require('./bootstrap');
-
-window.Vue = require('vue');
 // CONFIGURACIÓN BÁSICA DE VUE
 require('./bootstrap');
 
 window.Vue = require('vue');
 //import "@babel/polyfill";
 
+// IMPORTANDO LOADER
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+Vue.use(Loading);
+
 //============================================================
 //=============CONFIGURACIÓN PERSONALIZADA DE VUE=============
 //============================================================
 require('./config/components');
-//require('./config/filters');
+require('./config/filters');
 require('./config/sweetalert2');
-//import { ppuNewValue, ppuOldValue } from './config/functions';
 
-/*window.loading = function() {
+// SET GLOBAL DEL LOADER
+window.loading = function(self, ...args) {
+    self.$loading.show({
+        loader: 'dots',
+        opacity: 0.8,
+      ...args[0]
+    });
+};
+window.loaded = function(self) {
+    self.$loading.hide();
+};
+
+/*// ASIGNACIÓN GLOBAL DEL LOADER
+window.loading = function() {
     document.getElementsByTagName('body')[0].classList.remove('loaded');
 };
 window.loaded = function() {
