@@ -54,7 +54,7 @@ if (token && token.content) {
 }
 else { console.error('APP URL not found'); }
 
-// CONFIGURE VUE
+// CONFIGURACIÓN VUE
 const app = new Vue({
     el: '#custom-app',
     router,
