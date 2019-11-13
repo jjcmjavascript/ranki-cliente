@@ -65,13 +65,7 @@ const app = new Vue({
             user: {},
         }
     },
-    //components: {
-      //  App: () => import(/* webpackChunkName: 'layouts/app' */ '_app/layouts/App'),
-      //  Login: () => import(/* webpackChunkName: 'Login' */ '_app/Login'),
-    //)},
     methods: {
-        // funciones importadas como helpers
-        //ppuNewValue, ppuOldValue,
         /**
          * Obtiene los permisos de la ruta indicada
          * @param  {String} ruta Ruta del menú en la base de datos

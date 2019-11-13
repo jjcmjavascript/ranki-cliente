@@ -73,7 +73,6 @@ Vue.filter('number', function (number) {
 
     return number;
 })
-
 Vue.filter('ucwords', function (value) {
     if (!value) return ''
     return value.toString().toLowerCase().toLocaleUpperCase();
