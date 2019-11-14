@@ -4,7 +4,7 @@
             <div class="row h-100 bg-white">
                 <!-- IMAGEN -->
                 <div class="col-lg-7 no-padding">
-                    <div class="background-01" style="background-image: linear-gradient(150deg, rgba(51, 170, 255, 0.6)15%, rgba(4, 209, 255, 0.6)70%, rgba(164, 254, 199, 0.6)94%), url(../img/login-2.jpeg);background-size: cover;">
+                    <div class="background-01" style="background-image: linear-gradient(150deg, rgba(51, 170, 255, 0.6)15%, rgba(4, 209, 255, 0.6)70%, rgba(164, 254, 199, 0.6)94%), url();background-size: cover;">
                         <div class="authentication-col-content mx-auto">
                             <h1 class="gradient-text-01">
                                 Metro cuadrado
@@ -199,7 +199,7 @@
                         }
                     })
                     .catch((error) => {
-                        loaded();
+                        loaded(this);
                         this.error = this.$root.arrayResponse(error);
                     });
                 }

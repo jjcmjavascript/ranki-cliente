@@ -18,14 +18,14 @@ require('./config/sweetalert2');
 
 // SET GLOBAL DEL LOADER
 window.loading = function(self, ...args) {
-    self.$loading.show({
+    return self.$loading.show({
         loader: 'dots',
         opacity: 0.8,
       ...args[0]
     });
 };
 window.loaded = function(self) {
-    self.$loading.hide();
+    self.loading.hide();
 };
 
 /*// ASIGNACIÓN GLOBAL DEL LOADER
@@ -409,5 +409,3 @@ const app = new Vue({
         },
     },
 });
-
-

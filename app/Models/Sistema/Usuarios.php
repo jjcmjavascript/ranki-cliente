@@ -14,7 +14,7 @@ class Usuarios extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'apellido', 'email', 'clave',
+        'nombre', 'apellidos', 'email', 'password',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -22,7 +22,7 @@ class Usuarios extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'clave', 'remember_token',
+        'password', 'remember_token',
     ];
     /**
      * The attributes that should be cast to native types.
@@ -32,4 +32,19 @@ class Usuarios extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeBuscar($query, $request)
+    {
+        if($request->id) {
+            $query->where('id', $request->id); 
+        }
+        if($request->nombre) {
+            $query->where('nombre', $request->nombre);     
+        }
+        if($request->email) {
+            $query->where('email', $request->email); 
+        }
+
+        return $query;
+    }
 }
