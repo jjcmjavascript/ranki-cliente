@@ -9,7 +9,7 @@
                <div class="row">
                		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
 						<label class="font-weight-bold">RUT</label>
-						<input type="text" class="form-control" :class="" v-model="data.rut" />
+						<input type="text" class="form-control" @blur="validarRut()" :class="valid.rut" v-model="data.rut" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
 						<label class="font-weight-bold">Nombre</label>
@@ -24,16 +24,22 @@
 						<input type="text" class="form-control" v-model="data.apellidos" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
-						<label class="font-weight-bold">Email</label>
-						<input type="text" class="form-control" v-model="data.email" />
+						<label class="font-weight-bold">
+							Email
+						</label>
+						<input type="text" class="form-control" @blur="validarEmail()" :class="valid.email" v-model="data.email" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-3">
-						<label class="font-weight-bold">Clave</label>
-						<input type="text" class="form-control" v-model="data.password" />
+						<label class="font-weight-bold">
+							Clave
+							<i class="fa fa-info-circle" 
+							title="La clave debe contener al menos 8 caracteres"></i>
+						</label>
+						<input type="text" class="form-control" @blur="validarPassword()" :class="valid.password" v-model="data.password" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-3">
 						<label class="font-weight-bold">Confirmar clave</label>
-						<input type="text" class="form-control" v-model="data.confirmPassword" />
+						<input type="text" class="form-control" @blur="validarConfirmPassword()" :class="valid.confirmPassword" v-model="data.confirmPassword" />
                		</div>
            		</div>
             </template>
@@ -69,6 +75,12 @@
 					password: null,
 					confirmPassword: null,
 				},
+				valid: {
+					rut: '',
+					email: '',
+					password: '',
+					confirmPassword: ''
+				},
 				selects: {
 
 				}
@@ -102,6 +114,50 @@
 					 load.hide();
 				})
 			},
+			validarRut() {
+				if(this.data.rut) {
+					this.data.rut = this.data.rut.replace(/\./g, '');
+					if(this.$root.modulo11(this.data.rut).valid) {
+						this.valid.rut = 'is-valid';
+					}
+					else {
+						this.valid.rut = 'is-invalid';
+					}
+				}
+			},
+			validarEmail() {
+				if(this.data.email) {
+			    	let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			      	if(re.test(this.data.email)) {
+			      		this.valid.email = 'is-valid';
+			      	}
+			      	else {
+			      		this.valid.email = 'is-invalid';
+			      	};
+			    }
+		    },
+		    validarPassword() {
+		    	if(this.data.password) {
+		    		if(this.data.password.toString().length > 7) {
+		    			this.valid.password = 'is-valid';
+		    		}
+		    		else {
+		    			this.valid.password = 'is-invalid';
+		    		}
+		    	}
+		    },
+		    validarConfirmPassword() {
+		    	if(this.data.confirmPassword) {
+		    		if(this.data.confirmPassword.toString().length > 7 && 
+		    		   this.data.password == this.data.confirmPassword
+		    		) {
+		    			this.valid.confirmPassword = 'is-valid';
+		    		}
+		    		else {
+		    			this.valid.confirmPassword = 'is-invalid';
+		    		}
+		    	}
+		    },
 			limpiar() {
 				//
 			}

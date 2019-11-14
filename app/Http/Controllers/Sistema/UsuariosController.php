@@ -19,7 +19,7 @@ class UsuariosController extends Controller
 
     public function index(Request $request)
     {
-        $usuarios = Usuarios::buscar($request)->paginate(2);
+        $usuarios = Usuarios::buscar($request)->withTrashed()->paginate(2);
 
         return response($usuarios);
     }
@@ -42,10 +42,38 @@ class UsuariosController extends Controller
             $usuario->clave = Hash::make($request->clave);
             $usuario->save();
 
+            DB::commit();
+
             $mensaje = ['Usuario registrado exitosamente'];
             return response($mensaje, 200);
         }
         catch(\Exception $e) {
+            DB::rollBack();
+            $mensaje = [$e->getLine().' '.$e->getMessage()];
+            return response($mensaje, 500);
+        }
+    }
+
+    public function eliminar(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required | integer | exists:usuarios,id'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $usuario = Usuarios::find($request->id);
+            $usuarios->activo = 0;
+            $usuario->save();
+
+            DB::commit();
+
+            $mensaje = ['Usuario desactivado exitosamente'];
+            return response($mensaje, 200);
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
             $mensaje = [$e->getLine().' '.$e->getMessage()];
             return response($mensaje, 500);
         }

@@ -4,6 +4,7 @@ namespace App\Models\Sistema;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Usuarios extends Authenticatable
 {
@@ -14,7 +15,8 @@ class Usuarios extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'apellidos', 'email', 'password',
+        'nombre', 'apellidos', 'email', 'rut', 'direccion',
+        'telefono_movil', 'telefono_fijo', 'password',
     ];
     /**
      * The attributes that should be hidden for arrays.
