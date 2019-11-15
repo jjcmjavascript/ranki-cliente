@@ -19,7 +19,7 @@ class UsuariosController extends Controller
 
     public function index(Request $request)
     {
-        $usuarios = Usuarios::buscar($request)->withTrashed()->paginate(2);
+        $usuarios = Usuarios::buscar($request)->paginate(2);
 
         return response($usuarios);
     }
@@ -30,8 +30,10 @@ class UsuariosController extends Controller
             'nombre' => 'required | string',
             'apellidos' => 'required | string',
             'rut' => 'required | string', // Agregar validación modulo 11
+            'telefono_fijo' => 'sometimes | string',
+            'telefono_movil' => 'sometimes | string',
             'email' => 'required | email:rfc,dns',
-            'clave' => 'required'
+            'clave' => 'required | min:8'
         ]);
 
         try {
@@ -39,7 +41,7 @@ class UsuariosController extends Controller
 
             $usuario = new Usuarios;
             $usuario->fill($request->except('clave'));
-            $usuario->clave = Hash::make($request->clave);
+            $usuario->password = Hash::make($request->clave);
             $usuario->save();
 
             DB::commit();

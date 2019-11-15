@@ -35,6 +35,11 @@ class Usuarios extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeActivo($query)
+    {
+        return $query->where('activo', 1);
+    }
+
     public function scopeBuscar($query, $request)
     {
         if($request->id) {
@@ -45,6 +50,9 @@ class Usuarios extends Authenticatable
         }
         if($request->email) {
             $query->where('email', $request->email); 
+        }
+        if($request->activo) {
+            $query->where('activo', $request->activo);
         }
 
         return $query;

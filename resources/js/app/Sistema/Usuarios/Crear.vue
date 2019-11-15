@@ -1,5 +1,6 @@
 <template>
 	<div class="col-lg-12">
+		<alertas :success="success" :error="error"></alertas>
 		<panel type="filtro">
 			<template slot="header">
 				Crear nuevo usuario
@@ -16,10 +17,6 @@
 						<input type="text" class="form-control" v-model="data.nombre" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
-						<label class="font-weight-bold">Nombre</label>
-						<input type="text" class="form-control" v-model="data.nombre" />
-               		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
 						<label class="font-weight-bold">Apellidos</label>
 						<input type="text" class="form-control" v-model="data.apellidos" />
                		</div>
@@ -29,23 +26,31 @@
 						</label>
 						<input type="text" class="form-control" @blur="validarEmail()" :class="valid.email" v-model="data.email" />
                		</div>
+               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
+						<label class="font-weight-bold">Teléfono Móvil</label>
+						<input type="text" class="form-control" v-model="data.telefono_movil" />
+               		</div>
+               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
+						<label class="font-weight-bold">Teléfono fijo</label>
+						<input type="text" class="form-control" v-model="data.telefono_fijo" />
+               		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-3">
 						<label class="font-weight-bold">
 							Clave
 							<i class="fa fa-info-circle" 
 							title="La clave debe contener al menos 8 caracteres"></i>
 						</label>
-						<input type="text" class="form-control" @blur="validarPassword()" :class="valid.password" v-model="data.password" />
+						<input type="password" class="form-control" @blur="validarPassword()" :class="valid.password" v-model="data.password" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-3">
 						<label class="font-weight-bold">Confirmar clave</label>
-						<input type="text" class="form-control" @blur="validarConfirmPassword()" :class="valid.confirmPassword" v-model="data.confirmPassword" />
+						<input type="password" class="form-control" @blur="validarConfirmPassword()" :class="valid.confirmPassword" v-model="data.confirmPassword" />
                		</div>
            		</div>
             </template>
 
             <template slot="footer">
-            	<button class="btn btn-success btn-sm" :disabled="inhabilitarGuardar()" @click="guardar">
+            	<button class="btn btn-success btn-sm" :disabled="inhabilitarGuardar" @click="guardar()">
             		Guardar
             	</button>
 				<a :href="url.current" class="btn btn-default btn-sm">Volver</a>
@@ -72,6 +77,8 @@
 					nombre: null,
 					apellidos: null,
 					email: null,
+					telefono_movil: null,
+					telefono_fijo: null,
 					password: null,
 					confirmPassword: null,
 				},
@@ -87,25 +94,38 @@
 			}
 		},
         computed: {
-        	
+        	inhabilitarGuardar: function() {
+        		return !(
+        			this.data.nombre &&
+        			this.valid.rut == 'is-valid' &&
+        			this.valid.email == 'is-valid' &&
+        			this.valid.password == 'is-valid' &&
+        			this.valid.confirmPassword == 'is-valid'
+        		);
+        	},
         },
 		methods: {
-			inhabilitarGuardar: function() {
-        		return !this.$root.modulo11(this.data.rut).valid;
-        	},
+			limpiarMensajes() {
+				this.success = [];
+				this.error = [];
+			},
 			guardar(page = 1) {
+				this.limpiarMensajes();
 				let load = loading(this);
 
 				let request = new FormData;
-				this.data.id && request.append('id', this.data.id);
+				this.data.rut && request.append('rut', this.data.rut);
 				this.data.nombre && request.append('nombre', this.data.nombre);
+				this.data.apellidos && request.append('apellidos', this.data.apellidos);
 				this.data.email && request.append('email', this.data.email);
-				this.data.password && request.append('password', this.data.password);
-				this.data.confirmPassword && request.append('confirmPassword', this.data.confirmPassword);
+				this.data.telefono_fijo && request.append('telefono_fijo', this.data.telefono_fijo);
+				this.data.telefono_movil && request.append('telefono_movil', this.data.telefono_movil);
+				this.data.password && request.append('clave', this.data.password);
+				this.data.confirmPassword && request.append('clave_confirmation', this.data.confirmPassword);
 
-				axios.post(this.url.current, request)
+				axios.post(this.url.current + '/crear', request)
 				.then(response => {
-					this.rows = response.data;
+					this.success = response.data;
 				})
 				.catch(error => {
 					this.error = this.$root.arrayResponse(error);
@@ -159,7 +179,22 @@
 		    	}
 		    },
 			limpiar() {
-				//
+				data = {
+					rut: null,
+					nombre: null,
+					apellidos: null,
+					email: null,
+					telefono_movil: null,
+					telefono_fijo: null,
+					password: null,
+					confirmPassword: null,
+				};
+				valid = {
+					rut: '',
+					email: '',
+					password: '',
+					confirmPassword: ''
+				};
 			}
 		}
 	}
