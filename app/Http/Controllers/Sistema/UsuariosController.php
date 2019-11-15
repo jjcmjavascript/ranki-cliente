@@ -30,8 +30,10 @@ class UsuariosController extends Controller
             'nombre' => 'required | string',
             'apellidos' => 'required | string',
             'rut' => 'required | string', // Agregar validación modulo 11
+            'telefono_fijo' => 'sometimes | string',
+            'telefono_movil' => 'sometimes | string',
             'email' => 'required | email:rfc,dns',
-            'clave' => 'required'
+            'clave' => 'required | min:8'
         ]);
 
         try {
@@ -39,13 +41,41 @@ class UsuariosController extends Controller
 
             $usuario = new Usuarios;
             $usuario->fill($request->except('clave'));
-            $usuario->clave = Hash::make($request->clave);
+            $usuario->password = Hash::make($request->clave);
             $usuario->save();
+
+            DB::commit();
 
             $mensaje = ['Usuario registrado exitosamente'];
             return response($mensaje, 200);
         }
         catch(\Exception $e) {
+            DB::rollBack();
+            $mensaje = [$e->getLine().' '.$e->getMessage()];
+            return response($mensaje, 500);
+        }
+    }
+
+    public function eliminar(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required | integer | exists:usuarios,id'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $usuario = Usuarios::find($request->id);
+            $usuarios->activo = 0;
+            $usuario->save();
+
+            DB::commit();
+
+            $mensaje = ['Usuario desactivado exitosamente'];
+            return response($mensaje, 200);
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
             $mensaje = [$e->getLine().' '.$e->getMessage()];
             return response($mensaje, 500);
         }

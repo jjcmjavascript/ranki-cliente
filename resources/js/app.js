@@ -4,14 +4,18 @@ require('./bootstrap');
 window.Vue = require('vue');
 //import "@babel/polyfill";
 
-// IMPORTANDO LOADER
-import Loading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
-Vue.use(Loading);
-
 //============================================================
 //=============CONFIGURACIÓN PERSONALIZADA DE VUE=============
 //============================================================
+
+// IMPORTANDO DEPENDENCIAS
+import Loading from 'vue-loading-overlay';
+import VueRouter from 'vue-router';
+
+// IMPORTANDO ESTILOS
+import 'vue-loading-overlay/dist/vue-loading.css';
+import 'vue-select/dist/vue-select.css';
+
 require('./config/components');
 require('./config/filters');
 require('./config/sweetalert2');
@@ -36,10 +40,11 @@ window.loaded = function() {
     document.getElementsByTagName('body')[0].classList.add('loaded');
 };*/
 
-// SET ROUTER
-import VueRouter from 'vue-router';
+// SET DEPENDENCIAS
+Vue.use(Loading);
 Vue.use(VueRouter);
 
+// SET ROUTER
 import routes from './config/routes';
 const router = new VueRouter({
     mode: 'history',
