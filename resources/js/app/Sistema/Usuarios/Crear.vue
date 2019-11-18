@@ -1,5 +1,5 @@
 <template>
-	<div class="col-lg-12">
+	<div>
 		<alertas :success="success" :error="error"></alertas>
 		<panel type="filtro">
 			<template slot="header">
@@ -8,33 +8,37 @@
 
             <template slot="main">
                <div class="row">
-               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
+               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<label class="font-weight-bold">RUT</label>
 						<input type="text" class="form-control" @blur="validarRut()" :class="valid.rut" v-model="data.rut" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
+               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<label class="font-weight-bold">Nombre</label>
 						<input type="text" class="form-control" v-model="data.nombre" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
+               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<label class="font-weight-bold">Apellidos</label>
 						<input type="text" class="form-control" v-model="data.apellidos" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
+               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<label class="font-weight-bold">
 							Email
 						</label>
 						<input type="text" class="form-control" @blur="validarEmail()" :class="valid.email" v-model="data.email" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
+               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<label class="font-weight-bold">Teléfono Móvil</label>
 						<input type="text" class="form-control" v-model="data.telefono_movil" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-4">
+               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<label class="font-weight-bold">Teléfono fijo</label>
 						<input type="text" class="form-control" v-model="data.telefono_fijo" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-3">
+               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
+						<label class="font-weight-bold">Dirección</label>
+						<input type="text" class="form-control" v-model="data.direccion" />
+               		</div>
+               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<label class="font-weight-bold">
 							Clave
 							<i class="fa fa-info-circle" 
@@ -42,7 +46,7 @@
 						</label>
 						<input type="password" class="form-control" @blur="validarPassword()" :class="valid.password" v-model="data.password" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-3">
+               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 						<label class="font-weight-bold">Confirmar clave</label>
 						<input type="password" class="form-control" @blur="validarConfirmPassword()" :class="valid.confirmPassword" v-model="data.confirmPassword" />
                		</div>
@@ -53,7 +57,7 @@
             	<button class="btn btn-success btn-sm" :disabled="inhabilitarGuardar" @click="guardar()">
             		Guardar
             	</button>
-				<a :href="url.current" class="btn btn-default btn-sm">Volver</a>
+				<a :href="url.current" class="btn btn-secondary btn-sm">Volver</a>
             </template>
         </panel>
 	</div>
@@ -79,6 +83,7 @@
 					email: null,
 					telefono_movil: null,
 					telefono_fijo: null,
+					direccion: null,
 					password: null,
 					confirmPassword: null,
 				},
@@ -120,12 +125,14 @@
 				this.data.email && request.append('email', this.data.email);
 				this.data.telefono_fijo && request.append('telefono_fijo', this.data.telefono_fijo);
 				this.data.telefono_movil && request.append('telefono_movil', this.data.telefono_movil);
+				this.data.direccion && request.append('direccion', this.data.direccion);
 				this.data.password && request.append('clave', this.data.password);
 				this.data.confirmPassword && request.append('clave_confirmation', this.data.confirmPassword);
 
-				axios.post(this.url.current + '/crear', request)
+				axios.post(this.url.current + '/guardar', request)
 				.then(response => {
 					this.success = response.data;
+					this.limpiar();
 				})
 				.catch(error => {
 					this.error = this.$root.arrayResponse(error);

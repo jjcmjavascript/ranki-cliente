@@ -1,5 +1,5 @@
 <template>
-    <div class="col-xs-12 pb-3">
+    <div class="pb-3">
     <!-- <div class="panelParent col-xs-12" :class="size ? size : ''"> -->
         <div :class="_cardClass" :id="id ? id : 'panel'">
             <div class="card-header clearfix" :class="_panelClass" v-if="hasHeader && (type != 'resultado' || hasButtons)">

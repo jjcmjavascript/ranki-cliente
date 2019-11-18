@@ -1,5 +1,6 @@
 <template>
-	<div class="col-lg-12">
+	<div>
+		<alertas :success="success" :error="error"></alertas>
 		<panel type="filtro">
 			<template slot="header">
 				Filtros
@@ -68,11 +69,14 @@
 	               				</td>
 	               				<td>{{ value.created_at | dateTime }}</td>
 	               				<td>
-	               					<button class="btn btn-success btn-sm">
+	               					<button class="btn btn-info btn-sm" @click="editarUsuario(value.id)" :title="'Editar usuario #' + value.id">
 	               						<i class="fa fa-edit fa-fw"></i>
 	               					</button>
-	               					<button class="btn btn-danger btn-sm" v-if="value.activo">
-	               						<i class="fa fa-trash fa-fw"></i>
+	               					<button class="btn btn-danger btn-sm" v-if="value.activo" @click="desactivarUsuario(index)" :title="'Desactivar usuario #' + value.id">
+	               						<i class="fa fa-ban fa-fw"></i>
+	               					</button>
+	               					<button class="btn btn-success btn-sm" v-if="!value.activo" @click="reactivarUsuario(index)" :title="'Reactivar usuario #' + value.id">
+	               						<i class="fa fa-check fa-fw"></i>
 	               					</button>
 	               				</td>
 	               			</tr>
@@ -126,7 +130,12 @@
             //this.permisos = await this.$root.permissions('/');
         },
 		methods: {
+			limpiarMensajes() {
+				this.success = [];
+				this.error = [];
+			},
 			filtrar(page = 1) {
+				this.limpiarMensajes();
 				let load = loading(this);
 
 				let request = new FormData;
@@ -145,19 +154,21 @@
 					this.error = this.$root.arrayResponse(error);
 				})
 				.finally(() => {
-					 load.hide();
+					load.hide();
 				})
 			},
 			limpiar() {
 				this.filters = {
 					id: null,
 					nombre: null,
-					email: null
+					email: null,
+					estado: null,
 				};
+				this.filtrar(1);
 			},
-			verificarEstatus(value) {
+			verificarEstatus(estado) {
 				let activo;
-				if(value == 1) {
+				if(estado == 1) {
 					activo = '<span class="badge badge-success">Activo</span>';
 				}
 				else {
@@ -165,6 +176,63 @@
 				}
 				return activo;
 			},
+			editarUsuario(id) {
+				window.location = this.url.current + '/' + id + '/editar';
+			},
+			desactivarUsuario(key) {
+				this.limpiarMensajes();
+
+				let id = this.rows.data[key].id;
+				swal.fire({
+					text: '¿Esta seguro que desea deshabilitar el usuario #' + id + '?',
+					icon: 'warning',
+					showConfirmButton: true,
+					showCancelButton: false,
+				}).then(response => {
+					if(response.value) {
+						let load = loading(this);
+
+						axios.post(this.url.current + '/desactivar', {'id': id})
+						.then(response => {
+							this.success = response.data;
+							this.rows.data[key].activo = 0;
+						})
+						.catch(error => {
+							this.error = this.$root.arrayResponse(error);
+						})
+						.finally(() => {
+							 load.hide();
+						})
+					}
+				});
+			},
+			reactivarUsuario(key) {
+				this.limpiarMensajes();
+				
+				let id = this.rows.data[key].id;
+				swal.fire({
+					text: '¿Esta seguro que desea reactivar el usuario #' + id + '?',
+					icon: 'warning',
+					showConfirmButton: true,
+					showCancelButton: false,
+				}).then(response => {
+					if(response.value) {
+						let load = loading(this);
+
+						axios.post(this.url.current + '/reactivar', {'id': id})
+						.then(response => {
+							this.success = response.data;
+							this.rows.data[key].activo = 1;
+						})
+						.catch(error => {
+							this.error = this.$root.arrayResponse(error);
+						})
+						.finally(() => {
+							 load.hide();
+						})
+					}
+				});
+			}
 		}
 	}
 </script>

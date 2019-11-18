@@ -21,4 +21,8 @@ Route::get('loginvue', function () {
     return view('vue');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function() {
+	return view('vue');
+})->name('home');
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
