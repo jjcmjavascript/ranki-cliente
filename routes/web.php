@@ -26,3 +26,8 @@ Route::get('/home', function() {
 })->name('home');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
+// SOCIAL LOGIN
+
+Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
+Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');

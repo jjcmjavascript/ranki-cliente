@@ -86,12 +86,12 @@
                         @endif
                         <hr>
                         <div class="mb-2">
-                        <a href="javascript:;" class="btn btn-social btn-facebook m-r-5" style="width: 100%">
+                        <a href="{{ route('social.auth', 'facebook') }}" class="btn btn-social btn-facebook m-r-5" style="width: 100%">
                             <i class="fab fa-facebook-f"></i> Iniciar sesión con Facebook
                             </a>
                         </div>
                         <div class="mb-2">
-                            <a href="javascript:;" class="btn btn-social btn-google m-r-5" style="width: 100%">
+                            <a href="{{ route('social.auth', 'google') }}" class="btn btn-social btn-google m-r-5" style="width: 100%">
                                 <i class="fab fa-google"></i> Iniciar sesión con Google
                             </a>
                         </div>
