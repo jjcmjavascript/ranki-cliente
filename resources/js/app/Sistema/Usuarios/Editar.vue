@@ -38,18 +38,6 @@
 						<label class="font-weight-bold">Dirección</label>
 						<input type="text" class="form-control" v-model="data.direccion" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">
-							Clave
-							<i class="fa fa-info-circle" 
-							title="La clave debe contener al menos 8 caracteres"></i>
-						</label>
-						<input type="password" class="form-control" @blur="validarPassword()" :class="valid.password" v-model="data.password" />
-               		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">Confirmar clave</label>
-						<input type="password" class="form-control" @blur="validarConfirmPassword()" :class="valid.confirmPassword" v-model="data.confirmPassword" />
-               		</div>
            		</div>
             </template>
 
@@ -84,14 +72,10 @@
 					telefono_movil: null,
 					telefono_fijo: null,
 					direccion: null,
-					password: null,
-					confirmPassword: null,
 				},
 				valid: {
 					rut: '',
 					email: '',
-					password: '',
-					confirmPassword: ''
 				},
 				selects: {
 
@@ -103,22 +87,44 @@
         		return !(
         			this.data.nombre &&
         			this.valid.rut == 'is-valid' &&
-        			this.valid.email == 'is-valid' &&
-        			this.valid.password == 'is-valid' &&
-        			this.valid.confirmPassword == 'is-valid'
+        			this.valid.email == 'is-valid'
         		);
         	},
+        },
+        created() {
+        	this.iniciar();
         },
 		methods: {
 			limpiarMensajes() {
 				this.success = [];
 				this.error = [];
 			},
+			iniciar() {
+				this.limpiarMensajes();
+				let load = loading(this);
+
+				let request = new FormData;
+				request.append('id', this.$route.params.id);
+
+				axios.post(this.url.current + '/editar', request)
+				.then(response => {
+					this.data = response.data;
+					this.validarRut();
+					this.validarEmail();
+				})
+				.catch(error => {
+					this.error = this.$root.arrayResponse(error);
+				})
+				.finally(() => {
+					 load.hide();
+				})
+			},
 			guardar(page = 1) {
 				this.limpiarMensajes();
 				let load = loading(this);
 
 				let request = new FormData;
+				request.append('id', this.$route.params.id);
 				this.data.rut && request.append('rut', this.data.rut);
 				this.data.nombre && request.append('nombre', this.data.nombre);
 				this.data.apellidos && request.append('apellidos', this.data.apellidos);
@@ -126,13 +132,10 @@
 				this.data.telefono_fijo && request.append('telefono_fijo', this.data.telefono_fijo);
 				this.data.telefono_movil && request.append('telefono_movil', this.data.telefono_movil);
 				this.data.direccion && request.append('direccion', this.data.direccion);
-				this.data.password && request.append('clave', this.data.password);
-				this.data.confirmPassword && request.append('clave_confirmation', this.data.confirmPassword);
 
 				axios.post(this.url.current + '/guardar', request)
 				.then(response => {
 					this.success = response.data;
-					this.limpiar();
 				})
 				.catch(error => {
 					this.error = this.$root.arrayResponse(error);
@@ -162,28 +165,6 @@
 			      		this.valid.email = 'is-invalid';
 			      	};
 			    }
-		    },
-		    validarPassword() {
-		    	if(this.data.password) {
-		    		if(this.data.password.toString().length > 7) {
-		    			this.valid.password = 'is-valid';
-		    		}
-		    		else {
-		    			this.valid.password = 'is-invalid';
-		    		}
-		    	}
-		    },
-		    validarConfirmPassword() {
-		    	if(this.data.confirmPassword) {
-		    		if(this.data.confirmPassword.toString().length > 7 && 
-		    		   this.data.password == this.data.confirmPassword
-		    		) {
-		    			this.valid.confirmPassword = 'is-valid';
-		    		}
-		    		else {
-		    			this.valid.confirmPassword = 'is-invalid';
-		    		}
-		    	}
 		    },
 			limpiar() {
 				data = {

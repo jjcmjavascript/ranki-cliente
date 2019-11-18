@@ -16,7 +16,7 @@ class Usuarios extends Authenticatable
      */
     protected $fillable = [
         'nombre', 'apellidos', 'email', 'rut', 'direccion',
-        'telefono_movil', 'telefono_fijo', 'password',
+        'telefono_movil', 'telefono_fijo', 'activo', 'password',
     ];
     /**
      * The attributes that should be hidden for arrays.
