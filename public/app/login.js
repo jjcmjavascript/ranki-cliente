@@ -317,9 +317,732 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-xl-6" }, [
+        _c(
+          "div",
+          {
+            staticClass: "card border-0 bg-dark text-white mb-3 overflow-hidden"
+          },
+          [
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-xl-5 col-lg-4 align-items-center d-flex justify-content-center"
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "d-none d-lg-block",
+                      attrs: {
+                        src: _vm.$root.base_url + "/images/img-1.svg",
+                        height: "150px"
+                      }
+                    })
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(3)
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h1", { staticClass: "page-header" }, [
+      _vm._v("Dashboard "),
+      _c("small", [_vm._v("inicio de la aplicación")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+        _c("div", { staticClass: "widget widget-stats bg-teal" }, [
+          _c("div", { staticClass: "stats-icon stats-icon-lg" }, [
+            _c("i", { staticClass: "fa fa-globe fa-fw" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "stats-content" }, [
+            _c("div", { staticClass: "stats-title" }, [
+              _vm._v("VISITANTES HOY")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-number" }, [_vm._v("842,900")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-progress progress" }, [
+              _c("div", {
+                staticClass: "progress-bar",
+                staticStyle: { width: "70.1%" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-desc" }, [
+              _vm._v("Mejor que semana pasada (70.1%)")
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+        _c("div", { staticClass: "widget widget-stats bg-blue" }, [
+          _c("div", { staticClass: "stats-icon stats-icon-lg" }, [
+            _c("i", { staticClass: "fa fa-dollar-sign fa-fw" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "stats-content" }, [
+            _c("div", { staticClass: "stats-title" }, [
+              _vm._v("USUARIOS ACTIVOS")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-number" }, [_vm._v("180,200")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-progress progress" }, [
+              _c("div", {
+                staticClass: "progress-bar",
+                staticStyle: { width: "40.5%" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-desc" }, [
+              _vm._v("Mejor que semana pasada (40.5%)")
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+        _c("div", { staticClass: "widget widget-stats bg-indigo" }, [
+          _c("div", { staticClass: "stats-icon stats-icon-lg" }, [
+            _c("i", { staticClass: "fa fa-archive fa-fw" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "stats-content" }, [
+            _c("div", { staticClass: "stats-title" }, [
+              _vm._v("NUEVAS PUBLICACIONES")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-number" }, [_vm._v("38,900")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-progress progress" }, [
+              _c("div", {
+                staticClass: "progress-bar",
+                staticStyle: { width: "76.3%" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-desc" }, [
+              _vm._v("Mejor que semana pasada (76.3%)")
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
+        _c("div", { staticClass: "widget widget-stats bg-dark" }, [
+          _c("div", { staticClass: "stats-icon stats-icon-lg" }, [
+            _c("i", { staticClass: "fa fa-comment-alt fa-fw" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "stats-content" }, [
+            _c("div", { staticClass: "stats-title" }, [
+              _vm._v("NUEVOS COMENTARIOS")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-number" }, [_vm._v("3,988")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-progress progress" }, [
+              _c("div", {
+                staticClass: "progress-bar",
+                staticStyle: { width: "54.9%" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stats-desc" }, [
+              _vm._v("Mejor que semana pasada (54.9%)")
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xl-7 col-lg-8" }, [
+      _c("div", { staticClass: "mb-3 text-grey" }, [
+        _c("b", [_vm._v("TOTAL RECAUDADO")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "ml-2" }, [
+          _c("i", {
+            staticClass: "fa fa-info-circle",
+            attrs: {
+              "data-toggle": "popover",
+              "data-trigger": "hover",
+              "data-title": "Total sales",
+              "data-placement": "top",
+              "data-content":
+                "Net sales (gross sales minus discounts and returns) plus taxes and shipping. Includes orders from all sales channels."
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-flex mb-1" }, [
+        _c("h2", { staticClass: "mb-0" }, [
+          _vm._v("$"),
+          _c(
+            "span",
+            { attrs: { "data-animation": "number", "data-value": "64559.25" } },
+            [_vm._v("64559.25$")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "ml-auto mt-n1 mb-n1" }, [
+          _c("div", { attrs: { id: "total-sales-sparkline" } })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-3 text-grey" }, [
+        _c("i", { staticClass: "fa fa-caret-up" }),
+        _vm._v(" "),
+        _c(
+          "span",
+          { attrs: { "data-animation": "number", "data-value": "33.21" } },
+          [_vm._v("8.27")]
+        ),
+        _vm._v("% comparado con la semana pasada\n\t\t\t\t\t\t\t\t")
+      ]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "bg-white-transparent-2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "row text-truncate" }, [
+        _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "f-s-12 text-grey" }, [
+            _vm._v("Ordenes totales")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "f-s-18 m-b-5 f-w-600 p-b-1",
+              attrs: { "data-animation": "number", "data-value": "1568" }
+            },
+            [_vm._v("1568")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "progress progress-xs rounded-lg bg-dark-darker m-b-5"
+            },
+            [
+              _c("div", {
+                staticClass:
+                  "progress-bar progress-bar-striped rounded-right bg-teal",
+                staticStyle: { width: "55%" },
+                attrs: { "data-animation": "width", "data-value": "55%" }
+              })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "f-s-12 text-grey" }, [
+            _vm._v("Coste promedio")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "f-s-18 m-b-5 f-w-600 p-b-1" }, [
+            _vm._v("$"),
+            _c(
+              "span",
+              { attrs: { "data-animation": "number", "data-value": "41.20" } },
+              [_vm._v("41.20")]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "progress progress-xs rounded-lg bg-dark-darker m-b-5"
+            },
+            [
+              _c("div", {
+                staticClass: "progress-bar progress-bar-striped rounded-right",
+                staticStyle: { width: "55%" },
+                attrs: { "data-animation": "width", "data-value": "55%" }
+              })
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xl-6" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c(
+            "div",
+            {
+              staticClass: "card border-0 bg-dark text-white text-truncate mb-3"
+            },
+            [
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "mb-3 text-grey" }, [
+                  _c("b", { staticClass: "mb-3" }, [
+                    _vm._v("RANGO DE CONVERSION")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "ml-2" }, [
+                    _c("i", {
+                      staticClass: "fa fa-info-circle",
+                      attrs: {
+                        "data-toggle": "popover",
+                        "data-trigger": "hover",
+                        "data-title": "Conversion Rate",
+                        "data-placement": "top",
+                        "data-content":
+                          "Percentage of sessions that resulted in orders from total number of sessions.",
+                        "data-original-title": "",
+                        title: ""
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex align-items-center mb-1" }, [
+                  _c("h2", { staticClass: "text-white mb-0" }, [
+                    _c(
+                      "span",
+                      {
+                        attrs: {
+                          "data-animation": "number",
+                          "data-value": "2.19"
+                        }
+                      },
+                      [_vm._v("2.19")]
+                    ),
+                    _vm._v("%")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ml-auto" }, [
+                    _c("div", { attrs: { id: "conversion-rate-sparkline" } })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-4 text-grey" }, [
+                  _c("i", { staticClass: "fa fa-caret-down" }),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      attrs: {
+                        "data-animation": "number",
+                        "data-value": "0.50"
+                      }
+                    },
+                    [_vm._v("0.50")]
+                  ),
+                  _vm._v("% más que semana pasada\n\t\t\t\t\t\t\t\t")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex mb-2" }, [
+                  _c("div", { staticClass: "d-flex align-items-center" }, [
+                    _c("i", {
+                      staticClass: "fa fa-circle text-red f-s-8 mr-2"
+                    }),
+                    _vm._v(
+                      "\n\t\t\t\t\t\t\t\t\t\tPlanes aquiridos \n\t\t\t\t\t\t\t\t\t"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex align-items-center ml-auto" },
+                    [
+                      _c("div", { staticClass: "text-grey f-s-11" }, [
+                        _c("i", { staticClass: "fa fa-caret-up" }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-animation": "number",
+                              "data-value": "262"
+                            }
+                          },
+                          [_vm._v("262")]
+                        ),
+                        _vm._v("%")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "width-50 text-right pl-2 f-w-600" },
+                        [
+                          _c(
+                            "span",
+                            {
+                              attrs: {
+                                "data-animation": "number",
+                                "data-value": "3.79"
+                              }
+                            },
+                            [_vm._v("3.79")]
+                          ),
+                          _vm._v("%")
+                        ]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex mb-2" }, [
+                  _c("div", { staticClass: "d-flex align-items-center" }, [
+                    _c("i", {
+                      staticClass: "fa fa-circle text-warning f-s-8 mr-2"
+                    }),
+                    _vm._v(
+                      "\n\t\t\t\t\t\t\t\t\t\tBienes vendidos\n\t\t\t\t\t\t\t\t\t"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex align-items-center ml-auto" },
+                    [
+                      _c("div", { staticClass: "text-grey f-s-11" }, [
+                        _c("i", { staticClass: "fa fa-caret-up" }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-animation": "number",
+                              "data-value": "11"
+                            }
+                          },
+                          [_vm._v("11")]
+                        ),
+                        _vm._v("%")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "width-50 text-right pl-2 f-w-600" },
+                        [
+                          _c(
+                            "span",
+                            {
+                              attrs: {
+                                "data-animation": "number",
+                                "data-value": "3.85"
+                              }
+                            },
+                            [_vm._v("3.85")]
+                          ),
+                          _vm._v("%")
+                        ]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex" }, [
+                  _c("div", { staticClass: "d-flex align-items-center" }, [
+                    _c("i", {
+                      staticClass: "fa fa-circle text-lime f-s-8 mr-2"
+                    }),
+                    _vm._v(
+                      "\n\t\t\t\t\t\t\t\t\t\tBienes arrendados\n\t\t\t\t\t\t\t\t\t"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex align-items-center ml-auto" },
+                    [
+                      _c("div", { staticClass: "text-grey f-s-11" }, [
+                        _c("i", { staticClass: "fa fa-caret-up" }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-animation": "number",
+                              "data-value": "57"
+                            }
+                          },
+                          [_vm._v("57")]
+                        ),
+                        _vm._v("%")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "width-50 text-right pl-2 f-w-600" },
+                        [
+                          _c(
+                            "span",
+                            {
+                              attrs: {
+                                "data-animation": "number",
+                                "data-value": "2.19"
+                              }
+                            },
+                            [_vm._v("2.19")]
+                          ),
+                          _vm._v("%")
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c(
+            "div",
+            {
+              staticClass: "card border-0 bg-dark text-white text-truncate mb-3"
+            },
+            [
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "mb-3 text-grey" }, [
+                  _c("b", { staticClass: "mb-3" }, [
+                    _vm._v("SESIONES DE USUARIO")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "ml-2" }, [
+                    _c("i", {
+                      staticClass: "fa fa-info-circle",
+                      attrs: {
+                        "data-toggle": "popover",
+                        "data-trigger": "hover",
+                        "data-title": "Store Sessions",
+                        "data-placement": "top",
+                        "data-content":
+                          "Number of sessions on your online store. A session is a period of continuous activity from a visitor.",
+                        "data-original-title": "",
+                        title: ""
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex align-items-center mb-1" }, [
+                  _c("h2", { staticClass: "text-white mb-0" }, [
+                    _c(
+                      "span",
+                      {
+                        attrs: {
+                          "data-animation": "number",
+                          "data-value": "70719"
+                        }
+                      },
+                      [_vm._v("70719")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ml-auto" }, [
+                    _c("div", { attrs: { id: "store-session-sparkline" } })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-4 text-grey" }, [
+                  _c("i", { staticClass: "fa fa-caret-up" }),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      attrs: { "data-animation": "number", "data-value": "9.5" }
+                    },
+                    [_vm._v("9.5")]
+                  ),
+                  _vm._v("% más que semana pasada\n\t\t\t\t\t\t\t\t")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex mb-2" }, [
+                  _c("div", { staticClass: "d-flex align-items-center" }, [
+                    _c("i", {
+                      staticClass: "fa fa-circle text-teal f-s-8 mr-2"
+                    }),
+                    _vm._v("\n\t\t\t\t\t\t\t\t\t\tMoviles\n\t\t\t\t\t\t\t\t\t")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex align-items-center ml-auto" },
+                    [
+                      _c("div", { staticClass: "text-grey f-s-11" }, [
+                        _c("i", { staticClass: "fa fa-caret-up" }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-animation": "number",
+                              "data-value": "25.7"
+                            }
+                          },
+                          [_vm._v("25.7")]
+                        ),
+                        _vm._v("%")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "width-50 text-right pl-2 f-w-600" },
+                        [
+                          _c(
+                            "span",
+                            {
+                              attrs: {
+                                "data-animation": "number",
+                                "data-value": "53210"
+                              }
+                            },
+                            [_vm._v("53210")]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex mb-2" }, [
+                  _c("div", { staticClass: "d-flex align-items-center" }, [
+                    _c("i", {
+                      staticClass: "fa fa-circle text-blue f-s-8 mr-2"
+                    }),
+                    _vm._v(
+                      "\n\t\t\t\t\t\t\t\t\t\tEscritorio\n\t\t\t\t\t\t\t\t\t"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex align-items-center ml-auto" },
+                    [
+                      _c("div", { staticClass: "text-grey f-s-11" }, [
+                        _c("i", { staticClass: "fa fa-caret-up" }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-animation": "number",
+                              "data-value": "16.0"
+                            }
+                          },
+                          [_vm._v("16.0")]
+                        ),
+                        _vm._v("%")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "width-50 text-right pl-2 f-w-600" },
+                        [
+                          _c(
+                            "span",
+                            {
+                              attrs: {
+                                "data-animation": "number",
+                                "data-value": "11959"
+                              }
+                            },
+                            [_vm._v("11959")]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-flex" }, [
+                  _c("div", { staticClass: "d-flex align-items-center" }, [
+                    _c("i", {
+                      staticClass: "fa fa-circle text-aqua f-s-8 mr-2"
+                    }),
+                    _vm._v("\n\t\t\t\t\t\t\t\t\t\tTabletas\n\t\t\t\t\t\t\t\t\t")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "d-flex align-items-center ml-auto" },
+                    [
+                      _c("div", { staticClass: "text-grey f-s-11" }, [
+                        _c("i", { staticClass: "fa fa-caret-up" }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              "data-animation": "number",
+                              "data-value": "7.9"
+                            }
+                          },
+                          [_vm._v("7.9")]
+                        ),
+                        _vm._v("%")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "width-50 text-right pl-2 f-w-600" },
+                        [
+                          _c(
+                            "span",
+                            {
+                              attrs: {
+                                "data-animation": "number",
+                                "data-value": "5545"
+                              }
+                            },
+                            [_vm._v("5545")]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

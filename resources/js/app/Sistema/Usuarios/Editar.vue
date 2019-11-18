@@ -1,5 +1,5 @@
 <template>
-	<div class="col-lg-12">
+	<div>
 		<alertas :success="success" :error="error"></alertas>
 		<panel type="filtro">
 			<template slot="header">

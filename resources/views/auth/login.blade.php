@@ -10,6 +10,8 @@
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href="{{ asset('css/custom_theme.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/bootstrap-social.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     <!-- ================== END BASE CSS STYLE ================== -->
 </head>
 <body class="pace-top">
@@ -45,8 +47,10 @@
                 <!-- end login-header -->
                 <!-- begin login-content -->
                 <div class="login-content">
-                    <form action="{{ route('login') }}" method="POST" class="margin-bottom-0">
-                        <div class="form-group m-b-15">
+                    <form method="POST" action="{{ route('login') }}" class="margin-bottom-0">
+                        @csrf
+
+                        <div class="form-group m-b-10">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror form-control-lg" name="email" value="{{ old('email') }}" placeholder="Correo electrónico" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -55,7 +59,7 @@
                                     </span>
                                 @enderror
                         </div>
-                        <div class="form-group m-b-15">
+                        <div class="form-group m-b-10">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror form-control-lg" name="password" placeholder="Contraseña" required autocomplete="current-password">
 
                                 @error('password')
@@ -64,7 +68,7 @@
                                     </span>
                                 @enderror
                         </div>
-                        <div class="checkbox checkbox-css m-b-30">
+                        <div class="checkbox checkbox-css m-b-15">
                             <input type="checkbox" id="remember_me_checkbox" value="" />
                             <label for="remember_me_checkbox">
                             Recuerdame
@@ -74,11 +78,27 @@
                             <button type="submit" class="btn btn-success btn-block btn-lg">Iniciar sesión</button>
                         </div>
                         @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Olvido su contraseña?') }}
-                            </a>
+                            <p class="text-center">
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('¿Olvido su contraseña?') }}
+                                </a>
+                            </p>
                         @endif
-                        <div class="m-t-20 m-b-40 p-b-40 text-inverse">
+                        <hr>
+                        <div class="mb-2">
+                        <a href="javascript:;" class="btn btn-social btn-facebook m-r-5" style="width: 100%">
+                            <i class="fab fa-facebook-f"></i> Iniciar sesión con Facebook
+                            </a>
+                        </div>
+                        <div class="mb-2">
+                            <a href="javascript:;" class="btn btn-social btn-google m-r-5" style="width: 100%">
+                                <i class="fab fa-google"></i> Iniciar sesión con Google
+                            </a>
+                        </div>
+
+                        <hr>
+
+                        <div class="m-t-15 m-b-10 text-inverse text-center">
                             Todavia no estas registrado? Has click <a href="{{ route('register') }}">aqui</a> para hacerlo.
                         </div>
                         <hr />

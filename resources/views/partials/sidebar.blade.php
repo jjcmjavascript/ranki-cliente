@@ -8,7 +8,7 @@
 						<a href="javascript:;" data-toggle="nav-profile">
 							<div class="cover with-shadow"></div>
 							<div class="image">
-								<img src="../assets/img/user/user-13.jpg" alt="" />
+								<img src="../images/users/002.jpg" alt="" />
 							</div>
 							<div class="info">
 								<b class="caret pull-right"></b>
@@ -29,25 +29,25 @@
 				<!-- begin sidebar nav -->
 				<ul class="nav">
 					<li class="nav-header">Navegación</li>
-					<li class="has-sub active">
+					<li class="active">
 						<a href="{{ route('home') }}">
 							<i class="fa fa-th-large"></i> 
 							<span>Dashboard</span> 
 						</a>
 					</li>
-					<li class="has-sub">
+					<li>
 						<a href="{{ route('sistema.usuarios') }}">
 							<i class="fa fa-user"></i> 
 							<span>Usuarios</span> 
 						</a>
 					</li>
-					<li class="has-sub">
+					<li>
 						<a href="{{ route('sistema.usuarios') }}">
 							<i class="fa fa-address-book"></i> 
 							<span>Perfiles</span> 
 						</a>
 					</li>
-					<li class="has-sub">
+					<li>
 						<a href="javascript:;">
 							<i class="fa fa-star"></i> 
 							<span>Preferencias</span>

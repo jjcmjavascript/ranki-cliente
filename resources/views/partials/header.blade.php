@@ -63,7 +63,7 @@
 				</li>
 				<li class="dropdown navbar-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<!--img src="../assets/img/user/user-13.jpg" alt="" /--> 
+						<img src="../images/users/002.jpg" alt="" />
 						<span class="d-none d-md-inline">
 							{{ Auth::user()->nombre.' '.Auth::user()->apellidos }}
 						</span> <b class="caret"></b>

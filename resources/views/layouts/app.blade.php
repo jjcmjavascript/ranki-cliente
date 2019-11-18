@@ -64,6 +64,7 @@
     <!-- ================== END BASE JS ================== -->
     
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="{{ asset('js/d3.min.js') }}"></script>
     <script src="{{ asset('js/jquery.gritter.js') }}"></script>
     <script src="{{ asset('js/jquery.flot.js') }}"></script>
     <script src="{{ asset('js/jquery.flot.time.js') }}"></script>
@@ -71,9 +72,9 @@
     <script src="{{ asset('js/jquery.flot.pie.js') }}"></script>
     <script src="{{ asset('js/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('js/jquery-jvectormap.min.js') }}"></script>
-    <!-- script src="{{ asset('js/jquery-jvectormap-world-mill.js') }}"></script -->
+    <script src="{{ asset('js/jquery-jvectormap-world-mill.js') }}"></script>
     <!-- script src="{{ asset('js/bootstrap-datepicker.js') }}"></script -->
-    <!--script src="{{ asset('js/dashboard.js') }}"></script-->
+    <script src="{{ asset('js/dashboard.js') }}"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
 
 </body>

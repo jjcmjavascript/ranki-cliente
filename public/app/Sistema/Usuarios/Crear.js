@@ -224,7 +224,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-lg-12" },
     [
       _c("alertas", { attrs: { success: _vm.success, error: _vm.error } }),
       _vm._v(" "),
