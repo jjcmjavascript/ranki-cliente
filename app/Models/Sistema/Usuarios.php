@@ -51,8 +51,8 @@ class Usuarios extends Authenticatable
         if($request->email) {
             $query->where('email', $request->email); 
         }
-        if($request->activo) {
-            $query->where('activo', $request->activo);
+        if(isset($request->estado)) {
+            $query->where('activo', $request->estado);
         }
 
         return $query;

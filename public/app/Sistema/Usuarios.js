@@ -103,10 +103,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -469,120 +465,118 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("template", { slot: "main" }, [
-            _c("div", { staticClass: "table-responsive" }, [
-              _c("table", { staticClass: "table table-bordered" }, [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", [_vm._v("ID")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Nombre")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Email")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Teléfono Móvil")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Teléfono Fijo")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Estado")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Fecha creación")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Acciones")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.rows.data, function(value, index) {
-                    return _c("tr", [
-                      _c("td", [_vm._v(_vm._s(value.id))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(value.nombre))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(value.email))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(value.telefono_fijo))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(value.telefono_movil))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("span", {
-                          domProps: {
-                            innerHTML: _vm._s(
-                              _vm.verificarEstatus(value.activo)
-                            )
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(_vm._s(_vm._f("dateTime")(value.created_at)))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-info btn-sm",
-                            attrs: { title: "Editar usuario #" + value.id },
-                            on: {
-                              click: function($event) {
-                                return _vm.editarUsuario(value.id)
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-edit fa-fw" })]
-                        ),
-                        _vm._v(" "),
-                        value.activo
-                          ? _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger btn-sm",
-                                attrs: {
-                                  title: "Desactivar usuario #" + value.id
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.desactivarUsuario(index)
-                                  }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-ban fa-fw" })]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        !value.activo
-                          ? _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-success btn-sm",
-                                attrs: {
-                                  title: "Reactivar usuario #" + value.id
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.reactivarUsuario(index)
-                                  }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-check fa-fw" })]
-                            )
-                          : _vm._e()
-                      ])
-                    ])
-                  }),
-                  0
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
           _c(
             "template",
-            { slot: "footer" },
+            { slot: "main" },
             [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table table-bordered" }, [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [_vm._v("ID")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Nombre")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Email")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Teléfono Móvil")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Teléfono Fijo")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Estado")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Fecha creación")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Acciones")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.rows.data, function(value, index) {
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(value.id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(value.nombre))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(value.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(value.telefono_fijo))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(value.telefono_movil))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("span", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.verificarEstatus(value.activo)
+                              )
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(_vm._f("dateTime")(value.created_at)))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info btn-sm",
+                              attrs: { title: "Editar usuario #" + value.id },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editarUsuario(value.id)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-edit fa-fw" })]
+                          ),
+                          _vm._v(" "),
+                          value.activo
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  attrs: {
+                                    title: "Desactivar usuario #" + value.id
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.desactivarUsuario(index)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-ban fa-fw" })]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !value.activo
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success btn-sm",
+                                  attrs: {
+                                    title: "Reactivar usuario #" + value.id
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.reactivarUsuario(index)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-check fa-fw" })]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ]),
+              _vm._v(" "),
               _c("pagination", {
                 attrs: { data: _vm.rows, align: "right" },
                 on: { "pagination-change-page": _vm.filtrar }

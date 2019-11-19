@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="clearfix" :class="_bodyCard, _bodyColor">
+            <div class="card-body clearfix" :class="_bodyCard, _bodyColor">
                 <h3 class="card-title" v-if="hasHeader && type == 'resultado' && !hasButtons">
                     <slot name="header"></slot>
                 </h3>
@@ -56,6 +56,7 @@
                     switch (this.type) {
                         case 'filtro':
                         case 'crud':
+                        case 'form':
                             background = 'bg-info';
                             break;
                         case 'profile':
@@ -90,7 +91,7 @@
             _bodyCard: function() {
                 let style = '';
 
-                if(this.type != 'crud') {
+                if(this.type != 'crud' || this.type != 'form') {
                     style = ' card-body';
                 }
 

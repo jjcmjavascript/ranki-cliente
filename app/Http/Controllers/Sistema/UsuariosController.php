@@ -19,7 +19,7 @@ class UsuariosController extends Controller
 
     public function index(Request $request)
     {
-        $usuarios = Usuarios::buscar($request)->paginate(2);
+        $usuarios = Usuarios::buscar($request)->paginate(5);
 
         return response($usuarios);
     }

@@ -14,8 +14,8 @@ class UpdateUsuarios02 extends Migration
    public function up()
     {
         Schema::table('usuarios', function(Blueprint $table) {
-            $table->string('avatar')->nullable('telefono_fijo');
-            $table->string('provider_id')->nullable('telefono_fijo');
+            $table->string('avatar')->nullable()->after('telefono_fijo');
+            $table->string('provider_id')->nullable()->after('telefono_fijo');
             $table->string('provider')->nullable()->after('telefono_fijo');
         });
     }

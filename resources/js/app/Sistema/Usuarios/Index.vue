@@ -82,12 +82,8 @@
 	               			</tr>
 	               		</tbody>
 	               </table>
-	               
 	            </div>
-	           
-            </template>
-            <template slot="footer">
-            	<pagination :data="rows" align="right" @pagination-change-page="filtrar"></pagination>
+	            <pagination :data="rows" align="right" @pagination-change-page="filtrar"></pagination>
             </template>
         </panel>
 	</div>

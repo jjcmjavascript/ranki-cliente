@@ -229,7 +229,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "panel",
-        { attrs: { type: "filtro" } },
+        { attrs: { type: "form" } },
         [
           _c("template", { slot: "header" }, [
             _vm._v("\n\t\t\t\tCrear nuevo usuario\n\t\t\t")
@@ -243,9 +243,7 @@ var render = function() {
                   staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                 },
                 [
-                  _c("label", { staticClass: "font-weight-bold" }, [
-                    _vm._v("RUT")
-                  ]),
+                  _c("label", [_vm._v("RUT")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -281,9 +279,7 @@ var render = function() {
                   staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                 },
                 [
-                  _c("label", { staticClass: "font-weight-bold" }, [
-                    _vm._v("Nombre")
-                  ]),
+                  _c("label", [_vm._v("Nombre")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -315,9 +311,7 @@ var render = function() {
                   staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                 },
                 [
-                  _c("label", { staticClass: "font-weight-bold" }, [
-                    _vm._v("Apellidos")
-                  ]),
+                  _c("label", [_vm._v("Apellidos")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -349,9 +343,7 @@ var render = function() {
                   staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                 },
                 [
-                  _c("label", { staticClass: "font-weight-bold" }, [
-                    _vm._v("\n\t\t\t\t\t\t\tEmail\n\t\t\t\t\t\t")
-                  ]),
+                  _c("label", [_vm._v("\n\t\t\t\t\t\t\tEmail\n\t\t\t\t\t\t")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -387,9 +379,7 @@ var render = function() {
                   staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                 },
                 [
-                  _c("label", { staticClass: "font-weight-bold" }, [
-                    _vm._v("Teléfono Móvil")
-                  ]),
+                  _c("label", [_vm._v("Teléfono Móvil")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -425,9 +415,7 @@ var render = function() {
                   staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                 },
                 [
-                  _c("label", { staticClass: "font-weight-bold" }, [
-                    _vm._v("Teléfono fijo")
-                  ]),
+                  _c("label", [_vm._v("Teléfono fijo")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -459,9 +447,7 @@ var render = function() {
                   staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                 },
                 [
-                  _c("label", { staticClass: "font-weight-bold" }, [
-                    _vm._v("Dirección")
-                  ]),
+                  _c("label", [_vm._v("Dirección")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -493,7 +479,7 @@ var render = function() {
                   staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                 },
                 [
-                  _c("label", { staticClass: "font-weight-bold" }, [
+                  _c("label", [
                     _vm._v("\n\t\t\t\t\t\t\tClave\n\t\t\t\t\t\t\t"),
                     _c("i", {
                       staticClass: "fa fa-info-circle",
@@ -537,9 +523,7 @@ var render = function() {
                   staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                 },
                 [
-                  _c("label", { staticClass: "font-weight-bold" }, [
-                    _vm._v("Confirmar clave")
-                  ]),
+                  _c("label", [_vm._v("Confirmar clave")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
