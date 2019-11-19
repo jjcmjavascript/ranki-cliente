@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<alertas :success="success" :error="error"></alertas>
-		<panel type="filtro">
+		<panel type="form">
 			<template slot="header">
 				Crear nuevo usuario
 			</template>
@@ -9,37 +9,37 @@
             <template slot="main">
                <div class="row">
                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">RUT</label>
+						<label>RUT</label>
 						<input type="text" class="form-control" @blur="validarRut()" :class="valid.rut" v-model="data.rut" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">Nombre</label>
+						<label>Nombre</label>
 						<input type="text" class="form-control" v-model="data.nombre" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">Apellidos</label>
+						<label>Apellidos</label>
 						<input type="text" class="form-control" v-model="data.apellidos" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">
+						<label>
 							Email
 						</label>
 						<input type="text" class="form-control" @blur="validarEmail()" :class="valid.email" v-model="data.email" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">Teléfono Móvil</label>
+						<label>Teléfono Móvil</label>
 						<input type="text" class="form-control" v-model="data.telefono_movil" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">Teléfono fijo</label>
+						<label>Teléfono fijo</label>
 						<input type="text" class="form-control" v-model="data.telefono_fijo" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">Dirección</label>
+						<label>Dirección</label>
 						<input type="text" class="form-control" v-model="data.direccion" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">
+						<label>
 							Clave
 							<i class="fa fa-info-circle" 
 							title="La clave debe contener al menos 8 caracteres"></i>
@@ -47,7 +47,7 @@
 						<input type="password" class="form-control" @blur="validarPassword()" :class="valid.password" v-model="data.password" />
                		</div>
                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-						<label class="font-weight-bold">Confirmar clave</label>
+						<label>Confirmar clave</label>
 						<input type="password" class="form-control" @blur="validarConfirmPassword()" :class="valid.confirmPassword" v-model="data.confirmPassword" />
                		</div>
            		</div>

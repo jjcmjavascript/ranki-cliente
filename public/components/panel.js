@@ -64,6 +64,7 @@ __webpack_require__.r(__webpack_exports__);
         switch (this.type) {
           case 'filtro':
           case 'crud':
+          case 'form':
             background = 'bg-info';
             break;
 
@@ -104,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
     _bodyCard: function _bodyCard() {
       var style = '';
 
-      if (this.type != 'crud') {
+      if (this.type != 'crud' || this.type != 'form') {
         style = ' card-body';
       }
 
@@ -169,7 +170,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "clearfix",
+            staticClass: "card-body clearfix",
             class: _vm._bodyCard,
             _bodyColor: _vm._bodyColor
           },

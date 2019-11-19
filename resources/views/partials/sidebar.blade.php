@@ -8,7 +8,11 @@
 						<a href="javascript:;" data-toggle="nav-profile">
 							<div class="cover with-shadow"></div>
 							<div class="image">
-								<img src="../images/users/002.jpg" alt="" />
+								@if(Auth::user()->avatar)
+									<img src="{{ Auth::user()->avatar }}" alt="" />
+								@else
+									<img src="../images/users/002.jpg" alt="" />
+								@endif
 							</div>
 							<div class="info">
 								<b class="caret pull-right"></b>

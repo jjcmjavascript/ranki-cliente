@@ -15,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //\Illuminate\Support\Facades\URL::forceScheme('https');
+
         Schema::defaultStringLength(191);
 
         Validator::extend('empty_if_exists', function($attribute, $value, $parameters) {
