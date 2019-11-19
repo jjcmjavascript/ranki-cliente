@@ -1,26 +1,30 @@
 <template>
     <div class="pb-3">
     <!-- <div class="panelParent col-xs-12" :class="size ? size : ''"> -->
-        <div :class="_cardClass" :id="id ? id : 'panel'">
-            <div class="card-header clearfix" :class="_panelClass" v-if="hasHeader && (type != 'resultado' || hasButtons)">
-                <h4 class="float-left" :style="marginTop">
+        <div class="panel panel-inverse" :class="_panelClass" data-sortable-id="ui-widget-1">
+
+            <div class="panel-heading" :class="_headerClass" v-if="hasHeader && (type != 'resultado' || hasButtons)">
+                <h4 class="panel-title" :style="marginTop">
                     <slot name="header"></slot>
                 </h4>
-
-                <div class="float-right">
-                    <slot name="buttons"></slot>
+                <div class="panel-heading-btn">
+                    <div class="float-right">
+                        <slot name="buttons"></slot>
+                    </div>
                 </div>
             </div>
 
-            <div class="card-body clearfix" :class="_bodyCard, _bodyColor">
-                <h3 class="card-title" v-if="hasHeader && type == 'resultado' && !hasButtons">
-                    <slot name="header"></slot>
+            <div class="panel-toolbar" v-if="hasToolbar">
+                <h3 class="panel-title">
+                    <slot name="toolbar"></slot>
                 </h3>
+            </div>
 
+            <div class="panel-body" :class="_bodyColor">
                 <slot name="main"></slot>
             </div>
 
-            <div class="card-footer clearfix" :class="_footerClass">
+            <div class="panel-footer text-right" :class="_footerClass">
                 <slot name="footer"></slot>
             </div>
         </div>
@@ -42,6 +46,9 @@
             hasButtons() {
                 return !!this.$slots['buttons'];
             },
+            hasToolbar() {
+                return !!this.$slots['toolbar'];
+            },
             _footerClass() {
                 let _class = this.footerClass ? this.footerClass : '';
                 if (!this.$slots['footer']) {
@@ -49,15 +56,14 @@
                 }
                 return _class;
             },
-            // estilos
             _panelClass: function() {
-                let background = 'bg-flat-grey';
+                let background = '';
                 if (this.type) {
                     switch (this.type) {
                         case 'filtro':
                         case 'crud':
                         case 'form':
-                            background = 'bg-info';
+                            background = 'panel-info';
                             break;
                         case 'profile':
                             background = 'bg-material-indigo';
@@ -66,7 +72,11 @@
                 }
                 return background;
             },
-            _cardClass: function() {
+            // estilos
+            _headerClass: function() {
+                //
+            },
+            _cardClass: function() { // REVISAR PARA PROFILE
                 let background = 'card';
                 if (this.type) {
                     switch (this.type) {
@@ -88,15 +98,6 @@
                 }
                 return background;
             },
-            _bodyCard: function() {
-                let style = '';
-
-                if(this.type != 'crud' || this.type != 'form') {
-                    style = ' card-body';
-                }
-
-                return style;
-            },
             marginTop: function() {
                 let style = '';
 
@@ -109,16 +110,3 @@
         },
     }
 </script>
-
-<!--
-panelClass: {
-    flat-red
-    flat-iris
-    flat-pink
-    flat-purple
-    flat-blue
-    flat-green
-    flat-yellow
-    flat-grey
-}
- -->

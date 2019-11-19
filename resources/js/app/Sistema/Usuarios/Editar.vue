@@ -34,9 +34,13 @@
 						<label>Teléfono fijo</label>
 						<input type="text" class="form-control" v-model="data.telefono_fijo" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
+               		<div class="form-group col-xs-12 col-sm-4 col-md-6 col-lg-6">
 						<label>Dirección</label>
 						<input type="text" class="form-control" v-model="data.direccion" />
+               		</div>
+               		<div class="form-group col-xs-12 col-sm-4 col-md-6 col-lg-6">
+						<label class="font-weight-bold">Perfil</label>
+						<v-select label="nombre" :options="selects.perfiles" v-model="data._perfil"></v-select>
                		</div>
            		</div>
             </template>
@@ -72,13 +76,14 @@
 					telefono_movil: null,
 					telefono_fijo: null,
 					direccion: null,
+					_perfil: null,
 				},
 				valid: {
 					rut: '',
 					email: '',
 				},
 				selects: {
-
+					perfiles: []
 				}
 			}
 		},
@@ -108,7 +113,8 @@
 
 				axios.post(this.url.current + '/editar', request)
 				.then(response => {
-					this.data = response.data;
+					this.data = response.data.usuario;
+					this.selects.perfiles = response.data.perfiles;
 					this.validarRut();
 					this.validarEmail();
 				})
@@ -132,6 +138,7 @@
 				this.data.telefono_fijo && request.append('telefono_fijo', this.data.telefono_fijo);
 				this.data.telefono_movil && request.append('telefono_movil', this.data.telefono_movil);
 				this.data.direccion && request.append('direccion', this.data.direccion);
+				this.data._perfil && request.append('perfil_id', this.data._perfil.id);
 
 				axios.post(this.url.current + '/guardar', request)
 				.then(response => {

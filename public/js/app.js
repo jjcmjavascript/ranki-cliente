@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Sistema/Usuarios":"app/Sistema/Usuarios","app/Sistema/Usuarios/Crear":"app/Sistema/Usuarios/Crear","app/Sistema/Usuarios/Editar":"app/Sistema/Usuarios/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Sistema/Perfiles/Index":"app/Sistema/Perfiles/Index","app/Sistema/Usuarios/Crear":"app/Sistema/Usuarios/Crear","app/Sistema/Usuarios/Editar":"app/Sistema/Usuarios/Editar","app/Sistema/Usuarios/Index":"app/Sistema/Usuarios/Index","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -75161,8 +75161,10 @@ __webpack_require__(/*! ./config/sweetalert2 */ "./resources/js/config/sweetaler
 
 window.loading = function (self) {
   return self.$loading.show(_objectSpread({
-    loader: 'dots',
-    opacity: 0.8
+    loader: 'spinner',
+    opacity: 0.4,
+    backgroundColor: '#4C4C4C',
+    zIndex: 9999
   }, arguments.length <= 1 ? undefined : arguments[1]));
 };
 
@@ -75883,7 +75885,7 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '/sistema/usuarios',
   component: function component() {
-    return __webpack_require__.e(/*! import() | app/Sistema/Usuarios */ "app/Sistema/Usuarios").then(__webpack_require__.bind(null, /*! ../app/Sistema/Usuarios/Index */ "./resources/js/app/Sistema/Usuarios/Index.vue"));
+    return __webpack_require__.e(/*! import() | app/Sistema/Usuarios/Index */ "app/Sistema/Usuarios/Index").then(__webpack_require__.bind(null, /*! ../app/Sistema/Usuarios/Index */ "./resources/js/app/Sistema/Usuarios/Index.vue"));
   }
 }, {
   path: '/sistema/usuarios/crear',
@@ -75894,6 +75896,11 @@ var routes = [{
   path: '/sistema/usuarios/:id/editar',
   component: function component() {
     return __webpack_require__.e(/*! import() | app/Sistema/Usuarios/Editar */ "app/Sistema/Usuarios/Editar").then(__webpack_require__.bind(null, /*! ../app/Sistema/Usuarios/Editar */ "./resources/js/app/Sistema/Usuarios/Editar.vue"));
+  }
+}, {
+  path: '/sistema/perfiles',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | app/Sistema/Perfiles/Index */ "app/Sistema/Perfiles/Index").then(__webpack_require__.bind(null, /*! ../app/Sistema/Perfiles/Index */ "./resources/js/app/Sistema/Perfiles/Index.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

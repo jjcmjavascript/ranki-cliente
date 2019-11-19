@@ -125,7 +125,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "alert alert-success alert-dismissible fade show",
+                        "alert alert-green alert-dismissible fade show",
                       attrs: { role: "alert" }
                     },
                     [
@@ -146,7 +146,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "alert alert-success alert-dismissible fade show",
+                        "alert alert-green alert-dismissible fade show",
                       attrs: { role: "alert" }
                     },
                     [
@@ -166,7 +166,7 @@ var render = function() {
               ? _c(
                   "div",
                   {
-                    staticClass: "alert alert-success",
+                    staticClass: "alert alert-green",
                     attrs: { role: "alert" }
                   },
                   _vm._l(_vm.$attrs.success, function(message) {

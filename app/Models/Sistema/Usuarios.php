@@ -16,7 +16,8 @@ class Usuarios extends Authenticatable
      */
     protected $fillable = [
         'nombre', 'apellidos', 'email', 'rut', 'direccion',
-        'telefono_movil', 'telefono_fijo', 'avatar', 'provider', 'provider_id', 'activo', 'password',
+        'telefono_movil', 'telefono_fijo', 'avatar', 'provider', 
+        'provider_id', 'perfil_id', 'activo', 'password',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -35,6 +36,11 @@ class Usuarios extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function _perfil()
+    {
+        return $this->belongsTo('App\Models\Sistema\Perfiles', 'perfil_id');
+    }
+
     public function scopeActivo($query)
     {
         return $query->where('activo', 1);
@@ -46,7 +52,7 @@ class Usuarios extends Authenticatable
             $query->where('id', $request->id); 
         }
         if($request->nombre) {
-            $query->where('nombre', $request->nombre);     
+            $query->where('nombre', 'LIKE', '%'.$request->nombre.'%');     
         }
         if($request->email) {
             $query->where('email', $request->email); 

@@ -46,7 +46,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="{{ route('sistema.usuarios') }}">
+						<a href="{{ route('sistema.perfiles') }}">
 							<i class="fa fa-address-book"></i> 
 							<span>Perfiles</span> 
 						</a>

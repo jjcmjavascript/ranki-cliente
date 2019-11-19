@@ -2,7 +2,7 @@
     <div id="alertas">
         <template v-if="type == 'multiple'">
             <template v-if="$attrs.success">
-                <div class="alert alert-success alert-dismissible fade show" role="alert" v-for="message in $attrs.success">
+                <div class="alert alert-green alert-dismissible fade show" role="alert" v-for="message in $attrs.success">
                     {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span>
@@ -11,7 +11,7 @@
             </template>
 
             <template v-if="$attrs.error">
-                <div class="alert alert-success alert-dismissible fade show" role="alert" v-for="message in $attrs.error">
+                <div class="alert alert-green alert-dismissible fade show" role="alert" v-for="message in $attrs.error">
                     {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span>
@@ -20,7 +20,7 @@
             </template>
         </template>
         <template v-else>
-            <div class="alert alert-success" role="alert" v-if="$attrs.success && $attrs.success.length > 0">
+            <div class="alert alert-green" role="alert" v-if="$attrs.success && $attrs.success.length > 0">
                 <li v-for="message in $attrs.success">{{ message }}</li>
             </div>
 

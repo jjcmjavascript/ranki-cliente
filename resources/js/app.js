@@ -23,8 +23,10 @@ require('./config/sweetalert2');
 // SET GLOBAL DEL LOADER
 window.loading = function(self, ...args) {
     return self.$loading.show({
-        loader: 'dots',
-        opacity: 0.8,
+        loader: 'spinner',
+        opacity: 0.4,
+        backgroundColor: '#4C4C4C',
+        zIndex: 9999,
       ...args[0]
     });
 };
