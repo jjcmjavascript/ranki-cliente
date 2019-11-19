@@ -74,6 +74,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -94,6 +98,7 @@ __webpack_require__.r(__webpack_exports__);
         telefono_movil: null,
         telefono_fijo: null,
         direccion: null,
+        perfil: null,
         password: null,
         confirmPassword: null
       },
@@ -103,8 +108,13 @@ __webpack_require__.r(__webpack_exports__);
         password: '',
         confirmPassword: ''
       },
-      selects: {}
+      selects: {
+        perfiles: []
+      }
     };
+  },
+  created: function created() {
+    this.iniciar();
   },
   computed: {
     inhabilitarGuardar: function inhabilitarGuardar() {
@@ -116,10 +126,22 @@ __webpack_require__.r(__webpack_exports__);
       this.success = [];
       this.error = [];
     },
-    guardar: function guardar() {
+    iniciar: function iniciar() {
       var _this = this;
 
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.limpiarMensajes();
+      var load = loading(this);
+      axios.post(this.url.current + '/crear').then(function (response) {
+        _this.selects.perfiles = response.data;
+      })["catch"](function (error) {
+        _this.error = _this.$root.arrayResponse(error);
+      })["finally"](function () {
+        load.hide();
+      });
+    },
+    guardar: function guardar() {
+      var _this2 = this;
+
       this.limpiarMensajes();
       var load = loading(this);
       var request = new FormData();
@@ -130,14 +152,15 @@ __webpack_require__.r(__webpack_exports__);
       this.data.telefono_fijo && request.append('telefono_fijo', this.data.telefono_fijo);
       this.data.telefono_movil && request.append('telefono_movil', this.data.telefono_movil);
       this.data.direccion && request.append('direccion', this.data.direccion);
+      this.data.perfil && request.append('perfil_id', this.data.perfil.id);
       this.data.password && request.append('clave', this.data.password);
       this.data.confirmPassword && request.append('clave_confirmation', this.data.confirmPassword);
       axios.post(this.url.current + '/guardar', request).then(function (response) {
-        _this.success = response.data;
+        _this2.success = response.data;
 
-        _this.limpiar();
+        _this2.limpiar();
       })["catch"](function (error) {
-        _this.error = _this.$root.arrayResponse(error);
+        _this2.error = _this2.$root.arrayResponse(error);
       })["finally"](function () {
         load.hide();
       });
@@ -185,17 +208,18 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     limpiar: function limpiar() {
-      data = {
+      this.data = {
         rut: null,
         nombre: null,
         apellidos: null,
         email: null,
         telefono_movil: null,
         telefono_fijo: null,
+        perfil: null,
         password: null,
         confirmPassword: null
       };
-      valid = {
+      this.valid = {
         rut: '',
         email: '',
         password: '',
@@ -444,7 +468,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
+                  staticClass: "form-group col-xs-12 col-sm-4 col-md-6 col-lg-6"
                 },
                 [
                   _c("label", [_vm._v("Dirección")]),
@@ -471,6 +495,30 @@ var render = function() {
                     }
                   })
                 ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "form-group col-xs-12 col-sm-4 col-md-6 col-lg-6"
+                },
+                [
+                  _c("label", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Perfil")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-select", {
+                    attrs: { label: "nombre", options: _vm.selects.perfiles },
+                    model: {
+                      value: _vm.data.perfil,
+                      callback: function($$v) {
+                        _vm.$set(_vm.data, "perfil", $$v)
+                      },
+                      expression: "data.perfil"
+                    }
+                  })
+                ],
+                1
               ),
               _vm._v(" "),
               _c(

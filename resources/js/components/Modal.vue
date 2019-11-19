@@ -1,21 +1,18 @@
 <template>
-    <div class="c-modal" :id="_id">
-        <div class="content" :class="_size">
-            <div class="header clearfix">
-                <h5 class="title"><slot name="header"></slot></h5>
-                <button type="button" class="close-icon" v-on:click="close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-
-            <div class="body clearfix">
-                <slot name="main"></slot>
-            </div>
-
-            <div class="footer clearfix">
-                <slot name="footer"></slot>
-
-                <button class="btn btn-link" id="close" v-on:click="close">Cerrar</button>
+    <div class="modal" data-backdrop="static" data-keyboard="false" :id="_id" >
+        <div class="modal-dialog" :class="_size">
+            <div class="modal-content" :class="_size">
+                <div class="modal-header">
+                    <h5 class="title"><slot name="header"></slot></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                     <slot name="main"></slot>
+                </div>
+                <div class="modal-footer">
+                    <slot name="footer"></slot>
+                    <button class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -32,27 +29,19 @@
                 return this.id ? this.id : 'customModal';
             },
             _size: function() {
-                return this.size ? this.size : 'medium';
-            },
-        },
-        methods: {
-            close: function() {
-                document.getElementById(this._id).classList.remove('show');
-                document.querySelector('body').classList.remove('with-modal');
-                this.$emit('close');
-            },
-            show: function() {
-                document.querySelector('body').classList.add('with-modal');
-                document.getElementById(this._id).classList.add('show');
-            },
-            hide: function() {
-                this.close();
+                return this.size ? this.size : 'modal-md';
             },
         },
     };
 </script>
 
-<style scoped>
+<style>
+    .modal .modal-header .title {
+        margin: 0;
+    }
+</style>
+
+<!--style scoped>
     .c-modal {
         position: absolute;
         margin: 0;
@@ -62,6 +51,7 @@
         height: 100%;
         background: rgba(0, 0, 0, 0.5);
         display: none;
+        z-index: 99999;
     }
 
     .c-modal.show {
@@ -79,6 +69,7 @@
         border: 1px solid #3094C2;
         border-radius: .3rem;
         color: #000;
+        padding: 0;
     }
 
     .c-modal .content.extra-large {
@@ -94,50 +85,6 @@
         width: 400px;
     }
 
-    .c-modal .header,
-    .c-modal .body,
-    .c-modal .footer {
-        padding: 20px;
-    }
-
-    .c-modal .header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        border-top-left-radius: .3rem;
-        border-top-right-radius: .3rem;
-    }
-    .c-modal .header .title {
-        font-size: 20px;
-        margin-bottom: 0;
-        line-height: 1.5;
-        font-weight: 500;
-        margin-top: 0;
-        color: #41B0FF;
-    }
-    .c-modal .header .close-icon {
-        background-color: transparent;
-        border: 0;
-        color: #000;
-        cursor: pointer;
-        float: right;
-        font-family: inherit;
-        font-size: 1.5rem;
-        font-weight: 700;
-        line-height: 1;
-        margin: 0rem 0rem 0rem auto;
-        padding: 0;
-        opacity: .5;
-        text-shadow: 0 1px 0 #fff;
-
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }
-    .c-modal .header .close-icon:hover {
-        opacity: 1;
-    }
-
     .c-modal .body {
         font-size: 14px;
         line-height: 1.5;
@@ -151,28 +98,6 @@
     }
     .c-modal .body .row {
         margin: 0;
-    }
-
-    .c-modal .footer {
-        font-size: 14px;
-        position: relative;
-        width: 100%;
-        bottom: 0;
-        padding: 10px;
-        background-color: rgba(0,0,0,.2);
-        border-bottom-left-radius: .3rem;
-        border-bottom-right-radius: .3rem;
-        height: 58px;
-    }
-    .c-modal .footer #close {
-        float: right;
-    }
-    .c-modal .footer .btn-link {
-        color: #000;
-        text-decoration: none;
-    }
-    .c-modal .footer .btn-link:hover {
-        background-color: rgba(0, 0, 0, 0.15);
     }
 
     .c-modal table.table-bordered th,
@@ -219,4 +144,4 @@
         display: block !important;
         font-size: 16px;
     }
-</style>
+</style-->

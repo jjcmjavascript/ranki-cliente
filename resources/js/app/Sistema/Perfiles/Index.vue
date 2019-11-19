@@ -13,19 +13,15 @@
 
             <template slot="main">
                <div class="row">
-           			<div class="form-group col-xs-12 col-sm-2 col-md-1 col-lg-1">
+           			<div class="form-group col-xs-12 col-sm-2 col-ms-1 col-lg-1">
 						<label class="font-weight-bold">ID</label>
 						<input type="text" class="form-control" v-model="filters.id" />
            			</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-md-3 col-lg-3">
+               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-3">
 						<label class="font-weight-bold">Nombre</label>
 						<input type="text" class="form-control" v-model="filters.nombre" />
                		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-md-3 col-lg-3">
-						<label class="font-weight-bold">Email</label>
-						<input type="text" class="form-control" v-model="filters.email" />
-               		</div>
-               		<div class="form-group col-xs-12 col-sm-4 col-md-3 col-lg-3">
+               		<div class="form-group col-xs-12 col-sm-4 col-ms-3 col-lg-3">
 						<label class="font-weight-bold">Estado</label>
 						<v-select :options="selects.estados" v-model="filters.estado"></v-select>
                		</div>
@@ -35,11 +31,11 @@
 
         <panel type="crud" :footer-class="rows.last_page == 1 ? 'd-none' : ''">
 			<template slot="header">
-				Usuarios ({{ rows.total }} registrados)
+				Perfiles ({{ rows.total }} registrados)
 			</template>
 
 			<template slot="buttons">
-				<a :href="url.current + '/crear'" class="btn btn-success btn-sm">Crear nuevo</a>
+				<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalCrearPerfil">Crear nuevo</button>
 			</template>
 
             <template slot="main">
@@ -49,9 +45,6 @@
 	               			<tr>
 	               				<th>ID</th>
 	               				<th>Nombre</th>
-	               				<th>Email</th>
-	               				<th>Teléfono Móvil</th>
-	               				<th>Teléfono Fijo</th>
 	               				<th>Estado</th>
 	               				<th>Fecha creación</th>
 	               				<th>Acciones</th>
@@ -61,21 +54,18 @@
 	               			<tr v-for="(value, index) in rows.data">
 	               				<td>{{ value.id }}</td>
 	               				<td>{{ value.nombre }}</td>
-	               				<td>{{ value.email }}</td>
-	               				<td>{{ value.telefono_fijo }}</td>
-	               				<td>{{ value.telefono_movil }}</td>
 	               				<td>
 	               					<span v-html="verificarEstatus(value.activo)"></span>
 	               				</td>
 	               				<td>{{ value.created_at | dateTime }}</td>
 	               				<td>
-	               					<button class="btn btn-info btn-sm" @click="editarUsuario(value.id)" :title="'Editar usuario #' + value.id">
+	               					<button class="btn btn-info btn-sm" @click="editar(index)" :title="'Editar perfil #' + value.id">
 	               						<i class="fa fa-edit fa-fw"></i>
 	               					</button>
-	               					<button class="btn btn-danger btn-sm" v-if="value.activo" @click="desactivarUsuario(index)" :title="'Desactivar usuario #' + value.id">
+	               					<button class="btn btn-danger btn-sm" v-if="value.activo" @click="desactivar(index)" :title="'Desactivar perfil #' + value.id">
 	               						<i class="fa fa-ban fa-fw"></i>
 	               					</button>
-	               					<button class="btn btn-success btn-sm" v-if="!value.activo" @click="reactivarUsuario(index)" :title="'Reactivar usuario #' + value.id">
+	               					<button class="btn btn-success btn-sm" v-if="!value.activo" @click="reactivar(index)" :title="'Reactivar perfil #' + value.id">
 	               						<i class="fa fa-check fa-fw"></i>
 	               					</button>
 	               				</td>
@@ -86,6 +76,40 @@
 	            <pagination :data="rows" align="right" @pagination-change-page="filtrar"></pagination>
             </template>
         </panel>
+
+        <modal id="modalCrearPerfil">
+        	<template slot="header">
+        		Nuevo perfil
+        	</template>
+        	<template slot="main">
+        		<div class="row">
+        			<div class="form-group col-xs-12 col-lg-12">
+        				<label>Nombre</label>
+        				<input type="text" class="form-control" v-model="perfil.nombre" />
+        			</div>
+        		</div>
+        	</template>
+        	<template slot="footer">
+        		<button class="btn btn-success" @click="crear()">Guardar</button>
+        	</template>
+        </modal>
+
+        <modal id="modalEditarPerfil">
+        	<template slot="header">
+        		Editar perfil #<span v-if="perfil.key != null">{{ rows.data[perfil.key].id }}</span>
+        	</template>
+        	<template slot="main">
+        		<div class="row">
+        			<div class="form-group col-xs-12 col-lg-12">
+        				<label>Nombre</label>
+        				<input type="text" class="form-control" v-model="perfil.nombre" />
+        			</div>
+        		</div>
+        	</template>
+        	<template slot="footer">
+        		<button class="btn btn-success" @click="actualizar()">Guardar</button>
+        	</template>
+        </modal>
 	</div>
 </template>
 
@@ -99,7 +123,7 @@
 					name: '',
 				},
 				url: {
-                    current: this.$root.base_url + '/sistema/usuarios',
+                    current: this.$root.base_url + '/sistema/perfiles',
                     permisos: {},
                 },
 				rows: {
@@ -116,8 +140,11 @@
 				filters: {
 					id: null,
 					nombre: null,
-					email: null,
 					estado: null,
+				},
+				perfil: {
+					key: null,
+					nombre: null
 				}
 			}
 		},
@@ -130,6 +157,20 @@
 				this.success = [];
 				this.error = [];
 			},
+			limpiar() {
+				this.filters = {
+					id: null,
+					nombre: null,
+					estado: null,
+				};
+				this.filtrar(1);
+			},
+			limpiarPerfil() {
+				this.perfil = {
+					key: null,
+					nombre: null
+				};
+			},
 			filtrar(page = 1) {
 				this.limpiarMensajes();
 				let load = loading(this);
@@ -139,7 +180,6 @@
 
 				this.filters.id && request.append('id', this.filters.id);
 				this.filters.nombre && request.append('nombre', this.filters.nombre);
-				this.filters.email && request.append('email', this.filters.email);
 				this.filters.estado && request.append('estado', this.filters.estado.value);
 
 				axios.post(this.url.current, request)
@@ -153,15 +193,6 @@
 					load.hide();
 				})
 			},
-			limpiar() {
-				this.filters = {
-					id: null,
-					nombre: null,
-					email: null,
-					estado: null,
-				};
-				this.filtrar(1);
-			},
 			verificarEstatus(estado) {
 				let activo;
 				if(estado == 1) {
@@ -172,15 +203,64 @@
 				}
 				return activo;
 			},
-			editarUsuario(id) {
-				window.location = this.url.current + '/' + id + '/editar';
+			crear() {
+				this.limpiarMensajes();
+				let load = loading(this);
+
+				let request = new FormData;
+				this.perfil.nombre && request.append('nombre', this.perfil.nombre);
+
+				axios.post(this.url.current + '/guardar', request)
+				.then(response => {
+					this.success = response.data.mensaje;
+					this.rows.data.unshift(response.data.perfil);
+				})
+				.catch(error => {
+					this.error = this.$root.arrayResponse(error);
+				})
+				.finally(() => {
+					load.hide();
+					this.limpiarPerfil();
+					$('#modalCrearPerfil').modal('hide');
+				})
 			},
-			desactivarUsuario(key) {
+			editar(key) {
+				this.perfil.key = key;
+				this.perfil.nombre = this.rows.data[key].nombre;
+				$('#modalEditarPerfil').modal();
+
+				$('#modalEditarPerfil').on('hide.bs.modal', () => {
+					this.limpiarPerfil();
+				});
+			},
+			actualizar() {
+				this.limpiarMensajes();
+				let load = loading(this);
+
+				let key = this.perfil.key;
+				let request = new FormData;
+				request.append('id', this.rows.data[key].id);
+				this.perfil.nombre && request.append('nombre', this.perfil.nombre);
+
+				axios.post(this.url.current + '/guardar', request)
+				.then(response => {
+					this.success = response.data.mensaje;
+					this.rows.data[key] = response.data.perfil;
+				})
+				.catch(error => {
+					this.error = this.$root.arrayResponse(error);
+				})
+				.finally(() => {
+					load.hide();
+					$('#modalEditarPerfil').modal('hide');
+				})
+			},
+			desactivar(key) {
 				this.limpiarMensajes();
 
 				let id = this.rows.data[key].id;
 				swal.fire({
-					text: '¿Esta seguro que desea deshabilitar el usuario #' + id + '?',
+					text: '¿Esta seguro que desea deshabilitar el Perfil #' + id + '?',
 					icon: 'warning',
 					showConfirmButton: true,
 					showCancelButton: false,
@@ -202,12 +282,12 @@
 					}
 				});
 			},
-			reactivarUsuario(key) {
+			reactivar(key) {
 				this.limpiarMensajes();
 				
 				let id = this.rows.data[key].id;
 				swal.fire({
-					text: '¿Esta seguro que desea reactivar el usuario #' + id + '?',
+					text: '¿Esta seguro que desea reactivar el Perfil #' + id + '?',
 					icon: 'warning',
 					showConfirmButton: true,
 					showCancelButton: false,

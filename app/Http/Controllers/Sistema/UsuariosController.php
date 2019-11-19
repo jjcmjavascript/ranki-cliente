@@ -6,6 +6,7 @@ use DB;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sistema\Usuarios;
+use App\Models\Sistema\Perfiles;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -24,14 +25,22 @@ class UsuariosController extends Controller
         return response($usuarios);
     }
 
+    public function crear()
+    {
+        $perfiles = Perfiles::activo()->get();
+        return response($perfiles, 200);
+    }
+
     public function editar(Request $request)
     {
         $this->validate($request, [
             'id' => 'required | exists:usuarios,id'
         ]);
 
-        $usuarios = Usuarios::find($request->id);
-        return response($usuarios, 200);
+        $usuario = Usuarios::with('_perfil')->find($request->id);
+        $perfiles = Perfiles::activo()->get();
+
+        return response(compact('usuario', 'perfiles'), 200);
     }
 
     public function guardar(Request $request)
@@ -45,6 +54,7 @@ class UsuariosController extends Controller
             'telefono_movil' => 'sometimes|string',
             'direccion' => 'sometimes|string',
             'email' => 'required|email:rfc,dns',
+            'perfil_id' => 'required|exists:perfiles,id',
             'clave' => 'required_without:id|confirmed|min:8',
         ]);
 

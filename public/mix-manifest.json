@@ -1,9 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/app/Sistema/Usuarios.js": "/app/Sistema/Usuarios.js",
+    "/app/Sistema/Perfiles/Index.js": "/app/Sistema/Perfiles/Index.js",
     "/app/Sistema/Usuarios/Crear.js": "/app/Sistema/Usuarios/Crear.js",
     "/app/Sistema/Usuarios/Editar.js": "/app/Sistema/Usuarios/Editar.js",
+    "/app/Sistema/Usuarios/Index.js": "/app/Sistema/Usuarios/Index.js",
     "/app/login.js": "/app/login.js",
     "/components/Alertas.js": "/components/Alertas.js",
     "/components/DateRangePicker.js": "/components/DateRangePicker.js",

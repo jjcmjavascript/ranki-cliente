@@ -62,6 +62,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -81,13 +85,16 @@ __webpack_require__.r(__webpack_exports__);
         email: null,
         telefono_movil: null,
         telefono_fijo: null,
-        direccion: null
+        direccion: null,
+        _perfil: null
       },
       valid: {
         rut: '',
         email: ''
       },
-      selects: {}
+      selects: {
+        perfiles: []
+      }
     };
   },
   computed: {
@@ -111,7 +118,8 @@ __webpack_require__.r(__webpack_exports__);
       var request = new FormData();
       request.append('id', this.$route.params.id);
       axios.post(this.url.current + '/editar', request).then(function (response) {
-        _this.data = response.data;
+        _this.data = response.data.usuario;
+        _this.selects.perfiles = response.data.perfiles;
 
         _this.validarRut();
 
@@ -137,6 +145,7 @@ __webpack_require__.r(__webpack_exports__);
       this.data.telefono_fijo && request.append('telefono_fijo', this.data.telefono_fijo);
       this.data.telefono_movil && request.append('telefono_movil', this.data.telefono_movil);
       this.data.direccion && request.append('direccion', this.data.direccion);
+      this.data._perfil && request.append('perfil_id', this.data._perfil.id);
       axios.post(this.url.current + '/guardar', request).then(function (response) {
         _this2.success = response.data;
       })["catch"](function (error) {
@@ -429,7 +438,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
+                  staticClass: "form-group col-xs-12 col-sm-4 col-md-6 col-lg-6"
                 },
                 [
                   _c("label", [_vm._v("Dirección")]),
@@ -456,6 +465,30 @@ var render = function() {
                     }
                   })
                 ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "form-group col-xs-12 col-sm-4 col-md-6 col-lg-6"
+                },
+                [
+                  _c("label", { staticClass: "font-weight-bold" }, [
+                    _vm._v("Perfil")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-select", {
+                    attrs: { label: "nombre", options: _vm.selects.perfiles },
+                    model: {
+                      value: _vm.data._perfil,
+                      callback: function($$v) {
+                        _vm.$set(_vm.data, "_perfil", $$v)
+                      },
+                      expression: "data._perfil"
+                    }
+                  })
+                ],
+                1
               )
             ])
           ]),

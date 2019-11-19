@@ -38,6 +38,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['id', 'footer-class', 'size', 'type'],
   computed: {
@@ -46,6 +50,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     hasButtons: function hasButtons() {
       return !!this.$slots['buttons'];
+    },
+    hasToolbar: function hasToolbar() {
+      return !!this.$slots['toolbar'];
     },
     _footerClass: function _footerClass() {
       var _class = this.footerClass ? this.footerClass : '';
@@ -56,16 +63,15 @@ __webpack_require__.r(__webpack_exports__);
 
       return _class;
     },
-    // estilos
     _panelClass: function _panelClass() {
-      var background = 'bg-flat-grey';
+      var background = '';
 
       if (this.type) {
         switch (this.type) {
           case 'filtro':
           case 'crud':
           case 'form':
-            background = 'bg-info';
+            background = 'panel-info';
             break;
 
           case 'profile':
@@ -76,7 +82,11 @@ __webpack_require__.r(__webpack_exports__);
 
       return background;
     },
+    // estilos
+    _headerClass: function _headerClass() {//
+    },
     _cardClass: function _cardClass() {
+      // REVISAR PARA PROFILE
       var background = 'card';
 
       if (this.type) {
@@ -101,15 +111,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return background;
-    },
-    _bodyCard: function _bodyCard() {
-      var style = '';
-
-      if (this.type != 'crud' || this.type != 'form') {
-        style = ' card-body';
-      }
-
-      return style;
     },
     marginTop: function marginTop() {
       var style = '';
@@ -143,50 +144,52 @@ var render = function() {
   return _c("div", { staticClass: "pb-3" }, [
     _c(
       "div",
-      { class: _vm._cardClass, attrs: { id: _vm.id ? _vm.id : "panel" } },
+      {
+        staticClass: "panel panel-inverse",
+        class: _vm._panelClass,
+        attrs: { "data-sortable-id": "ui-widget-1" }
+      },
       [
         _vm.hasHeader && (_vm.type != "resultado" || _vm.hasButtons)
           ? _c(
               "div",
-              { staticClass: "card-header clearfix", class: _vm._panelClass },
+              { staticClass: "panel-heading", class: _vm._headerClass },
               [
                 _c(
                   "h4",
-                  { staticClass: "float-left", style: _vm.marginTop },
+                  { staticClass: "panel-title", style: _vm.marginTop },
                   [_vm._t("header")],
                   2
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "float-right" },
-                  [_vm._t("buttons")],
-                  2
-                )
+                _c("div", { staticClass: "panel-heading-btn" }, [
+                  _c(
+                    "div",
+                    { staticClass: "float-right" },
+                    [_vm._t("buttons")],
+                    2
+                  )
+                ])
               ]
             )
           : _vm._e(),
         _vm._v(" "),
+        _vm.hasToolbar
+          ? _c("div", { staticClass: "panel-toolbar" }, [
+              _c("h3", { staticClass: "panel-title" }, [_vm._t("toolbar")], 2)
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c(
           "div",
-          {
-            staticClass: "card-body clearfix",
-            class: _vm._bodyCard,
-            _bodyColor: _vm._bodyColor
-          },
-          [
-            _vm.hasHeader && _vm.type == "resultado" && !_vm.hasButtons
-              ? _c("h3", { staticClass: "card-title" }, [_vm._t("header")], 2)
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._t("main")
-          ],
+          { staticClass: "panel-body", class: _vm._bodyColor },
+          [_vm._t("main")],
           2
         ),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "card-footer clearfix", class: _vm._footerClass },
+          { staticClass: "panel-footer text-right", class: _vm._footerClass },
           [_vm._t("footer")],
           2
         )
