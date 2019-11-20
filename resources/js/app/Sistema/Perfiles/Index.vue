@@ -47,29 +47,47 @@
 	               				<th>Nombre</th>
 	               				<th>Estado</th>
 	               				<th>Fecha creación</th>
-	               				<th>Acciones</th>
+	               				<th v-if="table.showActions">Acciones</th>
 	               			</tr>
 	               		</thead>
 	               		<tbody>
-	               			<tr v-for="(value, index) in rows.data">
-	               				<td>{{ value.id }}</td>
-	               				<td>{{ value.nombre }}</td>
-	               				<td>
-	               					<span v-html="verificarEstatus(value.activo)"></span>
-	               				</td>
-	               				<td>{{ value.created_at | dateTime }}</td>
-	               				<td>
-	               					<button class="btn btn-info btn-sm" @click="editar(index)" :title="'Editar perfil #' + value.id">
-	               						<i class="fa fa-edit fa-fw"></i>
-	               					</button>
-	               					<button class="btn btn-danger btn-sm" v-if="value.activo" @click="desactivar(index)" :title="'Desactivar perfil #' + value.id">
-	               						<i class="fa fa-ban fa-fw"></i>
-	               					</button>
-	               					<button class="btn btn-success btn-sm" v-if="!value.activo" @click="reactivar(index)" :title="'Reactivar perfil #' + value.id">
-	               						<i class="fa fa-check fa-fw"></i>
-	               					</button>
-	               				</td>
-	               			</tr>
+	               			<template v-if="table.filtrando">
+	               				<tr>
+	               					<td :colspan="table.showActions ? 8 : 7">
+	               						Buscando datos
+	               					</td>
+	               				</tr>
+	               			</template>
+
+	               			<template v-else-if="!table.filtrando && Object.keys(rows.data).length>0">
+		               			<tr v-for="(value, index) in rows.data">
+		               				<td>{{ value.id }}</td>
+		               				<td>{{ value.nombre }}</td>
+		               				<td>
+		               					<span v-html="verificarEstatus(value.activo)"></span>
+		               				</td>
+		               				<td>{{ value.created_at | dateTime }}</td>
+		               				<td>
+		               					<button class="btn btn-info btn-sm" @click="editar(index)" :title="'Editar perfil #' + value.id">
+		               						<i class="fa fa-edit fa-fw"></i>
+		               					</button>
+		               					<button class="btn btn-danger btn-sm" v-if="value.activo" @click="desactivar(index)" :title="'Desactivar perfil #' + value.id">
+		               						<i class="fa fa-ban fa-fw"></i>
+		               					</button>
+		               					<button class="btn btn-success btn-sm" v-if="!value.activo" @click="reactivar(index)" :title="'Reactivar perfil #' + value.id">
+		               						<i class="fa fa-check fa-fw"></i>
+		               					</button>
+		               				</td>
+		               			</tr>
+	               			</template>
+
+	               			<template v-else>
+		               			<tr>
+		               				<td :colspan="table.showActions ? 8 : 7">
+		               					Busqueda finalizada. No se han encontrado datos
+		               				</td>
+		               			</tr>
+		               		</template>
 	               		</tbody>
 	               </table>
 	            </div>
@@ -119,9 +137,6 @@
 			return {
 				error: [],
 				success: [],
-				section: {
-					name: '',
-				},
 				url: {
                     current: this.$root.base_url + '/sistema/perfiles',
                     permisos: {},
@@ -145,6 +160,10 @@
 				perfil: {
 					key: null,
 					nombre: null
+				},
+				table: {
+					filtrando: false,
+					showActions: true
 				}
 			}
 		},
@@ -173,6 +192,7 @@
 			},
 			filtrar(page = 1) {
 				this.limpiarMensajes();
+				this.table.filtrando = true;
 				let load = loading(this);
 
 				let request = new FormData;
@@ -191,6 +211,7 @@
 				})
 				.finally(() => {
 					load.hide();
+					this.table.filtrando = false;
 				})
 			},
 			verificarEstatus(estado) {

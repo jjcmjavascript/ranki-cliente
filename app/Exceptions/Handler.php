@@ -3,6 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
+use Request;
+use App\Models\Exceptions as Error;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -34,6 +37,17 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if (Auth::user()) {
+            Error::create([
+                'usuario_id' => Auth::user()->id,
+                'code' => $exception->getCode(),
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+                'message' => $exception->getMessage(),
+                'action' => Request::url(),
+                'input' => json_encode(Request::all()),
+            ]);
+        }
         parent::report($exception);
     }
 
