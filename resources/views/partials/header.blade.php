@@ -10,7 +10,6 @@
 				</button>
 			</div>
 			<!-- end navbar-header -->
-			
 			<!-- begin header-nav -->
 			<ul class="navbar-nav navbar-right">
 				<li class="navbar-form">

@@ -34,7 +34,7 @@ class UsuariosController extends Controller
     public function editar(Request $request)
     {
         $this->validate($request, [
-            'id' => 'required | exists:usuarios,id'
+            'id' => 'required|exists:usuarios,id'
         ]);
 
         $usuario = Usuarios::with('_perfil')->find($request->id);
@@ -91,7 +91,7 @@ class UsuariosController extends Controller
     public function desactivar(Request $request)
     {
         $this->validate($request, [
-            'id' => 'required | integer | exists:usuarios,id'
+            'id' => 'required|integer|exists:usuarios,id'
         ]);
 
         try {
@@ -116,7 +116,7 @@ class UsuariosController extends Controller
     public function reactivar(Request $request)
     {
         $this->validate($request, [
-            'id' => 'required | integer | exists:usuarios,id'
+            'id' => 'required|integer|exists:usuarios,id'
         ]);
 
         try {

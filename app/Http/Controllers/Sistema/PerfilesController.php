@@ -21,7 +21,7 @@ class PerfilesController extends Controller
         ->orderBy('id', 'DESC')
         ->paginate();
 
-        return response($perfiles);
+        return response($perfiles, 200);
     }
 
     public function guardar(Request $request)
