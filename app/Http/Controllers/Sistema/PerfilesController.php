@@ -35,10 +35,9 @@ class PerfilesController extends Controller
             DB::beginTransaction();
 
             if($request->id) {
-                $perfil = Perfiles::find($request->id);
+                $perfil = Perfiles::findOrFail($request->id);
             }
-
-            if(!isset($perfil)) {
+            else {
                 $perfil = new Perfiles;
             }
 
@@ -66,7 +65,7 @@ class PerfilesController extends Controller
         try {
             DB::beginTransaction();
 
-            $perfil = Perfiles::find($request->id);
+            $perfil = Perfiles::findOrFail($request->id);
             $perfil->activo = 0;
             $perfil->save();
 
@@ -91,7 +90,7 @@ class PerfilesController extends Controller
         try {
             DB::beginTransaction();
 
-            $perfil = Perfiles::find($request->id);
+            $perfil = Perfiles::findOrFail($request->id);
             $perfil->activo = 1;
             $perfil->save();
 

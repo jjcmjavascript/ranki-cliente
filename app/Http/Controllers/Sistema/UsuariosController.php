@@ -62,10 +62,7 @@ class UsuariosController extends Controller
             DB::beginTransaction();
 
             if($request->id) {
-                $usuario = Usuarios::find($request->id);
-            }
-
-            if(isset($usuario)) {
+                $usuario = Usuarios::findOrFail($request->id);
                 $usuario->fill($request->all());
             }
             else {
@@ -97,7 +94,7 @@ class UsuariosController extends Controller
         try {
             DB::beginTransaction();
 
-            $usuario = Usuarios::find($request->id);
+            $usuario = Usuarios::findOrFail($request->id);
             $usuario->activo = 0;
             $usuario->save();
 
@@ -122,7 +119,7 @@ class UsuariosController extends Controller
         try {
             DB::beginTransaction();
 
-            $usuario = Usuarios::find($request->id);
+            $usuario = Usuarios::findOrFail($request->id);
             $usuario->activo = 1;
             $usuario->save();
 
