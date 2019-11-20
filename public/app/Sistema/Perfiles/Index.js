@@ -127,14 +127,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       error: [],
       success: [],
-      section: {
-        name: ''
-      },
       url: {
         current: this.$root.base_url + '/sistema/perfiles',
         permisos: {}
@@ -161,6 +176,10 @@ __webpack_require__.r(__webpack_exports__);
       perfil: {
         key: null,
         nombre: null
+      },
+      table: {
+        filtrando: false,
+        showActions: true
       }
     };
   },
@@ -202,6 +221,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.limpiarMensajes();
+      this.table.filtrando = true;
       var load = loading(this);
       var request = new FormData();
       request.append('page', page);
@@ -214,6 +234,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.error = _this.$root.arrayResponse(error);
       })["finally"](function () {
         load.hide();
+        _this.table.filtrando = false;
       });
     },
     verificarEstatus: function verificarEstatus(estado) {
@@ -528,86 +549,140 @@ var render = function() {
                       _vm._v(" "),
                       _c("th", [_vm._v("Fecha creación")]),
                       _vm._v(" "),
-                      _c("th", [_vm._v("Acciones")])
+                      _vm.table.showActions
+                        ? _c("th", [_vm._v("Acciones")])
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
                   _c(
                     "tbody",
-                    _vm._l(_vm.rows.data, function(value, index) {
-                      return _c("tr", [
-                        _c("td", [_vm._v(_vm._s(value.id))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(value.nombre))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", {
-                            domProps: {
-                              innerHTML: _vm._s(
-                                _vm.verificarEstatus(value.activo)
+                    [
+                      _vm.table.filtrando
+                        ? [
+                            _c("tr", [
+                              _c(
+                                "td",
+                                {
+                                  attrs: {
+                                    colspan: _vm.table.showActions ? 8 : 7
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\t               \t\t\t\t\t\tBuscando datos\n\t               \t\t\t\t\t"
+                                  )
+                                ]
                               )
-                            }
+                            ])
+                          ]
+                        : !_vm.table.filtrando &&
+                          Object.keys(_vm.rows.data).length > 0
+                        ? _vm._l(_vm.rows.data, function(value, index) {
+                            return _c("tr", [
+                              _c("td", [_vm._v(_vm._s(value.id))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(value.nombre))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("span", {
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      _vm.verificarEstatus(value.activo)
+                                    )
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(_vm._f("dateTime")(value.created_at))
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-info btn-sm",
+                                    attrs: {
+                                      title: "Editar perfil #" + value.id
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editar(index)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-edit fa-fw" })]
+                                ),
+                                _vm._v(" "),
+                                value.activo
+                                  ? _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger btn-sm",
+                                        attrs: {
+                                          title:
+                                            "Desactivar perfil #" + value.id
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.desactivar(index)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa fa-ban fa-fw"
+                                        })
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                !value.activo
+                                  ? _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-success btn-sm",
+                                        attrs: {
+                                          title: "Reactivar perfil #" + value.id
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.reactivar(index)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fa fa-check fa-fw"
+                                        })
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ])
+                            ])
                           })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(_vm._f("dateTime")(value.created_at)))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-info btn-sm",
-                              attrs: { title: "Editar perfil #" + value.id },
-                              on: {
-                                click: function($event) {
-                                  return _vm.editar(index)
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fa fa-edit fa-fw" })]
-                          ),
-                          _vm._v(" "),
-                          value.activo
-                            ? _c(
-                                "button",
+                        : [
+                            _c("tr", [
+                              _c(
+                                "td",
                                 {
-                                  staticClass: "btn btn-danger btn-sm",
                                   attrs: {
-                                    title: "Desactivar perfil #" + value.id
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.desactivar(index)
-                                    }
+                                    colspan: _vm.table.showActions ? 8 : 7
                                   }
                                 },
-                                [_c("i", { staticClass: "fa fa-ban fa-fw" })]
+                                [
+                                  _vm._v(
+                                    "\n\t\t               \t\t\t\t\tBusqueda finalizada. No se han encontrado datos\n\t\t               \t\t\t\t"
+                                  )
+                                ]
                               )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          !value.activo
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success btn-sm",
-                                  attrs: {
-                                    title: "Reactivar perfil #" + value.id
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.reactivar(index)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "fa fa-check fa-fw" })]
-                              )
-                            : _vm._e()
-                        ])
-                      ])
-                    }),
-                    0
+                            ])
+                          ]
+                    ],
+                    2
                   )
                 ])
               ]),
