@@ -13,15 +13,22 @@ class CreateUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('usuarios', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('apellidos')->nullable();
+            $table->string('rut', 15)->nullable()->after('email_verified_at');
+            $table->string('avatar')->nullable()->after('telefono_fijo');
+            $table->string('password');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('telefono_movil', 20)->nullable()->after('email_verified_at');
+            $table->string('telefono_fijo', 20)->nullable()->after('email_verified_at');
+            $table->text('direccion')->nullable()->after('email_verified_at');
+            $table->string('provider_id')->nullable()->after('telefono_fijo');
             $table->boolean('activo')->default(1);
+            $table->string('provider')->nullable()->after('telefono_fijo');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -33,6 +40,6 @@ class CreateUsuariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('clientes');
     }
 }
