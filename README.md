@@ -1,3 +1,4 @@
-# jmspa-m2
 
-Proyecto laravel inmobiliaria JMSPA
+# jmspa-m2-cliente
+
+Portal de jmspa destinado a clientes
