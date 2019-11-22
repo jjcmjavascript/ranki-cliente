@@ -1,307 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["app/login"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/login.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/login.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      error: [],
-      success: [],
-      usuario: null,
-      password: null,
-      modal: {
-        error: [],
-        success: [],
-        view: 'solicitar',
-        user: null,
-        email: null,
-        token: null,
-        password: null,
-        password_check: null
-      }
-    };
-  },
-  computed: {
-    alertUser: function alertUser() {
-      return !this.usuario || !this.$root.noScript(this.usuario);
-    },
-    alertPass: function alertPass() {
-      return !this.password || !this.$root.noScript(this.password);
-    },
-    disableLogin: function disableLogin() {
-      return this.alertUser || this.alertPass;
-    },
-    deshabilitarSolicitarCodigo: function deshabilitarSolicitarCodigo() {
-      return !this.modal.user || !this.modal.email || !this.$root.validEmail(this.modal.email);
-    },
-    deshabilitarCambiarContrasena: function deshabilitarCambiarContrasena() {
-      return !this.modal.user || !this.modal.email || !this.$root.validEmail(this.modal.email) || !this.modal.token || !this.modal.password || this.modal.password && (this.modal.password.length < 6 || this.modal.password.length > 100) || !this.modal.password_check || this.modal.password != this.modal.password_check;
-    }
-  },
-  methods: {
-    validateLogin: function validateLogin() {
-      if (this.usuario && this.password) {
-        this.login();
-      }
-    },
-    login: function login() {
-      var _this = this;
-
-      loading(this);
-      this.success = [];
-      this.error = []; //loaded();
-
-      if (this.$root.noScript(this.usuario) && this.$root.noScript(this.password)) {
-        var request = new FormData();
-        request.append('usuario', this.usuario);
-        request.append('password', this.password);
-        axios.post('/login', request).then(function (response) {
-          loaded();
-
-          if ('intended' in response.data && response.data.intended.indexOf('.js') === -1) {
-            window.location.href = response.data.intended;
-          } else if ('success' in response.data) {
-            window.location.href = '/';
-          } else {
-            _this.error = _this.$root.arrayResponse(response);
-          }
-        })["catch"](function (error) {
-          loaded(_this);
-          _this.error = _this.$root.arrayResponse(error);
-        });
-      } else {
-        this.error = ['No puede ingresar links o scripts en campos Usuario o Contraseña', 'Por favor verifique sus datos antes de continuar'];
-        loaded();
-      }
-    },
-    limpiar: function limpiar() {
-      this.success = [];
-      this.error = [];
-      this.modal = {
-        error: [],
-        success: [],
-        view: 'solicitar',
-        user: null,
-        email: null,
-        token: null,
-        password: null,
-        password_check: null
-      };
-    },
-    recoverView: function recoverView() {
-      this.limpiar();
-      this.modal.user = this.usuario;
-      this.$refs.modal.show();
-    },
-    recoverViewChange: function recoverViewChange(view) {
-      this.modal.error = [];
-      this.modal.success = [];
-      this.modal.view = view;
-      this.modal.token = null;
-      this.modal.password = null;
-      this.modal.password_check = null;
-    },
-    recoverRequest: function recoverRequest() {
-      var _this2 = this;
-
-      loading();
-      this.modal.success = [];
-      this.modal.error = [];
-
-      if (this.$root.noScript(this.modal.user) && this.$root.noScript(this.modal.email)) {
-        var request = new FormData();
-        request.append('usuario', this.modal.user);
-        request.append('email', this.modal.email);
-        axios.post('/login/recover/request', request).then(function (response) {
-          loaded();
-
-          if ('success' in response.data) {
-            _this2.modal.success = _this2.$root.arrayResponse(response.data.success);
-            _this2.modal.view = 'recuperar';
-          } else {
-            _this2.modal.error = _this2.$root.arrayResponse(response);
-          }
-        })["catch"](function (error) {
-          loaded();
-          _this2.modal.error = _this2.$root.arrayResponse(error);
-        });
-      } else {
-        this.error = ['No puede ingresar links o scripts en campos Usuario o Correo electrónico', 'Por favor verifique sus datos antes de continuar.'];
-        loaded();
-      }
-    },
-    recover: function recover() {
-      var _this3 = this;
-
-      loading();
-      this.success = [];
-      this.error = [];
-      this.modal.success = [];
-      this.modal.error = [];
-
-      if (this.$root.noScript(this.modal.user) && this.$root.noScript(this.modal.email) && this.$root.noScript(this.modal.token) && this.$root.noScript(this.modal.password)) {
-        var request = new FormData();
-        request.append('usuario', this.modal.user);
-        request.append('email', this.modal.email);
-        request.append('codigo', this.modal.token);
-        request.append('contrasena', this.modal.password);
-        axios.post('/login/recover', request).then(function (response) {
-          loaded();
-
-          if ('success' in response.data) {
-            _this3.usuario = _this3.modal.user;
-            _this3.password = _this3.modal.password;
-
-            _this3.$refs.modal.hide();
-
-            _this3.success = _this3.$root.arrayResponse(response.data.success);
-          } else {
-            _this3.modal.error = _this3.$root.arrayResponse(response);
-          }
-        })["catch"](function (error) {
-          loaded();
-          _this3.modal.error = _this3.$root.arrayResponse(error);
-        });
-      } else {
-        this.error = ['No puede ingresar links o scripts en campos Usuario o Correo electrónico', 'Por favor verifique sus datos antes de continuar.'];
-        loaded();
-      }
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/Home.vue?vue&type=template&id=6c5f482b&":
 /*!************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/Home.vue?vue&type=template&id=6c5f482b& ***!
@@ -317,1191 +15,2384 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _vm._m(1),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-xl-6" }, [
-        _c(
-          "div",
-          {
-            staticClass: "card border-0 bg-dark text-white mb-3 overflow-hidden"
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "row" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "col-xl-5 col-lg-4 align-items-center d-flex justify-content-center"
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "d-none d-lg-block",
-                      attrs: {
-                        src: _vm.$root.base_url + "/images/img-1.svg",
-                        height: "150px"
-                      }
-                    })
-                  ]
-                )
-              ])
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _vm._m(3)
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h1", { staticClass: "page-header" }, [
-      _vm._v("Dashboard "),
-      _c("small", [_vm._v("inicio de la aplicación")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
-        _c("div", { staticClass: "widget widget-stats bg-teal" }, [
-          _c("div", { staticClass: "stats-icon stats-icon-lg" }, [
-            _c("i", { staticClass: "fa fa-globe fa-fw" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "stats-content" }, [
-            _c("div", { staticClass: "stats-title" }, [
-              _vm._v("VISITANTES HOY")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-number" }, [_vm._v("842,900")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-progress progress" }, [
-              _c("div", {
-                staticClass: "progress-bar",
-                staticStyle: { width: "70.1%" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-desc" }, [
-              _vm._v("Mejor que semana pasada (70.1%)")
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
-        _c("div", { staticClass: "widget widget-stats bg-blue" }, [
-          _c("div", { staticClass: "stats-icon stats-icon-lg" }, [
-            _c("i", { staticClass: "fa fa-dollar-sign fa-fw" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "stats-content" }, [
-            _c("div", { staticClass: "stats-title" }, [
-              _vm._v("USUARIOS ACTIVOS")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-number" }, [_vm._v("180,200")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-progress progress" }, [
-              _c("div", {
-                staticClass: "progress-bar",
-                staticStyle: { width: "40.5%" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-desc" }, [
-              _vm._v("Mejor que semana pasada (40.5%)")
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
-        _c("div", { staticClass: "widget widget-stats bg-indigo" }, [
-          _c("div", { staticClass: "stats-icon stats-icon-lg" }, [
-            _c("i", { staticClass: "fa fa-archive fa-fw" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "stats-content" }, [
-            _c("div", { staticClass: "stats-title" }, [
-              _vm._v("NUEVAS PUBLICACIONES")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-number" }, [_vm._v("38,900")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-progress progress" }, [
-              _c("div", {
-                staticClass: "progress-bar",
-                staticStyle: { width: "76.3%" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-desc" }, [
-              _vm._v("Mejor que semana pasada (76.3%)")
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-xl-3 col-md-6" }, [
-        _c("div", { staticClass: "widget widget-stats bg-dark" }, [
-          _c("div", { staticClass: "stats-icon stats-icon-lg" }, [
-            _c("i", { staticClass: "fa fa-comment-alt fa-fw" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "stats-content" }, [
-            _c("div", { staticClass: "stats-title" }, [
-              _vm._v("NUEVOS COMENTARIOS")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-number" }, [_vm._v("3,988")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-progress progress" }, [
-              _c("div", {
-                staticClass: "progress-bar",
-                staticStyle: { width: "54.9%" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "stats-desc" }, [
-              _vm._v("Mejor que semana pasada (54.9%)")
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-7 col-lg-8" }, [
-      _c("div", { staticClass: "mb-3 text-grey" }, [
-        _c("b", [_vm._v("TOTAL RECAUDADO")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "ml-2" }, [
-          _c("i", {
-            staticClass: "fa fa-info-circle",
-            attrs: {
-              "data-toggle": "popover",
-              "data-trigger": "hover",
-              "data-title": "Total sales",
-              "data-placement": "top",
-              "data-content":
-                "Net sales (gross sales minus discounts and returns) plus taxes and shipping. Includes orders from all sales channels."
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "d-flex mb-1" }, [
-        _c("h2", { staticClass: "mb-0" }, [
-          _vm._v("$"),
+    return _c("div", [
+      _c("div", { attrs: { id: "wrapper" } }, [
+        _c("div", { staticClass: "content" }, [
           _c(
-            "span",
-            { attrs: { "data-animation": "number", "data-value": "64559.25" } },
-            [_vm._v("64559.25$")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "ml-auto mt-n1 mb-n1" }, [
-          _c("div", { attrs: { id: "total-sales-sparkline" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "mb-3 text-grey" }, [
-        _c("i", { staticClass: "fa fa-caret-up" }),
-        _vm._v(" "),
-        _c(
-          "span",
-          { attrs: { "data-animation": "number", "data-value": "33.21" } },
-          [_vm._v("8.27")]
-        ),
-        _vm._v("% comparado con la semana pasada\n\t\t\t\t\t\t\t\t")
-      ]),
-      _vm._v(" "),
-      _c("hr", { staticClass: "bg-white-transparent-2" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "row text-truncate" }, [
-        _c("div", { staticClass: "col-6" }, [
-          _c("div", { staticClass: "f-s-12 text-grey" }, [
-            _vm._v("Ordenes totales")
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
+            "section",
             {
-              staticClass: "f-s-18 m-b-5 f-w-600 p-b-1",
-              attrs: { "data-animation": "number", "data-value": "1568" }
+              staticClass: "scroll-con-sec hero-section",
+              attrs: { "data-scrollax-parent": "true", id: "sec1" }
             },
-            [_vm._v("1568")]
+            [
+              _c("div", {
+                staticClass: "bg",
+                attrs: {
+                  "data-bg": "images/bg/1.jpg",
+                  "data-scrollax": "properties: { translateY: '200px' }"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "overlay" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "hero-section-wrap fl-wrap" }, [
+                _c("div", { staticClass: "container" }, [
+                  _c("div", { staticClass: "intro-item fl-wrap" }, [
+                    _c("h2", [_vm._v("We will help you to find all")]),
+                    _vm._v(" "),
+                    _c("h3", [
+                      _vm._v(
+                        "Find great places , hotels , restourants , shops."
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "main-search-input-wrap" }, [
+                    _c("div", { staticClass: "main-search-input fl-wrap" }, [
+                      _c("div", { staticClass: "main-search-input-item" }, [
+                        _c("input", {
+                          attrs: {
+                            type: "text",
+                            placeholder: "What are you looking for?",
+                            value: ""
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "main-search-input-item location",
+                          attrs: { id: "autocomplete-container" }
+                        },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              placeholder: "Location",
+                              id: "autocomplete-input",
+                              value: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fa fa-dot-circle-o" })
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "main-search-input-item" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "chosen-select",
+                            attrs: { "data-placeholder": "All Categories" }
+                          },
+                          [
+                            _c("option", [_vm._v("All Categories")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Shops")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Hotels")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Restaurants")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Fitness")]),
+                            _vm._v(" "),
+                            _c("option", [_vm._v("Events")])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "main-search-button",
+                          attrs: {
+                            onclick:
+                              "window.location.href='listings-half-screen-map-list.html'"
+                          }
+                        },
+                        [_vm._v("Search")]
+                      )
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "bubble-bg" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "header-sec-link" }, [
+                _c("div", { staticClass: "container" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "custom-scroll-link",
+                      attrs: { href: "#sec2" }
+                    },
+                    [_vm._v("Let's Start")]
+                  )
+                ])
+              ])
+            ]
           ),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "progress progress-xs rounded-lg bg-dark-darker m-b-5"
-            },
-            [
-              _c("div", {
-                staticClass:
-                  "progress-bar progress-bar-striped rounded-right bg-teal",
-                staticStyle: { width: "55%" },
-                attrs: { "data-animation": "width", "data-value": "55%" }
-              })
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6" }, [
-          _c("div", { staticClass: "f-s-12 text-grey" }, [
-            _vm._v("Coste promedio")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "f-s-18 m-b-5 f-w-600 p-b-1" }, [
-            _vm._v("$"),
-            _c(
-              "span",
-              { attrs: { "data-animation": "number", "data-value": "41.20" } },
-              [_vm._v("41.20")]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "progress progress-xs rounded-lg bg-dark-darker m-b-5"
-            },
-            [
-              _c("div", {
-                staticClass: "progress-bar progress-bar-striped rounded-right",
-                staticStyle: { width: "55%" },
-                attrs: { "data-animation": "width", "data-value": "55%" }
-              })
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xl-6" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-6" }, [
-          _c(
-            "div",
-            {
-              staticClass: "card border-0 bg-dark text-white text-truncate mb-3"
-            },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "mb-3 text-grey" }, [
-                  _c("b", { staticClass: "mb-3" }, [
-                    _vm._v("RANGO DE CONVERSION")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "ml-2" }, [
-                    _c("i", {
-                      staticClass: "fa fa-info-circle",
-                      attrs: {
-                        "data-toggle": "popover",
-                        "data-trigger": "hover",
-                        "data-title": "Conversion Rate",
-                        "data-placement": "top",
-                        "data-content":
-                          "Percentage of sessions that resulted in orders from total number of sessions.",
-                        "data-original-title": "",
-                        title: ""
-                      }
-                    })
+          _c("section", { attrs: { id: "sec2" } }, [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "section-title" }, [
+                _c("h2", [_vm._v("Featured Categories")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "section-subtitle" }, [
+                  _vm._v("Catalog of Categories")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "section-separator" }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Explore some of the best tips from around the city from our partners and friends."
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "gallery-items fl-wrap mr-bot spad" }, [
+                _c("div", { staticClass: "gallery-item" }, [
+                  _c("div", { staticClass: "grid-item-holder" }, [
+                    _c("div", { staticClass: "listing-item-grid" }, [
+                      _c("img", {
+                        attrs: { src: "images/all/1.jpg", alt: "" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "listing-counter" }, [
+                        _c("span", [_vm._v("10 ")]),
+                        _vm._v(" Locations")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "listing-item-cat" }, [
+                        _c("h3", [
+                          _c("a", { attrs: { href: "listing.html" } }, [
+                            _vm._v("Conference and Event")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Constant care and attention to the patients makes good record"
+                          )
+                        ])
+                      ])
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "d-flex align-items-center mb-1" }, [
-                  _c("h2", { staticClass: "text-white mb-0" }, [
-                    _c(
-                      "span",
-                      {
-                        attrs: {
-                          "data-animation": "number",
-                          "data-value": "2.19"
-                        }
-                      },
-                      [_vm._v("2.19")]
-                    ),
-                    _vm._v("%")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ml-auto" }, [
-                    _c("div", { attrs: { id: "conversion-rate-sparkline" } })
+                _c("div", { staticClass: "gallery-item gallery-item-second" }, [
+                  _c("div", { staticClass: "grid-item-holder" }, [
+                    _c("div", { staticClass: "listing-item-grid" }, [
+                      _c("img", { attrs: { src: "images/bg/1.jpg", alt: "" } }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "listing-counter" }, [
+                        _c("span", [_vm._v("6 ")]),
+                        _vm._v(" Locations")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "listing-item-cat" }, [
+                        _c("h3", [
+                          _c("a", { attrs: { href: "listing.html" } }, [
+                            _vm._v("Cafe - Pub")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Constant care and attention to the patients makes good record"
+                          )
+                        ])
+                      ])
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "mb-4 text-grey" }, [
-                  _c("i", { staticClass: "fa fa-caret-down" }),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      attrs: {
-                        "data-animation": "number",
-                        "data-value": "0.50"
-                      }
-                    },
-                    [_vm._v("0.50")]
-                  ),
-                  _vm._v("% más que semana pasada\n\t\t\t\t\t\t\t\t")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-flex mb-2" }, [
-                  _c("div", { staticClass: "d-flex align-items-center" }, [
-                    _c("i", {
-                      staticClass: "fa fa-circle text-red f-s-8 mr-2"
-                    }),
-                    _vm._v(
-                      "\n\t\t\t\t\t\t\t\t\t\tPlanes aquiridos \n\t\t\t\t\t\t\t\t\t"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex align-items-center ml-auto" },
-                    [
-                      _c("div", { staticClass: "text-grey f-s-11" }, [
-                        _c("i", { staticClass: "fa fa-caret-up" }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            attrs: {
-                              "data-animation": "number",
-                              "data-value": "262"
-                            }
-                          },
-                          [_vm._v("262")]
-                        ),
-                        _vm._v("%")
+                _c("div", { staticClass: "gallery-item" }, [
+                  _c("div", { staticClass: "grid-item-holder" }, [
+                    _c("div", { staticClass: "listing-item-grid" }, [
+                      _c("img", {
+                        attrs: { src: "images/all/1.jpg", alt: "" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "listing-counter" }, [
+                        _c("span", [_vm._v("21 ")]),
+                        _vm._v(" Locations")
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "width-50 text-right pl-2 f-w-600" },
-                        [
-                          _c(
-                            "span",
-                            {
-                              attrs: {
-                                "data-animation": "number",
-                                "data-value": "3.79"
-                              }
-                            },
-                            [_vm._v("3.79")]
-                          ),
-                          _vm._v("%")
-                        ]
-                      )
-                    ]
-                  )
+                      _c("div", { staticClass: "listing-item-cat" }, [
+                        _c("h3", [
+                          _c("a", { attrs: { href: "listing.html" } }, [
+                            _vm._v("Gym - Fitness")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Constant care and attention to the patients makes good record"
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "d-flex mb-2" }, [
-                  _c("div", { staticClass: "d-flex align-items-center" }, [
-                    _c("i", {
-                      staticClass: "fa fa-circle text-warning f-s-8 mr-2"
-                    }),
-                    _vm._v(
-                      "\n\t\t\t\t\t\t\t\t\t\tBienes vendidos\n\t\t\t\t\t\t\t\t\t"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex align-items-center ml-auto" },
-                    [
-                      _c("div", { staticClass: "text-grey f-s-11" }, [
-                        _c("i", { staticClass: "fa fa-caret-up" }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            attrs: {
-                              "data-animation": "number",
-                              "data-value": "11"
-                            }
-                          },
-                          [_vm._v("11")]
-                        ),
-                        _vm._v("%")
+                _c("div", { staticClass: "gallery-item" }, [
+                  _c("div", { staticClass: "grid-item-holder" }, [
+                    _c("div", { staticClass: "listing-item-grid" }, [
+                      _c("img", {
+                        attrs: { src: "images/all/1.jpg", alt: "" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "listing-counter" }, [
+                        _c("span", [_vm._v("7 ")]),
+                        _vm._v(" Locations")
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "width-50 text-right pl-2 f-w-600" },
-                        [
-                          _c(
-                            "span",
-                            {
-                              attrs: {
-                                "data-animation": "number",
-                                "data-value": "3.85"
-                              }
-                            },
-                            [_vm._v("3.85")]
-                          ),
-                          _vm._v("%")
-                        ]
-                      )
-                    ]
-                  )
+                      _c("div", { staticClass: "listing-item-cat" }, [
+                        _c("h3", [
+                          _c("a", { attrs: { href: "listing.html" } }, [
+                            _vm._v("Hotels")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Constant care and attention to the patients makes good record"
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "d-flex" }, [
-                  _c("div", { staticClass: "d-flex align-items-center" }, [
-                    _c("i", {
-                      staticClass: "fa fa-circle text-lime f-s-8 mr-2"
-                    }),
-                    _vm._v(
-                      "\n\t\t\t\t\t\t\t\t\t\tBienes arrendados\n\t\t\t\t\t\t\t\t\t"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex align-items-center ml-auto" },
-                    [
-                      _c("div", { staticClass: "text-grey f-s-11" }, [
-                        _c("i", { staticClass: "fa fa-caret-up" }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            attrs: {
-                              "data-animation": "number",
-                              "data-value": "57"
-                            }
-                          },
-                          [_vm._v("57")]
-                        ),
-                        _vm._v("%")
+                _c("div", { staticClass: "gallery-item" }, [
+                  _c("div", { staticClass: "grid-item-holder" }, [
+                    _c("div", { staticClass: "listing-item-grid" }, [
+                      _c("img", {
+                        attrs: { src: "images/all/1.jpg", alt: "" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "listing-counter" }, [
+                        _c("span", [_vm._v("15 ")]),
+                        _vm._v(" Locations")
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "width-50 text-right pl-2 f-w-600" },
-                        [
-                          _c(
-                            "span",
-                            {
-                              attrs: {
-                                "data-animation": "number",
-                                "data-value": "2.19"
-                              }
-                            },
-                            [_vm._v("2.19")]
-                          ),
-                          _vm._v("%")
-                        ]
-                      )
-                    ]
+                      _c("div", { staticClass: "listing-item-cat" }, [
+                        _c("h3", [
+                          _c("a", { attrs: { href: "listing.html" } }, [
+                            _vm._v("Shop - Store")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Constant care and attention to the patients makes good record"
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "btn  big-btn circle-btn dec-btn  color-bg flat-btn",
+                  attrs: { href: "listing.html" }
+                },
+                [_vm._v("View All"), _c("i", { staticClass: "fa fa-eye" })]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("section", { staticClass: "gray-section" }, [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "section-title" }, [
+                _c("h2", [_vm._v("Popular listings")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "section-subtitle" }, [
+                  _vm._v("Best Listings")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "section-separator" }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Nulla tristique mi a massa convallis cursus. Nulla eu mi magna."
                   )
                 ])
               ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-6" }, [
-          _c(
-            "div",
-            {
-              staticClass: "card border-0 bg-dark text-white text-truncate mb-3"
-            },
-            [
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "mb-3 text-grey" }, [
-                  _c("b", { staticClass: "mb-3" }, [
-                    _vm._v("SESIONES DE USUARIO")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "ml-2" }, [
-                    _c("i", {
-                      staticClass: "fa fa-info-circle",
-                      attrs: {
-                        "data-toggle": "popover",
-                        "data-trigger": "hover",
-                        "data-title": "Store Sessions",
-                        "data-placement": "top",
-                        "data-content":
-                          "Number of sessions on your online store. A session is a period of continuous activity from a visitor.",
-                        "data-original-title": "",
-                        title: ""
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-flex align-items-center mb-1" }, [
-                  _c("h2", { staticClass: "text-white mb-0" }, [
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "list-carousel fl-wrap card-listing " }, [
+              _c("div", { staticClass: "listing-carousel  fl-wrap " }, [
+                _c("div", { staticClass: "slick-slide-item" }, [
+                  _c("div", { staticClass: "listing-item" }, [
                     _c(
-                      "span",
-                      {
-                        attrs: {
-                          "data-animation": "number",
-                          "data-value": "70719"
-                        }
-                      },
-                      [_vm._v("70719")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ml-auto" }, [
-                    _c("div", { attrs: { id: "store-session-sparkline" } })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mb-4 text-grey" }, [
-                  _c("i", { staticClass: "fa fa-caret-up" }),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      attrs: { "data-animation": "number", "data-value": "9.5" }
-                    },
-                    [_vm._v("9.5")]
-                  ),
-                  _vm._v("% más que semana pasada\n\t\t\t\t\t\t\t\t")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-flex mb-2" }, [
-                  _c("div", { staticClass: "d-flex align-items-center" }, [
-                    _c("i", {
-                      staticClass: "fa fa-circle text-teal f-s-8 mr-2"
-                    }),
-                    _vm._v("\n\t\t\t\t\t\t\t\t\t\tMoviles\n\t\t\t\t\t\t\t\t\t")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex align-items-center ml-auto" },
-                    [
-                      _c("div", { staticClass: "text-grey f-s-11" }, [
-                        _c("i", { staticClass: "fa fa-caret-up" }),
+                      "article",
+                      { staticClass: "geodir-category-listing fl-wrap" },
+                      [
+                        _c("div", { staticClass: "geodir-category-img" }, [
+                          _c("img", {
+                            attrs: { src: "images/all/1.jpg", alt: "" }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "overlay" }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "list-post-counter" }, [
+                            _c("span", [_vm._v("4")]),
+                            _c("i", { staticClass: "fa fa-heart" })
+                          ])
+                        ]),
                         _vm._v(" "),
                         _c(
-                          "span",
-                          {
-                            attrs: {
-                              "data-animation": "number",
-                              "data-value": "25.7"
-                            }
-                          },
-                          [_vm._v("25.7")]
-                        ),
-                        _vm._v("%")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "width-50 text-right pl-2 f-w-600" },
-                        [
-                          _c(
-                            "span",
-                            {
-                              attrs: {
-                                "data-animation": "number",
-                                "data-value": "53210"
-                              }
-                            },
-                            [_vm._v("53210")]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-flex mb-2" }, [
-                  _c("div", { staticClass: "d-flex align-items-center" }, [
-                    _c("i", {
-                      staticClass: "fa fa-circle text-blue f-s-8 mr-2"
-                    }),
-                    _vm._v(
-                      "\n\t\t\t\t\t\t\t\t\t\tEscritorio\n\t\t\t\t\t\t\t\t\t"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex align-items-center ml-auto" },
-                    [
-                      _c("div", { staticClass: "text-grey f-s-11" }, [
-                        _c("i", { staticClass: "fa fa-caret-up" }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            attrs: {
-                              "data-animation": "number",
-                              "data-value": "16.0"
-                            }
-                          },
-                          [_vm._v("16.0")]
-                        ),
-                        _vm._v("%")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "width-50 text-right pl-2 f-w-600" },
-                        [
-                          _c(
-                            "span",
-                            {
-                              attrs: {
-                                "data-animation": "number",
-                                "data-value": "11959"
-                              }
-                            },
-                            [_vm._v("11959")]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-flex" }, [
-                  _c("div", { staticClass: "d-flex align-items-center" }, [
-                    _c("i", {
-                      staticClass: "fa fa-circle text-aqua f-s-8 mr-2"
-                    }),
-                    _vm._v("\n\t\t\t\t\t\t\t\t\t\tTabletas\n\t\t\t\t\t\t\t\t\t")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "d-flex align-items-center ml-auto" },
-                    [
-                      _c("div", { staticClass: "text-grey f-s-11" }, [
-                        _c("i", { staticClass: "fa fa-caret-up" }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            attrs: {
-                              "data-animation": "number",
-                              "data-value": "7.9"
-                            }
-                          },
-                          [_vm._v("7.9")]
-                        ),
-                        _vm._v("%")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "width-50 text-right pl-2 f-w-600" },
-                        [
-                          _c(
-                            "span",
-                            {
-                              attrs: {
-                                "data-animation": "number",
-                                "data-value": "5545"
-                              }
-                            },
-                            [_vm._v("5545")]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              ])
-            ]
-          )
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/login.vue?vue&type=template&id=7406f826&":
-/*!*************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/login.vue?vue&type=template&id=7406f826& ***!
-  \*************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "container-fluid  no-gutters h-100" }, [
-        _c("div", { staticClass: "row h-100 bg-white" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-5 my-auto" }, [
-            _c(
-              "div",
-              { staticClass: "authentication-form mx-auto" },
-              [
-                _c("h3", { staticClass: "mb-3" }, [_vm._v("Iniciar Sesión")]),
-                _vm._v(" "),
-                _c("alertas", {
-                  attrs: { success: _vm.success, error: _vm.error }
-                }),
-                _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.login($event)
-                      }
-                    }
-                  },
-                  [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", [_vm._v("Usuario")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.usuario,
-                            expression: "usuario"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: { danger: _vm.alertUser },
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.usuario },
-                        on: {
-                          keypress: function($event) {
-                            if (
-                              !$event.type.indexOf("key") &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
+                          "div",
+                          { staticClass: "geodir-category-content fl-wrap" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "listing-geodir-category",
+                                attrs: { href: "listing.html" }
+                              },
+                              [_vm._v("Retail")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "listing-avatar" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: "author-single.html" } },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "images/avatar/1.jpg",
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "avatar-tooltip" }, [
+                                _vm._v("Added By  "),
+                                _c("strong", [_vm._v("Lisa Smith")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("h3", [
+                              _c(
+                                "a",
+                                { attrs: { href: "listing-single.html" } },
+                                [_vm._v("Event in City Mol")]
                               )
-                            ) {
-                              return null
-                            }
-                            return _vm.validateLogin($event)
-                          },
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.usuario = $event.target.value
-                          }
-                        }
-                      })
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                "Sed interdum metus at nisi tempor laoreet.  "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "geodir-category-options fl-wrap"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "listing-rating card-popup-rainingvis",
+                                    attrs: { "data-starrating2": "5" }
+                                  },
+                                  [_c("span", [_vm._v("(7 reviews)")])]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "geodir-category-location" },
+                                  [
+                                    _c("a", { attrs: { href: "#" } }, [
+                                      _c("i", {
+                                        staticClass: "fa fa-map-marker",
+                                        attrs: { "aria-hidden": "true" }
+                                      }),
+                                      _vm._v(
+                                        " 27th Brooklyn New York, NY 10065"
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "slick-slide-item" }, [
+                  _c("div", { staticClass: "listing-item" }, [
+                    _c(
+                      "article",
+                      { staticClass: "geodir-category-listing fl-wrap" },
+                      [
+                        _c("div", { staticClass: "geodir-category-img" }, [
+                          _c("img", {
+                            attrs: { src: "images/all/1.jpg", alt: "" }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "overlay" }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "list-post-counter" }, [
+                            _c("span", [_vm._v("15")]),
+                            _c("i", { staticClass: "fa fa-heart" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "geodir-category-content fl-wrap" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "listing-geodir-category",
+                                attrs: { href: "listing.html" }
+                              },
+                              [_vm._v("Event")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "listing-avatar" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: "author-single.html" } },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "images/avatar/1.jpg",
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "avatar-tooltip" }, [
+                                _vm._v("Added By  "),
+                                _c("strong", [_vm._v("Mark Rose")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("h3", [
+                              _c(
+                                "a",
+                                { attrs: { href: "listing-single.html" } },
+                                [_vm._v('Cafe "Lollipop"')]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                "Morbi suscipit erat in diam bibendum rutrum in nisl."
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "geodir-category-options fl-wrap"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "listing-rating card-popup-rainingvis",
+                                    attrs: { "data-starrating2": "4" }
+                                  },
+                                  [_c("span", [_vm._v("(17 reviews)")])]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "geodir-category-location" },
+                                  [
+                                    _c("a", { attrs: { href: "#" } }, [
+                                      _c("i", {
+                                        staticClass: "fa fa-map-marker",
+                                        attrs: { "aria-hidden": "true" }
+                                      }),
+                                      _vm._v(
+                                        " 27th Brooklyn New York, NY 10065"
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "slick-slide-item" }, [
+                  _c("div", { staticClass: "listing-item" }, [
+                    _c(
+                      "article",
+                      { staticClass: "geodir-category-listing fl-wrap" },
+                      [
+                        _c("div", { staticClass: "geodir-category-img" }, [
+                          _c("img", {
+                            attrs: { src: "images/all/1.jpg", alt: "" }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "overlay" }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "list-post-counter" }, [
+                            _c("span", [_vm._v("13")]),
+                            _c("i", { staticClass: "fa fa-heart" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "geodir-category-content fl-wrap" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "listing-geodir-category",
+                                attrs: { href: "listing.html" }
+                              },
+                              [_vm._v("Gym ")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "listing-avatar" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: "author-single.html" } },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "images/avatar/1.jpg",
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "avatar-tooltip" }, [
+                                _vm._v("Added By  "),
+                                _c("strong", [_vm._v("Nasty Wood")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("h3", [
+                              _c(
+                                "a",
+                                { attrs: { href: "listing-single.html" } },
+                                [_vm._v("Gym In Brooklyn")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v("Morbiaccumsan ipsum velit tincidunt . ")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "geodir-category-options fl-wrap"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "listing-rating card-popup-rainingvis",
+                                    attrs: { "data-starrating2": "3" }
+                                  },
+                                  [_c("span", [_vm._v("(16 reviews)")])]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "geodir-category-location" },
+                                  [
+                                    _c("a", { attrs: { href: "#" } }, [
+                                      _c("i", {
+                                        staticClass: "fa fa-map-marker",
+                                        attrs: { "aria-hidden": "true" }
+                                      }),
+                                      _vm._v(
+                                        " 27th Brooklyn New York, NY 10065"
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "slick-slide-item" }, [
+                  _c("div", { staticClass: "listing-item" }, [
+                    _c(
+                      "article",
+                      { staticClass: "geodir-category-listing fl-wrap" },
+                      [
+                        _c("div", { staticClass: "geodir-category-img" }, [
+                          _c("img", {
+                            attrs: { src: "images/all/1.jpg", alt: "" }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "overlay" }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "list-post-counter" }, [
+                            _c("span", [_vm._v("3")]),
+                            _c("i", { staticClass: "fa fa-heart" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "geodir-category-content fl-wrap" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "listing-geodir-category",
+                                attrs: { href: "listing.html" }
+                              },
+                              [_vm._v("Shops")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "listing-avatar" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: "author-single.html" } },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "images/avatar/1.jpg",
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "avatar-tooltip" }, [
+                                _vm._v("Added By  "),
+                                _c("strong", [_vm._v("Nasty Wood")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("h3", [
+                              _c(
+                                "a",
+                                { attrs: { href: "listing-single.html" } },
+                                [_vm._v("Shop in Boutique Zone")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v("Morbiaccumsan ipsum velit tincidunt . ")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "geodir-category-options fl-wrap"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "listing-rating card-popup-rainingvis",
+                                    attrs: { "data-starrating2": "4" }
+                                  },
+                                  [_c("span", [_vm._v("(6 reviews)")])]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "geodir-category-location" },
+                                  [
+                                    _c("a", { attrs: { href: "#" } }, [
+                                      _c("i", {
+                                        staticClass: "fa fa-map-marker",
+                                        attrs: { "aria-hidden": "true" }
+                                      }),
+                                      _vm._v(
+                                        " 27th Brooklyn New York, NY 10065"
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "slick-slide-item" }, [
+                  _c("div", { staticClass: "listing-item" }, [
+                    _c(
+                      "article",
+                      { staticClass: "geodir-category-listing fl-wrap" },
+                      [
+                        _c("div", { staticClass: "geodir-category-img" }, [
+                          _c("img", {
+                            attrs: { src: "images/all/1.jpg", alt: "" }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "overlay" }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "list-post-counter" }, [
+                            _c("span", [_vm._v("35")]),
+                            _c("i", { staticClass: "fa fa-heart" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "geodir-category-content fl-wrap" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "listing-geodir-category",
+                                attrs: { href: "listing.html" }
+                              },
+                              [_vm._v("Cars")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "listing-avatar" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: "author-single.html" } },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "images/avatar/1.jpg",
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "avatar-tooltip" }, [
+                                _vm._v("Added By  "),
+                                _c("strong", [_vm._v("Kliff Antony")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("h3", [
+                              _c(
+                                "a",
+                                { attrs: { href: "listing-single.html" } },
+                                [_vm._v("Best deal For the Cars")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v("Lorem ipsum gravida nibh vel velit.")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "geodir-category-options fl-wrap"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "listing-rating card-popup-rainingvis",
+                                    attrs: { "data-starrating2": "5" }
+                                  },
+                                  [_c("span", [_vm._v("(11 reviews)")])]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "geodir-category-location" },
+                                  [
+                                    _c("a", { attrs: { href: "#" } }, [
+                                      _c("i", {
+                                        staticClass: "fa fa-map-marker",
+                                        attrs: { "aria-hidden": "true" }
+                                      }),
+                                      _vm._v(
+                                        " 27th Brooklyn New York, NY 10065"
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "slick-slide-item" }, [
+                  _c("div", { staticClass: "listing-item" }, [
+                    _c(
+                      "article",
+                      { staticClass: "geodir-category-listing fl-wrap" },
+                      [
+                        _c("div", { staticClass: "geodir-category-img" }, [
+                          _c("img", {
+                            attrs: { src: "images/all/1.jpg", alt: "" }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "overlay" }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "list-post-counter" }, [
+                            _c("span", [_vm._v("553")]),
+                            _c("i", { staticClass: "fa fa-heart" })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "geodir-category-content fl-wrap" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "listing-geodir-category",
+                                attrs: { href: "listing.html" }
+                              },
+                              [_vm._v("Restourants")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "listing-avatar" }, [
+                              _c(
+                                "a",
+                                { attrs: { href: "author-single.html" } },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "images/avatar/1.jpg",
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "avatar-tooltip" }, [
+                                _vm._v("Added By  "),
+                                _c("strong", [_vm._v("Adam Koncy")])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("h3", [
+                              _c(
+                                "a",
+                                { attrs: { href: "listing-single.html" } },
+                                [_vm._v("Luxury Restourant")]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v("Sed non neque elit. Sed ut imperdie.")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "geodir-category-options fl-wrap"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "listing-rating card-popup-rainingvis",
+                                    attrs: { "data-starrating2": "5" }
+                                  },
+                                  [_c("span", [_vm._v("(7 reviews)")])]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "geodir-category-location" },
+                                  [
+                                    _c("a", { attrs: { href: "#" } }, [
+                                      _c("i", {
+                                        staticClass: "fa fa-map-marker",
+                                        attrs: { "aria-hidden": "true" }
+                                      }),
+                                      _vm._v(
+                                        " 27th Brooklyn New York, NY 10065"
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "swiper-button-prev sw-btn" }, [
+                _c("i", { staticClass: "fa fa-long-arrow-left" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "swiper-button-next sw-btn" }, [
+                _c("i", { staticClass: "fa fa-long-arrow-right" })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("section", { staticClass: "color-bg" }, [
+            _c("div", { staticClass: "shapes-bg-big" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "images-collage fl-wrap" }, [
+                    _c("div", { staticClass: "images-collage-title" }, [
+                      _vm._v("City"),
+                      _c("span", [_vm._v("Book")])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", [_vm._v("Contraseña")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.password,
-                            expression: "password"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: { danger: _vm.alertPass },
-                        attrs: { type: "password" },
-                        domProps: { value: _vm.password },
-                        on: {
-                          keypress: function($event) {
-                            if (
-                              !$event.type.indexOf("key") &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
-                              )
-                            ) {
-                              return null
-                            }
-                            return _vm.validateLogin($event)
-                          },
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.password = $event.target.value
-                          }
+                    _c(
+                      "div",
+                      {
+                        staticClass: "images-collage-main images-collage-item"
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: "images/avatar/1.jpg", alt: "" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "images-collage-other images-collage-item",
+                        attrs: {
+                          "data-position-left": "23",
+                          "data-position-top": "10",
+                          "data-zindex": "2"
                         }
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: "images/avatar/1.jpg", alt: "" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "images-collage-other images-collage-item",
+                        attrs: {
+                          "data-position-left": "62",
+                          "data-position-top": "54",
+                          "data-zindex": "5"
+                        }
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: "images/avatar/1.jpg", alt: "" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "images-collage-other images-collage-item anim-col",
+                        attrs: {
+                          "data-position-left": "18",
+                          "data-position-top": "70",
+                          "data-zindex": "11"
+                        }
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: "images/avatar/1.jpg", alt: "" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "images-collage-other images-collage-item",
+                        attrs: {
+                          "data-position-left": "37",
+                          "data-position-top": "90",
+                          "data-zindex": "1"
+                        }
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: "images/avatar/1.jpg", alt: "" }
+                        })
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "color-bg-text" }, [
+                    _c("h3", [_vm._v("Join our online community")]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "color-bg-link modal-open",
+                        attrs: { href: "#" }
+                      },
+                      [_vm._v("Sign In Now")]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("section", [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "section-title" }, [
+                _c("h2", [_vm._v("How it works")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "section-subtitle" }, [
+                  _vm._v("Discover & Connect ")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "section-separator" }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Explore some of the best tips from around the world.")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "process-wrap fl-wrap" }, [
+                _c("ul", [
+                  _c("li", [
+                    _c("div", { staticClass: "process-item" }, [
+                      _c("span", { staticClass: "process-count" }, [
+                        _vm._v("01 . ")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "time-line-icon" }, [
+                        _c("i", { staticClass: "fa fa-map-o" })
+                      ]),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v(" Find Interesting Place")]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Proin dapibus nisl ornare diam varius tempus. Aenean a quam luctus, finibus tellus ut, convallis eros sollicitudin turpis."
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "pr-dec" })
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("div", { staticClass: "process-item" }, [
+                      _c("span", { staticClass: "process-count" }, [
+                        _vm._v("02 .")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "time-line-icon" }, [
+                        _c("i", { staticClass: "fa fa-envelope-open-o" })
+                      ]),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v(" Contact a Few Owners")]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Faucibus ante, in porttitor tellus blandit et. Phasellus tincidunt metus lectus sollicitudin feugiat pharetra consectetur."
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "pr-dec" })
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("div", { staticClass: "process-item" }, [
+                      _c("span", { staticClass: "process-count" }, [
+                        _vm._v("03 .")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "time-line-icon" }, [
+                        _c("i", { staticClass: "fa fa-hand-peace-o" })
+                      ]),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v(" Make a Listing")]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Maecenas pulvinar, risus in facilisis dignissim, quam nisi hendrerit nulla, id vestibulum metus nullam viverra porta."
+                        )
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "process-end" }, [
+                  _c("i", { staticClass: "fa fa-check" })
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "section",
+            {
+              staticClass: "parallax-section",
+              attrs: { "data-scrollax-parent": "true" }
+            },
+            [
+              _c("div", {
+                staticClass: "bg",
+                attrs: {
+                  "data-bg": "images/bg/1.jpg",
+                  "data-scrollax": "properties: { translateY: '100px' }"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "overlay co lor-overlay" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "container" }, [
+                _c("div", { staticClass: "intro-item fl-wrap" }, [
+                  _c("h2", [_vm._v("Visit the Best Places In Your City")]),
+                  _vm._v(" "),
+                  _c("h3", [
+                    _vm._v("Find great places , hotels , restourants , shops.")
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { staticClass: "trs-btn", attrs: { href: "#" } }, [
+                    _vm._v("Add Listing + ")
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("section", [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "section-title" }, [
+                _c("h2", [_vm._v(" Pricing Tables")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "section-subtitle" }, [
+                  _vm._v("cost of our services")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "section-separator" }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Explore some of the best tips from around the city from our partners and friends."
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "pricing-wrap fl-wrap" }, [
+                _c("div", { staticClass: "price-item" }, [
+                  _c("div", { staticClass: "price-head op1" }, [
+                    _c("h3", [_vm._v("Basic")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "price-content fl-wrap" }, [
+                    _c("div", { staticClass: "price-num fl-wrap" }, [
+                      _c("span", { staticClass: "curen" }, [_vm._v("$")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "price-num-item" }, [
+                        _vm._v("49")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price-num-desc" }, [
+                        _vm._v("Per month")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "price-desc fl-wrap" }, [
+                      _c("ul", [
+                        _c("li", [_vm._v("One Listing")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("90 Days Availability")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("Non-Featured")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("Limited Support")])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        { staticClass: "price-link", attrs: { href: "#" } },
+                        [_vm._v("Choose Basic")]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price-item best-price" }, [
+                  _c("div", { staticClass: "price-head op2" }, [
+                    _c("h3", [_vm._v("Extended")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "price-content fl-wrap" }, [
+                    _c("div", { staticClass: "price-num fl-wrap" }, [
+                      _c("span", { staticClass: "curen" }, [_vm._v("$")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "price-num-item" }, [
+                        _vm._v("99")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price-num-desc" }, [
+                        _vm._v("Per month")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "price-desc fl-wrap" }, [
+                      _c("ul", [
+                        _c("li", [_vm._v("Ten Listings")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("Lifetime Availability")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("Featured In Search Results")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("24/7 Support")])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        { staticClass: "price-link", attrs: { href: "#" } },
+                        [_vm._v("Choose Extended")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "recomm-price" }, [
+                        _c("i", { staticClass: "fa fa-check" }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "clearfix" }),
+                        _vm._v(
+                          "\n                                                Recommended\n                                            "
+                        )
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price-item" }, [
+                  _c("div", { staticClass: "price-head" }, [
+                    _c("h3", [_vm._v("Professional")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "price-content fl-wrap" }, [
+                    _c("div", { staticClass: "price-num fl-wrap" }, [
+                      _c("span", { staticClass: "curen" }, [_vm._v("$")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "price-num-item" }, [
+                        _vm._v("149")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price-num-desc" }, [
+                        _vm._v("Per month")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "price-desc fl-wrap" }, [
+                      _c("ul", [
+                        _c("li", [_vm._v("Unlimited Listings")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("Lifetime Availability")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("Featured In Search Results")]),
+                        _vm._v(" "),
+                        _c("li", [_vm._v("24/7 Support")])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        { staticClass: "price-link", attrs: { href: "#" } },
+                        [_vm._v("Choose Professional")]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("section", { staticClass: "color-bg" }, [
+            _c("div", { staticClass: "shapes-bg-big" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: " single-facts fl-wrap" }, [
+                _c("div", { staticClass: "inline-facts-wrap" }, [
+                  _c("div", { staticClass: "inline-facts" }, [
+                    _c("div", { staticClass: "milestone-counter" }, [
+                      _c("div", { staticClass: "stats animaper" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "num",
+                            attrs: { "data-content": "0", "data-num": "254" }
+                          },
+                          [_vm._v("154")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h6", [_vm._v("New Visiters Every Week")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "inline-facts-wrap" }, [
+                  _c("div", { staticClass: "inline-facts" }, [
+                    _c("div", { staticClass: "milestone-counter" }, [
+                      _c("div", { staticClass: "stats animaper" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "num",
+                            attrs: { "data-content": "0", "data-num": "12168" }
+                          },
+                          [_vm._v("12168")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h6", [_vm._v("Happy customers every year")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "inline-facts-wrap" }, [
+                  _c("div", { staticClass: "inline-facts" }, [
+                    _c("div", { staticClass: "milestone-counter" }, [
+                      _c("div", { staticClass: "stats animaper" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "num",
+                            attrs: { "data-content": "0", "data-num": "172" }
+                          },
+                          [_vm._v("172")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h6", [_vm._v("Won Awards")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "inline-facts-wrap" }, [
+                  _c("div", { staticClass: "inline-facts" }, [
+                    _c("div", { staticClass: "milestone-counter" }, [
+                      _c("div", { staticClass: "stats animaper" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "num",
+                            attrs: { "data-content": "0", "data-num": "732" }
+                          },
+                          [_vm._v("732")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h6", [_vm._v("New Listing Every Week")])
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("section", [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "section-title" }, [
+                _c("h2", [_vm._v("Testimonials")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "section-subtitle" }, [
+                  _vm._v("Clients Reviews")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "section-separator" }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar."
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "carousel fl-wrap" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "testimonials-carousel single-carousel fl-wrap"
+                },
+                [
+                  _c("div", { staticClass: "slick-slide-item" }, [
+                    _c("div", { staticClass: "testimonilas-text" }, [
+                      _c("div", {
+                        staticClass: "listing-rating card-popup-rainingvis",
+                        attrs: { "data-starrating2": "5" }
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi arch itecto beatae vitae dicta sunt explicabo. "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "testimonilas-avatar-item" }, [
+                      _c("div", { staticClass: "testimonilas-avatar" }, [
+                        _c("img", {
+                          attrs: { src: "images/avatar/1.jpg", alt: "" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v("Lisa Noory")]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Restaurant Owner")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "slick-slide-item" }, [
+                    _c("div", { staticClass: "testimonilas-text" }, [
+                      _c("div", {
+                        staticClass: "listing-rating card-popup-rainingvis",
+                        attrs: { "data-starrating2": "4" }
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra."
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "testimonilas-avatar-item" }, [
+                      _c("div", { staticClass: "testimonilas-avatar" }, [
+                        _c("img", {
+                          attrs: { src: "images/avatar/1.jpg", alt: "" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v("Antony Moore")]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Restaurant Owner")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "slick-slide-item" }, [
+                    _c("div", { staticClass: "testimonilas-text" }, [
+                      _c("div", {
+                        staticClass: "listing-rating card-popup-rainingvis",
+                        attrs: { "data-starrating2": "5" }
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te odio dignissim qui blandit praesent."
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "testimonilas-avatar-item" }, [
+                      _c("div", { staticClass: "testimonilas-avatar" }, [
+                        _c("img", {
+                          attrs: { src: "images/avatar/1.jpg", alt: "" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v("Austin Harisson")]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Restaurant Owner")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "slick-slide-item" }, [
+                    _c("div", { staticClass: "testimonilas-text" }, [
+                      _c("div", {
+                        staticClass: "listing-rating card-popup-rainingvis",
+                        attrs: { "data-starrating2": "4" }
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram seacula quarta decima et quinta decima."
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "testimonilas-avatar-item" }, [
+                      _c("div", { staticClass: "testimonilas-avatar" }, [
+                        _c("img", {
+                          attrs: { src: "images/avatar/1.jpg", alt: "" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v("Garry Colonsi")]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Restaurant Owner")])
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "swiper-button-prev sw-btn" }, [
+                _c("i", { staticClass: "fa fa-long-arrow-left" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "swiper-button-next sw-btn" }, [
+                _c("i", { staticClass: "fa fa-long-arrow-right" })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("section", { staticClass: "gray-section" }, [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "fl-wrap spons-list" }, [
+                _c("ul", { staticClass: "client-carousel" }, [
+                  _c("li", [
+                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                      _c("img", {
+                        attrs: { src: "images/clients/1.png", alt: "" }
                       })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                      _c("img", {
+                        attrs: { src: "images/clients/1.png", alt: "" }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                      _c("img", {
+                        attrs: { src: "images/clients/1.png", alt: "" }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                      _c("img", {
+                        attrs: { src: "images/clients/1.png", alt: "" }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                      _c("img", {
+                        attrs: { src: "images/clients/1.png", alt: "" }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                      _c("img", {
+                        attrs: { src: "images/clients/1.png", alt: "" }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "sp-cont sp-cont-prev" }, [
+                  _c("i", { staticClass: "fa fa-angle-left" })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "sp-cont sp-cont-next" }, [
+                  _c("i", { staticClass: "fa fa-angle-right" })
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("section", [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "section-title" }, [
+                _c("h2", [_vm._v("Tips & Articles")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "section-subtitle" }, [
+                  _vm._v("From the blog.")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "section-separator" }),
+                _vm._v(" "),
+                _c("p", [_vm._v("Browse the latest articles from our blog.")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row home-posts" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("article", { staticClass: "card-post" }, [
+                    _c("div", { staticClass: "card-post-img fl-wrap" }, [
+                      _c("a", { attrs: { href: "blog-single.html" } }, [
+                        _c("img", {
+                          attrs: { src: "images/all/1.jpg", alt: "" }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-post-content fl-wrap" }, [
+                      _c("h3", [
+                        _c("a", { attrs: { href: "blog-single.html" } }, [
+                          _vm._v("Gallery Post")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post-author" }, [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("img", {
+                            attrs: { src: "images/avatar/1.jpg", alt: "" }
+                          }),
+                          _c("span", [_vm._v("By , Alisa Noory")])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post-opt" }, [
+                        _c("ul", [
+                          _c("li", [
+                            _c("i", { staticClass: "fa fa-calendar-check-o" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("25 April 2018")])
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c("i", { staticClass: "fa fa-eye" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("264")])
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c("i", { staticClass: "fa fa-tags" }),
+                            _vm._v(" "),
+                            _c("a", { attrs: { href: "#" } }, [
+                              _vm._v("Photography")
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("article", { staticClass: "card-post" }, [
+                    _c("div", { staticClass: "card-post-img fl-wrap" }, [
+                      _c("a", { attrs: { href: "blog-single.html" } }, [
+                        _c("img", {
+                          attrs: { src: "images/all/1.jpg", alt: "" }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-post-content fl-wrap" }, [
+                      _c("h3", [
+                        _c("a", { attrs: { href: "blog-single.html" } }, [
+                          _vm._v("Video and gallery post")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post-author" }, [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("img", {
+                            attrs: { src: "images/avatar/1.jpg", alt: "" }
+                          }),
+                          _c("span", [_vm._v("By , Mery Lynn")])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post-opt" }, [
+                        _c("ul", [
+                          _c("li", [
+                            _c("i", { staticClass: "fa fa-calendar-check-o" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("25 April 2018")])
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c("i", { staticClass: "fa fa-eye" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("264")])
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c("i", { staticClass: "fa fa-tags" }),
+                            _vm._v(" "),
+                            _c("a", { attrs: { href: "#" } }, [
+                              _vm._v("Design")
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("article", { staticClass: "card-post" }, [
+                    _c("div", { staticClass: "card-post-img fl-wrap" }, [
+                      _c("a", { attrs: { href: "blog-single.html" } }, [
+                        _c("img", {
+                          attrs: { src: "images/all/1.jpg", alt: "" }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-post-content fl-wrap" }, [
+                      _c("h3", [
+                        _c("a", { attrs: { href: "blog-single.html" } }, [
+                          _vm._v("Post Article")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post-author" }, [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _c("img", {
+                            attrs: { src: "images/avatar/1.jpg", alt: "" }
+                          }),
+                          _c("span", [_vm._v("By , Garry Dee")])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post-opt" }, [
+                        _c("ul", [
+                          _c("li", [
+                            _c("i", { staticClass: "fa fa-calendar-check-o" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("25 April 2018")])
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c("i", { staticClass: "fa fa-eye" }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("264")])
+                          ]),
+                          _vm._v(" "),
+                          _c("li", [
+                            _c("i", { staticClass: "fa fa-tags" }),
+                            _vm._v(" "),
+                            _c("a", { attrs: { href: "#" } }, [
+                              _vm._v("Stories")
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "btn  big-btn circle-btn  dec-btn color-bg flat-btn",
+                  attrs: { href: "blog.html" }
+                },
+                [_vm._v("Read All"), _c("i", { staticClass: "fa fa-eye" })]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("section", { staticClass: "gradient-bg" }, [
+            _c("div", { staticClass: "cirle-bg" }, [
+              _c("div", {
+                staticClass: "bg",
+                attrs: { "data-bg": "images/bg/circle.png" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "join-wrap fl-wrap" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c("h3", [_vm._v("Do You Have Questions ?")]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "Lorem ipsum dolor sit amet, harum dolor nec in, usu molestiae at no."
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "join-wrap-btn",
+                        attrs: { href: "contacts.html" }
+                      },
+                      [
+                        _vm._v("Get In Touch "),
+                        _c("i", { staticClass: "fa fa-envelope-o" })
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("footer", { staticClass: "main-footer dark-footer  " }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "footer-widget fl-wrap" }, [
+                _c("h3", [_vm._v("About Us")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "footer-contacts-widget fl-wrap" }, [
+                  _c("p", [
+                    _vm._v(
+                      "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "footer-contacts fl-wrap" }, [
+                    _c("li", [
+                      _c("span", [
+                        _c("i", { staticClass: "fa fa-envelope-o" }),
+                        _vm._v(" Mail :")
+                      ]),
+                      _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                        _vm._v("yourmail@domain.com")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("span", [
+                        _c("i", { staticClass: "fa fa-map-marker" }),
+                        _vm._v(" Adress :")
+                      ]),
+                      _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                        _vm._v("USA 27TH Brooklyn NY")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("span", [
+                        _c("i", { staticClass: "fa fa-phone" }),
+                        _vm._v(" Phone :")
+                      ]),
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v("+7(111)123456789")
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "footer-widget fl-wrap" }, [
+                _c("h3", [_vm._v("Our Last News")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "widget-posts fl-wrap" }, [
+                  _c("ul", [
+                    _c("li", { staticClass: "clearfix" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "widget-posts-img",
+                          attrs: { href: "#" }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "respimg",
+                            attrs: { src: "images/all/1.jpg", alt: "" }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "widget-posts-descr" }, [
+                        _c("a", { attrs: { href: "#", title: "" } }, [
+                          _vm._v("Vivamus dapibus rutrum")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "widget-posts-date" }, [
+                          _vm._v(" 21 Mar 09.05 ")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "clearfix" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "widget-posts-img",
+                          attrs: { href: "#" }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "respimg",
+                            attrs: { src: "images/all/1.jpg", alt: "" }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "widget-posts-descr" }, [
+                        _c("a", { attrs: { href: "#", title: "" } }, [
+                          _vm._v(" In hac habitasse platea")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "widget-posts-date" }, [
+                          _vm._v(" 7 Mar 18.21 ")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "clearfix" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "widget-posts-img",
+                          attrs: { href: "#" }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "respimg",
+                            attrs: { src: "images/all/1.jpg", alt: "" }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "widget-posts-descr" }, [
+                        _c("a", { attrs: { href: "#", title: "" } }, [
+                          _vm._v("Tortor tempor in porta")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "widget-posts-date" }, [
+                          _vm._v(" 7 Mar 16.42 ")
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "footer-widget fl-wrap" }, [
+                _c("h3", [_vm._v("Our  Twitter")]),
+                _vm._v(" "),
+                _c("div", { attrs: { id: "footer-twiit" } })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "footer-widget fl-wrap" }, [
+                _c("h3", [_vm._v("Subscribe")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "subscribe-widget fl-wrap" }, [
+                  _c("p", [
+                    _vm._v(
+                      "Want to be notified when we launch a new template or an udpate. Just sign up and we'll send you a notification by email."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "subcribe-form" }, [
+                    _c("form", { attrs: { id: "subscribe" } }, [
+                      _c("input", {
+                        staticClass: "enteremail",
+                        attrs: {
+                          name: "email",
+                          id: "subscribe-email",
+                          placeholder: "Email",
+                          spellcheck: "false",
+                          type: "text"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "subscribe-button",
+                          attrs: { type: "submit", id: "subscribe-button" }
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-rss" }),
+                          _vm._v(" Subscribe")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("label", {
+                        staticClass: "subscribe-message",
+                        attrs: { for: "subscribe-email" }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "footer-widget fl-wrap" }, [
+                  _c("div", { staticClass: "footer-menu fl-wrap" }, [
+                    _c("ul", [
+                      _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [_vm._v("Home ")])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [_vm._v("Blog")])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [_vm._v("Listing")])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("a", { attrs: { href: "#" } }, [_vm._v("Contacts")])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "sub-footer fl-wrap" }, [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "about-widget" }, [
+                  _c("img", { attrs: { src: "images/logo.png", alt: "" } })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "copyright" }, [
+                  _vm._v(" © CityBook 2018 .  All rights reserved.")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "footer-social" }, [
+                  _c("ul", [
+                    _c("li", [
+                      _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                        _c("i", { staticClass: "fa fa-facebook-official" })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                        _c("i", { staticClass: "fa fa-twitter" })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                        _c("i", { staticClass: "fa fa-chrome" })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                        _c("i", { staticClass: "fa fa-vk" })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("a", { attrs: { href: "#", target: "_blank" } }, [
+                        _c("i", { staticClass: "fa fa-whatsapp" })
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "main-register-wrap modal" }, [
+        _c("div", { staticClass: "main-overlay" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "main-register-holder" }, [
+          _c("div", { staticClass: "main-register fl-wrap" }, [
+            _c("div", { staticClass: "close-reg" }, [
+              _c("i", { staticClass: "fa fa-times" })
+            ]),
+            _vm._v(" "),
+            _c("h3", [
+              _vm._v("Inicia"),
+              _c("span", [
+                _vm._v(" en "),
+                _c("strong", [_vm._v("Metro Cuadrado")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "soc-log fl-wrap" }, [
+              _c("a", { staticClass: "facebook-log", attrs: { href: "#" } }, [
+                _c("i", { staticClass: "fa fa-facebook-official" }),
+                _vm._v("Inicia con Facebook")
+              ]),
+              _vm._v(" "),
+              _c("a", { staticClass: "twitter-log", attrs: { href: "#" } }, [
+                _c("i", { staticClass: "fa fa-twitter" }),
+                _vm._v(" Inicia con Twitter")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "log-separator fl-wrap" }, [
+              _c("span", [_vm._v("or")])
+            ]),
+            _vm._v(" "),
+            _c("div", { attrs: { id: "tabs-container" } }, [
+              _c("ul", { staticClass: "tabs-menu" }, [
+                _c("li", { staticClass: "current" }, [
+                  _c("a", { attrs: { href: "#tab-1" } }, [_vm._v("Login")])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#tab-2" } }, [_vm._v("Register")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tab" }, [
+                _c(
+                  "div",
+                  { staticClass: "tab-content", attrs: { id: "tab-1" } },
+                  [
+                    _c("div", { staticClass: "custom-form" }, [
+                      _c(
+                        "form",
+                        { attrs: { method: "post", name: "registerform" } },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              placeholder: "Rut",
+                              onClick: "this.select()",
+                              value: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "text",
+                              placeholder: "Email",
+                              onClick: "this.select()",
+                              value: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "filter-tags" }, [
+                            _c("input", {
+                              attrs: {
+                                id: "check-a",
+                                type: "checkbox",
+                                name: "check"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", { attrs: { for: "check-a" } }, [
+                              _vm._v("Remember me")
+                            ])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "lost_password" }, [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _vm._v("Olvido su contraseña?")
+                        ])
+                      ])
                     ])
                   ]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "row mb-4" }, [
-                  _c("div", { staticClass: "col-12 text-right" }, [
-                    _c(
-                      "span",
-                      { staticClass: "link", on: { click: _vm.recoverView } },
-                      [_vm._v("Olvidó su contraseña?")]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "sign-btn" }, [
+                _c("div", { staticClass: "tab" }, [
                   _c(
-                    "button",
-                    {
-                      staticClass: "btn-theme btn-theme-primary mb-4",
-                      attrs: { disabled: _vm.disableLogin },
-                      on: { click: _vm.login }
-                    },
-                    [_vm._v("Iniciar Sesión")]
+                    "div",
+                    { staticClass: "tab-content", attrs: { id: "tab-2" } },
+                    [
+                      _c("div", { staticClass: "custom-form" }, [
+                        _c(
+                          "form",
+                          {
+                            staticClass: "main-register-form",
+                            attrs: {
+                              method: "post",
+                              name: "registerform",
+                              id: "main-register-form2"
+                            }
+                          },
+                          [
+                            _c("input", {
+                              attrs: {
+                                name: "name",
+                                type: "text",
+                                placeholder: "Nombre",
+                                onClick: "this.select()",
+                                value: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                name: "name2",
+                                type: "text",
+                                placeholder: "Apellido",
+                                onClick: "this.select()",
+                                value: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                name: "password",
+                                type: "text",
+                                placeholder: "Rut",
+                                onClick: "this.select()",
+                                value: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                name: "email",
+                                type: "text",
+                                placeholder: "Email",
+                                onClick: "this.select()",
+                                value: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                name: "email",
+                                type: "text",
+                                placeholder: "Teléfono movil",
+                                onClick: "this.select()",
+                                value: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                name: "email",
+                                type: "text",
+                                placeholder: "Teléfono fijo",
+                                onClick: "this.select()",
+                                value: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                name: "email",
+                                type: "text",
+                                placeholder: "Clave",
+                                onClick: "this.select()",
+                                value: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                name: "email",
+                                type: "text",
+                                placeholder: "Confirmar Clave",
+                                onClick: "this.select()",
+                                value: ""
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "log-submit-btn",
+                                attrs: { type: "submit" }
+                              },
+                              [_c("span", [_vm._v("Register")])]
+                            )
+                          ]
+                        )
+                      ])
+                    ]
                   )
                 ])
-              ],
-              1
-            )
+              ])
+            ])
           ])
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "modal",
-        {
-          ref: "modal",
-          attrs: { id: "modalRecover", size: "medium" },
-          on: { close: _vm.limpiar }
-        },
-        [
-          _c("template", { slot: "header" }, [_vm._v("Recuperar Contraseña")]),
-          _vm._v(" "),
-          _c(
-            "template",
-            { slot: "main" },
-            [
-              _c("alertas", {
-                attrs: { success: _vm.modal.success, error: _vm.modal.error }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "form-group col-12" }, [
-                  _c("label", [_vm._v("Usuario")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.modal.user,
-                        expression: "modal.user"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", autocomplete: "off" },
-                    domProps: { value: _vm.modal.user },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.modal, "user", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group col-12" }, [
-                  _c("label", [_vm._v("Correo electrónico")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.modal.email,
-                        expression: "modal.email"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      autocomplete: "off",
-                      placeholder: "Correo registrado del usuario"
-                    },
-                    domProps: { value: _vm.modal.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.modal, "email", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _vm.modal.view == "recuperar"
-                  ? _c("div", { staticClass: "form-group col-12" }, [
-                      _c("label", [_vm._v("Código")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.modal.token,
-                            expression: "modal.token"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", autocomplete: "off" },
-                        domProps: { value: _vm.modal.token },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.modal, "token", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.modal.view == "recuperar"
-                  ? _c("div", { staticClass: "form-group col-12" }, [
-                      _c("label", [
-                        _vm._v(
-                          "\n                        Contraseña\n                        "
-                        ),
-                        _vm.modal.password &&
-                        (_vm.modal.password.length < 6 ||
-                          _vm.modal.password.length > 100)
-                          ? _c("i", {
-                              staticClass: "fas fa-exclamation-triangle danger",
-                              attrs: {
-                                title:
-                                  "Contraseña debe tener entre 6 y 100 caracteres"
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.modal.password,
-                            expression: "modal.password"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "password", autocomplete: "off" },
-                        domProps: { value: _vm.modal.password },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.modal, "password", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.modal.view == "recuperar"
-                  ? _c("div", { staticClass: "form-group col-12" }, [
-                      _c("label", [
-                        _vm._v(
-                          "\n                        Confirmar contraseña\n                        "
-                        ),
-                        _vm.modal.password_check &&
-                        _vm.modal.password_check != _vm.modal.password
-                          ? _c("i", {
-                              staticClass: "fas fa-exclamation-triangle danger",
-                              attrs: {
-                                title: "Contraseña difiere de confirmación"
-                              }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.modal.password_check,
-                            expression: "modal.password_check"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "password", autocomplete: "off" },
-                        domProps: { value: _vm.modal.password_check },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.modal,
-                              "password_check",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("small", { staticClass: "col-12 text-right" }, [
-                  _vm.modal.view == "recuperar"
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "link",
-                          class: { hidden: _vm.modal.view == "solicitar" },
-                          on: {
-                            click: function($event) {
-                              return _vm.recoverViewChange("solicitar")
-                            }
-                          }
-                        },
-                        [_vm._v("Solicitar código para recuperar contraseña")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.modal.view == "solicitar"
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "link",
-                          class: { hidden: _vm.modal.view == "recuperar" },
-                          on: {
-                            click: function($event) {
-                              return _vm.recoverViewChange("recuperar")
-                            }
-                          }
-                        },
-                        [_vm._v("Si ya tiene un código haga click aquí.")]
-                      )
-                    : _vm._e()
-                ])
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("template", { slot: "footer" }, [
-            _vm.modal.view == "solicitar"
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn-theme btn-theme-primary",
-                    attrs: { disabled: _vm.deshabilitarSolicitarCodigo },
-                    on: { click: _vm.recoverRequest }
-                  },
-                  [_vm._v("Solicitar código")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.modal.view == "recuperar"
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn-theme btn-theme-primary",
-                    attrs: { disabled: _vm.deshabilitarCambiarContrasena },
-                    on: { click: _vm.recover }
-                  },
-                  [_vm._v("Cambiar contraseña")]
-                )
-              : _vm._e()
-          ])
-        ],
-        2
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-7 no-padding" }, [
-      _c(
-        "div",
-        {
-          staticClass: "background-01",
-          staticStyle: {
-            "background-image":
-              "linear-gradient(150deg, rgba(51, 170, 255, 0.6)15%, rgba(4, 209, 255, 0.6)70%, rgba(164, 254, 199, 0.6)94%), url()",
-            "background-size": "cover"
-          }
-        },
-        [
-          _c("div", { staticClass: "authentication-col-content mx-auto" }, [
-            _c("h1", { staticClass: "gradient-text-01" }, [
-              _vm._v(
-                "\n                            Metro cuadrado\n                        "
-              )
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "\n                            ¡La inmobiliaria pensada para ti!\n                        "
-              )
-            ])
-          ])
-        ]
-      )
+      _c("a", { staticClass: "to-top" }, [
+        _c("i", { staticClass: "fa fa-angle-up" })
+      ])
     ])
   }
 ]
@@ -1666,75 +2557,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_6c5f482b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_6c5f482b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/app/login.vue":
-/*!************************************!*\
-  !*** ./resources/js/app/login.vue ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _login_vue_vue_type_template_id_7406f826___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./login.vue?vue&type=template&id=7406f826& */ "./resources/js/app/login.vue?vue&type=template&id=7406f826&");
-/* harmony import */ var _login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./login.vue?vue&type=script&lang=js& */ "./resources/js/app/login.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _login_vue_vue_type_template_id_7406f826___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _login_vue_vue_type_template_id_7406f826___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/app/login.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/app/login.vue?vue&type=script&lang=js&":
-/*!*************************************************************!*\
-  !*** ./resources/js/app/login.vue?vue&type=script&lang=js& ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./login.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/login.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/app/login.vue?vue&type=template&id=7406f826&":
-/*!*******************************************************************!*\
-  !*** ./resources/js/app/login.vue?vue&type=template&id=7406f826& ***!
-  \*******************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_template_id_7406f826___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./login.vue?vue&type=template&id=7406f826& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/login.vue?vue&type=template&id=7406f826&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_template_id_7406f826___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_login_vue_vue_type_template_id_7406f826___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

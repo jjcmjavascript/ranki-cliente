@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Sistema/Perfiles/Index":"app/Sistema/Perfiles/Index","app/Sistema/Usuarios/Crear":"app/Sistema/Usuarios/Crear","app/Sistema/Usuarios/Editar":"app/Sistema/Usuarios/Editar","app/Sistema/Usuarios/Index":"app/Sistema/Usuarios/Index","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -75170,15 +75170,7 @@ window.loading = function (self) {
 
 window.loaded = function (self) {
   self.loading.hide();
-};
-/*// ASIGNACIÓN GLOBAL DEL LOADER
-window.loading = function() {
-    document.getElementsByTagName('body')[0].classList.remove('loaded');
-};
-window.loaded = function() {
-    document.getElementsByTagName('body')[0].classList.add('loaded');
-};*/
-// SET DEPENDENCIAS
+}; // SET DEPENDENCIAS
 
 
 Vue.use(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_1___default.a);
@@ -75622,6 +75614,9 @@ var app = new Vue({
     }
   }
 });
+$('.close-reg').on("click", function () {
+  modal.hide();
+});
 
 /***/ }),
 
@@ -75812,12 +75807,18 @@ Vue.filter('nl2br', function (str, is_xhtml) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_login_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../routes/login.js */ "./resources/js/routes/login.js");
-/* harmony import */ var _routes_sistema_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes/sistema.js */ "./resources/js/routes/sistema.js");
-var baseRoutes = [];
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 
-baseRoutes.push.apply(baseRoutes, _routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
-baseRoutes.push.apply(baseRoutes, _routes_sistema_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+var baseRoutes = _toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
 /* harmony default export */ __webpack_exports__["default"] = (baseRoutes);
 
 /***/ }),
@@ -75859,48 +75860,9 @@ window.swal = Swal.mixin({
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var routes = [{
-  path: '/loginvue',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | app/login */ "app/login").then(__webpack_require__.bind(null, /*! ../app/login */ "./resources/js/app/login.vue"));
-  }
-}, {
-  path: '/home',
+  path: '/',
   component: function component() {
     return __webpack_require__.e(/*! import() | app/login */ "app/login").then(__webpack_require__.bind(null, /*! ../app/Home */ "./resources/js/app/Home.vue"));
-  }
-}];
-/* harmony default export */ __webpack_exports__["default"] = (routes);
-
-/***/ }),
-
-/***/ "./resources/js/routes/sistema.js":
-/*!****************************************!*\
-  !*** ./resources/js/routes/sistema.js ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var routes = [{
-  path: '/sistema/usuarios',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | app/Sistema/Usuarios/Index */ "app/Sistema/Usuarios/Index").then(__webpack_require__.bind(null, /*! ../app/Sistema/Usuarios/Index */ "./resources/js/app/Sistema/Usuarios/Index.vue"));
-  }
-}, {
-  path: '/sistema/usuarios/crear',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | app/Sistema/Usuarios/Crear */ "app/Sistema/Usuarios/Crear").then(__webpack_require__.bind(null, /*! ../app/Sistema/Usuarios/Crear */ "./resources/js/app/Sistema/Usuarios/Crear.vue"));
-  }
-}, {
-  path: '/sistema/usuarios/:id/editar',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | app/Sistema/Usuarios/Editar */ "app/Sistema/Usuarios/Editar").then(__webpack_require__.bind(null, /*! ../app/Sistema/Usuarios/Editar */ "./resources/js/app/Sistema/Usuarios/Editar.vue"));
-  }
-}, {
-  path: '/sistema/perfiles',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | app/Sistema/Perfiles/Index */ "app/Sistema/Perfiles/Index").then(__webpack_require__.bind(null, /*! ../app/Sistema/Perfiles/Index */ "./resources/js/app/Sistema/Perfiles/Index.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
@@ -75925,8 +75887,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\jmspa-m2\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\jmspa-m2\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/jmspa-m2/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/jmspa-m2/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

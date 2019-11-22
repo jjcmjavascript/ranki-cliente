@@ -1,88 +1,110 @@
-		<!-- begin #header -->
-		<div id="header" class="header navbar-default">
-			<!-- begin navbar-header -->
-			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>Metro</b> Cuadrado</a>
-				<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-			<!-- end navbar-header -->
-			<!-- begin header-nav -->
-			<ul class="navbar-nav navbar-right">
-				<li class="navbar-form">
-					<form action="" method="POST" name="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Enter keyword" />
-							<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
-						</div>
-					</form>
-				</li>
-				<li class="dropdown">
-					<a href="#" data-toggle="dropdown" class="dropdown-toggle f-s-14">
-						<i class="fa fa-bell"></i>
-						<span class="label">5</span>
-					</a>
-					<div class="dropdown-menu media-list dropdown-menu-right">
-						<div class="dropdown-header">NOTIFICATIONS (5)</div>
-						<a href="javascript:;" class="dropdown-item media">
-							<div class="media-left">
-								<i class="fa fa-bug media-object bg-silver-darker"></i>
-							</div>
-							<div class="media-body">
-								<h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
-								<div class="text-muted f-s-10">3 minutes ago</div>
-							</div>
-						</a>
-						<a href="javascript:;" class="dropdown-item media">
-							<div class="media-left">
-								<i class="fa fa-plus media-object bg-silver-darker"></i>
-							</div>
-							<div class="media-body">
-								<h6 class="media-heading"> New User Registered</h6>
-								<div class="text-muted f-s-10">1 hour ago</div>
-							</div>
-						</a>
-						<a href="javascript:;" class="dropdown-item media">
-							<div class="media-left">
-								<i class="fa fa-envelope media-object bg-silver-darker"></i>
-								<i class="fab fa-google text-warning media-object-icon f-s-14"></i>
-							</div>
-							<div class="media-body">
-								<h6 class="media-heading"> New Email From John</h6>
-								<div class="text-muted f-s-10">2 hour ago</div>
-							</div>
-						</a>
-						<div class="dropdown-footer text-center">
-							<a href="javascript:;">View more</a>
-						</div>
-					</div>
-				</li>
-				<li class="dropdown navbar-user">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						@if(Auth::user()->avatar)
-							<img src="{{ Auth::user()->avatar }}" alt="" />
-						@else
-							<img src="../images/users/002.jpg" alt="" />
-						@endif
-						<span class="d-none d-md-inline">
-							{{ Auth::user()->nombre.' '.Auth::user()->apellidos }}
-						</span> <b class="caret"></b>
-					</a>
-					<div class="dropdown-menu dropdown-menu-right">
-						<a href="javascript:;" class="dropdown-item">Editar</a>
-						<!--a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a-->
-						<a href="javascript:;" class="dropdown-item">Calendario</a>
-						<a href="javascript:;" class="dropdown-item">Configuración</a>
-						<div class="dropdown-divider"></div>
-						<a href="{{ route('logout') }}" class="dropdown-item">
-							Cerrar sesión
-						</a>
-					</div>
-				</li>
-			</ul>
-			<!-- end header-nav -->
-		</div>
-		<!-- end #header -->
+            <!-- header-->
+            <header class="main-header dark-header fs-header sticky">
+                <div class="header-inner">
+                    <div class="logo-holder">
+                        <a href="index.html"><img src="images/logo.png" alt=""></a>
+                    </div>
+                    <div class="header-search vis-header-search">
+                        <div class="header-search-input-item">
+                            <input type="text" placeholder="Keywords" value=""/>
+                        </div>
+                        <div class="header-search-select-item">
+                            <select data-placeholder="All Categories" class="chosen-select" >
+                                <option>All Categories</option>
+                                <option>Shops</option>
+                                <option>Hotels</option>
+                                <option>Restaurants</option>
+                                <option>Fitness</option>
+                                <option>Events</option>
+                            </select>
+                        </div>
+                        <button class="header-search-button" onclick="window.location.href='listing.html'">Search</button>
+                    </div>
+                    <div class="show-search-button"><i class="fa fa-search"></i> <span>Search</span></div>
+                    <a href="dashboard-add-listing.html" class="add-list">Add Listing <span><i class="fa fa-plus"></i></span></a>
+					
+					@guest 
+						<div class="show-reg-form modal-open"><i class="fa fa-sign-in"></i>Sign In</div>
+					@endguest
+                    <!-- nav-button-wrap-->
+                    <div class="nav-button-wrap color-bg">
+                        <div class="nav-button">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <!-- nav-button-wrap end-->
+                    <!--  navigation -->
+                    <div class="nav-holder main-menu">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="#" class="act-link">Home <i class="fa fa-caret-down"></i></a>
+                                    <!--second level -->
+                                    <ul>
+                                        <li><a href="index.html">Parallax Image</a></li>
+                                        <li><a href="index2.html">Video</a></li>
+                                        <li><a href="index3.html">Map</a></li>
+                                        <li><a href="index4.html">Slideshow</a></li>
+                                        <li><a href="index5.html">Slider</a></li>
+										<li><a href="index6.html">Fullscreen Slider</a></li>
+                                    </ul>
+                                    <!--second level end-->
+                                </li>
+                                <li>
+                                    <a href="#">Listings <i class="fa fa-caret-down"></i></a>
+                                    <!--second level -->
+                                    <ul>
+                                        <li><a href="listing.html">Column map</a></li>
+                                        <li><a href="listing2.html">Column map 2</a></li>
+                                        <li><a href="listing3.html">Fullwidth Map</a></li>
+                                        <li><a href="listing4.html">Fullwidth Map 2</a></li>
+                                        <li><a href="listing5.html">Without Map</a></li>
+                                        <li><a href="listing6.html">Without Map 2</a></li>
+                                        <li>
+                                            <a href="#">Single <i class="fa fa-caret-down"></i></a>
+                                            <!--third  level  -->
+                                            <ul>
+                                                <li><a href="listing-single.html">Style 1</a></li>
+                                                <li><a href="listing-single2.html">Style 2</a></li>
+                                                <li><a href="listing-single3.html">Style 3</a></li>
+												<li><a href="listing-single4.html">Style 4</a></li>
+                                            </ul>
+                                            <!--third  level end-->
+                                        </li>
+                                    </ul>
+                                    <!--second level end-->
+                                </li>
+                                <li>
+                                    <a href="blog.html">News</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pages <i class="fa fa-caret-down"></i></a>
+                                    <!--second level -->
+                                    <ul>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="contacts.html">Contacts</a></li>
+                                        <li><a href="author-single.html">User single</a></li>
+                                        <li><a href="how-itworks.html">How it Works</a></li>
+                                        <li><a href="pricing-tables.html">Pricing</a></li>
+                                        <li><a href="dashboard-myprofile.html">User Dasboard</a></li>
+                                        <li><a href="blog-single.html">Blog Single</a></li>
+                                        <li><a href="dashboard-add-listing.html">Add Listing</a></li>
+                                        <li><a href="404.html">404</a></li>
+                                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                                        <li><a href="header2.html">Header 2</a></li>
+                                        <li><a href="footer-fixed.html">Footer Fixed</a></li>
+                                    </ul>
+                                    <!--second level end-->
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- navigation  end -->
+                </div>
+            </header>
+            
+            <!--  header end -->
+
+            <script>
+
+            </script>

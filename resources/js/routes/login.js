@@ -1,10 +1,7 @@
 const routes = [
+
     {
-        path: '/loginvue',
-        component: () =>  import(/* webpackChunkName: 'app/login' */ '../app/login'),
-    },
-    {
-        path: '/home',
+        path: '/',
         component: () =>  import(/* webpackChunkName: 'app/login' */ '../app/Home'),
     },
 ];

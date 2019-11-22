@@ -34,13 +34,6 @@ window.loaded = function(self) {
     self.loading.hide();
 };
 
-/*// ASIGNACIÓN GLOBAL DEL LOADER
-window.loading = function() {
-    document.getElementsByTagName('body')[0].classList.remove('loaded');
-};
-window.loaded = function() {
-    document.getElementsByTagName('body')[0].classList.add('loaded');
-};*/
 
 // SET DEPENDENCIAS
 Vue.use(Loading);
@@ -415,4 +408,8 @@ const app = new Vue({
             };
         },
     },
+});
+
+$('.close-reg').on("click", function () {
+    modal.hide();
 });
