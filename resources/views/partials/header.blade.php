@@ -22,7 +22,6 @@
                     </div>
                     <div class="show-search-button"><i class="fa fa-search"></i> <span>Search</span></div>
                     <a href="dashboard-add-listing.html" class="add-list">Add Listing <span><i class="fa fa-plus"></i></span></a>
-					
 					@guest 
 						<div class="show-reg-form modal-open"><i class="fa fa-sign-in"></i>Sign In</div>
 					@endguest

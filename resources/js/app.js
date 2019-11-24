@@ -11,7 +11,8 @@ window.Vue = require('vue');
 // IMPORTANDO DEPENDENCIAS
 import Loading from 'vue-loading-overlay';
 import VueRouter from 'vue-router';
-
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 // IMPORTANDO ESTILOS
 import 'vue-loading-overlay/dist/vue-loading.css';
 import 'vue-select/dist/vue-select.css';
@@ -38,6 +39,7 @@ window.loaded = function(self) {
 // SET DEPENDENCIAS
 Vue.use(Loading);
 Vue.use(VueRouter);
+Vue.use(VueSweetalert2);
 
 // SET ROUTER
 import routes from './config/routes';
@@ -46,13 +48,7 @@ const router = new VueRouter({
     routes, // short for routes: routes
 })
 
-// SET BASE URL
-let token = document.head.querySelector('meta[name="app-url"]');
-let url = '';
-if (token && token.content) {
-    url = (token.content.substr(-1) != '/') ? token.content : token.content.substr(0, -1);
-}
-else { console.error('APP URL not found'); }
+
 
 // CONFIGURACIÓN VUE
 const app = new Vue({
@@ -60,7 +56,8 @@ const app = new Vue({
     router,
     data() {
         return {
-            base_url: url,
+
+            base_url: process.env.MIX_URL,
             menu: [],
             user: {},
         }
@@ -227,6 +224,33 @@ const app = new Vue({
             let array = this.arrayResponse(response);
             return array.join('<br />');
         },
+        cargando(title = 'Cargando, porfavor espere...'){
+            this.$swal.fire({
+                title : title ,
+                timerProgressBar: true,
+                allowOutsideClick : false,
+                allowEscapeKey : false,
+                onBeforeOpen: () => {
+                    this.$swal.showLoading()
+                }
+              })
+        },
+        alertas(tipo, titulo, mensaje= null){
+            if(mensaje){
+                let temp = '<ul>';
+                mensaje = this.arrayResponse(mensaje);
+                mensaje.forEach(e=>{
+                    temp+=`<li>${e}</li>`;
+                })
+                mensaje = temp+'</ul>'; 
+            }
+            Swal.fire(
+                titulo,
+                mensaje,
+                tipo
+              )
+            
+        },
         /**
          * Devuelve un array con todas las respuestas obtenidas
          * @param  {String|Array|Object}
@@ -321,7 +345,6 @@ const app = new Vue({
                     }
                     else {
                         respuestas = ['Se ha generado un error inesperado. Por favor contacte a soporte.'];
-                        console.log('arrayResponse', response);
                     }
                 }
                 else if (response.hasOwnProperty('mensaje') || 'message' in response) {

@@ -851,64 +851,25 @@
             </footer>
             <!--footer end  -->
             <!--register form -->
-            <div class="main-register-wrap modal">
-                <div class="main-overlay"></div>
-                <div class="main-register-holder">
-                    <div class="main-register fl-wrap">
-                        <div class="close-reg"><i class="fa fa-times"></i></div>
-                        <h3>Inicia<span> en <strong>Metro Cuadrado</strong></span></h3>
-                        <div class="soc-log fl-wrap">
-                            <a href="#" class="facebook-log"><i class="fa fa-facebook-official"></i>Inicia con Facebook</a>
-                            <a href="#" class="twitter-log"><i class="fa fa-twitter"></i> Inicia con Twitter</a>
-                        </div>
-                        <div class="log-separator fl-wrap"><span>or</span></div>
-                        <div id="tabs-container">
-                            <ul class="tabs-menu">
-                                <li class="current"><a href="#tab-1">Login</a></li>
-                                <li><a href="#tab-2">Register</a></li>
-                            </ul>
-                            <div class="tab">
-                                <div id="tab-1" class="tab-content">
-                                    <div class="custom-form">
-                                        <form method="post"  name="registerform">
+            
+            <login />   
 
-											 <input type="text" placeholder="Rut"  onClick="this.select()" value="" >
-                                             <input type="text" placeholder="Email" onClick="this.select()" value="">
-
-                                            <div class="filter-tags">
-                                                <input id="check-a" type="checkbox" name="check">
-                                                <label for="check-a">Remember me</label>
-                                            </div>
-                                        </form>
-                                        <div class="lost_password">
-                                            <a href="#">Olvido su contraseña?</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab">
-                                    <div id="tab-2" class="tab-content">
-                                 	<div class="custom-form">
-                                            <form method="post"   name="registerform" class="main-register-form" id="main-register-form2">
-                                                <input name="name" type="text"  placeholder="Nombre" onClick="this.select()" value="">
-                                                <input name="name2" type="text" placeholder="Apellido" onClick="this.select()" value="">
-                                                <input name="password" type="text" placeholder="Rut"  onClick="this.select()" value="" >
-                                                <input name="email" type="text" placeholder="Email" onClick="this.select()" value="">
-                                                <input name="email" type="text" placeholder="Teléfono movil" onClick="this.select()" value="">
-                                                <input name="email" type="text" placeholder="Teléfono fijo" onClick="this.select()" value="">
-                                                <input name="email" type="text" placeholder="Clave" onClick="this.select()" value="">
-                                                <input name="email" type="text" placeholder="Confirmar Clave" onClick="this.select()" value="">
-												<button type="submit"     class="log-submit-btn"  ><span>Register</span></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!--register form end -->
             <a class="to-top"><i class="fa fa-angle-up"></i></a>
 </div>
 </template>
+<script> 
+import Login from './Login.vue'
+
+    export default {
+        components : {
+            login : Login,
+        },
+        data (){
+            return {
+                
+            }
+        },
+
+    }
+</script>

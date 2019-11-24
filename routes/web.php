@@ -13,21 +13,21 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('vue');
-});
+Route::get('/','HomeController@index');
+Route::get('logout', 'HomeController@logout');
+Route::post('crear','HomeController@crear');
+Route::post('iniciar','HomeController@login');
 
-Route::get('loginvue', function () {
-    return view('vue');
-});
-
-Route::get('/home', function() {
-	return view('vue');
-})->name('home');
-
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 // SOCIAL LOGIN
 
 Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
+
+//clientes 
+ Route::prefix('inicio')->group(function(){
+    Route::get('/', function () {
+        return view('vue');
+    });
+    
+ });
