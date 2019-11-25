@@ -61,11 +61,7 @@
                     :class="{danger : alertaEnviar && alertaPass}"
                   />
                   <div class="soc-log fl-wrap n-padding">
-                    <a
-                      href
-                      class="twitter-log"
-                      @click.prevent="iniciar()"
-                    >iniciar</a>
+                    <a href class="twitter-log" @click.prevent="iniciar()">iniciar</a>
                   </div>
                   <br />
                   <div class="filter-tags">
@@ -126,7 +122,7 @@
                         v-model="userDos.correo"
                       />
                     </div>
-                    <div>
+                    <!-- <div>
                       <template v-if="alertaRegistrar && alertaTelefono">
                         <label>*Telefono invalido o vacio</label>
                       </template>
@@ -137,7 +133,7 @@
                         placeholder="Teléfono"
                         v-model="userDos.telefono"
                       />
-                    </div>
+                    </div>-->
                     <div>
                       <template v-if="alertaRegistrar && alertaPassDos">
                         <label>*Contraseña invalido o vacio</label>
@@ -187,7 +183,7 @@ export default {
       user: {
         correo: null,
         clave: null,
-        remember : null,
+        remember: null
       },
       userDos: {
         nombre: null,
@@ -206,7 +202,6 @@ export default {
         this.alertaNombre ||
         this.alertaApellido ||
         this.alertaRut ||
-        this.alertaTelefono ||
         this.alertaPassDifentes ||
         this.alertaPassConfirm ||
         this.alertaPassDos ||
@@ -224,10 +219,7 @@ export default {
     alertaRut() {
       return !this.userDos.rut || !this.$root.modulo11(this.userDos.rut).valid;
     },
-    alertaTelefono() {
-      return;
-      !this.userDos.telefono || !this.$root.noScript(this.userDos.telefono);
-    },
+
     alertaPassDifentes() {
       return (
         (this.userDos.clave || this.userDos.claveConfirm) &&
@@ -270,38 +262,30 @@ export default {
       this.alertaEnviar = true;
 
       if (!this.alertaPass && !this.alertaEmail) {
-
         try {
           const request = new FormData();
           this.user.correo && request.append("email", this.user.correo);
           this.user.clave && request.append("password", this.user.clave);
           this.user.remember && request.append("remember", this.user.remember);
-        
-            this.$root.cargando();
-            axios
-              .post("/iniciar", request)
-              .then(res => {
-                this.$swal.disableLoading();
-                this.mostrarAlerta(
-                  "success",
-                  "Exito",
-                  "Lo estamos redirigiendo"
-                );
-                console.log(res.data);
-                // window.location.href = res.data.url;
-              })
-              .catch(error => {
-                this.$swal.disableLoading();
-                this.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
-              })
-              .finally(() => {});
+
+          this.$root.cargando();
+          axios
+            .post("/iniciar", request)
+            .then(res => {
+              this.$swal.disableLoading();
+              this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
+              window.location.href = res.data.url;
+            })
+            .catch(error => {
+              this.$swal.disableLoading();
+              this.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
+            })
+            .finally(() => {});
         } catch (err) {
           this.alertaEnviar = false;
           console.error(err);
         }
-
       }
-
     },
     registrar() {
       this.alertaRegistrar = true;
@@ -313,8 +297,8 @@ export default {
           request.append("apellidos", this.userDos.apellido);
         this.userDos.rut && request.append("rut", this.userDos.rut);
         this.userDos.correo && request.append("email", this.userDos.correo);
-        this.userDos.telefono &&
-          request.append("telefono_movil", this.userDos.telefono);
+        // this.userDos.telefono &&
+        //   request.append("telefono_movil", this.userDos.telefono);
         this.userDos.clave && request.append("password", this.userDos.clave);
         this.userDos.claveConfirm &&
           request.append("password_confirmation", this.userDos.claveConfirm);
@@ -342,164 +326,6 @@ export default {
     },
     mostrarAlerta(tipo, titulo, mensaje = null) {
       this.$root.alertas(tipo, titulo, mensaje);
-    },
-    validateLogin: function() {
-      if (this.usuario && this.password) {
-        this.login();
-      }
-    },
-
-    login: function() {
-      loading(this);
-      this.success = [];
-      this.error = [];
-
-      //loaded();
-
-      if (
-        this.$root.noScript(this.usuario) &&
-        this.$root.noScript(this.password)
-      ) {
-        let request = new FormData();
-        request.append("usuario", this.usuario);
-        request.append("password", this.password);
-
-        axios
-          .post("/login", request)
-          .then(response => {
-            loaded();
-            if (
-              "intended" in response.data &&
-              response.data.intended.indexOf(".js") === -1
-            ) {
-              window.location.href = response.data.intended;
-            } else if ("success" in response.data) {
-              window.location.href = "/";
-            } else {
-              this.error = this.$root.arrayResponse(response);
-            }
-          })
-          .catch(error => {
-            loaded(this);
-            this.error = this.$root.arrayResponse(error);
-          });
-      } else {
-        this.error = [
-          "No puede ingresar links o scripts en campos Usuario o Contraseña",
-          "Por favor verifique sus datos antes de continuar"
-        ];
-        loaded();
-      }
-    },
-    limpiar: function() {
-      this.success = [];
-      this.error = [];
-      this.modal = {
-        error: [],
-        success: [],
-        view: "solicitar",
-        user: null,
-        email: null,
-        token: null,
-        password: null,
-        password_check: null
-      };
-    },
-    recoverView: function() {
-      this.limpiar();
-      this.modal.user = this.usuario;
-      this.$refs.modal.show();
-    },
-    recoverViewChange: function(view) {
-      this.modal.error = [];
-      this.modal.success = [];
-      this.modal.view = view;
-      this.modal.token = null;
-      this.modal.password = null;
-      this.modal.password_check = null;
-    },
-    recoverRequest: function() {
-      loading();
-      this.modal.success = [];
-      this.modal.error = [];
-
-      if (
-        this.$root.noScript(this.modal.user) &&
-        this.$root.noScript(this.modal.email)
-      ) {
-        let request = new FormData();
-        request.append("usuario", this.modal.user);
-        request.append("email", this.modal.email);
-
-        axios
-          .post("/login/recover/request", request)
-          .then(response => {
-            loaded();
-            if ("success" in response.data) {
-              this.modal.success = this.$root.arrayResponse(
-                response.data.success
-              );
-              this.modal.view = "recuperar";
-            } else {
-              this.modal.error = this.$root.arrayResponse(response);
-            }
-          })
-          .catch(error => {
-            loaded();
-            this.modal.error = this.$root.arrayResponse(error);
-          });
-      } else {
-        this.error = [
-          "No puede ingresar links o scripts en campos Usuario o Correo electrónico",
-          "Por favor verifique sus datos antes de continuar."
-        ];
-        loaded();
-      }
-    },
-    recover: function() {
-      loading();
-      this.success = [];
-      this.error = [];
-      this.modal.success = [];
-      this.modal.error = [];
-
-      if (
-        this.$root.noScript(this.modal.user) &&
-        this.$root.noScript(this.modal.email) &&
-        this.$root.noScript(this.modal.token) &&
-        this.$root.noScript(this.modal.password)
-      ) {
-        let request = new FormData();
-        request.append("usuario", this.modal.user);
-        request.append("email", this.modal.email);
-        request.append("codigo", this.modal.token);
-        request.append("contrasena", this.modal.password);
-
-        axios
-          .post("/login/recover", request)
-          .then(response => {
-            loaded();
-            if ("success" in response.data) {
-              this.usuario = this.modal.user;
-              this.password = this.modal.password;
-              this.$refs.modal.hide();
-
-              this.success = this.$root.arrayResponse(response.data.success);
-            } else {
-              this.modal.error = this.$root.arrayResponse(response);
-            }
-          })
-          .catch(error => {
-            loaded();
-            this.modal.error = this.$root.arrayResponse(error);
-          });
-      } else {
-        this.error = [
-          "No puede ingresar links o scripts en campos Usuario o Correo electrónico",
-          "Por favor verifique sus datos antes de continuar."
-        ];
-        loaded();
-      }
     }
   }
 };
@@ -518,6 +344,13 @@ li {
 label {
   color: #ef5350;
 }
+.google-log {
+  background: #f44336;
+}
+.google-log:hover{
+  background: #ef5350;
+}
+
 </style>>
 
 

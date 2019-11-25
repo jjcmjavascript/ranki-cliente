@@ -13,10 +13,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="app-url" content="{{ env('APP_URL') }}">
 
-    <link type="text/css" rel="stylesheet" href="template/css/reset.css">
-    <link type="text/css" rel="stylesheet" href="template/css/plugins.css">
-    <link type="text/css" rel="stylesheet" href="template/css/style.css">
-    <link type="text/css" rel="stylesheet" href="template/css/color.css">
+    <link type="text/css" rel="stylesheet" href="{{asset('template/css/plugins.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('template/css/reset.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('template/css/style.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('template/css/color.css')}}">
     
 </head>
 
@@ -28,9 +28,9 @@
 
     
     @yield('script')
-    <script type="text/javascript" src="template/js/jquery.min.js"></script>
-    <script type="text/javascript" src="template/js/plugins.js"></script>
-    <script type="text/javascript" src="template/js/scripts.js"></script>
+    <script type="text/javascript" src="{{asset('template/js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('template/js/plugins.js')}}"></script>
+    <script type="text/javascript" src="{{asset('template/js/scripts.js')}}"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
 </body>
 </html>

@@ -761,115 +761,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -891,10 +782,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -1094,7 +981,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     alertaResgistrar: function alertaResgistrar() {
-      return this.alertaNombre || this.alertaApellido || this.alertaRut || this.alertaTelefono || this.alertaPassDifentes || this.alertaPassConfirm || this.alertaPassDos || this.alertaEmailDos;
+      return this.alertaNombre || this.alertaApellido || this.alertaRut || this.alertaPassDifentes || this.alertaPassConfirm || this.alertaPassDos || this.alertaEmailDos;
     },
     alertaNombre: function alertaNombre() {
       return !this.userDos.nombre || !this.$root.noScript(this.userDos.nombre);
@@ -1104,10 +991,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     alertaRut: function alertaRut() {
       return !this.userDos.rut || !this.$root.modulo11(this.userDos.rut).valid;
-    },
-    alertaTelefono: function alertaTelefono() {
-      return;
-      !this.userDos.telefono || !this.$root.noScript(this.userDos.telefono);
     },
     alertaPassDifentes: function alertaPassDifentes() {
       return (this.userDos.clave || this.userDos.claveConfirm) && this.userDos.clave != this.userDos.claveConfirm;
@@ -1149,7 +1032,7 @@ __webpack_require__.r(__webpack_exports__);
 
             _this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
 
-            console.log(res.data); // window.location.href = res.data.url;
+            window.location.href = res.data.url;
           })["catch"](function (error) {
             _this.$swal.disableLoading();
 
@@ -1171,8 +1054,9 @@ __webpack_require__.r(__webpack_exports__);
         this.userDos.nombre && request.append("nombre", this.userDos.nombre);
         this.userDos.apellido && request.append("apellidos", this.userDos.apellido);
         this.userDos.rut && request.append("rut", this.userDos.rut);
-        this.userDos.correo && request.append("email", this.userDos.correo);
-        this.userDos.telefono && request.append("telefono_movil", this.userDos.telefono);
+        this.userDos.correo && request.append("email", this.userDos.correo); // this.userDos.telefono &&
+        //   request.append("telefono_movil", this.userDos.telefono);
+
         this.userDos.clave && request.append("password", this.userDos.clave);
         this.userDos.claveConfirm && request.append("password_confirmation", this.userDos.claveConfirm);
 
@@ -1198,134 +1082,6 @@ __webpack_require__.r(__webpack_exports__);
     mostrarAlerta: function mostrarAlerta(tipo, titulo) {
       var mensaje = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       this.$root.alertas(tipo, titulo, mensaje);
-    },
-    validateLogin: function validateLogin() {
-      if (this.usuario && this.password) {
-        this.login();
-      }
-    },
-    login: function login() {
-      var _this3 = this;
-
-      loading(this);
-      this.success = [];
-      this.error = []; //loaded();
-
-      if (this.$root.noScript(this.usuario) && this.$root.noScript(this.password)) {
-        var request = new FormData();
-        request.append("usuario", this.usuario);
-        request.append("password", this.password);
-        axios.post("/login", request).then(function (response) {
-          loaded();
-
-          if ("intended" in response.data && response.data.intended.indexOf(".js") === -1) {
-            window.location.href = response.data.intended;
-          } else if ("success" in response.data) {
-            window.location.href = "/";
-          } else {
-            _this3.error = _this3.$root.arrayResponse(response);
-          }
-        })["catch"](function (error) {
-          loaded(_this3);
-          _this3.error = _this3.$root.arrayResponse(error);
-        });
-      } else {
-        this.error = ["No puede ingresar links o scripts en campos Usuario o Contraseña", "Por favor verifique sus datos antes de continuar"];
-        loaded();
-      }
-    },
-    limpiar: function limpiar() {
-      this.success = [];
-      this.error = [];
-      this.modal = {
-        error: [],
-        success: [],
-        view: "solicitar",
-        user: null,
-        email: null,
-        token: null,
-        password: null,
-        password_check: null
-      };
-    },
-    recoverView: function recoverView() {
-      this.limpiar();
-      this.modal.user = this.usuario;
-      this.$refs.modal.show();
-    },
-    recoverViewChange: function recoverViewChange(view) {
-      this.modal.error = [];
-      this.modal.success = [];
-      this.modal.view = view;
-      this.modal.token = null;
-      this.modal.password = null;
-      this.modal.password_check = null;
-    },
-    recoverRequest: function recoverRequest() {
-      var _this4 = this;
-
-      loading();
-      this.modal.success = [];
-      this.modal.error = [];
-
-      if (this.$root.noScript(this.modal.user) && this.$root.noScript(this.modal.email)) {
-        var request = new FormData();
-        request.append("usuario", this.modal.user);
-        request.append("email", this.modal.email);
-        axios.post("/login/recover/request", request).then(function (response) {
-          loaded();
-
-          if ("success" in response.data) {
-            _this4.modal.success = _this4.$root.arrayResponse(response.data.success);
-            _this4.modal.view = "recuperar";
-          } else {
-            _this4.modal.error = _this4.$root.arrayResponse(response);
-          }
-        })["catch"](function (error) {
-          loaded();
-          _this4.modal.error = _this4.$root.arrayResponse(error);
-        });
-      } else {
-        this.error = ["No puede ingresar links o scripts en campos Usuario o Correo electrónico", "Por favor verifique sus datos antes de continuar."];
-        loaded();
-      }
-    },
-    recover: function recover() {
-      var _this5 = this;
-
-      loading();
-      this.success = [];
-      this.error = [];
-      this.modal.success = [];
-      this.modal.error = [];
-
-      if (this.$root.noScript(this.modal.user) && this.$root.noScript(this.modal.email) && this.$root.noScript(this.modal.token) && this.$root.noScript(this.modal.password)) {
-        var request = new FormData();
-        request.append("usuario", this.modal.user);
-        request.append("email", this.modal.email);
-        request.append("codigo", this.modal.token);
-        request.append("contrasena", this.modal.password);
-        axios.post("/login/recover", request).then(function (response) {
-          loaded();
-
-          if ("success" in response.data) {
-            _this5.usuario = _this5.modal.user;
-            _this5.password = _this5.modal.password;
-
-            _this5.$refs.modal.hide();
-
-            _this5.success = _this5.$root.arrayResponse(response.data.success);
-          } else {
-            _this5.modal.error = _this5.$root.arrayResponse(response);
-          }
-        })["catch"](function (error) {
-          loaded();
-          _this5.modal.error = _this5.$root.arrayResponse(error);
-        });
-      } else {
-        this.error = ["No puede ingresar links o scripts en campos Usuario o Correo electrónico", "Por favor verifique sus datos antes de continuar."];
-        loaded();
-      }
     }
   }
 });
@@ -1344,7 +1100,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-3d6ea3cd] {\n  border: 1px solid #ef5350 !important;\n}\n.n-padding[data-v-3d6ea3cd] {\n  padding: 0px;\n}\nli[data-v-3d6ea3cd] {\n  text-align: left;\n  padding-bottom: 3px;\n}\nlabel[data-v-3d6ea3cd] {\n  color: #ef5350;\n}\n", ""]);
+exports.push([module.i, "\n.danger[data-v-3d6ea3cd] {\n  border: 1px solid #ef5350 !important;\n}\n.n-padding[data-v-3d6ea3cd] {\n  padding: 0px;\n}\nli[data-v-3d6ea3cd] {\n  text-align: left;\n  padding-bottom: 3px;\n}\nlabel[data-v-3d6ea3cd] {\n  color: #ef5350;\n}\n.google-log[data-v-3d6ea3cd] {\n  background: #f44336;\n}\n.google-log[data-v-3d6ea3cd]:hover{\n  background: #ef5350;\n}\n\n", ""]);
 
 // exports
 
@@ -1398,15 +1154,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c("login"),
-      _vm._v(" "),
-      _vm._m(2)
-    ],
+    [_vm._m(0), _vm._v(" "), _c("login"), _vm._v(" "), _vm._m(1)],
     1
   )
 }
@@ -3212,271 +2960,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "main-footer dark-footer  " }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-3" }, [
-            _c("div", { staticClass: "footer-widget fl-wrap" }, [
-              _c("h3", [_vm._v("About Us")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "footer-contacts-widget fl-wrap" }, [
-                _c("p", [
-                  _vm._v(
-                    "In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam. "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("ul", { staticClass: "footer-contacts fl-wrap" }, [
-                  _c("li", [
-                    _c("span", [
-                      _c("i", { staticClass: "fa fa-envelope-o" }),
-                      _vm._v(" Mail :")
-                    ]),
-                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
-                      _vm._v("yourmail@domain.com")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("span", [
-                      _c("i", { staticClass: "fa fa-map-marker" }),
-                      _vm._v(" Adress :")
-                    ]),
-                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
-                      _vm._v("USA 27TH Brooklyn NY")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("span", [
-                      _c("i", { staticClass: "fa fa-phone" }),
-                      _vm._v(" Phone :")
-                    ]),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("+7(111)123456789")
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-3" }, [
-            _c("div", { staticClass: "footer-widget fl-wrap" }, [
-              _c("h3", [_vm._v("Our Last News")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "widget-posts fl-wrap" }, [
-                _c("ul", [
-                  _c("li", { staticClass: "clearfix" }, [
-                    _c(
-                      "a",
-                      { staticClass: "widget-posts-img", attrs: { href: "#" } },
-                      [
-                        _c("img", {
-                          staticClass: "respimg",
-                          attrs: { src: "images/all/1.jpg", alt: "" }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "widget-posts-descr" }, [
-                      _c("a", { attrs: { href: "#", title: "" } }, [
-                        _vm._v("Vivamus dapibus rutrum")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "widget-posts-date" }, [
-                        _vm._v(" 21 Mar 09.05 ")
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "clearfix" }, [
-                    _c(
-                      "a",
-                      { staticClass: "widget-posts-img", attrs: { href: "#" } },
-                      [
-                        _c("img", {
-                          staticClass: "respimg",
-                          attrs: { src: "images/all/1.jpg", alt: "" }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "widget-posts-descr" }, [
-                      _c("a", { attrs: { href: "#", title: "" } }, [
-                        _vm._v(" In hac habitasse platea")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "widget-posts-date" }, [
-                        _vm._v(" 7 Mar 18.21 ")
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "clearfix" }, [
-                    _c(
-                      "a",
-                      { staticClass: "widget-posts-img", attrs: { href: "#" } },
-                      [
-                        _c("img", {
-                          staticClass: "respimg",
-                          attrs: { src: "images/all/1.jpg", alt: "" }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "widget-posts-descr" }, [
-                      _c("a", { attrs: { href: "#", title: "" } }, [
-                        _vm._v("Tortor tempor in porta")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "widget-posts-date" }, [
-                        _vm._v(" 7 Mar 16.42 ")
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-3" }, [
-            _c("div", { staticClass: "footer-widget fl-wrap" }, [
-              _c("h3", [_vm._v("Our  Twitter")]),
-              _vm._v(" "),
-              _c("div", { attrs: { id: "footer-twiit" } })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-3" }, [
-            _c("div", { staticClass: "footer-widget fl-wrap" }, [
-              _c("h3", [_vm._v("Subscribe")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "subscribe-widget fl-wrap" }, [
-                _c("p", [
-                  _vm._v(
-                    "Want to be notified when we launch a new template or an udpate. Just sign up and we'll send you a notification by email."
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "subcribe-form" }, [
-                  _c("form", { attrs: { id: "subscribe" } }, [
-                    _c("input", {
-                      staticClass: "enteremail",
-                      attrs: {
-                        name: "email",
-                        id: "subscribe-email",
-                        placeholder: "Email",
-                        spellcheck: "false",
-                        type: "text"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "subscribe-button",
-                        attrs: { type: "submit", id: "subscribe-button" }
-                      },
-                      [
-                        _c("i", { staticClass: "fa fa-rss" }),
-                        _vm._v(" Subscribe")
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("label", {
-                      staticClass: "subscribe-message",
-                      attrs: { for: "subscribe-email" }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "footer-widget fl-wrap" }, [
-                _c("div", { staticClass: "footer-menu fl-wrap" }, [
-                  _c("ul", [
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("Home ")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("Blog")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("Listing")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("Contacts")])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sub-footer fl-wrap" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "about-widget" }, [
-                _c("img", { attrs: { src: "images/logo.png", alt: "" } })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "copyright" }, [
-                _vm._v(" © CityBook 2018 .  All rights reserved.")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "footer-social" }, [
-                _c("ul", [
-                  _c("li", [
-                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
-                      _c("i", { staticClass: "fa fa-facebook-official" })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
-                      _c("i", { staticClass: "fa fa-twitter" })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
-                      _c("i", { staticClass: "fa fa-chrome" })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
-                      _c("i", { staticClass: "fa fa-vk" })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#", target: "_blank" } }, [
-                      _c("i", { staticClass: "fa fa-whatsapp" })
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("a", { staticClass: "to-top" }, [
       _c("i", { staticClass: "fa fa-angle-up" })
     ])
@@ -3844,49 +3327,6 @@ var render = function() {
                                 _vm.$set(
                                   _vm.userDos,
                                   "correo",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ],
-                        2
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        [
-                          _vm.alertaRegistrar && _vm.alertaTelefono
-                            ? [
-                                _c("label", [
-                                  _vm._v("*Telefono invalido o vacio")
-                                ])
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.userDos.telefono,
-                                expression: "userDos.telefono"
-                              }
-                            ],
-                            staticClass: "numeros",
-                            class: {
-                              danger: _vm.alertaRegistrar && _vm.alertaTelefono
-                            },
-                            attrs: { type: "text", placeholder: "Teléfono" },
-                            domProps: { value: _vm.userDos.telefono },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.userDos,
-                                  "telefono",
                                   $event.target.value
                                 )
                               }

@@ -1,8 +1,8 @@
 <?php
 namespace App\Models\Sistema;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 // use Illuminate\Database\Eloquent\SoftDeletes;
 

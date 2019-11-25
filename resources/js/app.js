@@ -235,7 +235,10 @@ const app = new Vue({
                 }
               })
         },
-        alertas(tipo, titulo, mensaje= null){
+        stop(){
+            document.querySelector('.swal2-container').remove();
+        },
+        alertas(tipo, titulo, mensaje= null, button = true){
             if(mensaje){
                 let temp = '<ul>';
                 mensaje = this.arrayResponse(mensaje);
@@ -244,11 +247,17 @@ const app = new Vue({
                 })
                 mensaje = temp+'</ul>'; 
             }
-            Swal.fire(
-                titulo,
-                mensaje,
-                tipo
-              )
+            // Swal.fire(
+            //     titulo,
+            //     mensaje,
+            //     tipo,
+            //   )
+            this.$swal.fire({
+                showCloseButton: button ? true : false ,
+                title : titulo,
+                html : mensaje,
+                type: tipo,
+            })
             
         },
         /**

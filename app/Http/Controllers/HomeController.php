@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class HomeController extends Controller
 {
-
+    use AuthenticatesUsers;
     /**
      * Create a new controller instance.
      *
@@ -58,10 +58,12 @@ class HomeController extends Controller
 
             $cliente = new Cliente;
             $cliente->fill($request->except('clave'));
-            $cliente->password = Hash::make($request->clave);
+            $cliente->password = Hash::make($request->password);
             $cliente->save();
 
             DB::commit();
+
+            Auth::attempt( $request->only('email', 'password') );
 
             return response(['url'=>env('APP_URL').'inicio'],200);
 
@@ -78,22 +80,24 @@ class HomeController extends Controller
     {
 
 
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|min:8',
         ]);
-
+     
         $data = $request->only('email', 'password');
-
+            
         try {
-
-            if (Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
+            
+            
+            if (  Auth::attempt($data,$request->remember))
                 {
                     return response(['url'=>env('APP_URL').'inicio'],200);
 
                 }
 
-            throw new \Exception('El usuario no se encuentra registrado.');
+            throw new \Exception('Cotraseña o correo incorrecto.');
 
         }catch(\Exception $e){
 
@@ -103,10 +107,5 @@ class HomeController extends Controller
 
     }
 
-    public function logout()
-    {
-        Auth::logout();
 
-        return redirect('/');
-    }
 }

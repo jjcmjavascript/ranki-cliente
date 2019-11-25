@@ -11,23 +11,13 @@
 |
 */
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/','HomeController@index');
-Route::get('logout', 'HomeController@logout');
+Route::get('/','HomeController@index')->name('inicio');
 Route::post('crear','HomeController@crear');
 Route::post('iniciar','HomeController@login');
-
 
 // SOCIAL LOGIN
 
 Route::get('auth/{provider}', 'Auth\SocialAuthController@redirectToProvider')->name('social.auth');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
-
-//clientes 
- Route::prefix('inicio')->group(function(){
-    Route::get('/', function () {
-        return view('vue');
-    });
-    
- });
