@@ -11,21 +11,11 @@
 |
 */
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/', function () {
-    return view('vue');
-});
-
-Route::get('loginvue', function () {
-    return view('vue');
-});
-
-Route::get('/home', function() {
-	return view('vue');
-})->name('home');
-
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+Route::get('/','HomeController@index')->name('inicio');
+Route::post('crear','HomeController@crear');
+Route::post('iniciar','HomeController@login');
 
 // SOCIAL LOGIN
 

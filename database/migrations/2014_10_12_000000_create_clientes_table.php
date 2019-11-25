@@ -13,24 +13,28 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('clientes');
         Schema::create('clientes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('perfil_id')->unsigned()->nullable();
             $table->string('nombre');
             $table->string('apellidos')->nullable();
-            $table->string('rut', 15)->nullable()->after('email_verified_at');
-            $table->string('avatar')->nullable()->after('telefono_fijo');
-            $table->string('password');
+            $table->string('rut', 15)->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('password')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('telefono_movil', 20)->nullable()->after('email_verified_at');
-            $table->string('telefono_fijo', 20)->nullable()->after('email_verified_at');
-            $table->text('direccion')->nullable()->after('email_verified_at');
-            $table->string('provider')->nullable()->after('telefono_fijo');
-            $table->string('provider_id')->nullable()->after('telefono_fijo');
+            $table->string('telefono_movil', 20)->nullable();
+            $table->string('telefono_fijo', 20)->nullable();
+            $table->text('direccion')->nullable();
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
             $table->boolean('activo')->default(1);
             $table->integer('configuracion')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

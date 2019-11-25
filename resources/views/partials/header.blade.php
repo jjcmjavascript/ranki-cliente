@@ -21,11 +21,28 @@
                         <button class="header-search-button" onclick="window.location.href='listing.html'">Search</button>
                     </div>
                     <div class="show-search-button"><i class="fa fa-search"></i> <span>Search</span></div>
-                    <a href="dashboard-add-listing.html" class="add-list">Add Listing <span><i class="fa fa-plus"></i></span></a>
-					
+                    <!-- <a href="dashboard-add-listing.html" class="add-list">Add Listing <span><i class="fa fa-plus"></i></span></a> -->
 					@guest 
-						<div class="show-reg-form modal-open"><i class="fa fa-sign-in"></i>Sign In</div>
-					@endguest
+						<div class="show-reg-form modal-open"><i class="fa fa-sign-in"></i>Iniciar</div>
+                    @endguest
+                    
+                    @auth
+                    <div class="header-user-menu">
+                        <div class="header-user-name">
+                            <span>
+                                <img src="{{Auth::user()->avatar ? Auth::user()->avatar : Auth::user()->avatar}}" >
+                            </span>
+                            {{Auth::user()->nombre}}
+                        </div>
+                        <ul>
+                            <li><a href="{{route('cliente.perfil')}}"> Perfil</a></li>
+                            <li><a href="dashboard-add-listing.html"> Mis Publicaciones</a></li>
+                            <li><a href="dashboard-bookings.html">  Favoritos  </a></li>
+                            <li><a href="{{route('cliente.salir')}}">Salir</a></li>
+                        </ul>
+                    </div>
+                    @endauth
+
                     <!-- nav-button-wrap-->
                     <div class="nav-button-wrap color-bg">
                         <div class="nav-button">
@@ -37,9 +54,9 @@
                     <div class="nav-holder main-menu">
                         <nav>
                             <ul>
-                                <li>
+                                <!--<li>
                                     <a href="#" class="act-link">Home <i class="fa fa-caret-down"></i></a>
-                                    <!--second level -->
+                                    <!--second level 
                                     <ul>
                                         <li><a href="index.html">Parallax Image</a></li>
                                         <li><a href="index2.html">Video</a></li>
@@ -48,11 +65,11 @@
                                         <li><a href="index5.html">Slider</a></li>
 										<li><a href="index6.html">Fullscreen Slider</a></li>
                                     </ul>
-                                    <!--second level end-->
+                                    <!--second level end
                                 </li>
                                 <li>
                                     <a href="#">Listings <i class="fa fa-caret-down"></i></a>
-                                    <!--second level -->
+                                    <!--second level 
                                     <ul>
                                         <li><a href="listing.html">Column map</a></li>
                                         <li><a href="listing2.html">Column map 2</a></li>
@@ -62,21 +79,22 @@
                                         <li><a href="listing6.html">Without Map 2</a></li>
                                         <li>
                                             <a href="#">Single <i class="fa fa-caret-down"></i></a>
-                                            <!--third  level  -->
+                                            third  level  
                                             <ul>
                                                 <li><a href="listing-single.html">Style 1</a></li>
                                                 <li><a href="listing-single2.html">Style 2</a></li>
                                                 <li><a href="listing-single3.html">Style 3</a></li>
 												<li><a href="listing-single4.html">Style 4</a></li>
                                             </ul>
-                                            <!--third  level end-->
+                                            <!--third  level end
                                         </li>
                                     </ul>
-                                    <!--second level end-->
+                                    <!--second level end
                                 </li>
                                 <li>
                                     <a href="blog.html">News</a>
                                 </li>
+                                -->
                                 <li>
                                     <a href="#">Pages <i class="fa fa-caret-down"></i></a>
                                     <!--second level -->
@@ -96,6 +114,7 @@
                                     </ul>
                                     <!--second level end-->
                                 </li>
+
                             </ul>
                         </nav>
                     </div>
@@ -104,7 +123,10 @@
             </header>
             
             <!--  header end -->
-
+            <div class="loader-wrap">
+                <div class="pin"></div>
+                <div class="pulse"></div>
+            </div>
             <script>
 
             </script>

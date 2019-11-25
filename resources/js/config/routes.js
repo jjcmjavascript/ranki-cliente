@@ -1,7 +1,10 @@
 import login 	from '../routes/login.js';
+import cliente 	from '../routes/cliente.js';
+
 
 const baseRoutes =  [
-    ...login
+    ...login,
+    ...cliente
 ];
 
 export default baseRoutes;
