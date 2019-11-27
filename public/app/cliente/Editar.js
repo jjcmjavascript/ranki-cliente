@@ -337,7 +337,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-ff450948] {\n  color: #ef5350;\n}\n.fa-picture-o[data-v-ff450948] {\n  margin: 0px;\n  padding: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.danger[data-v-ff450948] {\n  color: #ef5350;\n}\n@media (max-width: 576px) {\n}\n@media (min-width: 768px) {\n.button-send[data-v-ff450948] {\n position: absolute;\n top: 91%;\n width: 20%;\n left: 0%;\n border-radius: 0px;\n border: 1px solid silver;\n padding-top: 5px;\n background: #64b5f6;\n color: white;\n border-top-right-radius: 8px;\n}\n.button-send[data-v-ff450948]:hover {\n  background : #2196f3;\n}\n}\n.fa-picture-o[data-v-ff450948] {\n  margin: 0px;\n  padding: 0px;\n}\n", ""]);
 
 // exports
 

@@ -199,7 +199,7 @@ export default {
       if(this.usuario && this.usuario._avatar.length > 0){
         return `/storage/${this.usuario._avatar[ this.usuario._avatar.length -1 ].ruta}`;
       }
-      else if(this.usuario && this.usuario.avatar){ 
+      else if(this.usuario && this.usuario.avatar){
         return  this.usuario.avatar
       }
       else {
@@ -365,6 +365,30 @@ export default {
 <style scoped>
 .danger {
   color: #ef5350;
+}
+@media (max-width: 576px) {
+
+
+ }
+@media (min-width: 768px) {
+.button-send {
+ position: absolute;
+ top: 91%;
+ width: 20%;
+ left: 0%;
+ border-radius: 0px;
+ border: 1px solid silver;
+ padding-top: 5px;
+ background: #64b5f6;
+ color: white;
+ border-top-right-radius: 8px;
+}
+
+.button-send:hover {
+  background : #2196f3;
+}
+
+
 }
 
 
