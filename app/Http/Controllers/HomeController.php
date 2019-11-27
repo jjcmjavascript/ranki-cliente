@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Auth;
 use Illuminate\Http\Request;
-use App\Models\Sistema\Cliente;
+use App\Models\Sistema\Usuario;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -46,7 +46,7 @@ class HomeController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
         
-        $cliente = Cliente::where('email', $request->email)
+        $cliente = Usuario::where('email', $request->email)
             ->orWhere('rut', $request->rut)
             ->first();
 
@@ -56,7 +56,7 @@ class HomeController extends Controller
 
             if($cliente) throw new \Exception('El usuario ya se encuentra registrado.');
 
-            $cliente = new Cliente;
+            $cliente = new Usuario;
             $cliente->fill($request->except('clave'));
             $cliente->password = Hash::make($request->password);
             $cliente->save();

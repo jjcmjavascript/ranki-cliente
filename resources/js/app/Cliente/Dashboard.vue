@@ -187,9 +187,13 @@ export default {
     block() {
       let elemento = document.querySelector(".loader-wrap");
       if (elemento.style.display == "none") {
+
         document.querySelector(".loader-wrap").style.display = "inline";
+
       } else {
+
         document.querySelector(".loader-wrap").style.display = "none";
+        
       }
     },
     stop() {

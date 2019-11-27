@@ -136,6 +136,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -152,7 +154,8 @@ __webpack_require__.r(__webpack_exports__);
         direccion: null,
         telefono_fijo: null,
         telefono_movil: null,
-        email: null
+        email: null,
+        _avatar: null
       }
     };
   },
@@ -187,6 +190,15 @@ __webpack_require__.r(__webpack_exports__);
     this.iniciar();
   },
   methods: {
+    urlImagen: function urlImagen() {
+      if (this.usuario && this.usuario._avatar.length > 0) {
+        return "/storage/".concat(this.usuario._avatar[this.usuario._avatar.length - 1].ruta);
+      } else if (this.usuario && this.usuario.avatar) {
+        return this.usuario.avatar;
+      } else {
+        return "https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg";
+      }
+    },
     guardarContrasena: function guardarContrasena() {
       var _this = this;
 
@@ -260,8 +272,53 @@ __webpack_require__.r(__webpack_exports__);
           _this3.stop();
 
           _this3.alerta("error", "Ups...!", err);
-        })["finally"](function () {});
+        });
       }
+    },
+    cambiarImagen: function cambiarImagen() {
+      var _this4 = this;
+
+      this.$swal.fire({
+        title: "Seleccione su imagen",
+        html: '<input type="file" id="envioAvatar" class="upload"> ',
+        onOpen: function onOpen() {
+          document.querySelector(".swal2-confirm").setAttribute("disabled", "disabled");
+          document.querySelector("#envioAvatar").addEventListener("change", function (e) {
+            if (e.target.files[0]) {
+              document.querySelector(".swal2-confirm").removeAttribute("disabled");
+            } else {
+              document.querySelector(".swal2-confirm").setAttribute("disabled", "disabled");
+            }
+          });
+        },
+        preConfirm: function preConfirm() {
+          var file = document.querySelector("#envioAvatar");
+          return file ? file : null;
+        }
+      }).then(function (res) {
+        if (res.value) {
+          if (res.value.files[0]) {
+            _this4.start();
+
+            var request = new FormData();
+            request.append('id', _this4.usuario.id);
+            request.append('imagen', res.value.files[0]);
+            axios.post("".concat(_this4.url_perfil, "/avatar"), request).then(function (res) {
+              console.log(res);
+
+              _this4.stop();
+
+              _this4.usuario = res.data.usuario;
+            })["catch"](function (err) {
+              _this4.stop();
+
+              _this4.alerta('error', 'Ups...!', err);
+            });
+          } else {
+            _this4.alerta("error", "Ups...!", "La imagen que ingreso no es valida.");
+          }
+        }
+      });
     }
   }
 });
@@ -280,7 +337,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-ff450948] {\n  color: #ef5350;\n}\n", ""]);
+exports.push([module.i, "\n.danger[data-v-ff450948] {\n  color: #ef5350;\n}\n.fa-picture-o[data-v-ff450948] {\n  margin: 0px;\n  padding: 0px;\n}\n", ""]);
 
 // exports
 
@@ -335,14 +392,24 @@ var render = function() {
   return _c("div", { staticClass: "col-xs-12 col-md-9" }, [
     _vm._m(0),
     _vm._v(" "),
-    _vm._m(1),
+    _c("div", { staticClass: "col-xs-12 col-md-3 col-md-offset-5" }, [
+      _c("div", { staticClass: "edit-profile-photo fl-wrap" }, [
+        _c("img", { staticClass: "respimg", attrs: { src: _vm.urlImagen() } }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "button-send", on: { click: _vm.cambiarImagen } },
+          [_c("i", { staticClass: "fa fa-picture-o" })]
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "profile-edit-container" }, [
-      _vm._m(2),
+      _vm._m(1),
       _vm._v(" "),
       _c("div", { staticClass: "custom-form" }, [
         _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(3),
+          _vm._m(2),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -367,7 +434,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(4),
+          _vm._m(3),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -392,7 +459,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(5),
+          _vm._m(4),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -417,7 +484,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(6),
+          _vm._m(5),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -443,7 +510,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(7),
+          _vm._m(6),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -469,7 +536,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(8),
+          _vm._m(7),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -515,7 +582,7 @@ var render = function() {
     _c("hr"),
     _vm._v(" "),
     _c("div", { staticClass: "profile-edit-container" }, [
-      _vm._m(9),
+      _vm._m(8),
       _vm._v(" "),
       _c("div", { staticClass: "custom-form no-icons" }, [
         _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
@@ -543,7 +610,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(10)
+          _vm._m(9)
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
@@ -571,7 +638,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(11)
+          _vm._m(10)
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
@@ -599,7 +666,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm._m(12)
+          _vm._m(11)
         ]),
         _vm._v(" "),
         _c(
@@ -657,21 +724,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-xs-12 col-md-3 col-md-offset-5" }, [
-      _c("div", { staticClass: "edit-profile-photo fl-wrap" }, [
-        _c("img", {
-          staticClass: "respimg",
-          attrs: { src: "images/avatar/1.jpg", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "change-photo-btn" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "profile-edit-header fl-wrap" }, [
       _c("h4", [_vm._v("My Account")])
     ])
@@ -682,7 +734,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v("\n          Nombre\n          "),
-      _c("i", { staticClass: "fa fa-user-o" })
+      _c("i", { staticClass: "fa fa-picture-o" })
     ])
   },
   function() {
@@ -691,7 +743,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v("\n          apellidos\n          "),
-      _c("i", { staticClass: "fa fa-user-o" })
+      _c("i", { staticClass: "fa fa-picture-o" })
     ])
   },
   function() {

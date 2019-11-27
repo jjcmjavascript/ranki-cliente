@@ -13,8 +13,11 @@ class CreatePasswordClientesResetsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('clientes_password_resets');
-        Schema::create('clientes_password_resets', function (Blueprint $table) {
+        Schema::create('usuarios_password_resets', function (Blueprint $table) {
+            $table->engine='InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_general_ci';
+            
             $table->string('email')->index();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
@@ -28,6 +31,6 @@ class CreatePasswordClientesResetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes_password_resets');
+        Schema::dropIfExists('usuarios_password_resets');
     }
 }
