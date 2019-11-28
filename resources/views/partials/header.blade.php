@@ -22,15 +22,19 @@
                     </div>
                     <div class="show-search-button"><i class="fa fa-search"></i> <span>Search</span></div>
                     <!-- <a href="dashboard-add-listing.html" class="add-list">Add Listing <span><i class="fa fa-plus"></i></span></a> -->
-					@guest 
+					@guest
 						<div class="show-reg-form modal-open"><i class="fa fa-sign-in"></i>Iniciar</div>
                     @endguest
-                    
+
                     @auth
                     <div class="header-user-menu">
                         <div class="header-user-name">
                             <span>
-                                <img src="{{Auth::user()->avatar ? Auth::user()->avatar : Auth::user()->avatar}}" >
+                               @if(count(Auth::user()->_avatar) >0 )
+                                <img src="/storage/{{Auth::user()->_avatar[count(Auth::user()->_avatar)-1]->ruta}}" >
+                               @elseif(Auth::user()->avatar)
+                                <img src="{{Auth::user()->avatar}}" >
+                               @endif
                             </span>
                             {{Auth::user()->nombre}}
                         </div>
@@ -56,7 +60,7 @@
                             <ul>
                                 <!--<li>
                                     <a href="#" class="act-link">Home <i class="fa fa-caret-down"></i></a>
-                                    <!--second level 
+                                    <!--second level
                                     <ul>
                                         <li><a href="index.html">Parallax Image</a></li>
                                         <li><a href="index2.html">Video</a></li>
@@ -69,7 +73,7 @@
                                 </li>
                                 <li>
                                     <a href="#">Listings <i class="fa fa-caret-down"></i></a>
-                                    <!--second level 
+                                    <!--second level
                                     <ul>
                                         <li><a href="listing.html">Column map</a></li>
                                         <li><a href="listing2.html">Column map 2</a></li>
@@ -79,7 +83,7 @@
                                         <li><a href="listing6.html">Without Map 2</a></li>
                                         <li>
                                             <a href="#">Single <i class="fa fa-caret-down"></i></a>
-                                            third  level  
+                                            third  level
                                             <ul>
                                                 <li><a href="listing-single.html">Style 1</a></li>
                                                 <li><a href="listing-single2.html">Style 2</a></li>
@@ -121,7 +125,7 @@
                     <!-- navigation  end -->
                 </div>
             </header>
-            
+
             <!--  header end -->
             <div class="loader-wrap">
                 <div class="pin"></div>

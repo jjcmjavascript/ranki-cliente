@@ -13,8 +13,12 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('clientes');
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::dropIfExists('usuarios');
+        Schema::create('usuarios', function (Blueprint $table) {
+            $table->engine='InnoDB';
+            $table->charset='utf8mb4';
+            $table->collation = 'utf8mb4_general_ci';
+
             $table->bigIncrements('id');
             $table->integer('perfil_id')->unsigned()->nullable();
             $table->string('nombre');
@@ -29,6 +33,7 @@ class CreateClientesTable extends Migration
             $table->text('direccion')->nullable();
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
+            $table->boolean('notificaciones')->default(0)->comment('Marca para recibir notificaciones');
             $table->boolean('activo')->default(1);
             $table->integer('configuracion')->unsigned()->nullable();
             $table->rememberToken();
@@ -45,6 +50,6 @@ class CreateClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('usuarios');
     }
 }

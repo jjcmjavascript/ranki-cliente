@@ -9,8 +9,10 @@
     </div>
     <div class="col-xs-12 col-md-3 col-md-offset-5">
       <div class="edit-profile-photo fl-wrap">
-        <img src="images/avatar/1.jpg" class="respimg" alt />
-        <div class="change-photo-btn"></div>
+        <img :src="urlImagen()" class="respimg" />
+        <button class="button-send" @click="cambiarImagen">
+          <i class="fa fa-picture-o"></i>
+        </button>
       </div>
     </div>
     <!-- profile-edit-container-->
@@ -22,14 +24,14 @@
         <div class="form-group col-xs-12 col-md-6">
           <label>
             Nombre
-            <i class="fa fa-user-o"></i>
+            <i class="fa fa-picture-o"></i>
           </label>
           <input type="text" placeholder="Nombre" v-model="usuario.nombre" />
         </div>
         <div class="form-group col-xs-12 col-md-6">
           <label>
             apellidos
-            <i class="fa fa-user-o"></i>
+            <i class="fa fa-picture-o"></i>
           </label>
           <input type="text" placeholder="Apellidos" v-model="usuario.apellidos" />
         </div>
@@ -142,7 +144,8 @@ export default {
         direccion: null,
         telefono_fijo: null,
         telefono_movil: null,
-        email: null
+        email: null,
+        _avatar : null,
       }
     };
   },
@@ -192,6 +195,19 @@ export default {
     this.iniciar();
   },
   methods: {
+    urlImagen(){
+      if(this.usuario && this.usuario._avatar.length > 0){
+        return `/storage/${this.usuario._avatar[ this.usuario._avatar.length -1 ].ruta}`;
+      }
+      else if(this.usuario && this.usuario.avatar){
+        return  this.usuario.avatar
+      }
+      else {
+        return "https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg";
+      }
+
+
+    },
     guardarContrasena() {
       if (
         !this.$root.noScript(this.pass.actual) ||
@@ -226,15 +242,19 @@ export default {
           .finally(() => {});
       }
     },
+
     start() {
       this.$root.cargando();
     },
+
     stop() {
       this.$root.stop();
     },
+
     alerta(tipo, titulo, mensaje = null) {
       this.$root.alertas(tipo, titulo, mensaje);
     },
+
     iniciar() {
       this.start();
 
@@ -248,6 +268,7 @@ export default {
           this.stop();
         });
     },
+
     registrar() {
       if (this.all) {
         this.alerta("error", "Ups... algunos datos son incorrectos!");
@@ -277,8 +298,65 @@ export default {
             this.stop();
             this.alerta("error", "Ups...!", err);
           })
-          .finally(() => {});
       }
+    },
+
+    cambiarImagen() {
+      this.$swal
+        .fire({
+          title: "Seleccione su imagen",
+          html: '<input type="file" id="envioAvatar" class="upload"> ',
+          onOpen() {
+            document
+              .querySelector(".swal2-confirm")
+              .setAttribute("disabled", "disabled");
+            document
+              .querySelector("#envioAvatar")
+              .addEventListener("change", function(e) {
+                if (e.target.files[0]) {
+                  document
+                    .querySelector(".swal2-confirm")
+                    .removeAttribute("disabled");
+                } else {
+                  document
+                    .querySelector(".swal2-confirm")
+                    .setAttribute("disabled", "disabled");
+                }
+              });
+          },
+          preConfirm() {
+            let file = document.querySelector("#envioAvatar");
+            return file ? file : null;
+          }
+        })
+        .then(res => {
+          if (res.value) {
+            if (res.value.files[0]) {
+              this.start();
+              const request = new FormData;
+              request.append('id',this.usuario.id );
+              request.append('imagen', res.value.files[0]);
+
+              axios.post(`${this.url_perfil}/avatar`,request)
+                .then((res)=>{
+                  console.log(res)
+                  this.stop();
+                  this.usuario = res.data.usuario;
+                })
+                .catch(err=> {
+                  this.stop()
+                  this.alerta('error','Ups...!', err)
+                })
+
+            } else {
+              this.alerta(
+                "error",
+                "Ups...!",
+                "La imagen que ingreso no es valida."
+              );
+            }
+          }
+        });
     }
   }
 };
@@ -287,5 +365,36 @@ export default {
 <style scoped>
 .danger {
   color: #ef5350;
+}
+@media (max-width: 576px) {
+
+
+ }
+@media (min-width: 768px) {
+.button-send {
+ position: absolute;
+ top: 91%;
+ width: 20%;
+ left: 0%;
+ border-radius: 0px;
+ border: 1px solid silver;
+ padding-top: 5px;
+ background: #64b5f6;
+ color: white;
+ border-top-right-radius: 8px;
+}
+
+.button-send:hover {
+  background : #2196f3;
+}
+
+
+}
+
+
+
+.fa-picture-o {
+  margin: 0px;
+  padding: 0px;
 }
 </style>

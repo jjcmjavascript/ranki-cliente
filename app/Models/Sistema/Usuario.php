@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Cliente extends Authenticatable
+class Usuario extends Authenticatable
 {
     use Notifiable;
     // use softDeletes;
@@ -15,7 +15,7 @@ class Cliente extends Authenticatable
      *
      * @var array
      */
-    protected $table = 'clientes';
+    protected $table = 'usuarios';
     protected $primaryKey = 'id';
     protected $fillable = [
         'id','nombre', 'apellidos', 'email', 'rut', 'direccion',
@@ -47,6 +47,11 @@ class Cliente extends Authenticatable
     public function scopeActivo($query)
     {
         return $query->where('activo', 1);
+    }
+
+    public function _avatar()
+    {
+        return $this->morphMany('App\Models\Comun\Imagen','imageable');
     }
 
     public function scopeBuscar($query, $request)
