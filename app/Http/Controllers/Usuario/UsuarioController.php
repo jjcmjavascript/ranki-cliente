@@ -12,9 +12,7 @@ use App\Models\Comun\Imagen;
 use App\Http\Controllers\Controller;
 
 class UsuarioController extends Controller
-{
-    
-    
+{   
     public function vue() 
     {  
         return view('vueDashboard');  
@@ -140,21 +138,19 @@ class UsuarioController extends Controller
             'imagen' => 'required|image|max:2048',
         ]);
 
-        $usuario = Usuario::where('id',$request->id)
+        try {
+             $usuario = Usuario::where('id',$request->id)
             ->with('_avatar')
             ->first();
 
-        if( $usuario->id != Auth::user()->id ) {
-            throw new \Exception('Un error ha ocurrido.');
-        };
-        
-        $file = $request->imagen;
-        
-        $filename = base64_encode(time().'_avatar_').'.'.$file->getClientOriginalExtension();
+            if( $usuario->id != Auth::user()->id ) {
+                throw new \Exception('Un error ha ocurrido.');
+            };
+            
+            $file = $request->imagen;
+            $filename = base64_encode(time().'_avatar_').'.'.$file->getClientOriginalExtension();
+            $original_name = $file->getClientOriginalName();
 
-        $original_name = $file->getClientOriginalName();
-        
-        try {
             DB::beginTransaction();
 
             if( Storage::disk('public')->putFileAs('avatars/'.base64_encode(Auth::user()->id), $file, $filename) )

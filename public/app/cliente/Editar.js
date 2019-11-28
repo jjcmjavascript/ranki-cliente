@@ -191,7 +191,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     urlImagen: function urlImagen() {
-      if (this.usuario && this.usuario._avatar.length > 0) {
+      if (this.usuario && this.usuario._avatar && this.usuario._avatar.length > 0) {
         return "/storage/".concat(this.usuario._avatar[this.usuario._avatar.length - 1].ruta);
       } else if (this.usuario && this.usuario.avatar) {
         return this.usuario.avatar;
@@ -337,7 +337,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-ff450948] {\n  color: #ef5350;\n}\n@media (max-width: 576px) {\n}\n@media (min-width: 768px) {\n.button-send[data-v-ff450948] {\n position: absolute;\n top: 91%;\n width: 20%;\n left: 0%;\n border-radius: 0px;\n border: 1px solid silver;\n padding-top: 5px;\n background: #64b5f6;\n color: white;\n border-top-right-radius: 8px;\n}\n.button-send[data-v-ff450948]:hover {\n  background : #2196f3;\n}\n}\n.fa-picture-o[data-v-ff450948] {\n  margin: 0px;\n  padding: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.danger[data-v-ff450948] {\r\n  color: #ef5350;\n}\n@media (max-width: 576px) {\n}\n@media (min-width: 768px) {\n.button-send[data-v-ff450948] {\r\n position: absolute;\r\n top: 91%;\r\n width: 20%;\r\n left: 0%;\r\n border-radius: 0px;\r\n border: 1px solid silver;\r\n padding-top: 5px;\r\n background: #64b5f6;\r\n color: white;\r\n border-top-right-radius: 8px;\n}\n.button-send[data-v-ff450948]:hover {\r\n  background : #2196f3;\n}\n}\n.fa-picture-o[data-v-ff450948] {\r\n  margin: 0px;\r\n  padding: 0px;\n}\r\n", ""]);
 
 // exports
 

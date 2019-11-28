@@ -196,7 +196,7 @@ export default {
   },
   methods: {
     urlImagen(){
-      if(this.usuario && this.usuario._avatar.length > 0){
+      if(this.usuario && this.usuario._avatar && this.usuario._avatar.length > 0){
         return `/storage/${this.usuario._avatar[ this.usuario._avatar.length -1 ].ruta}`;
       }
       else if(this.usuario && this.usuario.avatar){

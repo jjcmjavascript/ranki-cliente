@@ -224,7 +224,7 @@ const app = new Vue({
             let array = this.arrayResponse(response);
             return array.join('<br />');
         },
-        cargando(title = 'Cargando, porfavor espere...'){
+        cargando(title = 'Cargando, por favor espere...'){
             this.$swal.fire({
                 title : title ,
                 timerProgressBar: true,
