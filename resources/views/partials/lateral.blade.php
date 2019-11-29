@@ -6,7 +6,7 @@
           <h3>Principal </h3>
           <ul>
             <li>
-              <a href="{{route('cliente.inicio')}}" 
+              <a href="{{route('cliente.inicio')}}"
                 class="{{request()->is('dashboard') ? 'user-profile-act' : '' }}">
                 <i class="fa fa-gears"></i>Principal
               </a>
@@ -14,7 +14,7 @@
             <li>
               <a href="{{route('cliente.perfil')}}"
                 class="{{request()->is('dashboard/perfil') ? 'user-profile-act' : '' }}">
-              
+
                 <i class="fa fa-user-o"></i> Editar Perfil
               </a>
             </li>
@@ -56,7 +56,7 @@
           </ul>
         </div>
         <!-- user-profile-menu end-->
-        <a href="#" class="log-out-btn">Log Out</a>
+        <a href="{{route('cliente.salir')}}" class="log-out-btn">Log Out</a>
       </div>
     </div>
   </div>

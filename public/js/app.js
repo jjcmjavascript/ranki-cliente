@@ -78872,6 +78872,7 @@ Vue.filter('nl2br', function (str, is_xhtml) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_login_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../routes/login.js */ "./resources/js/routes/login.js");
 /* harmony import */ var _routes_cliente_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes/cliente.js */ "./resources/js/routes/cliente.js");
+/* harmony import */ var _routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../routes/Sistema.js */ "./resources/js/routes/Sistema.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -78882,7 +78883,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
-var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_cliente_js__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_cliente_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (baseRoutes);
 
 /***/ }),
@@ -78911,6 +78913,26 @@ window.swal = Swal.mixin({
   position: 'center',
   title: 'Alerta!'
 });
+
+/***/ }),
+
+/***/ "./resources/js/routes/Sistema.js":
+/*!****************************************!*\
+  !*** ./resources/js/routes/Sistema.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var routes = [{
+  path: '/inicio',
+  name: 'sistema',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../app/Sistema/index */ "./resources/js/app/Sistema/index.vue"));
+  }
+}];
+/* harmony default export */ __webpack_exports__["default"] = (routes);
 
 /***/ }),
 

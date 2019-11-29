@@ -31,9 +31,9 @@
                         <div class="header-user-name">
                             <span>
                                @if(count(Auth::user()->_avatar) >0 )
-                                <img src="/storage/{{Auth::user()->_avatar[count(Auth::user()->_avatar)-1]->ruta}}" >
+                                <img id="imagen_header" src="/storage/{{Auth::user()->_avatar[count(Auth::user()->_avatar)-1]->ruta}}" >
                                @elseif(Auth::user()->avatar)
-                                <img src="{{Auth::user()->avatar}}" >
+                                <img id="imagen_header" src="{{Auth::user()->avatar}}" >
                                @endif
                             </span>
                             {{Auth::user()->nombre}}
