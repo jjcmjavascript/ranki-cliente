@@ -319,7 +319,7 @@ export default {
       this.$swal
         .fire({
           title: "Seleccione su imagen",
-          html: '<input type="file" id="envioAvatar" class="upload" accept="">  ',
+          html: '<input type="file" id="envioAvatar" class="upload" accept=".png, .jpg, .jpeg">  ',
           onOpen() {
             document
               .querySelector(".swal2-confirm")
@@ -385,8 +385,12 @@ export default {
 }
 @media (max-width: 576px) {
 
-
- }
+    .edit-profile-photo img{
+          width: 100% !important;
+          margin-left: 0px !important;
+          float: none !important;
+    }
+}
 @media (min-width: 768px) {
 .button-send {
  position: absolute;

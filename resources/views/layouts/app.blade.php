@@ -13,10 +13,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="app-url" content="{{ env('APP_URL') }}">
 
+
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/plugins.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/reset.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/style.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/color.css')}}">
+
 
 </head>
 
