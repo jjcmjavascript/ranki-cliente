@@ -1,44 +1,16 @@
-.dropdown-toggle::after {
-    display: inline;
-    margin-left: 0em;
-    vertical-align: 0em;
-    content: "";
-    border-top: 0em solid;
-    border-right: 0em solid transparent;
-    border-bottom: 0;
-    border-left: 0em solid transparent;
+::placeholder {
+  color: #B6B6B6 !important;
+  opacity: 1; /* Firefox */
 }
 
-.vs__dropdown-toggle {
-	padding: 3px 0 6px !important;
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: #B6B6B6 !important;
 }
 
-.form-group label {
-    font-weight: bold;
+::-ms-input-placeholder { /* Microsoft Edge */
+ color: #B6B6B6 !important;
 }
 
-/********** BACKGROUND COLORS ************/
-
-.panel.panel-info>.panel-heading {
-    background-color: #49b6d6!important;
-    color: #fff;
-}
-
-/********** SEPARADOR *******************/
-
-.separator {
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-.separator::before, .separator::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid #000;
-}
-.separator::before {
-    margin-right: .25em;
-}
-.separator::after {
-    margin-left: .25em;
+.profile-edit-header {
+    margin-top: 12px;
 }

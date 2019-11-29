@@ -290,7 +290,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$swal.fire({
         title: "Seleccione su imagen",
-        html: '<input type="file" id="envioAvatar" class="upload" accept=".png, .jpg, .jpeg">  ',
+        html: '<input type="file" id="envioAvatar" class="upload" accept=".png, .jpg, .jpeg"><br/><p>Tamaño maximo 2MB</p>',
         onOpen: function onOpen() {
           document.querySelector(".swal2-confirm").setAttribute("disabled", "disabled");
           document.querySelector("#envioAvatar").addEventListener("change", function (e) {
@@ -308,8 +308,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         if (res.value) {
           if (res.value.files[0] && _this4.validarFormato(res.value.files[0])) {
-            if (!_this4.validarSize(res.value.files[0])) throw Error('El peso del archivo excede el maximo permitido');
-            validarSize;
+            if (!_this4.validarSize(res.value.files[0])) {
+              throw Error('El peso del archivo excede el maximo permitido');
+            }
 
             _this4.start();
 
@@ -348,7 +349,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-ff450948] {\n  color: #ef5350;\n}\n@media (max-width: 576px) {\n.edit-profile-photo img[data-v-ff450948]{\n          width: 100% !important;\n          margin-left: 0px !important;\n          float: none !important;\n}\n}\n@media (min-width: 768px) {\n.button-send[data-v-ff450948] {\n position: absolute;\n top: 91%;\n width: 20%;\n left: 0%;\n border-radius: 0px;\n border: 1px solid silver;\n padding-top: 5px;\n background: #64b5f6;\n color: white;\n border-top-right-radius: 8px;\n}\n.button-send[data-v-ff450948]:hover {\n  background : #2196f3;\n}\n}\n.fa-picture-o[data-v-ff450948] {\n  margin: 0px;\n  padding: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.danger[data-v-ff450948] {\r\n  color: #ef5350;\n}\n@media (max-width: 576px) {\n.edit-profile-photo img[data-v-ff450948]{\r\n          width: 100% !important;\r\n          margin-left: 0px !important;\r\n          float: none !important;\n}\n}\n@media (min-width: 768px) {\n.button-send[data-v-ff450948] {\r\n position: absolute;\r\n top: 91%;\r\n width: 20%;\r\n left: 0%;\r\n border-radius: 0px;\r\n border: 1px solid silver;\r\n padding-top: 5px;\r\n background: #64b5f6;\r\n color: white;\r\n border-top-right-radius: 8px;\n}\n.button-send[data-v-ff450948]:hover {\r\n  background : #2196f3;\n}\n}\n.fa-picture-o[data-v-ff450948] {\r\n  margin: 0px;\r\n  padding: 0px;\n}\r\n", ""]);
 
 // exports
 

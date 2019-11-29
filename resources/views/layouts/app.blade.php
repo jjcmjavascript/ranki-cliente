@@ -18,6 +18,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/reset.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/style.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/color.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('css/custom.css')}}">
 
 
 </head>

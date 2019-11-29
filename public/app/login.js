@@ -1100,7 +1100,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-3d6ea3cd] {\n  border: 1px solid #ef5350 !important;\n}\n.n-padding[data-v-3d6ea3cd] {\n  padding: 0px;\n}\nli[data-v-3d6ea3cd] {\n  text-align: left;\n  padding-bottom: 3px;\n}\nlabel[data-v-3d6ea3cd] {\n  color: #ef5350;\n}\n.google-log[data-v-3d6ea3cd] {\n  background: #f44336;\n}\n.google-log[data-v-3d6ea3cd]:hover{\n  background: #ef5350;\n}\n\n", ""]);
+exports.push([module.i, "\n.danger[data-v-3d6ea3cd] {\r\n  border: 1px solid #ef5350 !important;\n}\n.n-padding[data-v-3d6ea3cd] {\r\n  padding: 0px;\n}\nli[data-v-3d6ea3cd] {\r\n  text-align: left;\r\n  padding-bottom: 3px;\n}\nlabel[data-v-3d6ea3cd] {\r\n  color: #ef5350;\n}\n.google-log[data-v-3d6ea3cd] {\r\n  background: #f44336;\n}\n.google-log[data-v-3d6ea3cd]:hover{\r\n  background: #ef5350;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -2380,7 +2380,7 @@ var staticRenderFns = [
                       _vm._v(" "),
                       _c("span", { staticClass: "clearfix" }),
                       _vm._v(
-                        "\n                                                Recommended\n                                            "
+                        "\r\n                                                Recommended\r\n                                            "
                       )
                     ])
                   ])

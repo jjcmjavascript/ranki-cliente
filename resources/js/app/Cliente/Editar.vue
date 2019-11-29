@@ -319,7 +319,7 @@ export default {
       this.$swal
         .fire({
           title: "Seleccione su imagen",
-          html: '<input type="file" id="envioAvatar" class="upload" accept=".png, .jpg, .jpeg">  ',
+          html: '<input type="file" id="envioAvatar" class="upload" accept=".png, .jpg, .jpeg"><br/><p>Tamaño maximo 2MB</p>',
           onOpen() {
             document
               .querySelector(".swal2-confirm")
@@ -346,9 +346,10 @@ export default {
         .then(res => {
           if (res.value) {
             if (res.value.files[0] && this.validarFormato(res.value.files[0]) ){
-            if(!this.validarSize(res.value.files[0]) ) throw Error('El peso del archivo excede el maximo permitido');
+              if(!this.validarSize(res.value.files[0]) ) {
+              	throw Error('El peso del archivo excede el maximo permitido');
+              }
 
-          validarSize
               this.start();
               const request = new FormData;
               request.append('id',this.usuario.id );
