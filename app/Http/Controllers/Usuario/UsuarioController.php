@@ -12,10 +12,10 @@ use App\Models\Comun\Imagen;
 use App\Http\Controllers\Controller;
 
 class UsuarioController extends Controller
-{   
-    public function vue() 
-    {  
-        return view('vueDashboard');  
+{
+    public function vue()
+    {
+        return view('vueDashboard');
     }
 
     public function logout( Request $request )
@@ -28,13 +28,13 @@ class UsuarioController extends Controller
 
     public function iniciar()
     {
-    
+
         try{
 
             $usuario = Usuario::where('id',Auth::user()->id)
             ->with('_avatar')
             ->first();
-            
+
             return response(['usuario'=>$usuario],200);
 
         }
@@ -54,7 +54,7 @@ class UsuarioController extends Controller
             'direccion'  => 'nullable|string',
             'telefono_fijo'  => 'nullable|numeric',
             'telefono_movil'  => 'nullable|numeric',
-            
+
         ]);
         try {
 
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
             ->where('id',Auth::user()->id)
             ->first();
 
-           
+
 
             DB::beginTransaction();
 
@@ -71,7 +71,7 @@ class UsuarioController extends Controller
             if($request->email){
 
                 if( $usuario->email != $request->email ){
-                    
+
                     $this->validate($request, [
                         'email'=> 'email|unique:usuarios,email'
                     ]);
@@ -102,17 +102,22 @@ class UsuarioController extends Controller
             'actual' => 'string|required',
             'password' => 'string|confirmed|min:8',
         ]);
-        
+
         try {
             DB::beginTransaction();
 
             $usuario = Usuario::where('id', $request->id)->first();
 
+            //si esta logeado por redes sociales no pude cambiar pass
+            if($usuario->provider_id){
+              throw new \Exception('Acción invalida para estra cuenta');
+            }
+
             if( Hash::check($request->actual, $usuario->password ) ){
 
                 $usuario->password = Hash::make($request->password);
                 $usuario->save();
-                
+
             }else {
 
                 throw new \Exception('Contraseña actual no coincide.');
@@ -132,7 +137,7 @@ class UsuarioController extends Controller
     }
 
     public function avatar(Request $request)
-    {   
+    {
         $this->validate($request, [
             'id' =>'required|exists:usuarios,id',
             'imagen' => 'required|image|max:2048',
@@ -146,7 +151,7 @@ class UsuarioController extends Controller
             if( $usuario->id != Auth::user()->id ) {
                 throw new \Exception('Un error ha ocurrido.');
             };
-            
+
             $file = $request->imagen;
             $filename = base64_encode(time().'_avatar_').'.'.$file->getClientOriginalExtension();
             $original_name = $file->getClientOriginalName();
@@ -158,15 +163,15 @@ class UsuarioController extends Controller
                 $imagen = new Imagen;
 
                 $imagen->fill([
-                    'nombre' => $filename, 
-                    'nombre_original'=> $original_name, 
-                    'ruta'=> 'avatars/'.base64_encode(Auth::user()->id).'/'.$filename, 
-                    'imageable_id'=>Auth::user()->id, 
+                    'nombre' => $filename,
+                    'nombre_original'=> $original_name,
+                    'ruta'=> 'avatars/'.base64_encode(Auth::user()->id).'/'.$filename,
+                    'imageable_id'=>Auth::user()->id,
                     'imageable_type'=>'App\Models\Sistema\Usuario'
                 ]);
 
                 $imagen->save();
-                
+
             }
             else{
 
@@ -183,7 +188,7 @@ class UsuarioController extends Controller
             return response([
                 'usuario'=> $usuario,
             ],200);
-    
+
         }
         catch(\Exception $e){
 
@@ -192,7 +197,7 @@ class UsuarioController extends Controller
             ],500);
 
         }
-        
+
     }
 
 }

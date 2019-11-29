@@ -184,20 +184,30 @@ __webpack_require__.r(__webpack_exports__);
     },
     alertaEmail: function alertaEmail() {
       return !this.$root.noScript(this.usuario.email) || !this.$root.validEmail(this.usuario.email);
-    }
-  },
-  mounted: function mounted() {
-    this.iniciar();
-  },
-  methods: {
+    },
     urlImagen: function urlImagen() {
       if (this.usuario && this.usuario._avatar && this.usuario._avatar.length > 0) {
+        document.querySelector("#imagen_header").src = "/storage/".concat(this.usuario._avatar[this.usuario._avatar.length - 1].ruta);
         return "/storage/".concat(this.usuario._avatar[this.usuario._avatar.length - 1].ruta);
       } else if (this.usuario && this.usuario.avatar) {
         return this.usuario.avatar;
       } else {
         return "https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg";
       }
+    }
+  },
+  mounted: function mounted() {
+    this.iniciar();
+  },
+  methods: {
+    validarFormato: function validarFormato(file) {
+      var rules = ['img', 'png', 'jpeg', 'jpg', 'gif'];
+      return rules.includes(file.name.split('.').pop().toLowerCase());
+    },
+    validarSize: function validarSize(file) {
+      //mega
+      var size = 2.048;
+      return file.size / 1024 / 1024 < size;
     },
     guardarContrasena: function guardarContrasena() {
       var _this = this;
@@ -280,7 +290,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$swal.fire({
         title: "Seleccione su imagen",
-        html: '<input type="file" id="envioAvatar" class="upload"> ',
+        html: '<input type="file" id="envioAvatar" class="upload" accept="">  ',
         onOpen: function onOpen() {
           document.querySelector(".swal2-confirm").setAttribute("disabled", "disabled");
           document.querySelector("#envioAvatar").addEventListener("change", function (e) {
@@ -297,15 +307,16 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         if (res.value) {
-          if (res.value.files[0]) {
+          if (res.value.files[0] && _this4.validarFormato(res.value.files[0])) {
+            if (!_this4.validarSize(res.value.files[0])) throw Error('El peso del archivo excede el maximo permitido');
+            validarSize;
+
             _this4.start();
 
             var request = new FormData();
             request.append('id', _this4.usuario.id);
             request.append('imagen', res.value.files[0]);
             axios.post("".concat(_this4.url_perfil, "/avatar"), request).then(function (res) {
-              console.log(res);
-
               _this4.stop();
 
               _this4.usuario = res.data.usuario;
@@ -337,7 +348,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-ff450948] {\r\n  color: #ef5350;\n}\n@media (max-width: 576px) {\n}\n@media (min-width: 768px) {\n.button-send[data-v-ff450948] {\r\n position: absolute;\r\n top: 91%;\r\n width: 20%;\r\n left: 0%;\r\n border-radius: 0px;\r\n border: 1px solid silver;\r\n padding-top: 5px;\r\n background: #64b5f6;\r\n color: white;\r\n border-top-right-radius: 8px;\n}\n.button-send[data-v-ff450948]:hover {\r\n  background : #2196f3;\n}\n}\n.fa-picture-o[data-v-ff450948] {\r\n  margin: 0px;\r\n  padding: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.danger[data-v-ff450948] {\n  color: #ef5350;\n}\n@media (max-width: 576px) {\n}\n@media (min-width: 768px) {\n.button-send[data-v-ff450948] {\n position: absolute;\n top: 91%;\n width: 20%;\n left: 0%;\n border-radius: 0px;\n border: 1px solid silver;\n padding-top: 5px;\n background: #64b5f6;\n color: white;\n border-top-right-radius: 8px;\n}\n.button-send[data-v-ff450948]:hover {\n  background : #2196f3;\n}\n}\n.fa-picture-o[data-v-ff450948] {\n  margin: 0px;\n  padding: 0px;\n}\n", ""]);
 
 // exports
 
@@ -394,7 +405,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col-xs-12 col-md-3 col-md-offset-5" }, [
       _c("div", { staticClass: "edit-profile-photo fl-wrap" }, [
-        _c("img", { staticClass: "respimg", attrs: { src: _vm.urlImagen() } }),
+        _c("img", { staticClass: "respimg", attrs: { src: _vm.urlImagen } }),
         _vm._v(" "),
         _c(
           "button",
@@ -581,128 +592,131 @@ var render = function() {
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
-    _c("div", { staticClass: "profile-edit-container" }, [
-      _vm._m(8),
-      _vm._v(" "),
-      _c("div", { staticClass: "custom-form no-icons" }, [
-        _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
-          _c("label", [_vm._v("Contraseña Actual")]),
+    !_vm.usuario.provider_id
+      ? _c("div", { staticClass: "profile-edit-container" }, [
+          _vm._m(8),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.pass.actual,
-                expression: "pass.actual"
-              }
-            ],
-            staticClass: "pass-input",
-            attrs: { type: "password" },
-            domProps: { value: _vm.pass.actual },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c("div", { staticClass: "custom-form no-icons" }, [
+            _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
+              _c("label", [_vm._v("Contraseña Actual")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.pass.actual,
+                    expression: "pass.actual"
+                  }
+                ],
+                staticClass: "pass-input",
+                attrs: { type: "password" },
+                domProps: { value: _vm.pass.actual },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.pass, "actual", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.pass, "actual", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(9)
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
-          _c("label", [_vm._v("Nueva Contraseña")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.pass.nueva,
-                expression: "pass.nueva"
-              }
-            ],
-            staticClass: "pass-input",
-            attrs: { type: "password" },
-            domProps: { value: _vm.pass.nueva },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              }),
+              _vm._v(" "),
+              _vm._m(9)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
+              _c("label", [_vm._v("Nueva Contraseña")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.pass.nueva,
+                    expression: "pass.nueva"
+                  }
+                ],
+                staticClass: "pass-input",
+                attrs: { type: "password" },
+                domProps: { value: _vm.pass.nueva },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.pass, "nueva", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.pass, "nueva", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(10)
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
-          _c("label", [_vm._v("Confirma")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.pass.confirm,
-                expression: "pass.confirm"
-              }
-            ],
-            staticClass: "pass-input",
-            attrs: { type: "password" },
-            domProps: { value: _vm.pass.confirm },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              }),
+              _vm._v(" "),
+              _vm._m(10)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
+              _c("label", [_vm._v("Confirma")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.pass.confirm,
+                    expression: "pass.confirm"
+                  }
+                ],
+                staticClass: "pass-input",
+                attrs: { type: "password" },
+                domProps: { value: _vm.pass.confirm },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.pass, "confirm", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.pass, "confirm", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _vm._m(11)
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          [
-            _vm.pass.nueva != _vm.pass.confirm
-              ? [
-                  _c("label", { staticClass: "danger" }, [
-                    _vm._v("Las contraseñas no coinciden")
-                  ])
-                ]
-              : _vm._e()
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn big-btn color-bg flat-btn",
-            attrs: {
-              disabled: !_vm.pass.nueva || !_vm.pass.confirm || !_vm.pass.actual
-            },
-            on: {
-              click: function($event) {
-                return _vm.guardarContrasena()
-              }
-            }
-          },
-          [
-            _vm._v("\n        Guardar Cambios\n        "),
-            _c("i", { staticClass: "fa fa-angle-right" })
-          ]
-        )
-      ])
-    ])
+              }),
+              _vm._v(" "),
+              _vm._m(11)
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _vm.pass.nueva != _vm.pass.confirm
+                  ? [
+                      _c("label", { staticClass: "danger" }, [
+                        _vm._v("Las contraseñas no coinciden")
+                      ])
+                    ]
+                  : _vm._e()
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn big-btn color-bg flat-btn",
+                attrs: {
+                  disabled:
+                    !_vm.pass.nueva || !_vm.pass.confirm || !_vm.pass.actual
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.guardarContrasena()
+                  }
+                }
+              },
+              [
+                _vm._v("\n        Guardar Cambios\n        "),
+                _c("i", { staticClass: "fa fa-angle-right" })
+              ]
+            )
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [

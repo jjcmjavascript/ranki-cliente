@@ -17,16 +17,18 @@
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/reset.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/style.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('template/css/color.css')}}">
-    
+
 </head>
 
 <body>
     <div id="app">
             @include('partials.header')
             @yield('content')
+            @include('partials.footer')
+
     </div>
 
-    
+
     @yield('script')
     <script type="text/javascript" src="{{asset('template/js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('template/js/plugins.js')}}"></script>

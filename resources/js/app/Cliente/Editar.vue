@@ -9,7 +9,7 @@
     </div>
     <div class="col-xs-12 col-md-3 col-md-offset-5">
       <div class="edit-profile-photo fl-wrap">
-        <img :src="urlImagen()" class="respimg" />
+        <img :src="urlImagen" class="respimg" />
         <button class="button-send" @click="cambiarImagen">
           <i class="fa fa-picture-o"></i>
         </button>
@@ -81,7 +81,7 @@
       </div>
     </div>
     <hr />
-    <div class="profile-edit-container">
+    <div class="profile-edit-container" v-if="!usuario.provider_id">
       <div class="profile-edit-header fl-wrap" style="margin-top:30px">
         <h4>Cambiar contraseña</h4>
       </div>
@@ -189,15 +189,13 @@ export default {
         !this.$root.noScript(this.usuario.email) ||
         !this.$root.validEmail(this.usuario.email)
       );
-    }
-  },
-  mounted() {
-    this.iniciar();
-  },
-  methods: {
+    },
     urlImagen(){
       if(this.usuario && this.usuario._avatar && this.usuario._avatar.length > 0){
+        document.querySelector("#imagen_header").src =`/storage/${this.usuario._avatar[ this.usuario._avatar.length -1 ].ruta}`;
+
         return `/storage/${this.usuario._avatar[ this.usuario._avatar.length -1 ].ruta}`;
+
       }
       else if(this.usuario && this.usuario.avatar){
         return  this.usuario.avatar
@@ -207,6 +205,22 @@ export default {
       }
 
 
+    },
+  },
+  mounted() {
+    this.iniciar();
+  },
+  methods: {
+    validarFormato(file){
+      let rules = ['img','png','jpeg','jpg','gif'];
+
+      return rules.includes( file.name.split('.').pop().toLowerCase() );
+    },
+    validarSize(file){
+      //mega
+      let size = 2.048;
+
+      return ( (file.size / 1024)/1024) < size;
     },
     guardarContrasena() {
       if (
@@ -305,7 +319,7 @@ export default {
       this.$swal
         .fire({
           title: "Seleccione su imagen",
-          html: '<input type="file" id="envioAvatar" class="upload"> ',
+          html: '<input type="file" id="envioAvatar" class="upload" accept="">  ',
           onOpen() {
             document
               .querySelector(".swal2-confirm")
@@ -331,7 +345,10 @@ export default {
         })
         .then(res => {
           if (res.value) {
-            if (res.value.files[0]) {
+            if (res.value.files[0] && this.validarFormato(res.value.files[0]) ){
+            if(!this.validarSize(res.value.files[0]) ) throw Error('El peso del archivo excede el maximo permitido');
+
+          validarSize
               this.start();
               const request = new FormData;
               request.append('id',this.usuario.id );
@@ -339,9 +356,9 @@ export default {
 
               axios.post(`${this.url_perfil}/avatar`,request)
                 .then((res)=>{
-                  console.log(res)
                   this.stop();
                   this.usuario = res.data.usuario;
+
                 })
                 .catch(err=> {
                   this.stop()
