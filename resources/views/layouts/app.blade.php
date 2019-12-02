@@ -12,30 +12,36 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="app-url" content="{{ env('APP_URL') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/reset.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/plugins.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/style.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/color.css')}}">
 
-
-    <link type="text/css" rel="stylesheet" href="{{asset('template/css/plugins.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('template/css/reset.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('template/css/style.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('template/css/color.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{asset('css/custom.css')}}">
+    <!-- <link type="text/css" rel="stylesheet" href="{{asset('css/custom.css')}}"> -->
 
 
 </head>
 
 <body>
-    <div id="app">
+  <!--loader-->
+  <div class="loader-wrap">
+      <div class="pin">
+          <div class="pulse"></div>
+      </div>
+  </div>
+
+    <div id="main">
             @include('partials.header')
             @yield('content')
-            @include('partials.footer')
-
+            <!-- @include('partials.footer') -->
     </div>
 
-
     @yield('script')
-    <script type="text/javascript" src="{{asset('template/js/jquery.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('template/js/plugins.js')}}"></script>
-    <script type="text/javascript" src="{{asset('template/js/scripts.js')}}"></script>
+
     <!-- ================== END PAGE LEVEL JS ================== -->
+    <script type="text/javascript" src="{{asset('recursos/js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('recursos/js/plugins.js')}}"></script>
+    <script type="text/javascript" src="{{asset('recursos/js/scripts.js')}}"></script>
 </body>
 </html>

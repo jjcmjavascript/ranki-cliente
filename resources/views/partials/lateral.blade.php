@@ -1,62 +1,58 @@
-<div class="col-md-3">
-    <div class="fixed-bar fl-wrap">
-      <div class="user-profile-menu-wrap fl-wrap">
-        <!-- user-profile-menu-->
-        <div class="user-profile-menu">
-          <h3>Principal </h3>
-          <ul>
-            <li>
-              <a href="{{route('cliente.inicio')}}"
-                class="{{request()->is('dashboard') ? 'user-profile-act' : '' }}">
-                <i class="fa fa-gears"></i>Principal
-              </a>
-            </li>
-            <li>
-              <a href="{{route('cliente.perfil')}}"
-                class="{{request()->is('dashboard/perfil') ? 'user-profile-act' : '' }}">
+<!-- section-->
+<section class="flat-header color-bg adm-header">
+    <div class="wave-bg wave-bg2"></div>
+    <div class="container">
+        <div class="dasboard-wrap fl-wrap">
+            <div class="dasboard-breadcrumbs breadcrumbs">
+              <a href="#">Inicio</a>
+              <a href="#">Dashboard</a>
+              <span>Mi Perfil</span></div>
+            <!--dasboard-sidebar-->
+            <div class="dasboard-sidebar">
+                <div class="dasboard-sidebar-content fl-wrap">
+                    <div class="dasboard-avatar">
+                      @if(count(Auth::user()->_avatar) >0 )
+                      <img id="imagen_lateral" src="/storage/{{Auth::user()->_avatar[count(Auth::user()->_avatar)-1]->ruta}}" >
+                      @elseif(Auth::user()->avatar)
+                      <img id="imagen_lateral" src="{{Auth::user()->avatar}}" >
+                      @endif
+                    </div>
+                    <div class="dasboard-sidebar-item fl-wrap">
+                        <h3>
+                            <span>Bievenid@ </span>
+                          {{Auth::user()->nombre}}
+                        </h3>
+                    </div>
+                    <a href="{{route('cliente.salir')}}" class="log-out-btn color-bg">Salir <i class="far fa-sign-out"></i></a>
+                </div>
+            </div>
+            <!--dasboard-sidebar end-->
+            <!-- dasboard-menu-->
+            <div class="dasboard-menu">
+                <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
+                <ul class="dasboard-menu-wrap">
+                    <li>
+                        <a href="dashboard.html" class="user-profile-act" ><i class="far fa-user"></i>Perfil</a>
+                    </li>
+                    <li><a href="dashboard-messages.html" ><i class="far fa-envelope"></i> Mensajes <span>3</span></a></li>
+                    <li>
+                        <a href="dashboard-listing-table.html"><i class="far fa-th-list"></i> Favoritos  </a>
+                    </li>
 
-                <i class="fa fa-user-o"></i> Editar Perfil
-              </a>
-            </li>
-            <!-- <li>
-              <a href="dashboard/mensaje">
-                <i class="fa fa-envelope-o"></i> Mensajes
-                <span>3</span>
-              </a>
-            </li> -->
-
-          </ul>
+                </ul>
+            </div>
+            <!--dasboard-menu end-->
+            <!--Tariff Plan menu-->
+            <div   class="tfp-btn"><span>Planes: </span> <strong>Activos</strong></div>
+            <div class="tfp-det">
+                <p>You Are on <a href="#">Extended</a> . Use link bellow to view details or upgrade. </p>
+                <a href="#" class="tfp-det-btn color2-bg">Details</a>
+            </div>
+            <!--Tariff Plan menu end-->
         </div>
-        <!-- user-profile-menu end-->
-        <!-- user-profile-menu-->
-        <div class="user-profile-menu">
-          <h3>Listings</h3>
-          <ul>
-            <li>
-              <a href="dashboard-listing-table.html">
-                <i class="fa fa-th-list"></i> My listigs
-              </a>
-            </li>
-            <li>
-              <a href="dashboard-bookings.html">
-                <i class="fa fa-calendar-check-o"></i> Bookings
-                <span>2</span>
-              </a>
-            </li>
-            <li>
-              <a href="dashboard-review.html">
-                <i class="fa fa-comments-o"></i> Reviews
-              </a>
-            </li>
-            <li>
-              <a href="dashboard-add-listing.html">
-                <i class="fa fa-plus-square-o"></i> Add New
-              </a>
-            </li>
-          </ul>
-        </div>
-        <!-- user-profile-menu end-->
-        <a href="{{route('cliente.salir')}}" class="log-out-btn">Log Out</a>
-      </div>
     </div>
-  </div>
+</section>
+
+
+<!-- section end-->
+<!-- section-->

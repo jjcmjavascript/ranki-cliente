@@ -54,15 +54,15 @@ class UsuarioController extends Controller
             'direccion'  => 'nullable|string',
             'telefono_fijo'  => 'nullable|numeric',
             'telefono_movil'  => 'nullable|numeric',
+            'imagen' => 'nullable|image|max:2048',
 
         ]);
         try {
 
             $usuario = Usuario::where('id', $request->id)
             ->where('id',Auth::user()->id)
+            ->with('_avatar')
             ->first();
-
-
 
             DB::beginTransaction();
 
@@ -79,11 +79,38 @@ class UsuarioController extends Controller
                     $usuario->email = $request->email;
                 }
             }
+            // avatar
+            if($request->imagen){
+
+              $file = $request->imagen;
+              $filename = base64_encode(time().'_avatar_').'.'.$file->getClientOriginalExtension();
+              $original_name = $file->getClientOriginalName();
+              $imagen = new Imagen;
+
+              if( Storage::disk('public')->putFileAs('avatars/'.base64_encode(Auth::user()->id), $file, $filename) )
+              {
+                  $imagen = new Imagen;
+
+                  $imagen->fill([
+                      'nombre' => $filename,
+                      'nombre_original'=> $original_name,
+                      'ruta'=> 'avatars/'.base64_encode(Auth::user()->id).'/'.$filename,
+                      'imageable_id'=>Auth::user()->id,
+                      'imageable_type'=>'App\Models\Sistema\Usuario'
+                  ]);
+
+                  $imagen->save();
+
+              }
+
+              $imagen->save();
+
+            }
 
             $usuario->save();
 
             DB::commit();
-
+            $usuario->refresh();
             return response(['usuario'=>$usuario],200);
 
         }catch(\Exception $e){
