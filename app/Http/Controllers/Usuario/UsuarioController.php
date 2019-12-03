@@ -5,85 +5,69 @@ namespace App\Http\Controllers\Usuario;
 use DB;
 use Auth;
 use Storage;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+use App\Helpers\ApiHelper;
 use App\Models\Sistema\Usuario;
 use App\Models\Comun\Imagen;
-use App\Http\Controllers\Controller;
 
 class UsuarioController extends Controller
 {
-    function  __construct ()
-    {
-      $this->guzzle  = new \GuzzleHttp\Client();
-    }
-
     public function vue()
     {
         return view('vueDashboard');
     }
 
-    public function logout( Request $request )
-    {
-
-        session()->flush();
-
-        Auth::logout();
-
-        return redirect()->to('/');
-    }
-
-    public function editar()
+    public function perfil()
     {
         try{
-            $usuario = Usuario::where('id',Auth::user()->id)
+            $usuario = Usuario::where('id', Auth::user()->id)
             ->with('_avatar')
             ->first();
 
-            return response(['usuario'=>$usuario],200);
+            return response([ 'usuario' => $usuario ], 200);
 
         }
         catch( \Exception $e){
 
-            return response(['error'=>$e->getMessage()],500);
+            return response([ 'error' => $e->getMessage() ], 500);
         }
 
     }
 
-    public function guardar ( Request $request)
+    public function guardar( Request $request )
     {
-          $this->validate($request, [
-              'id' =>'required|exists:usuarios,id',
-              'nombre'  => 'nullable|string|max:30',
-              'apellidos'=> 'nullable|string|max:100',
-              'direccion'  => 'nullable|string',
-              'telefono_fijo'  => 'nullable|numeric',
-              'telefono_movil'  => 'nullable|numeric',
-              'avatar' => 'nullable|image|max:2048',
+        $this->validate($request, [
+            'id' =>'required|exists:usuarios,id',
+            'nombre'  => 'nullable|string|max:30',
+            'apellidos'=> 'nullable|string|max:100',
+            'direccion'  => 'nullable|string',
+            'telefono_fijo'  => 'nullable|numeric',
+            'telefono_movil'  => 'nullable|numeric',
+            'avatar' => 'nullable|image|max:2048',
+        ]);
 
-          ]);
-          try {
-
-            $response = $this->guzzle->post( env('API_CONNECTION').'/api/usuarios/guardar', [
-              'headers' => [
+        try {
+            $ruta = 'api/usuarios/guardar';
+            $headers = [
                 'Accept' => 'application/json',
-                'Authorization' => session('api')->token_type.' '.session('api')->access_token,
-              ],
-              'form_params' => $request->all(),
-            ]);
+                'Authorization' => session('api')->token_type.' '.session('api')->access_token
+            ];
+            $form_params = $request->all();
 
-            $response = json_decode((string) $response->getBody(), true);
+            $response = (new ApiHelper)->sendApiRequest($ruta, $headers, $form_params);
 
+            return response([ 'usuario' => $response->getBody() ],200);
 
-            return response(['usuario'=>$response],200);
-
-          } catch (\Exception $e) {
-
+        } 
+        catch (\Exception $e) {
             return response([
                 'error' => $e->getLine().':'.$e->getMessage()
-            ],500);
-
-          }
+            ], 500);
+        }
 
     }
 
@@ -325,44 +309,39 @@ class UsuarioController extends Controller
 
         try {
 
-            if (  Auth::attempt($data,$request->remember) )
-                {
-                  $response = $this->guzzle->post( env('API_CONNECTION').'/oauth/token', [
-                     'form_params' => [
-                         'grant_type' => 'password',
-                         'client_id' => 2,
-                         'client_secret' => 'Nq7zb7N9OINI12EWgcC7ZozTJQpLx6jDvMfiCLcj',
-                         'username' =>Auth::user()->email,
-                         'password'=> Auth::user()->password,
-                     ],
-                   ]);
+            if (Auth::attempt($data,$request->remember))
+            {
+                $ruta = 'oauth/token';
 
-                    // $user = Usuario::where('id', Auth::user()->id)->first();
-                    $response = json_decode((string) $response->getBody(), true);
+                $form_params = [
+                    'grant_type' => 'password',
+                    'client_id' => env('API_CLIENT_ID'),
+                    'client_secret' => env('API_CLIENT_SECRET'),
+                    'username' =>Auth::user()->email,
+                    'password'=> Auth::user()->password,
+                ];
+                
+                $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
 
-                    //token_type , expires_in , acces_token , refresh_token
+                // SET API SESSION WITH CREDENTIALS
+                session(['api' => (object)$response]);
 
-                    session(['api'=> (object)$response]);
-
-                    return response([
-                      'url'=> url()->previous()
-                    ],200);
-
-                }
+                return response([ 'url' => url()->previous() ], 200);
+            }
 
             throw new \Exception('Cotraseña o correo incorrecto.');
-
-        }catch(\Exception $e){
-
-            return response(['error'=> $e->getMessage() ],500);
-
         }
-
+        catch(\Exception $e) {
+            return response([ 'error'=> $e->getMessage() ],500);
+        }
     }
 
-    private function guzz ()
+    public function logout( Request $request )
     {
+        session()->flush();
 
+        Auth::logout();
 
+        return redirect()->to('/');
     }
 }

@@ -199,8 +199,6 @@ export default {
             } else {
                 return "https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg";
             }
-
-
         },
     },
     mounted() {

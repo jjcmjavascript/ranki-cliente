@@ -39,10 +39,10 @@
                            {{strtoupper(Auth::user()->nombre)}}
                        </div>
                        <ul>
-                           <li><a href="{{route('cliente.perfil')}}"> Perfil</a></li>
+                           <li><a href="{{route('usuario.perfil')}}"> Perfil</a></li>
                            <li><a href="dashboard-add-listing.html"> Mis Publicaciones</a></li>
                            <li><a href="dashboard-bookings.html">  Favoritos  </a></li>
-                           <li><a href="{{route('cliente.salir')}}">Salir</a></li>
+                           <li><a href="{{route('usuario.salir')}}">Salir</a></li>
                        </ul>
                    </div>
                    @endauth

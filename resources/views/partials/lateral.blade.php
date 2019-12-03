@@ -23,7 +23,7 @@
                           {{Auth::user()->nombre}}
                         </h3>
                     </div>
-                    <a href="{{route('cliente.salir')}}" class="log-out-btn color-bg">Salir <i class="far fa-sign-out"></i></a>
+                    <a href="{{route('usuario.salir')}}" class="log-out-btn color-bg">Salir <i class="far fa-sign-out"></i></a>
                 </div>
             </div>
             <!--dasboard-sidebar end-->

@@ -169,6 +169,12 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
+         * Custom Providers...
+         */
+
+        App\Providers\HelperServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -192,6 +198,7 @@ return [
     'aliases' => [
 
         'App' => Illuminate\Support\Facades\App::class,
+        'ApiHelper' => App\Helpers\ApiHelper::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
