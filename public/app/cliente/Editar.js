@@ -137,12 +137,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      url: this.$root.base_url + "dashboard",
-      url_perfil: this.$root.base_url + "dashboard/perfil",
+      file: null,
+      url: this.$root.base_url + 'perfil',
       pass: {
         actual: null,
         nueva: null,
@@ -187,7 +186,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     urlImagen: function urlImagen() {
       if (this.usuario && this.usuario._avatar && this.usuario._avatar.length > 0) {
-        document.querySelector("#imagen_header").src = "/storage/".concat(this.usuario._avatar[this.usuario._avatar.length - 1].ruta);
         return "/storage/".concat(this.usuario._avatar[this.usuario._avatar.length - 1].ruta);
       } else if (this.usuario && this.usuario.avatar) {
         return this.usuario.avatar;
@@ -197,6 +195,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    document.querySelector('html').style['overflow-y'] = 'auto';
     this.iniciar();
   },
   methods: {
@@ -221,7 +220,7 @@ __webpack_require__.r(__webpack_exports__);
         this.pass.actual && request.append("actual", this.pass.actual);
         this.pass.nueva && request.append("password", this.pass.nueva);
         this.pass.confirm && request.append("password_confirmation", this.pass.confirm);
-        axios.post(this.url_perfil + "/clave", request).then(function (res) {
+        axios.post(this.url + "/clave", request).then(function (res) {
           _this.stop();
 
           _this.alerta("success", "Exito", "Tu clave fue modificada!");
@@ -257,7 +256,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.stop();
       });
     },
-    registrar: function registrar() {
+    editar: function editar() {
       var _this3 = this;
 
       if (this.all) {
@@ -272,12 +271,15 @@ __webpack_require__.r(__webpack_exports__);
         this.usuario.telefono_fijo && request.append("telefono_fijo", this.usuario.telefono_fijo);
         this.usuario.telefono_movil && request.append("telefono_movil", this.usuario.telefono_movil);
         this.usuario.email && request.append("email", this.usuario.email);
-        axios.post(this.url_perfil, request).then(function (res) {
+        this.file && request.append('avatar', this.file);
+        axios.post(this.url + '/guardar', request).then(function (res) {
           _this3.stop();
 
           _this3.alerta("success", "Exito", "Tus datos fueron modificados!");
 
           _this3.usuario = res.data.usuario;
+          document.querySelector("#imagen_header").src = _this3.urlImagen;
+          document.querySelector("#imagen_lateral").src = _this3.urlImagen;
         })["catch"](function (err) {
           _this3.stop();
 
@@ -285,52 +287,23 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    cambiarImagen: function cambiarImagen() {
-      var _this4 = this;
+    cambiarImagen: function cambiarImagen(event) {
+      this.file = null;
 
-      this.$swal.fire({
-        title: "Seleccione su imagen",
-        html: '<input type="file" id="envioAvatar" class="upload" accept=".png, .jpg, .jpeg"><br/><p>Tamaño maximo 2MB</p>',
-        onOpen: function onOpen() {
-          document.querySelector(".swal2-confirm").setAttribute("disabled", "disabled");
-          document.querySelector("#envioAvatar").addEventListener("change", function (e) {
-            if (e.target.files[0]) {
-              document.querySelector(".swal2-confirm").removeAttribute("disabled");
-            } else {
-              document.querySelector(".swal2-confirm").setAttribute("disabled", "disabled");
-            }
-          });
-        },
-        preConfirm: function preConfirm() {
-          var file = document.querySelector("#envioAvatar");
-          return file ? file : null;
-        }
-      }).then(function (res) {
-        if (res.value) {
-          if (res.value.files[0] && _this4.validarFormato(res.value.files[0])) {
-            if (!_this4.validarSize(res.value.files[0])) {
-              throw Error('El peso del archivo excede el maximo permitido');
-            }
-
-            _this4.start();
-
-            var request = new FormData();
-            request.append('id', _this4.usuario.id);
-            request.append('imagen', res.value.files[0]);
-            axios.post("".concat(_this4.url_perfil, "/avatar"), request).then(function (res) {
-              _this4.stop();
-
-              _this4.usuario = res.data.usuario;
-            })["catch"](function (err) {
-              _this4.stop();
-
-              _this4.alerta('error', 'Ups...!', err);
-            });
-          } else {
-            _this4.alerta("error", "Ups...!", "La imagen que ingreso no es valida.");
+      try {
+        if (event.target.files[0]) {
+          if (!this.validarFormato(event.target.files[0])) {
+            throw Error("La imagen que ingreso no es valida.");
+          } else if (!this.validarSize(event.target.files[0])) {
+            throw Error('El peso del archivo excede el maximo permitido.');
           }
+
+          this.file = event.target.files[0];
         }
-      });
+      } catch (e) {
+        document.querySelector("input[type='file']").value = null;
+        this.alerta("error", "Ups...!", e);
+      }
     }
   }
 });
@@ -349,7 +322,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-ff450948] {\r\n  color: #ef5350;\n}\n@media (max-width: 576px) {\n.edit-profile-photo img[data-v-ff450948]{\r\n          width: 100% !important;\r\n          margin-left: 0px !important;\r\n          float: none !important;\n}\n}\n@media (min-width: 768px) {\n.button-send[data-v-ff450948] {\r\n position: absolute;\r\n top: 91%;\r\n width: 20%;\r\n left: 0%;\r\n border-radius: 0px;\r\n border: 1px solid silver;\r\n padding-top: 5px;\r\n background: #64b5f6;\r\n color: white;\r\n border-top-right-radius: 8px;\n}\n.button-send[data-v-ff450948]:hover {\r\n  background : #2196f3;\n}\n}\n.fa-picture-o[data-v-ff450948] {\r\n  margin: 0px;\r\n  padding: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.danger[data-v-ff450948] {\n    color: #ef5350;\n}\n@media (max-width: 576px) {}\n@media (min-width: 768px) {}\n.fa-picture-o[data-v-ff450948] {\n    margin: 0px;\n    padding: 0px;\n}\n", ""]);
 
 // exports
 
@@ -401,323 +374,342 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-xs-12 col-md-9" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-xs-12 col-md-3 col-md-offset-5" }, [
-      _c("div", { staticClass: "edit-profile-photo fl-wrap" }, [
-        _c("img", { staticClass: "respimg", attrs: { src: _vm.urlImagen } }),
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "dasboard-wrap fl-wrap" }, [
+      _c("div", { staticClass: "dashboard-content fl-wrap" }, [
+        _vm._m(0),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "button-send", on: { click: _vm.cambiarImagen } },
-          [_c("i", { staticClass: "fa fa-picture-o" })]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "profile-edit-container" }, [
-      _vm._m(1),
-      _vm._v(" "),
-      _c("div", { staticClass: "custom-form" }, [
-        _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.usuario.nombre,
-                expression: "usuario.nombre"
-              }
-            ],
-            attrs: { type: "text", placeholder: "Nombre" },
-            domProps: { value: _vm.usuario.nombre },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.usuario, "nombre", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(3),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.usuario.apellidos,
-                expression: "usuario.apellidos"
-              }
-            ],
-            attrs: { type: "text", placeholder: "Apellidos" },
-            domProps: { value: _vm.usuario.apellidos },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.usuario, "apellidos", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(4),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.usuario.email,
-                expression: "usuario.email"
-              }
-            ],
-            attrs: { type: "text", placeholder: "Correo" },
-            domProps: { value: _vm.usuario.email },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.usuario, "email", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(5),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.usuario.telefono_movil,
-                expression: "usuario.telefono_movil"
-              }
-            ],
-            staticClass: "numeros",
-            attrs: { type: "text", placeholder: "+9(123)987654" },
-            domProps: { value: _vm.usuario.telefono_movil },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.usuario, "telefono_movil", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(6),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.usuario.telefono_fijo,
-                expression: "usuario.telefono_fijo"
-              }
-            ],
-            staticClass: "numeros",
-            attrs: { type: "text", placeholder: "+9(123)987654" },
-            domProps: { value: _vm.usuario.telefono_fijo },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.usuario, "telefono_fijo", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
-          _vm._m(7),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.usuario.direccion,
-                expression: "usuario.direccion"
-              }
-            ],
-            attrs: { type: "text", placeholder: "Santiago" },
-            domProps: { value: _vm.usuario.direccion },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.usuario, "direccion", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn big-btn color-bg flat-btn",
-            attrs: { disabled: _vm.send },
-            on: {
-              click: function($event) {
-                return _vm.registrar()
-              }
-            }
-          },
-          [
-            _vm._v("\n        Guardar Cambios\n        "),
-            _c("i", { staticClass: "fa fa-angle-right" })
-          ]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    !_vm.usuario.provider_id
-      ? _c("div", { staticClass: "profile-edit-container" }, [
-          _vm._m(8),
-          _vm._v(" "),
-          _c("div", { staticClass: "custom-form no-icons" }, [
-            _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
-              _c("label", [_vm._v("Contraseña Actual")]),
+        _c("div", { staticClass: "profile-edit-container" }, [
+          _c("div", { staticClass: "custom-form" }, [
+            _c("div", { staticClass: "form-group col-xs-12" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
+              _vm._m(1),
               _vm._v(" "),
               _c("input", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.pass.actual,
-                    expression: "pass.actual"
+                    value: _vm.usuario.nombre,
+                    expression: "usuario.nombre"
                   }
                 ],
-                staticClass: "pass-input",
-                attrs: { type: "password" },
-                domProps: { value: _vm.pass.actual },
+                attrs: { type: "text", placeholder: "Nombre" },
+                domProps: { value: _vm.usuario.nombre },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.pass, "actual", $event.target.value)
+                    _vm.$set(_vm.usuario, "nombre", $event.target.value)
                   }
                 }
-              }),
-              _vm._v(" "),
-              _vm._m(9)
+              })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
-              _c("label", [_vm._v("Nueva Contraseña")]),
+            _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
+              _vm._m(2),
               _vm._v(" "),
               _c("input", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.pass.nueva,
-                    expression: "pass.nueva"
+                    value: _vm.usuario.apellidos,
+                    expression: "usuario.apellidos"
                   }
                 ],
-                staticClass: "pass-input",
-                attrs: { type: "password" },
-                domProps: { value: _vm.pass.nueva },
+                attrs: { type: "text", placeholder: "Apellidos" },
+                domProps: { value: _vm.usuario.apellidos },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.pass, "nueva", $event.target.value)
+                    _vm.$set(_vm.usuario, "apellidos", $event.target.value)
                   }
                 }
-              }),
-              _vm._v(" "),
-              _vm._m(10)
+              })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
-              _c("label", [_vm._v("Confirma")]),
+            _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
+              _vm._m(3),
               _vm._v(" "),
               _c("input", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.pass.confirm,
-                    expression: "pass.confirm"
+                    value: _vm.usuario.email,
+                    expression: "usuario.email"
                   }
                 ],
-                staticClass: "pass-input",
-                attrs: { type: "password" },
-                domProps: { value: _vm.pass.confirm },
+                attrs: { type: "text", placeholder: "Correo" },
+                domProps: { value: _vm.usuario.email },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.pass, "confirm", $event.target.value)
+                    _vm.$set(_vm.usuario, "email", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.usuario.telefono_movil,
+                    expression: "usuario.telefono_movil"
+                  }
+                ],
+                staticClass: "numeros",
+                attrs: { type: "text", placeholder: "+9(123)987654" },
+                domProps: { value: _vm.usuario.telefono_movil },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.usuario, "telefono_movil", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.usuario.telefono_fijo,
+                    expression: "usuario.telefono_fijo"
+                  }
+                ],
+                staticClass: "numeros",
+                attrs: { type: "text", placeholder: "+9(123)987654" },
+                domProps: { value: _vm.usuario.telefono_fijo },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.usuario, "telefono_fijo", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.usuario.direccion,
+                    expression: "usuario.direccion"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "Santiago" },
+                domProps: { value: _vm.usuario.direccion },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.usuario, "direccion", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
+              _vm._m(7),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "file", accept: ".jpeg, .jpg, .png" },
+                on: {
+                  change: function($event) {
+                    return _vm.cambiarImagen($event)
                   }
                 }
               }),
               _vm._v(" "),
-              _vm._m(11)
+              _c("p", [_vm._v("Tamaño maximo 2MB")])
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              [
-                _vm.pass.nueva != _vm.pass.confirm
-                  ? [
-                      _c("label", { staticClass: "danger" }, [
-                        _vm._v("Las contraseñas no coinciden")
-                      ])
-                    ]
-                  : _vm._e()
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn big-btn color-bg flat-btn",
-                attrs: {
-                  disabled:
-                    !_vm.pass.nueva || !_vm.pass.confirm || !_vm.pass.actual
+            _c("div", { staticClass: "col-xs-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn small-btn color-bg flat-btn",
+                  attrs: { disabled: _vm.send },
+                  on: {
+                    click: function($event) {
+                      return _vm.editar()
+                    }
+                  }
                 },
-                on: {
-                  click: function($event) {
-                    return _vm.guardarContrasena()
-                  }
-                }
-              },
-              [
-                _vm._v("\n        Guardar Cambios\n        "),
-                _c("i", { staticClass: "fa fa-angle-right" })
-              ]
-            )
-          ])
+                [
+                  _vm._v(
+                    "\n                            Guardar Cambios\n                        "
+                  )
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          !_vm.usuario.provider_id
+            ? _c("div", { staticClass: "profile-edit-container" }, [
+                _vm._m(8),
+                _vm._v(" "),
+                _c("div", { staticClass: "custom-form no-icons" }, [
+                  _c("div", { staticClass: "form-group col-xs-12" }, [
+                    _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
+                      _c("label", [_vm._v("Contraseña Actual")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.pass.actual,
+                            expression: "pass.actual"
+                          }
+                        ],
+                        staticClass: "pass-input",
+                        attrs: { type: "password" },
+                        domProps: { value: _vm.pass.actual },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.pass, "actual", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(9)
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
+                    _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
+                      _c("label", [_vm._v("Nueva Contraseña")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.pass.nueva,
+                            expression: "pass.nueva"
+                          }
+                        ],
+                        staticClass: "pass-input",
+                        attrs: { type: "password" },
+                        domProps: { value: _vm.pass.nueva },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.pass, "nueva", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(10)
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
+                    _c("div", { staticClass: "pass-input-wrap fl-wrap" }, [
+                      _c("label", [_vm._v("Confirma")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.pass.confirm,
+                            expression: "pass.confirm"
+                          }
+                        ],
+                        staticClass: "pass-input",
+                        attrs: { type: "password" },
+                        domProps: { value: _vm.pass.confirm },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.pass, "confirm", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(11)
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    [
+                      _vm.pass.nueva != _vm.pass.confirm
+                        ? [
+                            _c("label", { staticClass: "danger" }, [
+                              _vm._v("Las contraseñas no coinciden")
+                            ])
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn big-btn color-bg flat-btn",
+                      attrs: {
+                        disabled:
+                          !_vm.pass.nueva ||
+                          !_vm.pass.confirm ||
+                          !_vm.pass.actual
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.guardarContrasena()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Guardar Cambios\n                            "
+                      ),
+                      _c("i", { staticClass: "fa fa-angle-right" })
+                    ]
+                  )
+                ])
+              ])
+            : _vm._e()
         ])
-      : _vm._e()
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -725,22 +717,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile-edit-page-header" }, [
-      _c("h2", [_vm._v("Editar Perfil")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "breadcrumbs" }, [
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Principal")]),
-        _vm._v(" "),
-        _c("span", [_vm._v("Editar perfil")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile-edit-header fl-wrap" }, [
-      _c("h4", [_vm._v("My Account")])
+    return _c("div", { staticClass: "box-widget-item-header" }, [
+      _c("h3", [_vm._v(" Perfil")])
     ])
   },
   function() {
@@ -748,8 +726,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("\n          Nombre\n          "),
-      _c("i", { staticClass: "fa fa-picture-o" })
+      _vm._v(
+        "\n                            Nombre\n                            "
+      ),
+      _c("i", { staticClass: "fa fa-user" })
     ])
   },
   function() {
@@ -757,8 +737,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("\n          apellidos\n          "),
-      _c("i", { staticClass: "fa fa-picture-o" })
+      _vm._v(
+        "\n                            apellidos\n                            "
+      ),
+      _c("i", { staticClass: "fa fa-user" })
     ])
   },
   function() {
@@ -766,8 +748,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("\n          Correo\n          "),
-      _c("i", { staticClass: "fa fa-envelope-o" })
+      _vm._v(
+        "\n                            Correo\n                            "
+      ),
+      _c("i", { staticClass: "fa fa-envelope" })
     ])
   },
   function() {
@@ -775,7 +759,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("\n          Telefono Movil\n          "),
+      _vm._v(
+        "\n                            Telefono Movil\n                            "
+      ),
       _c("i", { staticClass: "fa fa-phone" })
     ])
   },
@@ -784,7 +770,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("\n          Telefono Fijo\n          "),
+      _vm._v(
+        "\n                            Telefono Fijo\n                            "
+      ),
       _c("i", { staticClass: "fa fa-phone" })
     ])
   },
@@ -793,8 +781,21 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("\n          Direccion\n          "),
+      _vm._v(
+        "\n                            Direccion\n                            "
+      ),
       _c("i", { staticClass: "fa fa-map-marker" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v(
+        "\n                            Avatar\n                            "
+      ),
+      _c("i", { staticClass: "fa fa-file-image" })
     ])
   },
   function() {

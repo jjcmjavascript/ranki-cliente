@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/cliente/Dashboard":"app/cliente/Dashboard","app/cliente/Editar":"app/cliente/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/cliente/Editar":"app/cliente/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -78946,13 +78946,7 @@ var routes = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var routes = [{
-  path: '/dashboard',
-  name: '/dashboard',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | app/cliente/Dashboard */ "app/cliente/Dashboard").then(__webpack_require__.bind(null, /*! ../app/Cliente/Dashboard */ "./resources/js/app/Cliente/Dashboard.vue"));
-  }
-}, {
-  path: '/dashboard/perfil',
+  path: '/perfil',
   name: '/perfil',
   component: function component() {
     return __webpack_require__.e(/*! import() | app/cliente/Editar */ "app/cliente/Editar").then(__webpack_require__.bind(null, /*! ../app/Cliente/Editar */ "./resources/js/app/Cliente/Editar.vue"));
@@ -78999,8 +78993,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\jmspa-m2-cliente\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\jmspa-m2-cliente\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/jmspa-m2/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/jmspa-m2/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

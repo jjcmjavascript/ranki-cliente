@@ -49,7 +49,6 @@ const router = new VueRouter({
 })
 
 
-
 // CONFIGURACIÓN VUE
 const app = new Vue({
     el: '#custom-app',
@@ -245,7 +244,7 @@ const app = new Vue({
                 mensaje.forEach(e=>{
                     temp+=`<li>${e}</li>`;
                 })
-                mensaje = temp+'</ul>'; 
+                mensaje = temp+'</ul>';
             }
             // Swal.fire(
             //     titulo,
@@ -258,7 +257,7 @@ const app = new Vue({
                 html : mensaje,
                 type: tipo,
             })
-            
+
         },
         /**
          * Devuelve un array con todas las respuestas obtenidas

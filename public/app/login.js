@@ -955,6 +955,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1100,7 +1101,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-3d6ea3cd] {\r\n  border: 1px solid #ef5350 !important;\n}\n.n-padding[data-v-3d6ea3cd] {\r\n  padding: 0px;\n}\nli[data-v-3d6ea3cd] {\r\n  text-align: left;\r\n  padding-bottom: 3px;\n}\nlabel[data-v-3d6ea3cd] {\r\n  color: #ef5350;\n}\n.google-log[data-v-3d6ea3cd] {\r\n  background: #f44336;\n}\n.google-log[data-v-3d6ea3cd]:hover{\r\n  background: #ef5350;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.danger[data-v-3d6ea3cd] {\n  border: 1px solid #ef5350 !important;\n}\n.n-padding[data-v-3d6ea3cd] {\n  padding: 0px;\n}\nli[data-v-3d6ea3cd] {\n  text-align: left;\n  padding-bottom: 3px;\n}\nlabel[data-v-3d6ea3cd] {\n  color: #ef5350;\n}\n.google-log[data-v-3d6ea3cd] {\n  background: #f44336;\n}\n.google-log[data-v-3d6ea3cd]:hover{\n  background: #ef5350;\n}\n\n", ""]);
 
 // exports
 
@@ -2380,7 +2381,7 @@ var staticRenderFns = [
                       _vm._v(" "),
                       _c("span", { staticClass: "clearfix" }),
                       _vm._v(
-                        "\r\n                                                Recommended\r\n                                            "
+                        "\n                                                Recommended\n                                            "
                       )
                     ])
                   ])
@@ -2987,7 +2988,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "main-register-wrap modal" }, [
-    _c("div", { staticClass: "main-overlay" }),
+    _c("div", { staticClass: "reg-overlay" }),
     _vm._v(" "),
     _c("div", { staticClass: "main-register-holder" }, [
       _c("div", { staticClass: "main-register fl-wrap" }, [
@@ -2995,29 +2996,11 @@ var render = function() {
         _vm._v(" "),
         _vm._m(1),
         _vm._v(" "),
-        _c("div", { staticClass: "soc-log fl-wrap" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "google-log",
-              attrs: { href: _vm.$root.base_url + "/auth/google" }
-            },
-            [
-              _c("i", { staticClass: "fa fa-google" }),
-              _vm._v(" Inicia con Google\n        ")
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
         _c("div", { attrs: { id: "tabs-container" } }, [
-          _vm._m(4),
-          _vm._v(" "),
           _c("div", { staticClass: "tab" }, [
             _c("div", { staticClass: "tab-content", attrs: { id: "tab-1" } }, [
+              _vm._m(2),
+              _vm._v(" "),
               _c("div", { staticClass: "custom-form" }, [
                 _c(
                   "form",
@@ -3161,7 +3144,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(5)
+                _vm._m(3)
               ])
             ]),
             _vm._v(" "),
@@ -3170,6 +3153,8 @@ var render = function() {
                 "div",
                 { staticClass: "tab-content", attrs: { id: "tab-2" } },
                 [
+                  _vm._m(4),
+                  _vm._v(" "),
                   _c("div", { staticClass: "custom-form" }, [
                     _c("form", { staticClass: "main-register-form" }, [
                       _c(
@@ -3440,6 +3425,26 @@ var render = function() {
                 ]
               )
             ])
+          ]),
+          _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
+          _c("div", { staticClass: "soc-log fl-wrap" }, [
+            _c("p", [_vm._v("Inicia o Registrate con tus redes.")]),
+            _vm._v(" "),
+            _vm._m(6),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "google-log",
+                attrs: { href: _vm.$root.base_url + "/auth/google" }
+              },
+              [
+                _c("i", { staticClass: "fab fa-google" }),
+                _vm._v(" Inicia con Google\n                    ")
+              ]
+            )
           ])
         ])
       ])
@@ -3451,37 +3456,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "close-reg" }, [
-      _c("i", { staticClass: "fa fa-times" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", [
-      _vm._v("\n        Inicia\n        "),
-      _c("span", [
-        _vm._v("\n          en\n          "),
-        _c("strong", [_vm._v("Metro Cuadrado")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "facebook-log", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fa fa-facebook-official" }),
-      _vm._v("Inicia con Facebook\n        ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "log-separator fl-wrap" }, [
-      _c("span", [_vm._v("O")])
+    return _c("div", { staticClass: "close-reg color-bg" }, [
+      _c("i", { staticClass: "fal fa-times" })
     ])
   },
   function() {
@@ -3490,10 +3466,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("ul", { staticClass: "tabs-menu" }, [
       _c("li", { staticClass: "current" }, [
-        _c("a", { attrs: { href: "#tab-1" } }, [_vm._v("Iniciar")])
+        _c("a", { attrs: { href: "#tab-1" } }, [
+          _c("i", { staticClass: "fal fa-sign-in-alt" }),
+          _vm._v(" Iniciar")
+        ])
       ]),
       _vm._v(" "),
-      _c("li", [_c("a", { attrs: { href: "#tab-2" } }, [_vm._v("Registrar")])])
+      _c("li", [
+        _c("a", { attrs: { href: "#tab-2" } }, [
+          _c("i", { staticClass: "fal fa-user-plus" }),
+          _vm._v(" Registrar")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", [
+      _vm._v("\n                        Inicia\n                        "),
+      _c("span", [
+        _vm._v("\n                          en\n                          "),
+        _c("strong", [_vm._v("Metro Cuadrado")])
+      ])
     ])
   },
   function() {
@@ -3502,6 +3498,32 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "lost_password" }, [
       _c("a", { attrs: { href: "#" } }, [_vm._v("Olvido su contraseña?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", [
+      _vm._v("Registrate "),
+      _c("span", [_vm._v("En"), _c("strong", [_vm._v("  METRO CUADRADO")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "log-separator fl-wrap" }, [
+      _c("span", [_vm._v("or")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "facebook-log", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fab fa-facebook-f" }),
+      _vm._v("Connect with Facebook")
     ])
   }
 ]
