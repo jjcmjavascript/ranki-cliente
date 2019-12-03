@@ -141,8 +141,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       file: null,
-      url: this.$root.base_url + "dashboard",
-      url_perfil: this.$root.base_url + "dashboard/perfil",
+      url: this.$root.base_url + 'perfil',
       pass: {
         actual: null,
         nueva: null,
@@ -221,7 +220,7 @@ __webpack_require__.r(__webpack_exports__);
         this.pass.actual && request.append("actual", this.pass.actual);
         this.pass.nueva && request.append("password", this.pass.nueva);
         this.pass.confirm && request.append("password_confirmation", this.pass.confirm);
-        axios.post(this.url_perfil + "/clave", request).then(function (res) {
+        axios.post(this.url + "/clave", request).then(function (res) {
           _this.stop();
 
           _this.alerta("success", "Exito", "Tu clave fue modificada!");
@@ -257,7 +256,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.stop();
       });
     },
-    registrar: function registrar() {
+    editar: function editar() {
       var _this3 = this;
 
       if (this.all) {
@@ -272,8 +271,8 @@ __webpack_require__.r(__webpack_exports__);
         this.usuario.telefono_fijo && request.append("telefono_fijo", this.usuario.telefono_fijo);
         this.usuario.telefono_movil && request.append("telefono_movil", this.usuario.telefono_movil);
         this.usuario.email && request.append("email", this.usuario.email);
-        this.file && request.append('imagen', this.file);
-        axios.post(this.url_perfil, request).then(function (res) {
+        this.file && request.append('avatar', this.file);
+        axios.post(this.url + '/guardar', request).then(function (res) {
           _this3.stop();
 
           _this3.alerta("success", "Exito", "Tus datos fueron modificados!");
@@ -560,7 +559,7 @@ var render = function() {
                   attrs: { disabled: _vm.send },
                   on: {
                     click: function($event) {
-                      return _vm.registrar()
+                      return _vm.editar()
                     }
                   }
                 },

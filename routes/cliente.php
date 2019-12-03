@@ -1,24 +1,27 @@
 <?php
 
-Route::prefix('inicio')->middleware('auth')->namespace('Usuario')->group(function(){
-    Route::get('/', function () {  return view('vue'); });
+//publica
+Route::namespace('Usuario')->name('usuario')->group(function(){
 
-    Route::get('logout', 'UsuarioController@logout')->name('cliente.salir');
+  Route::post('iniciar','UsuarioController@login')->name('.login');
+  Route::post('crear','UsuarioController@crear')->name('.crear');
 
 });
-Route::prefix('dashboard')->middleware('auth')->namespace('Usuario')->group(function(){
 
-    Route::get('/', 'UsuarioController@vue')->name('cliente.inicio');
-    Route::post('/','UsuarioController@iniciar')->name('cliente.inicio');
+Route::prefix('perfil')->name('cliente')->middleware('auth')->namespace('Usuario')->group(function(){
 
-    Route::get('perfil','UsuarioController@vue')->name('cliente.perfil');
-    Route::post('perfil','UsuarioController@editar')->name('cliente.perfi');
-    Route::post('perfil/clave','UsuarioController@editar_clave')->name('cliente.perfi');
-    Route::post('perfil/avatar', 'UsuarioController@avatar')->name('cliente.avatar');
+    Route::get('/','UsuarioController@vue')->name('.perfil');
+    Route::post('/','UsuarioController@editar')->name('.editar');
 
-    Route::get('favoritos','UsuarioController@vue')->name('cliente.favoritos');
-    Route::post('favoritos','UsuarioController@vue')->name('cliente.favoritos');
+    Route::post('guardar','UsuarioController@guardar')->name('.guardar');
 
-    Route::get('logout', 'UsuarioController@logout')->name('cliente.salir');
+    Route::post('clave','UsuarioController@editar_clave')->name('.editar_clave');
+
+    // Route::post('avatar', 'UsuarioController@avatar')->name('.avatar');
+
+    Route::get('favoritos','UsuarioController@vue')->name('.favoritos');
+    Route::post('favoritos','UsuarioController@vue')->name('.favoritos');
+
+    Route::get('logout', 'UsuarioController@logout')->name('.salir');
 
 });

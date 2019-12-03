@@ -14,8 +14,6 @@
 // Auth::routes();
 
 Route::get('/','HomeController@index')->name('inicio');
-Route::post('crear','HomeController@crear');
-Route::post('iniciar','HomeController@login');
 
 // SOCIAL LOGIN
 

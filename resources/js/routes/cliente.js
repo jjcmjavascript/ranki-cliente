@@ -1,12 +1,8 @@
 const routes= [
 
+
     {
-        path: '/dashboard',
-        name: '/dashboard',
-        component : ()=> import(/* webpackChunkName: 'app/cliente/Dashboard'*/'../app/Cliente/Dashboard'),
-    },
-    {
-        path: '/dashboard/perfil',
+        path: '/perfil',
         name: '/perfil',
         component : ()=> import(/* webpackChunkName: 'app/cliente/Editar'*/'../app/Cliente/Editar'),
     },

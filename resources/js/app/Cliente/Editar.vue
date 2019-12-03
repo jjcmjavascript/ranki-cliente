@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-xs-12">
 
-                        <button class="btn small-btn color-bg flat-btn" :disabled="send" @click="registrar()">
+                        <button class="btn small-btn color-bg flat-btn" :disabled="send" @click="editar()">
                             Guardar Cambios
                         </button>
                     </div>
@@ -131,8 +131,7 @@ export default {
     data() {
         return {
             file: null,
-            url: this.$root.base_url + "dashboard",
-            url_perfil: this.$root.base_url + "dashboard/perfil",
+            url: this.$root.base_url + 'perfil',
             pass: {
                 actual: null,
                 nueva: null,
@@ -238,7 +237,7 @@ export default {
                     request.append("password_confirmation", this.pass.confirm);
 
                 axios
-                    .post(this.url_perfil + "/clave", request)
+                    .post(this.url + "/clave", request)
                     .then(res => {
                         this.stop();
                         this.alerta("success", "Exito", "Tu clave fue modificada!");
@@ -269,7 +268,6 @@ export default {
 
         iniciar() {
             this.start();
-
             axios
                 .post(this.url, this.usuario)
                 .then(res => {
@@ -281,7 +279,7 @@ export default {
                 });
         },
 
-        registrar() {
+        editar() {
             if (this.all) {
                 this.alerta("error", "Ups... algunos datos son incorrectos!");
             } else {
@@ -298,10 +296,10 @@ export default {
                 this.usuario.telefono_movil &&
                     request.append("telefono_movil", this.usuario.telefono_movil);
                 this.usuario.email && request.append("email", this.usuario.email);
-                this.file && request.append('imagen', this.file);
+                this.file && request.append('avatar', this.file);
 
                 axios
-                    .post(this.url_perfil, request)
+                    .post(this.url + '/guardar', request)
                     .then(res => {
                         this.stop();
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");

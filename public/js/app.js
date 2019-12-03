@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/cliente/Dashboard":"app/cliente/Dashboard","app/cliente/Editar":"app/cliente/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/cliente/Editar":"app/cliente/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -78221,7 +78221,7 @@ var app = new Vue({
   router: router,
   data: function data() {
     return {
-      base_url: "http://jmspa-m2.com/",
+      base_url: "http://m2.com/",
       menu: [],
       user: {}
     };
@@ -78946,13 +78946,7 @@ var routes = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var routes = [{
-  path: '/dashboard',
-  name: '/dashboard',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | app/cliente/Dashboard */ "app/cliente/Dashboard").then(__webpack_require__.bind(null, /*! ../app/Cliente/Dashboard */ "./resources/js/app/Cliente/Dashboard.vue"));
-  }
-}, {
-  path: '/dashboard/perfil',
+  path: '/perfil',
   name: '/perfil',
   component: function component() {
     return __webpack_require__.e(/*! import() | app/cliente/Editar */ "app/cliente/Editar").then(__webpack_require__.bind(null, /*! ../app/Cliente/Editar */ "./resources/js/app/Cliente/Editar.vue"));
