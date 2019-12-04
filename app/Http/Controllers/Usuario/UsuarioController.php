@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Usuario;
 use DB;
 use Auth;
 use Storage;
+use ApiHelper;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Helpers\ApiHelper;
 use App\Models\Sistema\Usuario;
 use App\Models\Comun\Imagen;
 
@@ -95,49 +95,49 @@ class UsuarioController extends Controller
         }
     } 
 
-    // public function crear(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'nombre' => 'required|string',
-    //         'apellidos' => 'required|string',
-    //         'rut' => 'required|string',
-    //         'telefono_movil' => 'sometimes|string',
-    //         'direccion' => 'sometimes|string',
-    //         'email' => 'required|email:rfc,dns',
-    //         // 'perfil_id' => 'required|exists:perfiles,id',
-    //         'password' => 'required|confirmed|min:8',
-    //     ]);
-    //
-    //     $cliente = Usuario::where('email', $request->email)
-    //         ->orWhere('rut', $request->rut)
-    //         ->first();
-    //
-    //     try {
-    //
-    //         DB::beginTransaction();
-    //
-    //         if($cliente) throw new \Exception('El usuario ya se encuentra registrado.');
-    //
-    //         $cliente = new Usuario;
-    //         $cliente->fill($request->except('clave'));
-    //         $cliente->password = Hash::make($request->password);
-    //         $cliente->save();
-    //
-    //         DB::commit();
-    //
-    //         Auth::attempt( $request->only('email', 'password') );
-    //
-    //         return response(['url'=>env('APP_URL').'inicio'],200);
-    //
-    //     }catch(\Exception $e){
-    //
-    //         DB::rollback();
-    //
-    //         return response([ 'error'=>$e->getMessage() ],500);
-    //
-    //     }
-    //
-    // }
+    public function crear(Request $request)
+    {
+        $this->validate($request, [
+            'nombre' => 'required|string',
+            'apellidos' => 'required|string',
+            'rut' => 'required|string',
+            'telefono_movil' => 'sometimes|string',
+            'direccion' => 'sometimes|string',
+            'email' => 'required|email:rfc,dns',
+            // 'perfil_id' => 'required|exists:perfiles,id',
+            'password' => 'required|confirmed|min:8',
+        ]);
+    
+        $cliente = Usuario::where('email', $request->email)
+            ->orWhere('rut', $request->rut)
+            ->first();
+    
+        try {
+    
+            DB::beginTransaction();
+    
+            if($cliente) throw new \Exception('El usuario ya se encuentra registrado.');
+    
+            $cliente = new Usuario;
+            $cliente->fill($request->except('clave'));
+            $cliente->password = Hash::make($request->password);
+            $cliente->save();
+    
+            DB::commit();
+    
+            Auth::attempt( $request->only('email', 'password') );
+    
+            return response(['url'=> url()->previous() ],200);
+    
+        }catch(\Exception $e){
+    
+            DB::rollback();
+    
+            return response([ 'error'=>$e->getMessage() ],500);
+    
+        }
+    
+    }
 
     public function login( Request $request )
     {

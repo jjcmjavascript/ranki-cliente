@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use Socialite;
+use ApiHelper;
 
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Helpers\ApiHelper;
 use App\Models\Sistema\Usuario;
 
 class SocialAuthController extends Controller
@@ -50,9 +50,11 @@ class SocialAuthController extends Controller
             $ruta = 'oauth/token';
             
             $form_params = [
-                'grant_type' => 'client_credentials',
+                'grant_type' => 'social',
                 'client_id' => env('API_CLIENT_ID'),
                 'client_secret' => env('API_CLIENT_SECRET'),
+                'provider' => Auth::user()->provider, // provider
+                'access_token' => Auth::user()->provider_id, // provider_id
             ];
             
             $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
