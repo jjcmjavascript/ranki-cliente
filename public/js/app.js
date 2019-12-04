@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/cliente/Editar":"app/cliente/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Usuario/Editar":"app/Usuario/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -78871,8 +78871,8 @@ Vue.filter('nl2br', function (str, is_xhtml) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_login_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../routes/login.js */ "./resources/js/routes/login.js");
-/* harmony import */ var _routes_cliente_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes/cliente.js */ "./resources/js/routes/cliente.js");
-/* harmony import */ var _routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../routes/Sistema.js */ "./resources/js/routes/Sistema.js");
+/* harmony import */ var _routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes/usuario.js */ "./resources/js/routes/usuario.js");
+/* harmony import */ var _routes_sistema_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../routes/sistema.js */ "./resources/js/routes/sistema.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -78884,7 +78884,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
-var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_cliente_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__["default"]));
+var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_sistema_js__WEBPACK_IMPORTED_MODULE_2__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (baseRoutes);
 
 /***/ }),
@@ -78916,9 +78916,28 @@ window.swal = Swal.mixin({
 
 /***/ }),
 
-/***/ "./resources/js/routes/Sistema.js":
+/***/ "./resources/js/routes/login.js":
+/*!**************************************!*\
+  !*** ./resources/js/routes/login.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var routes = [{
+  path: '/',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | app/login */ "app/login").then(__webpack_require__.bind(null, /*! ../app/Home */ "./resources/js/app/Home.vue"));
+  }
+}];
+/* harmony default export */ __webpack_exports__["default"] = (routes);
+
+/***/ }),
+
+/***/ "./resources/js/routes/sistema.js":
 /*!****************************************!*\
-  !*** ./resources/js/routes/Sistema.js ***!
+  !*** ./resources/js/routes/sistema.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -78936,9 +78955,9 @@ var routes = [{
 
 /***/ }),
 
-/***/ "./resources/js/routes/cliente.js":
+/***/ "./resources/js/routes/usuario.js":
 /*!****************************************!*\
-  !*** ./resources/js/routes/cliente.js ***!
+  !*** ./resources/js/routes/usuario.js ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -78949,26 +78968,7 @@ var routes = [{
   path: '/perfil',
   name: '/perfil',
   component: function component() {
-    return __webpack_require__.e(/*! import() | app/cliente/Editar */ "app/cliente/Editar").then(__webpack_require__.bind(null, /*! ../app/Cliente/Editar */ "./resources/js/app/Cliente/Editar.vue"));
-  }
-}];
-/* harmony default export */ __webpack_exports__["default"] = (routes);
-
-/***/ }),
-
-/***/ "./resources/js/routes/login.js":
-/*!**************************************!*\
-  !*** ./resources/js/routes/login.js ***!
-  \**************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var routes = [{
-  path: '/',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | app/login */ "app/login").then(__webpack_require__.bind(null, /*! ../app/Home */ "./resources/js/app/Home.vue"));
+    return __webpack_require__.e(/*! import() | app/Usuario/Editar */ "app/Usuario/Editar").then(__webpack_require__.bind(null, /*! ../app/Usuario/Editar */ "./resources/js/app/Usuario/Editar.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
@@ -78993,8 +78993,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/jmspa-m2/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/jmspa-m2/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\jmspa-m2-cliente\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\jmspa-m2-cliente\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

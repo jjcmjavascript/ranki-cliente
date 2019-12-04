@@ -44,23 +44,26 @@ class SocialAuthController extends Controller
     // Login y redirección
     public function authAndRedirect($user)
     {
-        Auth::login($user);
+        try {    
+            Auth::login($user);      
 
-        $ruta = 'oauth/token';
+            $ruta = 'oauth/token';
+            
+            $form_params = [
+                'grant_type' => 'client_credentials',
+                'client_id' => env('API_CLIENT_ID'),
+                'client_secret' => env('API_CLIENT_SECRET'),
+            ];
+            
+            $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
 
-        $form_params = [
-            'grant_type' => 'password',
-            'client_id' => env('API_CLIENT_ID'),
-            'client_secret' => env('API_CLIENT_SECRET'),
-            'username' =>Auth::user()->email,
-            'password'=> Auth::user()->password,
-        ];
-        
-        $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
+            // SET API SESSION WITH CREDENTIALS
+            session(['api' => (object)$response]);
 
-        // SET API SESSION WITH CREDENTIALS
-        session(['api' => (object)$response]);
-
-        return response([ 'url' => url()->previous() ], 200);
+            return \Redirect::back();
+        }
+        catch(\Exception $e) {
+            return response([ 'error'=> $e->getMessage() ],500);
+        }
     }
 }
