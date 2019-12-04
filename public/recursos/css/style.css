@@ -8829,10 +8829,10 @@ section.hero-section  {
 /* modificaciones */
 
 /* header */
-.show-search-button
+/* .show-search-button
 {
   border-right : 0px;
-}
+} */
 /* alertas swal */
 .swal2-container {
   background: rgba(0.0.0.0,6) !important;
@@ -8844,7 +8844,7 @@ section.hero-section  {
  	background: rgba(0,0,0,0.6);
 
 }
-.main-header{
+/* .main-header{
   background: #1565c0 !important;
   height: 70px;
   padding-top: 5px;
@@ -8852,7 +8852,7 @@ section.hero-section  {
 }
 #wrapper{
   padding-top: 70px;
-}
+} */
 .accordion a.toggle.act-accordion, .banner-wdget-content a, .box-image-widget-media a:hover,
 .rooms-media-btn-item, .sw-btn, .bt n:hover, .more-photos-button, .box-item a.gal-link:hover, .dasboard-sidebar-content,
 .tfp-det-btn:hover, .color3-bg, .team-social, .text-carousel-wrap .sw-btn:hover,
