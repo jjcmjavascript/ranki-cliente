@@ -3468,14 +3468,14 @@ var staticRenderFns = [
       _c("li", { staticClass: "current" }, [
         _c("a", { attrs: { href: "#tab-1" } }, [
           _c("i", { staticClass: "fal fa-sign-in-alt" }),
-          _vm._v(" Iniciar")
+          _vm._v(" Registrar ")
         ])
       ]),
       _vm._v(" "),
       _c("li", [
         _c("a", { attrs: { href: "#tab-2" } }, [
           _c("i", { staticClass: "fal fa-user-plus" }),
-          _vm._v(" Registrar")
+          _vm._v(" Iniciar")
         ])
       ])
     ])
@@ -3485,7 +3485,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h3", [
-      _vm._v("\n                        Inicia\n                        "),
+      _vm._v("\n                        REGISTRATE\n                        "),
       _c("span", [
         _vm._v("\n                          en\n                          "),
         _c("strong", [_vm._v("Metro Cuadrado")])
@@ -3505,8 +3505,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h3", [
-      _vm._v("Registrate "),
-      _c("span", [_vm._v("En"), _c("strong", [_vm._v("  METRO CUADRADO")])])
+      _vm._v("INICIA "),
+      _c("span", [_vm._v("en"), _c("strong", [_vm._v("  METRO CUADRADO")])])
     ])
   },
   function() {

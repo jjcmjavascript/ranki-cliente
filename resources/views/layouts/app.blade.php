@@ -17,85 +17,9 @@
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/plugins.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/style.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/color.css')}}">
-    <style >
+    <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/custom.css')}}">
 
-    @media screen and (max-width: 772px) {
-      /* boton de inicio registro */
-      .show-reg-form {
-        display: none;
-      }
 
-      .main-menu{
-        top: 0px;
-        padding: 15px 0px;
-        height: 100vh;
-        width: 80%;
-        background: rgba(255, 255, 255, 0.8);
-        color  : black;
-      }
-
-    }
-    .show-reg-form {
-        top: 9px;
-        font-size: 13px;
-        font-weight: bolder;
-    }
-    /* JM spa logo */
-    .logo-holder {
-      float: left;
-      position: absolute;
-      top: 2px;
-      height: 80px;
-    }
-    /* contenedor principal del header */
-    .main-header {
-      height: 80px;
-    }
-    /* contenedor segundario */
-    .header-top {
-        height: 80px;
-    }
-    /* menu principal en grande */
-    .nav-holder {
-        float: none !important;
-        position: relative !important;
-        left: auto;
-        right: 30px;
-        top: 17px;
-    }
-    .header-user-menu,.show-reg-form {
-        margin-right: 10px;
-    }
-    #wrapper {
-      padding-top: 60px;
-    }
-    .show-search-button {
-      border:none;
-    }
-    .show-search-button::before {
-      content: none;
-    }
-    .nav-button-wrap {
-      float: right;
-      top: 20px;
-      right: 10px;
-    }
-
-    .fa.fa-search {
-      color:
-      #4DB7FE;
-    }
-    .buscar {
-      color:  white;
-      font-size: 0.9rem;
-      margin-left: 13px;
-      cursor: pointer;
-    }
-    .buscar:hover {
-      text-shadow: 0px 0px 2px #4DB7FE; 
-    }
-
-    </style>
     <!-- <link type="text/css" rel="stylesheet" href="{{asset('css/custom.css')}}"> -->
 
 
@@ -116,10 +40,11 @@
     </div>
 
     @yield('script')
-
     <!-- ================== END PAGE LEVEL JS ================== -->
     <script type="text/javascript" src="{{asset('recursos/js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('recursos/js/plugins.js')}}"></script>
     <script type="text/javascript" src="{{asset('recursos/js/scripts.js')}}"></script>
+    <script type="text/javascript" src="{{asset('recursos/js/custom.js')}}"></script>
+
 </body>
 </html>

@@ -4,7 +4,7 @@ const routes= [
     {
         path: '/perfil',
         name: '/perfil',
-        component : ()=> import(/* webpackChunkName: 'app/cliente/Editar'*/'../app/Cliente/Editar'),
+        component : ()=> import(/* webpackChunkName: 'app/cliente/Editar'*/'../app/Usuario/Editar'),
     },
 ]
 

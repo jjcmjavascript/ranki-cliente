@@ -1,0 +1,112 @@
+  @media screen and (max-width: 480px) {
+
+  }
+
+  @media screen and (max-width: 768px) {
+
+      /* boton de inicio registro */
+      .show-reg-form {
+          display: none;
+      }
+
+      .main-menu {
+          top: 0px;
+          padding: 15px 0px;
+          height: 100vh;
+          width: 80%;
+          background: rgba(255, 255, 255, 0.8);
+          color: black;
+      }
+  }
+
+  .iniciar_sm {
+  text-align: center;
+  background: silver;
+  padding: 6px;
+  color:
+    white;
+    background: #42a5f5;
+    cursor: pointer;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    }
+  /* JM spa logo */
+  .logo-holder {
+      float: left;
+      position: absolute;
+      top: 2px;
+      height: 80px;
+  }
+
+  /* contenedor principal del header */
+  .main-header {
+      height: 80px;
+  }
+
+  .header-user-menu, .show-reg-form {
+      margin-right: 10px;
+  }
+
+  /*  */
+  .show-reg-form {
+      top: 9px;
+      font-size: 13px;
+      font-weight: bolder;
+  }
+
+  /* contenedor segundario */
+  .header-top {
+      height: 80px;
+  }
+
+  /* menu principal en grande */
+  .nav-holder {
+      float: none !important;
+      position: relative !important;
+      left: auto;
+      right: 30px;
+      top: 17px;
+  }
+
+  #wrapper {
+      padding-top: 60px;
+  }
+
+  .show-search-button {
+      border: none;
+  }
+
+  .show-search-button::before {
+      content: none;
+  }
+
+  .nav-button-wrap {
+      float: right;
+      top: 20px;
+      right: 10px;
+  }
+
+  .fa.fa-search {
+      color:
+          #4DB7FE;
+  }
+  .buscar {
+      color: white;
+      font-size: 0.9rem;
+      margin-left: 13px;
+      cursor: pointer;
+  }
+   .fa-search{
+     cursor: pointer;
+   }
+
+  .buscar:hover {
+      text-shadow: 0px 0px 2px #4DB7FE;
+  }
+
+  /* noton de inciar session en modal */
+  .soc-log a {
+      padding: none;
+      font-weight: bolder;
+      text-align: center;
+  }

@@ -78871,8 +78871,7 @@ Vue.filter('nl2br', function (str, is_xhtml) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_login_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../routes/login.js */ "./resources/js/routes/login.js");
-/* harmony import */ var _routes_cliente_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes/cliente.js */ "./resources/js/routes/cliente.js");
-/* harmony import */ var _routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../routes/Sistema.js */ "./resources/js/routes/Sistema.js");
+/* harmony import */ var _routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes/usuario.js */ "./resources/js/routes/usuario.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -78882,9 +78881,9 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 
+ // import sistema  from '../routes/sistema.js';
 
-
-var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_cliente_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__["default"]));
+var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (baseRoutes);
 
 /***/ }),
@@ -78916,46 +78915,6 @@ window.swal = Swal.mixin({
 
 /***/ }),
 
-/***/ "./resources/js/routes/Sistema.js":
-/*!****************************************!*\
-  !*** ./resources/js/routes/Sistema.js ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var routes = [{
-  path: '/inicio',
-  name: 'sistema',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../app/Sistema/index */ "./resources/js/app/Sistema/index.vue"));
-  }
-}];
-/* harmony default export */ __webpack_exports__["default"] = (routes);
-
-/***/ }),
-
-/***/ "./resources/js/routes/cliente.js":
-/*!****************************************!*\
-  !*** ./resources/js/routes/cliente.js ***!
-  \****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var routes = [{
-  path: '/perfil',
-  name: '/perfil',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | app/cliente/Editar */ "app/cliente/Editar").then(__webpack_require__.bind(null, /*! ../app/Cliente/Editar */ "./resources/js/app/Cliente/Editar.vue"));
-  }
-}];
-/* harmony default export */ __webpack_exports__["default"] = (routes);
-
-/***/ }),
-
 /***/ "./resources/js/routes/login.js":
 /*!**************************************!*\
   !*** ./resources/js/routes/login.js ***!
@@ -78969,6 +78928,26 @@ var routes = [{
   path: '/',
   component: function component() {
     return __webpack_require__.e(/*! import() | app/login */ "app/login").then(__webpack_require__.bind(null, /*! ../app/Home */ "./resources/js/app/Home.vue"));
+  }
+}];
+/* harmony default export */ __webpack_exports__["default"] = (routes);
+
+/***/ }),
+
+/***/ "./resources/js/routes/usuario.js":
+/*!****************************************!*\
+  !*** ./resources/js/routes/usuario.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var routes = [{
+  path: '/perfil',
+  name: '/perfil',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | app/cliente/Editar */ "app/cliente/Editar").then(__webpack_require__.bind(null, /*! ../app/Usuario/Editar */ "./resources/js/app/Usuario/Editar.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

@@ -6,8 +6,8 @@
           <div class="main-register fl-wrap">
               <div class="close-reg color-bg"><i class="fal fa-times"></i></div>
               <ul class="tabs-menu">
-                  <li class="current"><a href="#tab-1"><i class="fal fa-sign-in-alt"></i> Iniciar</a></li>
-                  <li><a href="#tab-2"><i class="fal fa-user-plus"></i> Registrar</a></li>
+                  <li class="current"><a href="#tab-1"><i class="fal fa-sign-in-alt"></i> Registrar </a></li>
+                  <li><a href="#tab-2"><i class="fal fa-user-plus"></i> Iniciar</a></li>
               </ul>
               <!--tabs -->
               <div id="tabs-container">
@@ -15,7 +15,7 @@
                       <!--tab -->
                       <div id="tab-1" class="tab-content">
                         <h3>
-                          Inicia
+                          REGISTRATE
                           <span>
                             en
                             <strong>Metro Cuadrado</strong>
@@ -65,7 +65,7 @@
                       <!--tab -->
                       <div class="tab">
                           <div id="tab-2" class="tab-content">
-                              <h3>Registrate <span>En<strong>&nbsp; METRO CUADRADO</strong></span></h3>
+                              <h3>INICIA <span>en<strong>&nbsp; METRO CUADRADO</strong></span></h3>
                               <div class="custom-form">
                                 <form class="main-register-form">
                                   <div>
