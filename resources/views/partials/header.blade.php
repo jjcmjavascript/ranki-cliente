@@ -4,7 +4,7 @@
     <div class="header-top fl-wrap">
         <div class="container">
             <div class="logo-holder">
-                <a href="index.html"><img src="{{asset('images/logos/logo.png')}}" alt=""></a>
+                <a href="{{route('inicio')}}"><img src="{{asset('images/logos/logo.png')}}" alt=""></a>
                   <span >
                     <i class="fa fa-search"></i>
                     <label class="buscar" onclick="buscar.open(event)">
@@ -12,70 +12,89 @@
                     </label>
                   </span>
             </div>
-
-
             <!-- MENU PRINCIPAL miniaturo-->
+            @guest
+              <div class="show-reg-form modal-open"><i class="fa fa-sign-in"></i>Iniciar</div>
+            @endguest
 
-            <div class="show-reg-form modal-open"><i class="fa fa-sign-in"></i>Iniciar</div>
-            <!-- <div class="header-user-menu">
-                <div class="header-user-name">
-                    <span><img src="images/avatar/1.jpg" alt=""></span>
-                    My account
-                </div>
-                <ul>
-                    <li><a href="dashboard-myprofile.html"> Edit profile</a></li>
-                    <li><a href="dashboard-add-listing.html"> Add Listing</a></li>
-                    <li><a href="dashboard-bookings.html">  Bookings  </a></li>
-                    <li><a href="dashboard-review.html"> Reviews </a></li>
-                    <li><a href="#">Log Out</a></li>
-                </ul>
-            <div>   -->
             <!-- MENU GRANDE  -->
             <div class="nav-holder main-menu">
                 <nav>
                     <ul>
-                      <li>
+                      @guest
+                      <li class="iniciar_sm_li">
                         <a onclick="registro.open(event)">
                           <div class="iniciar_sm">
-                            Iniciar<i class="fa fa-sign-in" aria-hidden="true"></i>
+                            Iniciar
                           </div>
-                          <!-- <div class="inciar_sm">
-                            <i class="fa fa-sign-in fa-2x"></i>
-                          </div> -->
                         </a>
                       </li>
-                      <hr>
+                      <hr class="iniciar_sm_li">
+                      @endguest
+                      @auth
+                      <li class="iniciar_sm_li">
+                        <a href="{{route('usuario.salir')}}">
+                          <div class="iniciar_sm">
+                            Salir
+                          </div>
+                        </a>
+                      </li>
+                      <li class="iniciar_sm_li">
+                        <a disabled="disabled">
+                          <div class="">
+                            BIENVENIDO : {{strtoupper(Auth::user()->nombre)}}
+                            <hr>
+                          </div>
+                        </a>
+                      </li>
+                      <hr class="iniciar_sm_li">
+                      @endauth
                         <li>
-                            <a href="#" class="act-link">Home <i class="fas fa-caret-down"></i></a>
+                            <a href="#" class="act-link">Principal <i class="fas fa-caret-down"></i></a>
                             <!--second level -->
                             <ul>
-                                <li><a href="index.html">Parallax Image</a></li>
-                                <li><a href="index2.html">Slider</a></li>
-                                <li><a href="index3.html">Video</a></li>
-                                <li><a href="index4.html">Slideshow</a></li>
+                                <li><a href="index.html">proximanente...</a></li>
                             </ul>
                             <!--second level end-->
                         </li>
                         <li>
-                            <a href="blog.html">News</a>
+                            <a href="blog.html">proximanente</a>
                         </li>
-
-                        <!-- <li>
-                          <a href="#" onclick="registro.open(event)">
-                            <span class="iniciar-sm"><i class="fa fa-sign-in"></i>Iniciar</span>
-                          </a>
-                        </li> -->
                     </ul>
                 </nav>
             </div>
-
             <div class="nav-button-wrap color-bg">
                 <div class="nav-button">
                     <span></span><span></span><span></span>
                 </div>
             </div>
+
+
+            @auth
+            <div class="header-user-menu">
+              <div class="header-user-name">
+                <span>
+                  @if(count(Auth::user()->_avatar) >0 )
+                   <img id="imagen_header" src="/storage/{{Auth::user()->_avatar[count(Auth::user()->_avatar)-1]->ruta}}" >
+                  @elseif(Auth::user()->avatar)
+                   <img id="imagen_header" src="{{Auth::user()->avatar}}" >
+                  @else
+                  <img id="imagen_header" src="https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg" >
+                  @endif
+                </span>
+                {{strtoupper(Auth::user()->nombre)}}
+              </div>
+              <ul>
+                <li><a href="{{route('usuario.perfil')}}"> Editar Perfil</a></li>
+                <li><a href="{{route('usuario.salir')}}">Salir</a></li>
+              </ul>
+              <div>
+              <div class="add_propiedad">
+                  Agregar  <i class="fa fa-plus"></i>
+              </div>
+            @endauth
         </div>
-    </div>
+
 
     <div class="header-search vis-search">
         <div class="container">

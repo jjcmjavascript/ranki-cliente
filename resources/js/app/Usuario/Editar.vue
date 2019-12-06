@@ -195,7 +195,9 @@ export default {
                 return `/storage/${this.usuario._avatar[ this.usuario._avatar.length -1 ].ruta}`;
 
             } else if (this.usuario && this.usuario.avatar) {
+
                 return this.usuario.avatar
+                
             } else {
                 return "https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg";
             }

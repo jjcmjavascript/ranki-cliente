@@ -15,7 +15,7 @@
                       <!--tab -->
                       <div id="tab-1" class="tab-content">
                         <h3>
-                          REGISTRATE
+                          INICIA
                           <span>
                             en
                             <strong>Metro Cuadrado</strong>
@@ -65,7 +65,7 @@
                       <!--tab -->
                       <div class="tab">
                           <div id="tab-2" class="tab-content">
-                              <h3>INICIA <span>en<strong>&nbsp; METRO CUADRADO</strong></span></h3>
+                              <h3>REGISTRATE <span>en<strong>&nbsp; METRO CUADRADO</strong></span></h3>
                               <div class="custom-form">
                                 <form class="main-register-form">
                                   <div>

@@ -3485,7 +3485,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h3", [
-      _vm._v("\n                        REGISTRATE\n                        "),
+      _vm._v("\n                        INICIA\n                        "),
       _c("span", [
         _vm._v("\n                          en\n                          "),
         _c("strong", [_vm._v("Metro Cuadrado")])
@@ -3505,7 +3505,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h3", [
-      _vm._v("INICIA "),
+      _vm._v("REGISTRATE "),
       _c("span", [_vm._v("en"), _c("strong", [_vm._v("  METRO CUADRADO")])])
     ])
   },
