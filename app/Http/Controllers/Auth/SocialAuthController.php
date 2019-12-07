@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use Socialite;
+use ApiHelper;
 
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Helpers\ApiHelper;
 use App\Models\Sistema\Usuario;
 
 class SocialAuthController extends Controller
@@ -44,23 +44,28 @@ class SocialAuthController extends Controller
     // Login y redirección
     public function authAndRedirect($user)
     {
-        Auth::login($user);
+        try {    
+            Auth::login($user);      
 
-        $ruta = 'oauth/token';
+            $ruta = 'oauth/token';
+            
+            $form_params = [
+                'grant_type' => 'social',
+                'client_id' => env('API_CLIENT_ID'),
+                'client_secret' => env('API_CLIENT_SECRET'),
+                'provider' => Auth::user()->provider, // provider
+                'access_token' => Auth::user()->provider_id, // provider_id
+            ];
+            
+            $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
 
-        $form_params = [
-            'grant_type' => 'password',
-            'client_id' => env('API_CLIENT_ID'),
-            'client_secret' => env('API_CLIENT_SECRET'),
-            'username' =>Auth::user()->email,
-            'password'=> Auth::user()->password,
-        ];
-        
-        $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
+            // SET API SESSION WITH CREDENTIALS
+            session(['api' => (object)$response]);
 
-        // SET API SESSION WITH CREDENTIALS
-        session(['api' => (object)$response]);
-
-        return response([ 'url' => url()->previous() ], 200);
+            return \Redirect::back();
+        }
+        catch(\Exception $e) {
+            return response([ 'error'=> $e->getMessage() ],500);
+        }
     }
 }

@@ -9,7 +9,7 @@ Route::namespace('Usuario')->name('usuario')->group(function(){
 });
 
 // RUTAS CON PERMISOS
-Route::middleware('auth')->group(function() {
+Route::middleware(['auth','verifyToken'])->group(function() {
 
 	// PERFIL DE USUARIO
 	Route::namespace('Usuario')->prefix('perfil')->name('usuario')->group(function() {

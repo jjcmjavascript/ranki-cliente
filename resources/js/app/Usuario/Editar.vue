@@ -304,13 +304,13 @@ export default {
                         this.stop();
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");
                         this.usuario = res.data.usuario;
-                        document.querySelector("#imagen_header").src = this.urlImagen;
-                        document.querySelector("#imagen_lateral").src = this.urlImagen;
+                        //document.querySelector("#imagen_header").src = this.urlImagen;
+                        //document.querySelector("#imagen_lateral").src = this.urlImagen;
 
                     })
                     .catch(err => {
                         this.stop();
-                        this.alerta("error", "Ups...!", err);
+                        this.alerta("error", "Lo sentimos!", err);
                     })
             }
         },

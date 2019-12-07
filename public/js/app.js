@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/cliente/Editar":"app/cliente/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Usuario/Editar":"app/Usuario/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -78711,19 +78711,22 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-// import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
+window.axios.interceptors.response.use(function (response) {
+  //redirecs cuando Expired (expired) / no Logeado (guest)/
+  if ('exit' in response.data) {
+    window.location = response.data.exit;
+    return;
+  }
+
+  return response;
+}, function (error) {
+  if ('exit' in response.data.error) {
+    window.location = response.data.exit;
+    return;
+  }
+
+  return Promise.reject(error);
+});
 
 /***/ }),
 
@@ -78872,6 +78875,7 @@ Vue.filter('nl2br', function (str, is_xhtml) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_login_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../routes/login.js */ "./resources/js/routes/login.js");
 /* harmony import */ var _routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes/usuario.js */ "./resources/js/routes/usuario.js");
+/* harmony import */ var _routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../routes/Sistema.js */ "./resources/js/routes/Sistema.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -78881,9 +78885,9 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 
- // import sistema  from '../routes/sistema.js';
 
-var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (baseRoutes);
 
 /***/ }),
@@ -78912,6 +78916,26 @@ window.swal = Swal.mixin({
   position: 'center',
   title: 'Alerta!'
 });
+
+/***/ }),
+
+/***/ "./resources/js/routes/Sistema.js":
+/*!****************************************!*\
+  !*** ./resources/js/routes/Sistema.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var routes = [{
+  path: '/inicio',
+  name: 'sistema',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../app/Sistema/index */ "./resources/js/app/Sistema/index.vue"));
+  }
+}];
+/* harmony default export */ __webpack_exports__["default"] = (routes);
 
 /***/ }),
 
@@ -78947,7 +78971,7 @@ var routes = [{
   path: '/perfil',
   name: '/perfil',
   component: function component() {
-    return __webpack_require__.e(/*! import() | app/cliente/Editar */ "app/cliente/Editar").then(__webpack_require__.bind(null, /*! ../app/Usuario/Editar */ "./resources/js/app/Usuario/Editar.vue"));
+    return __webpack_require__.e(/*! import() | app/Usuario/Editar */ "app/Usuario/Editar").then(__webpack_require__.bind(null, /*! ../app/Usuario/Editar */ "./resources/js/app/Usuario/Editar.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
