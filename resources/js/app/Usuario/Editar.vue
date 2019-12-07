@@ -195,9 +195,13 @@ export default {
                 return `/storage/${this.usuario._avatar[ this.usuario._avatar.length -1 ].ruta}`;
 
             } else if (this.usuario && this.usuario.avatar) {
+<<<<<<< HEAD
 
                 return this.usuario.avatar
                 
+=======
+                return this.usuario.avatar
+>>>>>>> 65c4ac9f565763381e9d2085538c965ea3f2b9e7
             } else {
                 return "https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg";
             }
@@ -304,13 +308,22 @@ export default {
                         this.stop();
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");
                         this.usuario = res.data.usuario;
+<<<<<<< HEAD
                         document.querySelector("#imagen_header").src = this.urlImagen;
                         document.querySelector("#imagen_lateral").src = this.urlImagen;
+=======
+                        //document.querySelector("#imagen_header").src = this.urlImagen;
+                        //document.querySelector("#imagen_lateral").src = this.urlImagen;
+>>>>>>> 65c4ac9f565763381e9d2085538c965ea3f2b9e7
 
                     })
                     .catch(err => {
                         this.stop();
+<<<<<<< HEAD
                         this.alerta("error", "Ups...!", err);
+=======
+                        this.alerta("error", "Lo sentimos!", err);
+>>>>>>> 65c4ac9f565763381e9d2085538c965ea3f2b9e7
                     })
             }
         },

@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Auth;
 use Illuminate\Http\Request;
+use App\Models\Sistema\Usuario;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 
 class HomeController extends Controller
 {
+    use AuthenticatesUsers;
     /**
      * Create a new controller instance.
      *
@@ -13,9 +20,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('guest');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -23,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('vue');
     }
+
 }

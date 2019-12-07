@@ -1,0 +1,35 @@
+<template>
+
+</template>
+
+<script>
+
+export default {
+    data(){
+        return {
+            url: this.$root.base_url + this.$route.path,
+            usuario : {
+                nombre : null,
+            }
+        }
+    },
+    methods : {
+        cargando(){
+            this.$root.cargando();
+        },
+        stop(){
+            this.$root.stop();
+        },
+        alerta(tipo, titulo, mensaje = null) {
+        this.$root.alertas(tipo, titulo, mensaje);
+        },
+        iniciar(){
+            axios.post(this.url)
+            .then(()=>{
+                
+            })
+        },
+
+    }
+}
+</script>

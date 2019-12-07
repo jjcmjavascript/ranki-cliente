@@ -1,284 +1,766 @@
 <template>
-	<div>
-		<!-- begin page-header -->
-			<h1 class="page-header">Dashboard <small>inicio de la aplicación</small></h1>
-			<!-- end page-header -->
-			<!-- begin row -->
-			<div class="row">
-				<!-- begin col-3 -->
-				<div class="col-xl-3 col-md-6">
-					<div class="widget widget-stats bg-teal">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-						<div class="stats-content">
-							<div class="stats-title">VISITANTES HOY</div>
-							<div class="stats-number">842,900</div>
-							<div class="stats-progress progress">
-								<div class="progress-bar" style="width: 70.1%;"></div>
-							</div>
-							<div class="stats-desc">Mejor que semana pasada (70.1%)</div>
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-xl-3 col-md-6">
-					<div class="widget widget-stats bg-blue">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
-						<div class="stats-content">
-							<div class="stats-title">USUARIOS ACTIVOS</div>
-							<div class="stats-number">180,200</div>
-							<div class="stats-progress progress">
-								<div class="progress-bar" style="width: 40.5%;"></div>
-							</div>
-							<div class="stats-desc">Mejor que semana pasada (40.5%)</div>
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-xl-3 col-md-6">
-					<div class="widget widget-stats bg-indigo">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
-						<div class="stats-content">
-							<div class="stats-title">NUEVAS PUBLICACIONES</div>
-							<div class="stats-number">38,900</div>
-							<div class="stats-progress progress">
-								<div class="progress-bar" style="width: 76.3%;"></div>
-							</div>
-							<div class="stats-desc">Mejor que semana pasada (76.3%)</div>
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-xl-3 col-md-6">
-					<div class="widget widget-stats bg-dark">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-						<div class="stats-content">
-							<div class="stats-title">NUEVOS COMENTARIOS</div>
-							<div class="stats-number">3,988</div>
-							<div class="stats-progress progress">
-								<div class="progress-bar" style="width: 54.9%;"></div>
-							</div>
-							<div class="stats-desc">Mejor que semana pasada (54.9%)</div>
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
-			</div>
-			<!-- end row -->
-			<!-- begin row -->
-			<div class="row">
-				<!-- begin col-6 -->
-				<div class="col-xl-6">
-					<!-- begin card -->
-					<div class="card border-0 bg-dark text-white mb-3 overflow-hidden">
-						<!-- begin card-body -->
-						<div class="card-body">
-							<!-- begin row -->
-							<div class="row">
-								<!-- begin col-7 -->
-								<div class="col-xl-7 col-lg-8">
-									<!-- begin title -->
-									<div class="mb-3 text-grey">
-										<b>TOTAL RECAUDADO</b>
-										<span class="ml-2">
-											<i class="fa fa-info-circle" data-toggle="popover" data-trigger="hover" data-title="Total sales" data-placement="top" data-content="Net sales (gross sales minus discounts and returns) plus taxes and shipping. Includes orders from all sales channels."></i>
-										</span>
-									</div>
-									<!-- end title -->
-									<!-- begin total-sales -->
-									<div class="d-flex mb-1">
-										<h2 class="mb-0">$<span data-animation="number" data-value="64559.25">64559.25$</span></h2>
-										<div class="ml-auto mt-n1 mb-n1"><div id="total-sales-sparkline"></div></div>
-									</div>
-									<!-- end total-sales -->
-									<!-- begin percentage -->
-									<div class="mb-3 text-grey">
-										<i class="fa fa-caret-up"></i> <span data-animation="number" data-value="33.21">8.27</span>% comparado con la semana pasada
-									</div>
-									<!-- end percentage -->
-									<hr class="bg-white-transparent-2" />
-									<!-- begin row -->
-									<div class="row text-truncate">
-										<!-- begin col-6 -->
-										<div class="col-6">
-											<div class="f-s-12 text-grey">Ordenes totales</div>
-											<div class="f-s-18 m-b-5 f-w-600 p-b-1" data-animation="number" data-value="1568">1568</div>
-											<div class="progress progress-xs rounded-lg bg-dark-darker m-b-5">
-												<div class="progress-bar progress-bar-striped rounded-right bg-teal" data-animation="width" data-value="55%" style="width: 55%"></div>
-											</div>
-										</div>
-										<!-- end col-6 -->
-										<!-- begin col-6 -->
-										<div class="col-6">
-											<div class="f-s-12 text-grey">Coste promedio</div>
-											<div class="f-s-18 m-b-5 f-w-600 p-b-1">$<span data-animation="number" data-value="41.20">41.20</span></div>
-											<div class="progress progress-xs rounded-lg bg-dark-darker m-b-5">
-												<div class="progress-bar progress-bar-striped rounded-right" data-animation="width" data-value="55%" style="width: 55%"></div>
-											</div>
-										</div>
-										<!-- end col-6 -->
-									</div>
-									<!-- end row -->
-								</div>
-								<!-- end col-7 -->
-								<!-- begin col-5 -->
-								<div class="col-xl-5 col-lg-4 align-items-center d-flex justify-content-center">
-									<img :src="$root.base_url + '/images/img-1.svg'" height="150px" class="d-none d-lg-block" />
-								</div>
-								<!-- end col-5 -->
-							</div>
-							<!-- end row -->
-						</div>
-						<!-- end card-body -->
-					</div>
-					<!-- end card -->
-				</div>
-				<!-- end col-6 -->
-				<!-- begin col-6 -->
-				<div class="col-xl-6">
-					<!-- begin row -->
-					<div class="row">
-						<!-- begin col-6 -->
-						<div class="col-sm-6">
-							<!-- begin card -->
-							<div class="card border-0 bg-dark text-white text-truncate mb-3">
-								<!-- begin card-body -->
-								<div class="card-body">
-									<!-- begin title -->
-									<div class="mb-3 text-grey">
-										<b class="mb-3">RANGO DE CONVERSION</b> 
-										<span class="ml-2"><i class="fa fa-info-circle" data-toggle="popover" data-trigger="hover" data-title="Conversion Rate" data-placement="top" data-content="Percentage of sessions that resulted in orders from total number of sessions." data-original-title="" title=""></i></span>
-									</div>
-									<!-- end title -->
-									<!-- begin conversion-rate -->
-									<div class="d-flex align-items-center mb-1">
-										<h2 class="text-white mb-0"><span data-animation="number" data-value="2.19">2.19</span>%</h2>
-										<div class="ml-auto">
-											<div id="conversion-rate-sparkline"></div>
-										</div>
-									</div>
-									<!-- end conversion-rate -->
-									<!-- begin percentage -->
-									<div class="mb-4 text-grey">
-										<i class="fa fa-caret-down"></i> <span data-animation="number" data-value="0.50">0.50</span>% más que semana pasada
-									</div>
-									<!-- end percentage -->
-									<!-- begin info-row -->
-									<div class="d-flex mb-2">
-										<div class="d-flex align-items-center">
-											<i class="fa fa-circle text-red f-s-8 mr-2"></i>
-											Planes aquiridos 
-										</div>
-										<div class="d-flex align-items-center ml-auto">
-											<div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span data-animation="number" data-value="262">262</span>%</div>
-											<div class="width-50 text-right pl-2 f-w-600"><span data-animation="number" data-value="3.79">3.79</span>%</div>
-										</div>
-									</div>
-									<!-- end info-row -->
-									<!-- begin info-row -->
-									<div class="d-flex mb-2">
-										<div class="d-flex align-items-center">
-											<i class="fa fa-circle text-warning f-s-8 mr-2"></i>
-											Bienes vendidos
-										</div>
-										<div class="d-flex align-items-center ml-auto">
-											<div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span data-animation="number" data-value="11">11</span>%</div>
-											<div class="width-50 text-right pl-2 f-w-600"><span data-animation="number" data-value="3.85">3.85</span>%</div>
-										</div>
-									</div>
-									<!-- end info-row -->
-									<!-- begin info-row -->
-									<div class="d-flex">
-										<div class="d-flex align-items-center">
-											<i class="fa fa-circle text-lime f-s-8 mr-2"></i>
-											Bienes arrendados
-										</div>
-										<div class="d-flex align-items-center ml-auto">
-											<div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span data-animation="number" data-value="57">57</span>%</div>
-											<div class="width-50 text-right pl-2 f-w-600"><span data-animation="number" data-value="2.19">2.19</span>%</div>
-										</div>
-									</div>
-									<!-- end info-row -->
-								</div>
-								<!-- end card-body -->
-							</div>
-							<!-- end card -->
-						</div>
-						<!-- end col-6 -->
-						<!-- begin col-6 -->
-						<div class="col-sm-6">
-							<!-- begin card -->
-							<div class="card border-0 bg-dark text-white text-truncate mb-3">
-								<!-- begin card-body -->
-								<div class="card-body">
-									<!-- begin title -->
-									<div class="mb-3 text-grey">
-										<b class="mb-3">SESIONES DE USUARIO</b> 
-										<span class="ml-2"><i class="fa fa-info-circle" data-toggle="popover" data-trigger="hover" data-title="Store Sessions" data-placement="top" data-content="Number of sessions on your online store. A session is a period of continuous activity from a visitor." data-original-title="" title=""></i></span>
-									</div>
-									<!-- end title -->
-									<!-- begin store-session -->
-									<div class="d-flex align-items-center mb-1">
-										<h2 class="text-white mb-0"><span data-animation="number" data-value="70719">70719</span></h2>
-										<div class="ml-auto">
-											<div id="store-session-sparkline"></div>
-										</div>
-									</div>
-									<!-- end store-session -->
-									<!-- begin percentage -->
-									<div class="mb-4 text-grey">
-										<i class="fa fa-caret-up"></i> <span data-animation="number" data-value="9.5">9.5</span>% más que semana pasada
-									</div>
-									<!-- end percentage -->
-									<!-- begin info-row -->
-									<div class="d-flex mb-2">
-										<div class="d-flex align-items-center">
-											<i class="fa fa-circle text-teal f-s-8 mr-2"></i>
-											Moviles
-										</div>
-										<div class="d-flex align-items-center ml-auto">
-											<div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span data-animation="number" data-value="25.7">25.7</span>%</div>
-											<div class="width-50 text-right pl-2 f-w-600"><span data-animation="number" data-value="53210">53210</span></div>
-										</div>
-									</div>
-									<!-- end info-row -->
-									<!-- begin info-row -->
-									<div class="d-flex mb-2">
-										<div class="d-flex align-items-center">
-											<i class="fa fa-circle text-blue f-s-8 mr-2"></i>
-											Escritorio
-										</div>
-										<div class="d-flex align-items-center ml-auto">
-											<div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span data-animation="number" data-value="16.0">16.0</span>%</div>
-											<div class="width-50 text-right pl-2 f-w-600"><span data-animation="number" data-value="11959">11959</span></div>
-										</div>
-									</div>
-									<!-- end info-row -->
-									<!-- begin info-row -->
-									<div class="d-flex">
-										<div class="d-flex align-items-center">
-											<i class="fa fa-circle text-aqua f-s-8 mr-2"></i>
-											Tabletas
-										</div>
-										<div class="d-flex align-items-center ml-auto">
-											<div class="text-grey f-s-11"><i class="fa fa-caret-up"></i> <span data-animation="number" data-value="7.9">7.9</span>%</div>
-											<div class="width-50 text-right pl-2 f-w-600"><span data-animation="number" data-value="5545">5545</span></div>
-										</div>
-									</div>
-									<!-- end info-row -->
-								</div>
-								<!-- end card-body -->
-							</div>
-							<!-- end card -->
-						</div>
-						<!-- end col-6 -->
-					</div>
-					<!-- end row -->
-				</div>
-				<!-- end col-6 -->
-			</div>
-			<!-- end row -->
-	</div>
+<div>
+            <!--  wrapper  -->
+            <div id="wrapper">
+                <!-- Content-->
+                <div class="content">
+                    <!--section -->
+                    <section class="scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
+                        <div class="bg"  data-bg="images/bg/1.jpg" data-scrollax="properties: { translateY: '200px' }"></div>
+                        <div class="overlay"></div>
+                        <div class="hero-section-wrap fl-wrap">
+                            <div class="container">
+                                <div class="intro-item fl-wrap">
+                                    <h2>We will help you to find all</h2>
+                                    <h3>Find great places , hotels , restourants , shops.</h3>
+                                </div>
+                                <div class="main-search-input-wrap">
+                                    <div class="main-search-input fl-wrap">
+                                        <div class="main-search-input-item">
+                                            <input type="text" placeholder="What are you looking for?" value=""/>
+                                        </div>
+                                        <div class="main-search-input-item location" id="autocomplete-container">
+                                            <input type="text" placeholder="Location" id="autocomplete-input" value=""/>
+                                            <a href="#"><i class="fa fa-dot-circle-o"></i></a>
+                                        </div>
+                                        <div class="main-search-input-item">
+                                            <select data-placeholder="All Categories" class="chosen-select" >
+                                                <option>All Categories</option>
+                                                <option>Shops</option>
+                                                <option>Hotels</option>
+                                                <option>Restaurants</option>
+                                                <option>Fitness</option>
+                                                <option>Events</option>
+                                            </select>
+                                        </div>
+                                        <button class="main-search-button" onclick="window.location.href='listings-half-screen-map-list.html'">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bubble-bg"> </div>
+                        <div class="header-sec-link">
+                            <div class="container"><a href="#sec2" class="custom-scroll-link">Let's Start</a></div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                    <!--section -->
+                    <section id="sec2">
+                        <div class="container">
+                            <div class="section-title">
+                                <h2>Featured Categories</h2>
+                                <div class="section-subtitle">Catalog of Categories</div>
+                                <span class="section-separator"></span>
+                                <p>Explore some of the best tips from around the city from our partners and friends.</p>
+                            </div>
+                            <!-- portfolio start -->
+                            <div class="gallery-items fl-wrap mr-bot spad">
+                                <!-- gallery-item-->
+                                <div class="gallery-item">
+                                    <div class="grid-item-holder">
+                                        <div class="listing-item-grid">
+                                            <img  src="images/all/1.jpg"   alt="">
+                                            <div class="listing-counter"><span>10 </span> Locations</div>
+                                            <div class="listing-item-cat">
+                                                <h3><a href="listing.html">Conference and Event</a></h3>
+                                                <p>Constant care and attention to the patients makes good record</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- gallery-item end-->
+                                <!-- gallery-item-->
+                                <div class="gallery-item gallery-item-second">
+                                    <div class="grid-item-holder">
+                                        <div class="listing-item-grid">
+                                            <img  src="images/bg/1.jpg"   alt="">
+                                            <div class="listing-counter"><span>6 </span> Locations</div>
+                                            <div class="listing-item-cat">
+                                                <h3><a href="listing.html">Cafe - Pub</a></h3>
+                                                <p>Constant care and attention to the patients makes good record</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- gallery-item end-->
+                                <!-- gallery-item-->
+                                <div class="gallery-item">
+                                    <div class="grid-item-holder">
+                                        <div class="listing-item-grid">
+                                            <img  src="images/all/1.jpg"   alt="">
+                                            <div class="listing-counter"><span>21 </span> Locations</div>
+                                            <div class="listing-item-cat">
+                                                <h3><a href="listing.html">Gym - Fitness</a></h3>
+                                                <p>Constant care and attention to the patients makes good record</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- gallery-item end-->
+                                <!-- gallery-item-->
+                                <div class="gallery-item">
+                                    <div class="grid-item-holder">
+                                        <div class="listing-item-grid">
+                                            <img  src="images/all/1.jpg"   alt="">
+                                            <div class="listing-counter"><span>7 </span> Locations</div>
+                                            <div class="listing-item-cat">
+                                                <h3><a href="listing.html">Hotels</a></h3>
+                                                <p>Constant care and attention to the patients makes good record</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- gallery-item end-->
+                                <!-- gallery-item-->
+                                <div class="gallery-item">
+                                    <div class="grid-item-holder">
+                                        <div class="listing-item-grid">
+                                            <img  src="images/all/1.jpg"   alt="">
+                                            <div class="listing-counter"><span>15 </span> Locations</div>
+                                            <div class="listing-item-cat">
+                                                <h3><a href="listing.html">Shop - Store</a></h3>
+                                                <p>Constant care and attention to the patients makes good record</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- gallery-item end-->
+                            </div>
+                            <!-- portfolio end -->
+                            <a href="listing.html" class="btn  big-btn circle-btn dec-btn  color-bg flat-btn">View All<i class="fa fa-eye"></i></a>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                    <!--section -->
+                    <section class="gray-section">
+                        <div class="container">
+                            <div class="section-title">
+                                <h2>Popular listings</h2>
+                                <div class="section-subtitle">Best Listings</div>
+                                <span class="section-separator"></span>
+                                <p>Nulla tristique mi a massa convallis cursus. Nulla eu mi magna.</p>
+                            </div>
+                        </div>
+                        <!-- carousel -->
+                        <div class="list-carousel fl-wrap card-listing ">
+                            <!--listing-carousel-->
+                            <div class="listing-carousel  fl-wrap ">
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <!-- listing-item -->
+                                    <div class="listing-item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <img src="images/all/1.jpg" alt="">
+                                                <div class="overlay"></div>
+                                                <div class="list-post-counter"><span>4</span><i class="fa fa-heart"></i></div>
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap">
+                                                <a class="listing-geodir-category" href="listing.html">Retail</a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                    <span class="avatar-tooltip">Added By  <strong>Lisa Smith</strong></span>
+                                                </div>
+                                                <h3><a href="listing-single.html">Event in City Mol</a></h3>
+                                                <p>Sed interdum metus at nisi tempor laoreet.  </p>
+                                                <div class="geodir-category-options fl-wrap">
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5">
+                                                        <span>(7 reviews)</span>
+                                                    </div>
+                                                    <div class="geodir-category-location"><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 27th Brooklyn New York, NY 10065</a></div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <!-- listing-item end-->
+                                </div>
+                                <!--slick-slide-item end-->
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <!-- listing-item -->
+                                    <div class="listing-item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <img src="images/all/1.jpg" alt="">
+                                                <div class="overlay"></div>
+                                                <div class="list-post-counter"><span>15</span><i class="fa fa-heart"></i></div>
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap">
+                                                <a class="listing-geodir-category" href="listing.html">Event</a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                    <span class="avatar-tooltip">Added By  <strong>Mark Rose</strong></span>
+                                                </div>
+                                                <h3><a href="listing-single.html">Cafe "Lollipop"</a></h3>
+                                                <p>Morbi suscipit erat in diam bibendum rutrum in nisl.</p>
+                                                <div class="geodir-category-options fl-wrap">
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="4">
+                                                        <span>(17 reviews)</span>
+                                                    </div>
+                                                    <div class="geodir-category-location"><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 27th Brooklyn New York, NY 10065</a></div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <!-- listing-item end-->
+                                </div>
+                                <!--slick-slide-item end-->
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <!-- listing-item -->
+                                    <div class="listing-item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <img src="images/all/1.jpg" alt="">
+                                                <div class="overlay"></div>
+                                                <div class="list-post-counter"><span>13</span><i class="fa fa-heart"></i></div>
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap">
+                                                <a class="listing-geodir-category" href="listing.html">Gym </a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                    <span class="avatar-tooltip">Added By  <strong>Nasty Wood</strong></span>
+                                                </div>
+                                                <h3><a href="listing-single.html">Gym In Brooklyn</a></h3>
+                                                <p>Morbiaccumsan ipsum velit tincidunt . </p>
+                                                <div class="geodir-category-options fl-wrap">
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="3">
+                                                        <span>(16 reviews)</span>
+                                                    </div>
+                                                    <div class="geodir-category-location"><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 27th Brooklyn New York, NY 10065</a></div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <!-- listing-item end-->
+                                </div>
+                                <!--slick-slide-item end-->
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <!-- listing-item -->
+                                    <div class="listing-item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <img src="images/all/1.jpg" alt="">
+                                                <div class="overlay"></div>
+                                                <div class="list-post-counter"><span>3</span><i class="fa fa-heart"></i></div>
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap">
+                                                <a class="listing-geodir-category" href="listing.html">Shops</a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                    <span class="avatar-tooltip">Added By  <strong>Nasty Wood</strong></span>
+                                                </div>
+                                                <h3><a href="listing-single.html">Shop in Boutique Zone</a></h3>
+                                                <p>Morbiaccumsan ipsum velit tincidunt . </p>
+                                                <div class="geodir-category-options fl-wrap">
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="4">
+                                                        <span>(6 reviews)</span>
+                                                    </div>
+                                                    <div class="geodir-category-location"><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 27th Brooklyn New York, NY 10065</a></div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <!-- listing-item end-->
+                                </div>
+                                <!--slick-slide-item end-->
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <!-- listing-item -->
+                                    <div class="listing-item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <img src="images/all/1.jpg" alt="">
+                                                <div class="overlay"></div>
+                                                <div class="list-post-counter"><span>35</span><i class="fa fa-heart"></i></div>
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap">
+                                                <a class="listing-geodir-category" href="listing.html">Cars</a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                    <span class="avatar-tooltip">Added By  <strong>Kliff Antony</strong></span>
+                                                </div>
+                                                <h3><a href="listing-single.html">Best deal For the Cars</a></h3>
+                                                <p>Lorem ipsum gravida nibh vel velit.</p>
+                                                <div class="geodir-category-options fl-wrap">
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5">
+                                                        <span>(11 reviews)</span>
+                                                    </div>
+                                                    <div class="geodir-category-location"><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 27th Brooklyn New York, NY 10065</a></div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <!-- listing-item end-->
+                                </div>
+                                <!--slick-slide-item end-->
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <!-- listing-item -->
+                                    <div class="listing-item">
+                                        <article class="geodir-category-listing fl-wrap">
+                                            <div class="geodir-category-img">
+                                                <img src="images/all/1.jpg" alt="">
+                                                <div class="overlay"></div>
+                                                <div class="list-post-counter"><span>553</span><i class="fa fa-heart"></i></div>
+                                            </div>
+                                            <div class="geodir-category-content fl-wrap">
+                                                <a class="listing-geodir-category" href="listing.html">Restourants</a>
+                                                <div class="listing-avatar"><a href="author-single.html"><img src="images/avatar/1.jpg" alt=""></a>
+                                                    <span class="avatar-tooltip">Added By  <strong>Adam Koncy</strong></span>
+                                                </div>
+                                                <h3><a href="listing-single.html">Luxury Restourant</a></h3>
+                                                <p>Sed non neque elit. Sed ut imperdie.</p>
+                                                <div class="geodir-category-options fl-wrap">
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5">
+                                                        <span>(7 reviews)</span>
+                                                    </div>
+                                                    <div class="geodir-category-location"><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 27th Brooklyn New York, NY 10065</a></div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <!-- listing-item end-->
+                                </div>
+                                <!--slick-slide-item end-->
+                            </div>
+                            <!--listing-carousel end-->
+                            <div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
+                            <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
+                        </div>
+                        <!--  carousel end-->
+                    </section>
+                    <!-- section end -->
+                    <!--section -->
+                    <section class="color-bg">
+                        <div class="shapes-bg-big"></div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="images-collage fl-wrap">
+                                        <div class="images-collage-title">City<span>Book</span></div>
+                                        <div class="images-collage-main images-collage-item"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <div class="images-collage-other images-collage-item" data-position-left="23" data-position-top="10" data-zindex="2"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <div class="images-collage-other images-collage-item" data-position-left="62" data-position-top="54" data-zindex="5"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <div class="images-collage-other images-collage-item anim-col" data-position-left="18" data-position-top="70" data-zindex="11"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <div class="images-collage-other images-collage-item" data-position-left="37" data-position-top="90" data-zindex="1"><img src="images/avatar/1.jpg" alt=""></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="color-bg-text">
+                                        <h3>Join our online community</h3>
+                                        <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit, sed diam nonu mmy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+                                        <a href="#" class="color-bg-link modal-open">Sign In Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--section   end -->
+                    <!--section -->
+                    <section>
+                        <div class="container">
+                            <div class="section-title">
+                                <h2>How it works</h2>
+                                <div class="section-subtitle">Discover & Connect </div>
+                                <span class="section-separator"></span>
+                                <p>Explore some of the best tips from around the world.</p>
+                            </div>
+                            <!--process-wrap  -->
+                            <div class="process-wrap fl-wrap">
+                                <ul>
+                                    <li>
+                                        <div class="process-item">
+                                            <span class="process-count">01 . </span>
+                                            <div class="time-line-icon"><i class="fa fa-map-o"></i></div>
+                                            <h4> Find Interesting Place</h4>
+                                            <p>Proin dapibus nisl ornare diam varius tempus. Aenean a quam luctus, finibus tellus ut, convallis eros sollicitudin turpis.</p>
+                                        </div>
+                                        <span class="pr-dec"></span>
+                                    </li>
+                                    <li>
+                                        <div class="process-item">
+                                            <span class="process-count">02 .</span>
+                                            <div class="time-line-icon"><i class="fa fa-envelope-open-o"></i></div>
+                                            <h4> Contact a Few Owners</h4>
+                                            <p>Faucibus ante, in porttitor tellus blandit et. Phasellus tincidunt metus lectus sollicitudin feugiat pharetra consectetur.</p>
+                                        </div>
+                                        <span class="pr-dec"></span>
+                                    </li>
+                                    <li>
+                                        <div class="process-item">
+                                            <span class="process-count">03 .</span>
+                                            <div class="time-line-icon"><i class="fa fa-hand-peace-o"></i></div>
+                                            <h4> Make a Listing</h4>
+                                            <p>Maecenas pulvinar, risus in facilisis dignissim, quam nisi hendrerit nulla, id vestibulum metus nullam viverra porta.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="process-end"><i class="fa fa-check"></i></div>
+                            </div>
+                            <!--process-wrap   end-->
+                        </div>
+                    </section>
+                    <section class="parallax-section" data-scrollax-parent="true">
+                        <div class="bg"  data-bg="images/bg/1.jpg" data-scrollax="properties: { translateY: '100px' }"></div>
+                        <div class="overlay co lor-overlay"></div>
+                        <!--container-->
+                        <div class="container">
+                            <div class="intro-item fl-wrap">
+                                <h2>Visit the Best Places In Your City</h2>
+                                <h3>Find great places , hotels , restourants , shops.</h3>
+                                <a class="trs-btn" href="#">Add Listing + </a>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                    <!--section -->
+                    <section>
+                        <div class="container">
+                            <div class="section-title">
+                                <h2> Pricing Tables</h2>
+                                <div class="section-subtitle">cost of our services</div>
+                                <span class="section-separator"></span>
+                                <p>Explore some of the best tips from around the city from our partners and friends.</p>
+                            </div>
+                            <div class="pricing-wrap fl-wrap">
+                                <!-- price-item-->
+                                <div class="price-item">
+                                    <div class="price-head op1">
+                                        <h3>Basic</h3>
+                                    </div>
+                                    <div class="price-content fl-wrap">
+                                        <div class="price-num fl-wrap">
+                                            <span class="curen">$</span>
+                                            <span class="price-num-item">49</span>
+                                            <div class="price-num-desc">Per month</div>
+                                        </div>
+                                        <div class="price-desc fl-wrap">
+                                            <ul>
+                                                <li>One Listing</li>
+                                                <li>90 Days Availability</li>
+                                                <li>Non-Featured</li>
+                                                <li>Limited Support</li>
+                                            </ul>
+                                            <a href="#" class="price-link">Choose Basic</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- price-item end-->
+                                <!-- price-item-->
+                                <div class="price-item best-price">
+                                    <div class="price-head op2">
+                                        <h3>Extended</h3>
+                                    </div>
+                                    <div class="price-content fl-wrap">
+                                        <div class="price-num fl-wrap">
+                                            <span class="curen">$</span>
+                                            <span class="price-num-item">99</span>
+                                            <div class="price-num-desc">Per month</div>
+                                        </div>
+                                        <div class="price-desc fl-wrap">
+                                            <ul>
+                                                <li>Ten Listings</li>
+                                                <li>Lifetime Availability</li>
+                                                <li>Featured In Search Results</li>
+                                                <li>24/7 Support</li>
+                                            </ul>
+                                            <a href="#" class="price-link">Choose Extended</a>
+                                            <div class="recomm-price">
+                                                <i class="fa fa-check"></i>
+                                                <span class="clearfix"></span>
+                                                Recommended
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- price-item end-->
+                                <!-- price-item-->
+                                <div class="price-item">
+                                    <div class="price-head">
+                                        <h3>Professional</h3>
+                                    </div>
+                                    <div class="price-content fl-wrap">
+                                        <div class="price-num fl-wrap">
+                                            <span class="curen">$</span>
+                                            <span class="price-num-item">149</span>
+                                            <div class="price-num-desc">Per month</div>
+                                        </div>
+                                        <div class="price-desc fl-wrap">
+                                            <ul>
+                                                <li>Unlimited Listings</li>
+                                                <li>Lifetime Availability</li>
+                                                <li>Featured In Search Results</li>
+                                                <li>24/7 Support</li>
+                                            </ul>
+                                            <a href="#" class="price-link">Choose Professional</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- price-item end-->
+                            </div>
+                            <!-- about-wrap end  -->
+                        </div>
+                    </section>
+                    <!-- section end -->
+                    <!--section -->
+                    <section class="color-bg">
+                        <div class="shapes-bg-big"></div>
+                        <div class="container">
+                            <div class=" single-facts fl-wrap">
+                                <!-- inline-facts -->
+                                <div class="inline-facts-wrap">
+                                    <div class="inline-facts">
+                                        <div class="milestone-counter">
+                                            <div class="stats animaper">
+                                                <div class="num" data-content="0" data-num="254">154</div>
+                                            </div>
+                                        </div>
+                                        <h6>New Visiters Every Week</h6>
+                                    </div>
+                                </div>
+                                <!-- inline-facts end -->
+                                <!-- inline-facts  -->
+                                <div class="inline-facts-wrap">
+                                    <div class="inline-facts">
+                                        <div class="milestone-counter">
+                                            <div class="stats animaper">
+                                                <div class="num" data-content="0" data-num="12168">12168</div>
+                                            </div>
+                                        </div>
+                                        <h6>Happy customers every year</h6>
+                                    </div>
+                                </div>
+                                <!-- inline-facts end -->
+                                <!-- inline-facts  -->
+                                <div class="inline-facts-wrap">
+                                    <div class="inline-facts">
+                                        <div class="milestone-counter">
+                                            <div class="stats animaper">
+                                                <div class="num" data-content="0" data-num="172">172</div>
+                                            </div>
+                                        </div>
+                                        <h6>Won Awards</h6>
+                                    </div>
+                                </div>
+                                <!-- inline-facts end -->
+                                <!-- inline-facts  -->
+                                <div class="inline-facts-wrap">
+                                    <div class="inline-facts">
+                                        <div class="milestone-counter">
+                                            <div class="stats animaper">
+                                                <div class="num" data-content="0" data-num="732">732</div>
+                                            </div>
+                                        </div>
+                                        <h6>New Listing Every Week</h6>
+                                    </div>
+                                </div>
+                                <!-- inline-facts end -->
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                    <!--section -->
+                    <section>
+                        <div class="container">
+                            <div class="section-title">
+                                <h2>Testimonials</h2>
+                                <div class="section-subtitle">Clients Reviews</div>
+                                <span class="section-separator"></span>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
+                            </div>
+                        </div>
+                        <!-- testimonials-carousel -->
+                        <div class="carousel fl-wrap">
+                            <!--testimonials-carousel-->
+                            <div class="testimonials-carousel single-carousel fl-wrap">
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <div class="testimonilas-text">
+                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="5"> </div>
+                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi arch itecto beatae vitae dicta sunt explicabo. </p>
+                                    </div>
+                                    <div class="testimonilas-avatar-item">
+                                        <div class="testimonilas-avatar"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <h4>Lisa Noory</h4>
+                                        <span>Restaurant Owner</span>
+                                    </div>
+                                </div>
+                                <!--slick-slide-item end-->
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <div class="testimonilas-text">
+                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="4"> </div>
+                                        <p>Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</p>
+                                    </div>
+                                    <div class="testimonilas-avatar-item">
+                                        <div class="testimonilas-avatar"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <h4>Antony Moore</h4>
+                                        <span>Restaurant Owner</span>
+                                    </div>
+                                </div>
+                                <!--slick-slide-item end-->
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <div class="testimonilas-text">
+                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="5"> </div>
+                                        <p>Feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te odio dignissim qui blandit praesent.</p>
+                                    </div>
+                                    <div class="testimonilas-avatar-item">
+                                        <div class="testimonilas-avatar"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <h4>Austin Harisson</h4>
+                                        <span>Restaurant Owner</span>
+                                    </div>
+                                </div>
+                                <!--slick-slide-item end-->
+                                <!--slick-slide-item-->
+                                <div class="slick-slide-item">
+                                    <div class="testimonilas-text">
+                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="4"> </div>
+                                        <p>Qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram seacula quarta decima et quinta decima.</p>
+                                    </div>
+                                    <div class="testimonilas-avatar-item">
+                                        <div class="testimonilas-avatar"><img src="images/avatar/1.jpg" alt=""></div>
+                                        <h4>Garry Colonsi</h4>
+                                        <span>Restaurant Owner</span>
+                                    </div>
+                                </div>
+                                <!--slick-slide-item end-->
+                            </div>
+                            <!--testimonials-carousel end-->
+                            <div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
+                            <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
+                        </div>
+                        <!-- carousel end-->
+                    </section>
+                    <!-- section end -->
+                    <!--section -->
+                    <section class="gray-section">
+                        <div class="container">
+                            <div class="fl-wrap spons-list">
+                                <ul class="client-carousel">
+                                    <li><a href="#" target="_blank"><img src="images/clients/1.png" alt=""></a></li>
+                                    <li><a href="#" target="_blank"><img src="images/clients/1.png" alt=""></a></li>
+                                    <li><a href="#" target="_blank"><img src="images/clients/1.png" alt=""></a></li>
+                                    <li><a href="#" target="_blank"><img src="images/clients/1.png" alt=""></a></li>
+                                    <li><a href="#" target="_blank"><img src="images/clients/1.png" alt=""></a></li>
+                                    <li><a href="#" target="_blank"><img src="images/clients/1.png" alt=""></a></li>
+                                </ul>
+                                <div class="sp-cont sp-cont-prev"><i class="fa fa-angle-left"></i></div>
+                                <div class="sp-cont sp-cont-next"><i class="fa fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                    <!--section -->
+                    <section>
+                        <div class="container">
+                            <div class="section-title">
+                                <h2>Tips & Articles</h2>
+                                <div class="section-subtitle">From the blog.</div>
+                                <span class="section-separator"></span>
+                                <p>Browse the latest articles from our blog.</p>
+                            </div>
+                            <div class="row home-posts">
+                                <div class="col-md-4">
+                                    <article class="card-post">
+                                        <div class="card-post-img fl-wrap">
+                                            <a href="blog-single.html"><img src="images/all/1.jpg"   alt=""></a>
+                                        </div>
+                                        <div class="card-post-content fl-wrap">
+                                            <h3><a href="blog-single.html">Gallery Post</a></h3>
+                                            <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
+                                            <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Alisa Noory</span></a></div>
+                                            <div class="post-opt">
+                                                <ul>
+                                                    <li><i class="fa fa-calendar-check-o"></i> <span>25 April 2018</span></li>
+                                                    <li><i class="fa fa-eye"></i> <span>264</span></li>
+                                                    <li><i class="fa fa-tags"></i> <a href="#">Photography</a>  </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="col-md-4">
+                                    <article class="card-post">
+                                        <div class="card-post-img fl-wrap">
+                                            <a href="blog-single.html"><img  src="images/all/1.jpg"   alt=""></a>
+                                        </div>
+                                        <div class="card-post-content fl-wrap">
+                                            <h3><a href="blog-single.html">Video and gallery post</a></h3>
+                                            <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
+                                            <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Mery Lynn</span></a></div>
+                                            <div class="post-opt">
+                                                <ul>
+                                                    <li><i class="fa fa-calendar-check-o"></i> <span>25 April 2018</span></li>
+                                                    <li><i class="fa fa-eye"></i> <span>264</span></li>
+                                                    <li><i class="fa fa-tags"></i> <a href="#">Design</a>  </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="col-md-4">
+                                    <article class="card-post">
+                                        <div class="card-post-img fl-wrap">
+                                            <a href="blog-single.html"><img  src="images/all/1.jpg"   alt=""></a>
+                                        </div>
+                                        <div class="card-post-content fl-wrap">
+                                            <h3><a href="blog-single.html">Post Article</a></h3>
+                                            <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. </p>
+                                            <div class="post-author"><a href="#"><img src="images/avatar/1.jpg" alt=""><span>By , Garry Dee</span></a></div>
+                                            <div class="post-opt">
+                                                <ul>
+                                                    <li><i class="fa fa-calendar-check-o"></i> <span>25 April 2018</span></li>
+                                                    <li><i class="fa fa-eye"></i> <span>264</span></li>
+                                                    <li><i class="fa fa-tags"></i> <a href="#">Stories</a>  </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                            <a href="blog.html" class="btn  big-btn circle-btn  dec-btn color-bg flat-btn">Read All<i class="fa fa-eye"></i></a>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                    <!--section -->
+                    <section class="gradient-bg">
+                        <div class="cirle-bg">
+                            <div class="bg" data-bg="images/bg/circle.png"></div>
+                        </div>
+                        <div class="container">
+                            <div class="join-wrap fl-wrap">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h3>Do You Have Questions ?</h3>
+                                        <p>Lorem ipsum dolor sit amet, harum dolor nec in, usu molestiae at no.</p>
+                                    </div>
+                                    <div class="col-md-4"><a href="contacts.html" class="join-wrap-btn">Get In Touch <i class="fa fa-envelope-o"></i></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- section end -->
+                </div>
+                <!-- Content end -->
+            </div>
+            <!-- wrapper end -->
+
+            <login />   
+
+            <!--register form end -->
+            <a class="to-top"><i class="fa fa-angle-up"></i></a>
+</div>
 </template>
+<script> 
+import Login from './Login.vue'
+
+    export default {
+        components : {
+            login : Login,
+        },
+        data (){
+            return {
+                
+            }
+        },
+
+    }
+</script>

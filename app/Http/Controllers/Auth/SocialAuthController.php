@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
-use App\Models\Sistema\Usuarios;
 use Socialite;
+use ApiHelper;
+
 use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
+use App\Models\Sistema\Usuario;
 
 class SocialAuthController extends Controller
 {
-    // Metodo encargado de la redireccion a Facebook
+    // Metodo encargado de la redireccion a Red Social
     public function redirectToProvider($provider)
     {
         return Socialite::driver($provider)->redirect();
@@ -22,11 +25,11 @@ class SocialAuthController extends Controller
         // Obtenemos los datos del usuario
         $social_user = Socialite::driver($provider)->user(); 
         // Comprobamos si el usuario ya existe
-        if ($user = Usuarios::where('email', $social_user->email)->first()) { 
+        if ($user = Usuario::where('email', $social_user->email)->first()) { 
             return $this->authAndRedirect($user); // Login y redirección
         } else {  
             // En caso de que no exista creamos un nuevo usuario con sus datos.
-            $user = Usuarios::create([
+            $user = Usuario::create([
                 'nombre' => $social_user->name,
                 'email' => $social_user->email,
                 'avatar' => $social_user->avatar,
@@ -41,8 +44,28 @@ class SocialAuthController extends Controller
     // Login y redirección
     public function authAndRedirect($user)
     {
-        Auth::login($user);
+        try {    
+            Auth::login($user);      
 
-        return redirect()->to('/home');
+            $ruta = 'oauth/token';
+            
+            $form_params = [
+                'grant_type' => 'social',
+                'client_id' => env('API_CLIENT_ID'),
+                'client_secret' => env('API_CLIENT_SECRET'),
+                'provider' => Auth::user()->provider, // provider
+                'access_token' => Auth::user()->provider_id, // provider_id
+            ];
+            
+            $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
+
+            // SET API SESSION WITH CREDENTIALS
+            session(['api' => (object)$response]);
+
+            return \Redirect::back();
+        }
+        catch(\Exception $e) {
+            return response([ 'error'=> $e->getMessage() ],500);
+        }
     }
 }
