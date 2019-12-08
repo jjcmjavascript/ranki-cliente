@@ -142,6 +142,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -237,51 +260,7 @@ var render = function() {
                 "div",
                 { staticClass: "list-main-wrap fl-wrap card-listing" },
                 [
-                  _c("div", { staticClass: "list-main-wrap-opt fl-wrap" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "price-opt" }, [
-                      _c("span", { staticClass: "price-opt-title" }, [
-                        _vm._v("Ordenar Por:")
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "price-opt-title" }, [
-                        _vm._v("   Consultar Por:")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "listsearch-input-item" }, [
-                        _c(
-                          "select",
-                          {
-                            staticClass: "chosen-select no-search-select",
-                            attrs: {
-                              "data-placeholder": "Popularity",
-                              id: "estavaina"
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.console.log($event)
-                              },
-                              input: function($event) {
-                                return _vm.alert($event)
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "1" } }, [
-                              _vm._v("Activas")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "0" } }, [
-                              _vm._v("Inactivas")
-                            ])
-                          ]
-                        )
-                      ])
-                    ])
-                  ]),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -302,7 +281,7 @@ var render = function() {
                                   "div",
                                   { staticClass: "geodir-category-img" },
                                   [
-                                    _vm._m(3, true),
+                                    _vm._m(2, true),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -313,17 +292,17 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            " +
+                                          "\r\n                                            " +
                                             _vm._s(
                                               val._propiedades._tipo_operacion
                                                 .nombre
                                             ) +
-                                            "\n                                        "
+                                            "\r\n                                        "
                                         )
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(4, true)
+                                    _vm._m(3, true)
                                   ]
                                 ),
                                 _vm._v(" "),
@@ -362,12 +341,12 @@ var render = function() {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades
                                                             .titulo
                                                         ) +
-                                                        "\n                                                    "
+                                                        "\r\n                                                    "
                                                     )
                                                   ]
                                                 )
@@ -393,7 +372,7 @@ var render = function() {
                                                         "fas fa-map-marker-alt"
                                                     }),
                                                     _vm._v(
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades
                                                             .numero_calle
@@ -401,14 +380,14 @@ var render = function() {
                                                                 .numero_calle
                                                             : ""
                                                         ) +
-                                                        "\n                                                        " +
+                                                        "\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades.calle
                                                             ? val._propiedades
                                                                 .calle
                                                             : ""
                                                         ) +
-                                                        "\n                                                        /\n                                                        " +
+                                                        "\r\n                                                        /\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades
                                                             ._comuna
@@ -419,7 +398,7 @@ var render = function() {
                                                                 ","
                                                             : ""
                                                         ) +
-                                                        "\n                                                        " +
+                                                        "\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades
                                                             ._region
@@ -429,7 +408,7 @@ var render = function() {
                                                                   .nombre
                                                             : ""
                                                         ) +
-                                                        "\n\n                                                    "
+                                                        "\r\n\r\n                                                    "
                                                     )
                                                   ]
                                                 )
@@ -468,14 +447,14 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                " +
+                                              "\r\n                                                " +
                                                 _vm._s(
                                                   val._propiedades._tipo_valor
                                                     ? val._propiedades
                                                         ._tipo_valor.nombre
                                                     : ""
                                                 ) +
-                                                "\n                                                 "
+                                                "\r\n                                                 "
                                             ),
                                             _c("span", [
                                               _vm._v(
@@ -488,7 +467,7 @@ var render = function() {
                                           ]
                                         ),
                                         _vm._v(" "),
-                                        _vm._m(5, true)
+                                        _vm._m(4, true)
                                       ]
                                     )
                                   ]
@@ -503,7 +482,7 @@ var render = function() {
                   _vm._v(" "),
                   _vm.rows.total > 15
                     ? _c("div", { staticClass: "pagination" }, [
-                        _vm._m(6),
+                        _vm._m(5),
                         _vm._v(" "),
                         _c("a", { attrs: { href: "#" } }, [_vm._v("1")]),
                         _vm._v(" "),
@@ -517,7 +496,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("a", { attrs: { href: "#" } }, [_vm._v("4")]),
                         _vm._v(" "),
-                        _vm._m(7)
+                        _vm._m(6)
                       ])
                     : _vm._e()
                 ]
@@ -549,31 +528,42 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "list-main-wrap-title fl-wrap col-title" },
-      [_c("h2", [_vm._v(" Mis favoritos")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "listsearch-input-item" }, [
-      _c(
-        "select",
-        {
-          staticClass: "chosen-select no-search-select",
-          attrs: { "data-placeholder": "Popularity" }
-        },
-        [
-          _c("option", [_vm._v("Popularidad")]),
+    return _c("div", { staticClass: "list-main-wrap-opt fl-wrap" }, [
+      _c("div", { staticClass: "list-main-wrap-title fl-wrap col-title" }, [
+        _c("h2", [_vm._v(" Mis favoritos")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-4 form-group pr-0" }, [
+          _c("label", { staticClass: "col-form-label price-opt-title" }, [
+            _vm._v("Ordenar Por:")
+          ]),
           _vm._v(" "),
-          _c("option", [_vm._v("Mayor Precio")]),
+          _c("div", { staticClass: "col-lg-8 col-sm-8 pr-0" }, [
+            _c("select", { staticClass: "form-control" }, [
+              _c("option", [_vm._v("Popularidad")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Mayor Precio")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("Menor Precio")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-4 form-group pl-0" }, [
+          _c("span", { staticClass: "col-form-label price-opt-title" }, [
+            _vm._v("Consultar Por:")
+          ]),
           _vm._v(" "),
-          _c("option", [_vm._v("Menor Precio")])
-        ]
-      )
+          _c("div", { staticClass: "col-lg-8 col-sm-8" }, [
+            _c("select", { staticClass: "form-control" }, [
+              _c("option", { attrs: { value: "1" } }, [_vm._v("Activas")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "0" } }, [_vm._v("Inactivas")])
+            ])
+          ])
+        ])
+      ])
     ])
   },
   function() {

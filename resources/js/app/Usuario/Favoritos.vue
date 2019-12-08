@@ -18,10 +18,10 @@
                                 <h2> Mis favoritos</h2>
                             </div>
                             <!-- price-opt-->
-                            <div class="price-opt">
+                            <!--div class="price-opt">
                                 <span class="price-opt-title">Ordenar Por:</span>
                                 <div class="listsearch-input-item">
-                                    <select data-placeholder="Popularity" class="chosen-select no-search-select">
+                                    <select data-placeholder="Popularity" class="chosen-select no-search-select" @change="console.log($event)">
                                         <option>Popularidad</option>
                                         <option>Mayor Precio</option>
                                         <option>Menor Precio</option>
@@ -35,7 +35,30 @@
                                         <option value="0">Inactivas</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div-->
+
+                            <div class="row">
+                                        <div class="col-lg-4 form-group pr-0">
+                                            <label class="col-form-label price-opt-title">Ordenar Por:</label>
+                                            <div class="col-lg-8 col-sm-8 pr-0">
+                                                <select class="form-control">
+                                                    <option>Popularidad</option>
+                                                    <option>Mayor Precio</option>
+                                                    <option>Menor Precio</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 form-group pl-0">
+                                            <span class="col-form-label price-opt-title">Consultar Por:</span>
+                                            <div class="col-lg-8 col-sm-8">
+                                            <select class="form-control">
+                                                <option value="1">Activas</option>
+                                                <option value="0">Inactivas</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                </div>
 
 
                         </div>
