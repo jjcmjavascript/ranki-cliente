@@ -47,6 +47,11 @@ class SocialAuthController extends Controller
         try {
             Auth::login($user);
             $response = (new ApiHelper)->sendCredentialsRequest('social');
+
+            if(!$response){
+                session()->flush();
+                return redirect('/');
+            }
             // SET API SESSION WITH CREDENTIALS
             return \Redirect::back();
         }

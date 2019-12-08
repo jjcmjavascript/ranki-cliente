@@ -9,7 +9,11 @@ const routes= [
         name: '/favoritos',
         component : ()=> import(/* webpackChunkName: 'app/Usuario/Favoritos'*/'../app/Usuario/Favoritos'),
     },
+    {
+        path: '/publicaciones',
+        name: '/publicaciones',
+        component : ()=> import(/* webpackChunkName: 'app/Usuario/Publicaciones'*/'../app/Usuario/Publicaciones'),
+    },
 ]
-
 
 export default routes;

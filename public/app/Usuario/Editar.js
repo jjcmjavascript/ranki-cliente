@@ -136,6 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -220,6 +221,10 @@ __webpack_require__.r(__webpack_exports__);
       var size = 2.048;
       return file.size / 1024 / 1024 < size;
     },
+    alerta: function alerta(tipo, titulo) {
+      var mensaje = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      this.$root.alertas(tipo, titulo, mensaje);
+    },
     guardarContrasena: function guardarContrasena() {
       var _this = this;
 
@@ -233,8 +238,6 @@ __webpack_require__.r(__webpack_exports__);
         this.pass.nueva && request.append("password", this.pass.nueva);
         this.pass.confirm && request.append("password_confirmation", this.pass.confirm);
         axios.post(this.url + "/clave", request).then(function (res) {
-          _this.stop();
-
           _this.alerta("success", "Exito", "Tu clave fue modificada!");
 
           _this.pass.actual = null;
@@ -253,9 +256,10 @@ __webpack_require__.r(__webpack_exports__);
 
       this.start();
       axios.post(this.url, this.usuario).then(function (res) {
-        _this2.usuario = res.data.usuario;
-      })["catch"](function (err) {})["finally"](function () {
         _this2.stop();
+
+        _this2.usuario = res.data.usuario;
+      })["catch"](function (err) {})["finally"](function () {// this.stop();
       });
     },
     editar: function editar() {
@@ -275,8 +279,6 @@ __webpack_require__.r(__webpack_exports__);
         this.usuario.email && request.append("email", this.usuario.email);
         this.file && request.append('avatar', this.file);
         axios.post(this.url + '/guardar', request).then(function (res) {
-          _this3.stop();
-
           _this3.alerta("success", "Exito", "Tus datos fueron modificados!");
 
           _this3.usuario = res.data.usuario;
@@ -379,6 +381,8 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "dasboard-wrap fl-wrap" }, [
       _c("div", { staticClass: "dashboard-content fl-wrap" }, [
+        _c("br"),
+        _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "profile-edit-container" }, [
@@ -717,9 +721,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-widget-item-header" }, [
-      _c("h3", [_vm._v(" Perfil")])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "box-widget-item-header",
+        staticStyle: { color: "#888DA0" }
+      },
+      [_c("h3", [_vm._v(" Perfil")])]
+    )
   },
   function() {
     var _vm = this

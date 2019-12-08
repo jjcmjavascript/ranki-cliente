@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -78974,6 +78974,12 @@ var routes = [{
   name: '/favoritos',
   component: function component() {
     return __webpack_require__.e(/*! import() | app/Usuario/Favoritos */ "app/Usuario/Favoritos").then(__webpack_require__.bind(null, /*! ../app/Usuario/Favoritos */ "./resources/js/app/Usuario/Favoritos.vue"));
+  }
+}, {
+  path: '/publicaciones',
+  name: '/publicaciones',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | app/Usuario/Publicaciones */ "app/Usuario/Publicaciones").then(__webpack_require__.bind(null, /*! ../app/Usuario/Publicaciones */ "./resources/js/app/Usuario/Publicaciones.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

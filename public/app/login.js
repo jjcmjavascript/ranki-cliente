@@ -379,8 +379,9 @@ __webpack_require__.r(__webpack_exports__);
           axios.post("/iniciar", request).then(function (res) {
             _this.$swal.disableLoading();
 
-            _this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo"); //window.location.href = res.data.url;
+            _this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
 
+            window.location.href = res.data.url;
           })["catch"](function (error) {
             _this.$swal.disableLoading();
 
@@ -413,8 +414,9 @@ __webpack_require__.r(__webpack_exports__);
           axios.post("/crear", request).then(function (res) {
             _this2.$swal.disableLoading();
 
-            _this2.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo"); //window.location.href = res.data.url;
+            _this2.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
 
+            window.location.href = res.data.url;
           })["catch"](function (error) {
             _this2.$swal.disableLoading();
 

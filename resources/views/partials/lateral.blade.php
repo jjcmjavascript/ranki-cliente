@@ -37,11 +37,12 @@
                             <i class="far fa-user"></i>Perfil</a>
                     </li>
                     <li>
-                        <a href="dashboard-messages.html" class="">
-                            <i class="far fa-envelope"></i> Mensajes <span>3</span></a></li>
-                    <li>
                         <a href="{{route('usuario.favoritos')}}" class="{{request()->is('favoritos') ? 'user-profile-act' : ''}}">
                             <i class="far fa-th-list"></i> Favoritos  </a>
+                    </li>
+                    <li>
+                        <a href="{{route('usuario.publicaciones')}}" class="{{request()->is('publicaciones') ? 'user-profile-act' : ''}}">
+                            <i class="far fa-th-list"></i> Publicaciones  </a>
                     </li>
 
                 </ul>

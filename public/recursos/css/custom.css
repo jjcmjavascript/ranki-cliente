@@ -1,4 +1,13 @@
 /* MIN */
+section.middle-padding {
+    padding: 8px 0;
+}
+body, section, .grey-blue-bg {
+    background: #fafafa;
+}
+li{
+    padding-left: 3px;
+}
 @media screen and (min-width: 769px) {
     .iniciar_sm_li {
         display: none;

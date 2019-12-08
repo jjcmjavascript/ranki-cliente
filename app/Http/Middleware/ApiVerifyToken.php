@@ -20,6 +20,7 @@ class ApiVerifyToken
     {
 
         if(!$this->verifyToken($request)){
+
             session()->flush();
 
             if( $request->ajax() ){
@@ -72,7 +73,6 @@ class ApiVerifyToken
             '/perfil/logout',
             '/auth/google',
             '/auth/facebook',
-
         ];
 
         return in_array($ruta , $exceptions );

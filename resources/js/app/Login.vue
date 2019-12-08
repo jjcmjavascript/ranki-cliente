@@ -235,7 +235,7 @@ export default {
                         .then(res => {
                             this.$swal.disableLoading();
                             this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
-                            //window.location.href = res.data.url;
+                            window.location.href = res.data.url;
                         })
                         .catch(error => {
                             this.$swal.disableLoading();
@@ -272,7 +272,7 @@ export default {
                         .then(res => {
                             this.$swal.disableLoading();
                             this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
-                            //window.location.href = res.data.url;
+                            window.location.href = res.data.url;
                         })
                         .catch(error => {
                             this.$swal.disableLoading();

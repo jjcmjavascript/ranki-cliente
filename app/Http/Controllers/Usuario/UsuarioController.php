@@ -150,7 +150,7 @@ class UsuarioController extends Controller
 
                 $response = (new ApiHelper)->sendCredentialsRequest();
 
-                return response([ 'exit' => url()->previous() ], 200);
+                return response([ 'url' => url()->previous() ], 200);
             }
 
             throw new \Exception('Cotraseña o correo incorrecto.');
@@ -174,10 +174,10 @@ class UsuarioController extends Controller
         try {
 
             $request->merge(['id_usuario'=>Auth::user()->id]);
-            
-            $response = (new ApiHelper)->sendApiRequest('api/usuarios/favoritos',$request->all());
-            if(isset($response['error'])) throw new \Exception($response);
 
+            $response = (new ApiHelper)->sendApiRequest('api/usuarios/favoritos',$request->all());
+
+            if(isset($response['error'])) throw new \Exception($response);
             return response()->json([
                 'rows'=>$response
             ],200);

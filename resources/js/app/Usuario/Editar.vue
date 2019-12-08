@@ -5,7 +5,8 @@
     <div class="dasboard-wrap fl-wrap">
         <!-- dashboard-content-->
         <div class="dashboard-content fl-wrap">
-            <div class="box-widget-item-header">
+            <br>
+            <div class="box-widget-item-header" style="color:#888DA0;">
                 <h3> Perfil</h3>
             </div>
             <!-- profile-edit-container-->
@@ -237,6 +238,9 @@ export default {
             return ((file.size / 1024) / 1024) < size;
         },
 
+                alerta(tipo, titulo, mensaje = null) {
+                    this.$root.alertas(tipo, titulo, mensaje);
+                },
         guardarContrasena() {
             if (
                 !this.$root.noScript(this.pass.actual) ||
@@ -257,7 +261,6 @@ export default {
                 axios
                     .post(this.url + "/clave", request)
                     .then(res => {
-                        this.stop();
                         this.alerta("success", "Exito", "Tu clave fue modificada!");
                         this.pass.actual = null;
                         this.pass.nueva = null;
@@ -277,11 +280,12 @@ export default {
             axios
                 .post(this.url, this.usuario)
                 .then(res => {
+                    this.stop();
                     this.usuario = res.data.usuario;
                 })
                 .catch(err => {})
                 .finally(() => {
-                    this.stop();
+                    // this.stop();
                 });
         },
 
@@ -290,6 +294,7 @@ export default {
                 this.alerta("error", "Ups... algunos datos son incorrectos!");
             } else {
                 this.start();
+
                 const request = new FormData();
                 this.usuario.id && request.append("id", this.usuario.id);
                 this.usuario.nombre && request.append("nombre", this.usuario.nombre);
@@ -307,7 +312,6 @@ export default {
                 axios
                     .post(this.url + '/guardar', request)
                     .then(res => {
-                        this.stop();
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");
                         this.usuario = res.data.usuario;
                         document.querySelector("#imagen_header").src = this.urlImagen;

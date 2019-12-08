@@ -27,5 +27,11 @@ Route::middleware(['auth','verifyToken'])->group(function() {
         Route::post('/','UsuarioController@favoritos')->name('.favoritos');
 
     });
+    // Publicaciones
+    Route::namespace('Usuario')->prefix('publicaciones')->name('usuario')->group(function() {
+        Route::get('/','UsuarioController@vue')->name('.publicaciones');
+        Route::post('/','UsuarioController@favoritos')->name('.publicaciones');
+
+    });
 
 });
