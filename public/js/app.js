@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Usuario/Editar":"app/Usuario/Editar","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -78478,13 +78478,9 @@ var app = new Vue({
           temp += "<li>".concat(e, "</li>");
         });
         mensaje = temp + '</ul>';
-      } // Swal.fire(
-      //     titulo,
-      //     mensaje,
-      //     tipo,
-      //   )
+      }
 
-
+      mensaje = mensaje.indexOf('undefine') > 0 ? '' : mensaje;
       this.$swal.fire({
         showCloseButton: button ? true : false,
         title: titulo,
@@ -78713,15 +78709,15 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.interceptors.response.use(function (response) {
   //redirecs cuando Expired (expired) / no Logeado (guest)/
-  if ('exit' in response.data) {
+  if (response.data && response.data.exit) {
     window.location = response.data.exit;
     return;
   }
 
   return response;
 }, function (error) {
-  if ('exit' in response.data.error) {
-    window.location = response.data.exit;
+  if (error.data && error.data.exit) {
+    window.location = error.data.exit;
     return;
   }
 
@@ -78972,6 +78968,12 @@ var routes = [{
   name: '/perfil',
   component: function component() {
     return __webpack_require__.e(/*! import() | app/Usuario/Editar */ "app/Usuario/Editar").then(__webpack_require__.bind(null, /*! ../app/Usuario/Editar */ "./resources/js/app/Usuario/Editar.vue"));
+  }
+}, {
+  path: '/favoritos',
+  name: '/favoritos',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | app/Usuario/Favoritos */ "app/Usuario/Favoritos").then(__webpack_require__.bind(null, /*! ../app/Usuario/Favoritos */ "./resources/js/app/Usuario/Favoritos.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

@@ -136,10 +136,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      usuarios: [{
+        nombre: 'junior corales',
+        cedula: 123123123
+      }, {
+        nombre: 'el samy',
+        cedula: 899787
+      }],
       file: null,
       url: this.$root.base_url + 'perfil',
       pass: {
@@ -199,6 +205,12 @@ __webpack_require__.r(__webpack_exports__);
     this.iniciar();
   },
   methods: {
+    start: function start() {
+      this.$root.cargando();
+    },
+    stop: function stop() {
+      this.$root.stop();
+    },
     validarFormato: function validarFormato(file) {
       var rules = ['img', 'png', 'jpeg', 'jpg', 'gif'];
       return rules.includes(file.name.split('.').pop().toLowerCase());
@@ -236,16 +248,6 @@ __webpack_require__.r(__webpack_exports__);
         })["finally"](function () {});
       }
     },
-    start: function start() {
-      this.$root.cargando();
-    },
-    stop: function stop() {
-      this.$root.stop();
-    },
-    alerta: function alerta(tipo, titulo) {
-      var mensaje = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      this.$root.alertas(tipo, titulo, mensaje);
-    },
     iniciar: function iniciar() {
       var _this2 = this;
 
@@ -277,8 +279,9 @@ __webpack_require__.r(__webpack_exports__);
 
           _this3.alerta("success", "Exito", "Tus datos fueron modificados!");
 
-          _this3.usuario = res.data.usuario; //document.querySelector("#imagen_header").src = this.urlImagen;
-          //document.querySelector("#imagen_lateral").src = this.urlImagen;
+          _this3.usuario = res.data.usuario;
+          document.querySelector("#imagen_header").src = _this3.urlImagen;
+          document.querySelector("#imagen_lateral").src = _this3.urlImagen;
         })["catch"](function (err) {
           _this3.stop();
 
@@ -380,8 +383,6 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "profile-edit-container" }, [
           _c("div", { staticClass: "custom-form" }, [
-            _c("div", { staticClass: "form-group col-xs-12" }),
-            _vm._v(" "),
             _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
               _vm._m(1),
               _vm._v(" "),

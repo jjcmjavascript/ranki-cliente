@@ -6,10 +6,10 @@
             <div class="logo-holder">
                 <a href="{{route('inicio')}}"><img src="{{asset('images/logos/logo.png')}}" alt=""></a>
                   <span >
-                    <i class="fa fa-search"></i>
-                    <label class="buscar" onclick="buscar.open(event)">
+                    <!-- <i class="fa fa-search"></i> -->
+                    <!-- <label class="buscar" onclick="buscar.open(event)">
                       Buscar
-                    </label>
+                    </label> -->
                   </span>
             </div>
             <!-- MENU PRINCIPAL miniaturo-->
@@ -151,7 +151,7 @@
                 <!-- header-search-input-item end -->
             </div>
         </div>
-        <div class="close-header-search"><i class="fal fa-angle-double-up"></i></div>
+        <!-- <div class="close-header-search"><i class="fal fa-angle-double-up"></i></div> -->
     </div>
 
 </header>

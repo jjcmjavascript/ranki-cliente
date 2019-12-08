@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Sistema\Usuario;
 use App\Models\Comun\Imagen;
+use Carbon\Carbon;
 
 class UsuarioController extends Controller
 {
@@ -52,13 +53,9 @@ class UsuarioController extends Controller
 
         try {
             $ruta = 'api/usuarios/guardar';
-            $headers = [
-                'Accept' => 'application/json',
-                'Authorization' => session('api')->token_type.' '.session('api')->access_token
-            ];
             $form_params = $request->all();
 
-            $response = (new ApiHelper)->sendApiRequest($ruta, $headers, $form_params);
+            $response = (new ApiHelper)->sendApiRequest($ruta, $form_params);
 
             return response([ 'usuario' => $response ],200);
         }
@@ -80,13 +77,10 @@ class UsuarioController extends Controller
 
         try {
             $ruta = 'api/usuarios/editar_clave';
-            $headers = [
-                'Accept' => 'application/json',
-                'Authorization' => session('api')->token_type.' '.session('api')->access_token
-            ];
+
             $form_params = $request->all();
 
-            $response = (new ApiHelper)->sendApiRequest($ruta, $headers, $form_params);
+            $response = (new ApiHelper)->sendApiRequest($ruta, $form_params);
 
             return response([ 'usuario' => $response ], 200);
         }
@@ -153,22 +147,10 @@ class UsuarioController extends Controller
 
             if ( Auth::attempt($data,$request->remember) )
             {
-                $ruta = 'oauth/token';
 
-                $form_params = [
-                    'grant_type' => 'password',
-                    'client_id' => env('API_CLIENT_ID'),
-                    'client_secret' => env('API_CLIENT_SECRET'),
-                    'username' =>Auth::user()->email,
-                    'password'=> Auth::user()->password,
-                ];
+                $response = (new ApiHelper)->sendCredentialsRequest();
 
-                $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
-                dd($response);
-                // SET API SESSION WITH CREDENTIALS
-                session(['api' => (object)$response]);
-
-                return response([ 'url' => url()->previous() ], 200);
+                return response([ 'exit' => url()->previous() ], 200);
             }
 
             throw new \Exception('Cotraseña o correo incorrecto.');
@@ -185,5 +167,46 @@ class UsuarioController extends Controller
         Auth::logout();
 
         return redirect()->to('/');
+    }
+
+    public function favoritos(Request $request){
+
+        try {
+
+            $request->merge(['id_usuario'=>Auth::user()->id]);
+            
+            $response = (new ApiHelper)->sendApiRequest('api/usuarios/favoritos',$request->all());
+            if(isset($response['error'])) throw new \Exception($response);
+
+            return response()->json([
+                'rows'=>$response
+            ],200);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'error' => $e->getLine().':'.$e->getMessage()
+            ],500);
+        }
+    }
+
+    public function mis_propiedades(Request $request){
+
+        try {
+            $request->merge([ 'id_usuario'=>Auth::user()->id ]);
+
+            $response = (new ApiHelper)->sendApiRequest('api/usuarios/propiedades', $request->all());
+            if(isset($response['error'])) throw new \Exception($response);
+
+            return response()->json([
+                'rows'=>$response
+            ],200);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'error' => $e->getLine().':'.$e->getMessage()
+            ],500);
+        }
     }
 }

@@ -246,11 +246,7 @@ const app = new Vue({
                 })
                 mensaje = temp+'</ul>';
             }
-            // Swal.fire(
-            //     titulo,
-            //     mensaje,
-            //     tipo,
-            //   )
+            mensaje = mensaje.indexOf('undefine') > 0? '' : mensaje;
             this.$swal.fire({
                 showCloseButton: button ? true : false ,
                 title : titulo,

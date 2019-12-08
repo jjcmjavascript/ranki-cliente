@@ -19,10 +19,6 @@
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/color.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/custom.css')}}">
 
-
-    <!-- <link type="text/css" rel="stylesheet" href="{{asset('css/custom.css')}}"> -->
-
-
 </head>
 
 <body>
@@ -36,7 +32,6 @@
     <div id="main">
             @include('partials.header')
             @yield('content')
-            <!-- @include('partials.footer') -->
     </div>
 
     @yield('script')

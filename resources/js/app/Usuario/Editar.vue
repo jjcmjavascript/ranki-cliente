@@ -1,5 +1,6 @@
 <template>
 <div class="container">
+
     <!--dasboard-wrap-->
     <div class="dasboard-wrap fl-wrap">
         <!-- dashboard-content-->
@@ -10,9 +11,7 @@
             <!-- profile-edit-container-->
             <div class="profile-edit-container">
                 <div class="custom-form">
-                    <div class="form-group col-xs-12">
 
-                    </div>
                     <div class="form-group col-xs-12 col-md-6">
                         <label>
                             Nombre
@@ -77,16 +76,16 @@
                     </div>
 
                     <div class="custom-form no-icons">
-                      <div class="form-group col-xs-12">
-                        <div class="pass-input-wrap fl-wrap">
-                          <label>Contraseña Actual</label>
-                          <input type="password" class="pass-input" v-model="pass.actual" />
-                          <span class="eye">
-                            <i class="fa fa-eye" aria-hidden="true"></i>
-                          </span>
-                        </div>
+                        <div class="form-group col-xs-12">
+                            <div class="pass-input-wrap fl-wrap">
+                                <label>Contraseña Actual</label>
+                                <input type="password" class="pass-input" v-model="pass.actual" />
+                                <span class="eye">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </span>
+                            </div>
 
-                      </div>
+                        </div>
                         <div class="form-group col-xs-12 col-md-6">
                             <div class="pass-input-wrap fl-wrap">
                                 <label>Nueva Contraseña</label>
@@ -130,6 +129,15 @@
 export default {
     data() {
         return {
+            usuarios: [{
+                    nombre: 'junior corales',
+                    cedula: 123123123
+                },
+                {
+                    nombre: 'el samy',
+                    cedula: 899787
+                }
+            ],
             file: null,
             url: this.$root.base_url + 'perfil',
             pass: {
@@ -197,7 +205,7 @@ export default {
             } else if (this.usuario && this.usuario.avatar) {
 
                 return this.usuario.avatar
-                
+
             } else {
                 return "https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg";
             }
@@ -208,17 +216,27 @@ export default {
         this.iniciar();
     },
     methods: {
+        start(){
+            this.$root.cargando();
+        },
+
+        stop(){
+            this.$root.stop();
+        },
+
         validarFormato(file) {
             let rules = ['img', 'png', 'jpeg', 'jpg', 'gif'];
 
             return rules.includes(file.name.split('.').pop().toLowerCase());
         },
+
         validarSize(file) {
             //mega
             let size = 2.048;
 
             return ((file.size / 1024) / 1024) < size;
         },
+
         guardarContrasena() {
             if (
                 !this.$root.noScript(this.pass.actual) ||
@@ -252,18 +270,6 @@ export default {
                     })
                     .finally(() => {});
             }
-        },
-
-        start() {
-            this.$root.cargando();
-        },
-
-        stop() {
-            this.$root.stop();
-        },
-
-        alerta(tipo, titulo, mensaje = null) {
-            this.$root.alertas(tipo, titulo, mensaje);
         },
 
         iniciar() {
@@ -304,8 +310,8 @@ export default {
                         this.stop();
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");
                         this.usuario = res.data.usuario;
-                        //document.querySelector("#imagen_header").src = this.urlImagen;
-                        //document.querySelector("#imagen_lateral").src = this.urlImagen;
+                        document.querySelector("#imagen_header").src = this.urlImagen;
+                        document.querySelector("#imagen_lateral").src = this.urlImagen;
 
                     })
                     .catch(err => {

@@ -17,14 +17,15 @@ Route::middleware(['auth','verifyToken'])->group(function() {
 	    Route::post('/','UsuarioController@perfil')->name('.perfil');
 
 	    Route::post('guardar','UsuarioController@guardar')->name('.guardar');
-
 	    Route::post('clave','UsuarioController@editar_clave')->name('.editar_clave');
-
-	    // Route::post('avatar', 'UsuarioController@avatar')->name('.avatar');
-
-	    Route::get('favoritos','UsuarioController@vue')->name('.favoritos');
-	    Route::post('favoritos','UsuarioController@vue')->name('.favoritos');
 
 	    Route::get('logout', 'UsuarioController@logout')->name('.salir');
 	});
+        // favoritos
+    Route::namespace('Usuario')->prefix('favoritos')->name('usuario')->group(function() {
+        Route::get('/','UsuarioController@vue')->name('.favoritos');
+        Route::post('/','UsuarioController@favoritos')->name('.favoritos');
+
+    });
+
 });

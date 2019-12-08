@@ -25,19 +25,19 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.axios.interceptors.response.use(function (response) {
   //redirecs cuando Expired (expired) / no Logeado (guest)/
-   if('exit' in response.data ){
+   if( response.data && response.data.exit  ){
       window.location = response.data.exit;
-      return;
+      return ;
    }
 
    return response;
 
   }, function (error) {
 
-    if('exit' in response.data.error ){
-       window.location = response.data.exit;
-       return;
-    }
-
+      if( error.data && error.data.exit  ){
+         window.location = error.data.exit;
+         return;
+      }
     return Promise.reject(error);
+
   });

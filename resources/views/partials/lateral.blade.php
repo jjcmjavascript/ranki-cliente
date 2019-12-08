@@ -4,11 +4,11 @@
     <div class="container">
         <div class="dasboard-wrap fl-wrap">
             <div class="dasboard-breadcrumbs breadcrumbs">
-              <a href="#">Inicio</a>
-              <a href="#">Dashboard</a>
-              <span>Mi Perfil</span></div>
+              <a href="{{route('inicio')}}">INICIO</a>
+              <span>{{ str_replace('/','',strtoupper(request()->getRequestUri())) }}</span></div>
             <!--dasboard-sidebar-->
-            <div class="dasboard-sidebar">
+            @if( request()->is('perfil') )
+            <div class="dasboard-sidebar" >
                 <div class="dasboard-sidebar-content fl-wrap">
                     <div class="dasboard-avatar">
                       @if(count(Auth::user()->_avatar) >0 )
@@ -26,17 +26,22 @@
                     <a href="{{route('usuario.salir')}}" class="log-out-btn color-bg">Salir <i class="far fa-sign-out"></i></a>
                 </div>
             </div>
+            @endif
             <!--dasboard-sidebar end-->
             <!-- dasboard-menu-->
             <div class="dasboard-menu">
                 <div class="dasboard-menu-btn color3-bg">Dashboard Menu <i class="fal fa-bars"></i></div>
                 <ul class="dasboard-menu-wrap">
                     <li>
-                        <a href="dashboard.html" class="user-profile-act" ><i class="far fa-user"></i>Perfil</a>
+                        <a href="{{route('usuario.perfil')}}" class="{{request()->is('perfil') ? 'user-profile-act' : '' }}" >
+                            <i class="far fa-user"></i>Perfil</a>
                     </li>
-                    <li><a href="dashboard-messages.html" ><i class="far fa-envelope"></i> Mensajes <span>3</span></a></li>
                     <li>
-                        <a href="dashboard-listing-table.html"><i class="far fa-th-list"></i> Favoritos  </a>
+                        <a href="dashboard-messages.html" class="">
+                            <i class="far fa-envelope"></i> Mensajes <span>3</span></a></li>
+                    <li>
+                        <a href="{{route('usuario.favoritos')}}" class="{{request()->is('favoritos') ? 'user-profile-act' : ''}}">
+                            <i class="far fa-th-list"></i> Favoritos  </a>
                     </li>
 
                 </ul>

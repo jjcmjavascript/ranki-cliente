@@ -18,9 +18,15 @@ class ApiVerifyToken
      */
     public function handle($request, Closure $next)
     {
-        // if(!$this->verifyToken($request)){
-        //     $this->closeAndRedirect($request);
-        // };
+
+        if(!$this->verifyToken($request)){
+            session()->flush();
+
+            if( $request->ajax() ){
+                return response()->json([ 'exit' => env('APP_URL'),500]);
+            }
+            return redirect('/');
+        };
 
         return $next($request);
     }
@@ -29,16 +35,14 @@ class ApiVerifyToken
     {
 
        if( !$this->exceptionRoutes( $request ) ) {
+           // si estas logeado pero no tienes session api
+           if(Auth::check() && !session('api') ) return false;
+           // verificiacion del time
            $token_life = (int) session('api')->expires_in ; //expires in en segundos convertidos a minutos
            $diff = Carbon::parse( session('api')->created_at )->diffInSeconds( Carbon::now() );
 
            if( $diff  > $token_life ){
-               $val = $this->getNewToken();
-
-               if($val){
-                   return true;
-               }
-               return false;
+               return $this->getNewToken();
            }
            return true;
        }
@@ -47,28 +51,11 @@ class ApiVerifyToken
 
     private function getNewToken()
     {
-        $ruta = 'oauth/token';
-        $form_params = [
-            'grant_type' => 'refresh_token',
-            'client_id' => env('API_CLIENT_ID'),
-            'client_secret' => env('API_CLIENT_SECRET'),
-            'refresh_token'=> session('api')->refresh_token,
-        ];
-        $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
-
-    }
-
-
-    private function closeAndRedirect($request)
-    {
-        session()->flush();
-
-        if( $request->ajax() ){
-            return response(
-                [ 'exit' => env('APP_URL')]
-            );
+        $response = (new ApiHelper)->sendCredentialsRequest('refresh');
+        if($response){
+            return true;
         }
-        return redirect()->to('/');
+        return false;
     }
 
     private function exceptionRoutes( $request )
@@ -82,7 +69,10 @@ class ApiVerifyToken
         $exceptions = [
             '/',
             '/iniciar',
-            '/perfil/logout'
+            '/perfil/logout',
+            '/auth/google',
+            '/auth/facebook',
+
         ];
 
         return in_array($ruta , $exceptions );
