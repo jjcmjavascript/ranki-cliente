@@ -7,7 +7,7 @@
             <!--section -->
             <section class="hero-section" data-scrollax-parent="true" id="sec1">
                 <div class="hero-parallax">
-                    <div class="bg"  data-bg="images/portada.jpg" data-scrollax="properties: { translateY: '200px' }"></div>
+                    <div class="bg" data-bg="images/portada.jpg" data-scrollax="properties: { translateY: '200px' }"></div>
                     <div class="overlay op7"></div>
                 </div>
                 <div class="hero-section-wrap fl-wrap">
@@ -22,11 +22,11 @@
                             <div class="main-search-input fl-wrap">
                                 <div class="main-search-input-item location" id="autocomplete-container">
                                     <span class="inpt_dec"><i class="fal fa-map-marker"></i></span>
-                                    <input type="text" placeholder="Hotel , City..." class="autocomplete-input" id="autocompleteid2"  value=""/>
+                                    <input type="text" placeholder="Hotel , City..." class="autocomplete-input" id="autocompleteid2" value="" />
                                     <a href="#"><i class="fal fa-dot-circle"></i></a>
                                 </div>
                                 <div class="main-search-input-item main-date-parent main-search-input-item_small">
-                                    <span class="inpt_dec"><i class="fal fa-calendar-check"></i></span> <input type="text" placeholder="When" name="main-input-search"   value=""/>
+                                    <span class="inpt_dec"><i class="fal fa-calendar-check"></i></span> <input type="text" placeholder="When" name="main-input-search" value="" />
                                 </div>
                                 <div class="main-search-input-item">
                                     <div class="qty-dropdown fl-wrap">
@@ -70,9 +70,9 @@
                 <!-- carousel -->
                 <div class="list-carousel fl-wrap card-listing ">
                     <!--listing-carousel-->
-                    <div class="listing-carousel  fl-wrap " >
+                    <div class="listing-carousel  fl-wrap ">
                         <!--slick-slide-item-->
-                        <div class="slick-slide-item"  v-for="i in 10">
+                        <div class="slick-slide-item" v-for="i in 10">
                             <!-- listing-item  -->
                             <div class="listing-item">
                                 <article class="geodir-category-listing fl-wrap">
@@ -128,24 +128,24 @@
     </div>
     <!--wrapper end -->
     <!--footer -->
-            <login />
+    <login />
 
-            <!--register form end -->
-            <a class="to-top"><i class="fa fa-angle-up"></i></a>
+    <!--register form end -->
+    <a class="to-top"><i class="fa fa-angle-up"></i></a>
 </div>
 </template>
 <script>
 import Login from './Login.vue'
-    // api/publicaciones/recientes
-    export default {
-        components : {
-            login : Login,
-        },
-        data (){
-            return {
-                app_url  : this.$root.base_url,
-            }
-        },
+// api/publicaciones/recientes
+export default {
+    components: {
+        login: Login,
+    },
+    data() {
+        return {
+            app_url: this.$root.base_url,
+        }
+    },
 
-    }
+}
 </script>

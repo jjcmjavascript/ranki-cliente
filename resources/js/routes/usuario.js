@@ -14,6 +14,7 @@ const routes= [
         name: '/publicaciones',
         component : ()=> import(/* webpackChunkName: 'app/Usuario/Publicaciones'*/'../app/Usuario/Publicaciones'),
     },
+
 ]
 
 export default routes;
