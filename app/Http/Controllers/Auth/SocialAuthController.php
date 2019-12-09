@@ -18,16 +18,16 @@ class SocialAuthController extends Controller
     {
         return Socialite::driver($provider)->redirect();
     }
-    
+
     // Metodo encargado de obtener la información del usuario
     public function handleProviderCallback($provider)
     {
         // Obtenemos los datos del usuario
-        $social_user = Socialite::driver($provider)->user(); 
+        $social_user = Socialite::driver($provider)->user();
         // Comprobamos si el usuario ya existe
-        if ($user = Usuario::where('email', $social_user->email)->first()) { 
+        if ($user = Usuario::where('email', $social_user->email)->first()) {
             return $this->authAndRedirect($user); // Login y redirección
-        } else {  
+        } else {
             // En caso de que no exista creamos un nuevo usuario con sus datos.
             $user = Usuario::create([
                 'nombre' => $social_user->name,
@@ -44,24 +44,15 @@ class SocialAuthController extends Controller
     // Login y redirección
     public function authAndRedirect($user)
     {
-        try {    
-            Auth::login($user);      
+        try {
+            Auth::login($user);
+            $response = (new ApiHelper)->sendCredentialsRequest('social');
 
-            $ruta = 'oauth/token';
-            
-            $form_params = [
-                'grant_type' => 'social',
-                'client_id' => env('API_CLIENT_ID'),
-                'client_secret' => env('API_CLIENT_SECRET'),
-                'provider' => Auth::user()->provider, // provider
-                'access_token' => Auth::user()->provider_id, // provider_id
-            ];
-            
-            $response = (new ApiHelper)->sendCredentialsRequest($ruta, $form_params);
-
+            if(!$response){
+                session()->flush();
+                return redirect('/');
+            }
             // SET API SESSION WITH CREDENTIALS
-            session(['api' => (object)$response]);
-
             return \Redirect::back();
         }
         catch(\Exception $e) {
