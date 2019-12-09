@@ -47,7 +47,6 @@
                           </div>
                         </a>
                       </li>
-                      <hr class="iniciar_sm_li">
                       @endauth
                         <li>
                             <a href="{{route('inicio')}}" class="act-link">Principal</a>

@@ -83,6 +83,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -183,60 +185,67 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "rows" },
+                      { staticClass: "row" },
                       _vm._l(_vm.rows.data, function(val) {
                         return _vm.rows.data.length > 0
                           ? _c(
                               "div",
-                              { staticClass: "col-xs-12 card col-md-3 ml-1" },
+                              {
+                                staticClass:
+                                  "col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1"
+                              },
                               [
-                                _c("img", {
-                                  staticClass: "card-img-top",
-                                  attrs: {
-                                    src:
-                                      "http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg",
-                                    alt: ""
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "card-body" }, [
-                                  _c("h5", { staticClass: "card-title" }, [
-                                    _vm._v(
-                                      "\n                                            " +
-                                        _vm._s(val._propiedades.titulo) +
-                                        "\n\n                                        "
-                                    )
-                                  ]),
+                                _c("div", { staticClass: "card" }, [
+                                  _c("img", {
+                                    staticClass: "card-img-top",
+                                    attrs: {
+                                      src:
+                                        "http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg",
+                                      alt: ""
+                                    }
+                                  }),
                                   _vm._v(" "),
-                                  _c(
-                                    "p",
-                                    { staticClass: "card-text text-align-lef" },
-                                    [
+                                  _c("div", { staticClass: "card-body" }, [
+                                    _c("h5", { staticClass: "card-title" }, [
                                       _vm._v(
-                                        "\n                                            Tipo : " +
-                                          _vm._s(
-                                            val._propiedades._tipo_operacion
-                                              .nombre
-                                          ) +
-                                          " "
-                                      ),
-                                      _c("br"),
-                                      _vm._v(
-                                        "\n                                            Moneda: " +
-                                          _vm._s(
-                                            val._propiedades._tipo_valor
-                                              ? val._propiedades._tipo_valor
-                                                  .nombre
-                                              : ""
-                                          ) +
-                                          "\n                                            Monto : $" +
-                                          _vm._s(val._propiedades.precio) +
-                                          "\n                                        "
+                                        "\r\n                                                " +
+                                          _vm._s(val._propiedades.titulo) +
+                                          "\r\n\r\n                                            "
                                       )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm._m(2, true)
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass: "card-text text-align-lef"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\r\n                                                Tipo : " +
+                                            _vm._s(
+                                              val._propiedades._tipo_operacion
+                                                .nombre
+                                            ) +
+                                            " "
+                                        ),
+                                        _c("br"),
+                                        _vm._v(
+                                          "\r\n                                                Moneda: " +
+                                            _vm._s(
+                                              val._propiedades._tipo_valor
+                                                ? val._propiedades._tipo_valor
+                                                    .nombre
+                                                : ""
+                                            ) +
+                                            "\r\n                                                Monto : $" +
+                                            _vm._s(val._propiedades.precio) +
+                                            "\r\n                                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._m(2, true)
+                                  ])
                                 ])
                               ]
                             )

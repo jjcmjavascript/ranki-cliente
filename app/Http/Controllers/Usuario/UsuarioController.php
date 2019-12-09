@@ -57,6 +57,8 @@ class UsuarioController extends Controller
 
             $response = (new ApiHelper)->sendApiRequest($ruta, $form_params);
 
+            if(isset($response['error'])) throw new \Exception($response);
+
             return response([ 'usuario' => $response ],200);
         }
         catch (\Exception $e) {
@@ -81,6 +83,8 @@ class UsuarioController extends Controller
             $form_params = $request->all();
 
             $response = (new ApiHelper)->sendApiRequest($ruta, $form_params);
+
+            if(isset($response['error'])) throw new \Exception($response);
 
             return response([ 'usuario' => $response ], 200);
         }
@@ -121,13 +125,13 @@ class UsuarioController extends Controller
 
             Auth::attempt( $request->only('email', 'password') );
 
-            return response(['url'=> url()->previous() ],200);
+            return response(['url' => url()->previous() ],200);
 
         }catch(\Exception $e){
 
             DB::rollback();
 
-            return response([ 'error'=>$e->getMessage() ],500);
+            return response([ 'error' => $e->getMessage() ],500);
 
         }
 
@@ -173,20 +177,21 @@ class UsuarioController extends Controller
 
         try {
 
-            $request->merge(['id_usuario'=>Auth::user()->id]);
+            $request->merge(['id_usuario' => Auth::user()->id]);
 
             $response = (new ApiHelper)->sendApiRequest('api/usuarios/favoritos',$request->all());
 
             if(isset($response['error'])) throw new \Exception($response);
+            
             return response()->json([
-                'rows'=>$response
-            ],200);
+                'rows' => $response
+            ], 200);
 
         } catch (\Exception $e) {
 
             return response()->json([
-                'error' => $e->getLine().':'.$e->getMessage()
-            ],500);
+                'error' => $e->getLine().': '.$e->getMessage()
+            ], 500);
         }
     }
 
@@ -196,16 +201,17 @@ class UsuarioController extends Controller
             $request->merge([ 'id_usuario'=>Auth::user()->id ]);
 
             $response = (new ApiHelper)->sendApiRequest('api/usuarios/propiedades', $request->all());
+
             if(isset($response['error'])) throw new \Exception($response);
 
             return response()->json([
-                'rows'=>$response
+                'rows' => $response
             ],200);
 
         } catch (\Exception $e) {
 
             return response()->json([
-                'error' => $e->getLine().':'.$e->getMessage()
+                'error' => $e->getLine().': '.$e->getMessage()
             ],500);
         }
     }

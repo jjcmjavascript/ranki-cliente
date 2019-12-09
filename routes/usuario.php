@@ -21,29 +21,23 @@ Route::middleware(['auth','verifyToken'])->group(function() {
 
 	    Route::get('logout', 'UsuarioController@logout')->name('.salir');
 	});
-        // favoritos
+
+    // FAVORITOS
     Route::namespace('Usuario')->prefix('favoritos')->name('usuario')->group(function() {
         Route::get('/','UsuarioController@vue')->name('.favoritos');
         Route::post('/','UsuarioController@favoritos')->name('.favoritos');
-
     });
-    // Publicaciones
+
+    // PUBLICACIONES
     Route::namespace('Usuario')->prefix('publicaciones')->name('usuario')->group(function() {
         Route::get('/','UsuarioController@vue')->name('.publicaciones');
         Route::post('/','UsuarioController@favoritos')->name('.publicaciones');
-
     });
-});
 
-Route::middleware(['auth','verifyToken'])->group(function() {
-	// Propiedad
+    // PROPIEDADES
 	Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function() {
 		Route::get('crear','PropiedadController@vue')->name('.crear');
 	    Route::post('crear','PropiedadController@crear')->name('.crear');
-        Route::post('guardar','PropiedadController@crear')->name('.crear');
-
-
-
+        Route::post('guardar','PropiedadController@crear')->name('.guardar');
 	});
-
 });

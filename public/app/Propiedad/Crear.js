@@ -321,6 +321,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -553,7 +555,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.data.region) {
         var request = new FormData();
         request.append('id_region', this.data.region.id);
-        axios.post(this.$root.base_url + '/mantenedor/combo_box/comunas', request).then(function (response) {
+        axios.post(this.$root.base_url + 'comun/combo_box/comunas', request).then(function (response) {
           _this4.selects.comunas = response.data;
         })["catch"](function (error) {
           _this4.error = _this4.$root.arrayResponse(error);
@@ -664,7 +666,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\ninput[type=\"file\"][data-v-1f51cce4] {\n    display: none;\n}\n\n", ""]);
+exports.push([module.i, "\ninput[type=\"file\"][data-v-1f51cce4] {\r\n    display: none;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -1234,7 +1236,10 @@ var render = function() {
                       [
                         _c(
                           "div",
-                          { staticClass: "checkbox checkbox-css mt-4" },
+                          {
+                            staticClass:
+                              "custom-control custom-checkbox mt-4 pt-2"
+                          },
                           [
                             _c("input", {
                               directives: [
@@ -1245,6 +1250,7 @@ var render = function() {
                                   expression: "data.amoblada"
                                 }
                               ],
+                              staticClass: "custom-control-input",
                               attrs: { type: "checkbox", id: "cssCheckbox1" },
                               domProps: {
                                 checked: Array.isArray(_vm.data.amoblada)
@@ -1283,9 +1289,14 @@ var render = function() {
                               }
                             }),
                             _vm._v(" "),
-                            _c("label", { attrs: { for: "cssCheckbox1" } }, [
-                              _vm._v("Esta propiedad esta amoblada")
-                            ])
+                            _c(
+                              "label",
+                              {
+                                staticClass: "custom-control-label",
+                                attrs: { for: "cssCheckbox1" }
+                              },
+                              [_vm._v("Esta propiedad esta amoblada")]
+                            )
                           ]
                         )
                       ]
@@ -1554,9 +1565,13 @@ var render = function() {
                                   return _c("span", [
                                     _c(
                                       "div",
-                                      { staticClass: "checkbox checkbox-css" },
+                                      {
+                                        staticClass:
+                                          "custom-control custom-checkbox"
+                                      },
                                       [
                                         _c("input", {
+                                          staticClass: "custom-control-input",
                                           attrs: {
                                             type: "checkbox",
                                             id: "cssCheckbox1" + key
@@ -1573,7 +1588,7 @@ var render = function() {
                                         _c(
                                           "label",
                                           {
-                                            staticClass: "no_bold",
+                                            staticClass: "custom-control-label",
                                             attrs: { for: "cssCheckbox1" + key }
                                           },
                                           [
@@ -1608,9 +1623,13 @@ var render = function() {
                                   return _c("span", [
                                     _c(
                                       "div",
-                                      { staticClass: "checkbox checkbox-css" },
+                                      {
+                                        staticClass:
+                                          "custom-control custom-checkbox"
+                                      },
                                       [
                                         _c("input", {
+                                          staticClass: "custom-control-input",
                                           attrs: {
                                             type: "checkbox",
                                             id: "cssCheckbox2" + key
@@ -1627,7 +1646,7 @@ var render = function() {
                                         _c(
                                           "label",
                                           {
-                                            staticClass: "no_bold",
+                                            staticClass: "custom-control-label",
                                             attrs: { for: "cssCheckbox2" + key }
                                           },
                                           [
@@ -1662,9 +1681,13 @@ var render = function() {
                                   return _c("span", [
                                     _c(
                                       "div",
-                                      { staticClass: "checkbox checkbox-css" },
+                                      {
+                                        staticClass:
+                                          "custom-control custom-checkbox"
+                                      },
                                       [
                                         _c("input", {
+                                          staticClass: "custom-control-input",
                                           attrs: {
                                             type: "checkbox",
                                             id: "cssCheckbox3" + key
@@ -1681,7 +1704,7 @@ var render = function() {
                                         _c(
                                           "label",
                                           {
-                                            staticClass: "no_bold",
+                                            staticClass: "custom-control-label",
                                             attrs: { for: "cssCheckbox3" + key }
                                           },
                                           [
@@ -1713,9 +1736,13 @@ var render = function() {
                                   return _c("span", [
                                     _c(
                                       "div",
-                                      { staticClass: "checkbox checkbox-css" },
+                                      {
+                                        staticClass:
+                                          "custom-control custom-checkbox"
+                                      },
                                       [
                                         _c("input", {
+                                          staticClass: "custom-control-input",
                                           attrs: {
                                             type: "checkbox",
                                             id: "cssCheckbox4" + key
@@ -1732,7 +1759,7 @@ var render = function() {
                                         _c(
                                           "label",
                                           {
-                                            staticClass: "no_bold",
+                                            staticClass: "custom-control-label",
                                             attrs: { for: "cssCheckbox4" + key }
                                           },
                                           [
@@ -2083,13 +2110,15 @@ var render = function() {
                         ])
                       ]
                     )
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _vm._m(22)
                 ])
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "section-decor" })
+          ])
         ]
       )
     ])
@@ -2108,7 +2137,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "text-info" }, [
+    return _c("h5", { staticClass: "text-info mb-2" }, [
       _c("span", { staticClass: "fa-stack" }, [
         _c("i", { staticClass: "fa fa-circle fa-stack-2x icon-background" }),
         _vm._v(" "),
@@ -2148,7 +2177,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "mt-2 text-info" }, [
+    return _c("h5", { staticClass: "mt-2 text-info mb-2" }, [
       _c("span", { staticClass: "fa-stack" }, [
         _c("i", { staticClass: "fa fa-circle fa-stack-2x icon-background" }),
         _vm._v(" "),
@@ -2253,7 +2282,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "mt-2 text-info" }, [
+    return _c("h5", { staticClass: "mt-2 text-info mb-2" }, [
       _c("span", { staticClass: "fa-stack" }, [
         _c("i", { staticClass: "fa fa-circle fa-stack-2x icon-background" }),
         _vm._v(" "),
@@ -2295,7 +2324,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "mt-2 text-info" }, [
+    return _c("h5", { staticClass: "mt-2 text-info mb-2" }, [
       _c("span", { staticClass: "fa-stack" }, [
         _c("i", { staticClass: "fa fa-circle fa-stack-2x icon-background" }),
         _vm._v(" "),
@@ -2322,6 +2351,16 @@ var staticRenderFns = [
     return _c("label", [
       _vm._v("Precio de publicación "),
       _c("span", { staticClass: "text-red" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "float-right" }, [
+      _c("button", { staticClass: "btn btn-success btn-lg" }, [
+        _vm._v("Publicar propiedad")
+      ])
     ])
   }
 ]

@@ -19,29 +19,31 @@
                                 <h2> Mis Publicaciones</h2>
                             </div>
 
-                            <div class="rows">
-                                <div class="col-xs-12 card col-md-3 ml-1" v-if="rows.data.length > 0" v-for="val in rows.data" >
-                                    <img class="card-img-top" src="http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg" alt=""></a>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1" v-if="rows.data.length > 0" v-for="val in rows.data" >
+                                    <div class="card">
+                                        <img class="card-img-top" src="http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg" alt=""></a>
 
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            {{val._propiedades.titulo}}
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                {{val._propiedades.titulo}}
 
-                                        </h5>
-                                        <p class="card-text text-align-lef">
-                                            Tipo : {{ val._propiedades._tipo_operacion.nombre }} <br>
-                                            Moneda: {{val._propiedades._tipo_valor ? val._propiedades._tipo_valor.nombre : ''}}
-                                            Monto : ${{val._propiedades.precio}}
-                                        </p>
-                                        <div class="geodir-category-footer fl-wrap">
-                                            <br>
-                                            <div class="geodir-opt-list">
-                                                <a href="#" class="geodir-js-booking"><i class="fal fa-trash"></i>
-                                                    <span class="geodir-opt-tooltip">Borrar</span>
-                                                </a>
-                                                <a href="#" class="geodir-js-booking"><i class="fal fa-edit"></i>
-                                                    <span class="geodir-opt-tooltip">Editar</span>
-                                                </a>
+                                            </h5>
+                                            <p class="card-text text-align-lef">
+                                                Tipo : {{ val._propiedades._tipo_operacion.nombre }} <br>
+                                                Moneda: {{val._propiedades._tipo_valor ? val._propiedades._tipo_valor.nombre : ''}}
+                                                Monto : ${{val._propiedades.precio}}
+                                            </p>
+                                            <div class="geodir-category-footer fl-wrap">
+                                                <br>
+                                                <div class="geodir-opt-list">
+                                                    <a href="#" class="geodir-js-booking"><i class="fal fa-trash"></i>
+                                                        <span class="geodir-opt-tooltip">Borrar</span>
+                                                    </a>
+                                                    <a href="#" class="geodir-js-booking"><i class="fal fa-edit"></i>
+                                                        <span class="geodir-opt-tooltip">Editar</span>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

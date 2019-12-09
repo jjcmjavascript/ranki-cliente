@@ -88,7 +88,7 @@ class ApiHelper {
 
 	}
 
-	public function sendApiRequest($ruta, $form_params,$getOnlyBody = true)
+	public function sendApiRequest($ruta, $form_params = null, $getOnlyBody = true)
     {
 
 		$headers = [
@@ -96,7 +96,7 @@ class ApiHelper {
 			'Authorization' => session('api')->token_type.' '.session('api')->access_token
 		];
 
-        $response = $this->guzzle->post( env('API_CONNECTION'). $ruta, [
+        $response = $this->guzzle->post( \Config::get('app.api_connection'). $ruta, [
           'headers' => $headers,
           'form_params' => $form_params,
         ]);

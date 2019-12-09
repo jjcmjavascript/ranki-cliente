@@ -15,6 +15,8 @@
                       <img id="imagen_lateral" src="/storage/{{Auth::user()->_avatar[count(Auth::user()->_avatar)-1]->ruta}}" >
                       @elseif(Auth::user()->avatar)
                       <img id="imagen_lateral" src="{{Auth::user()->avatar}}" >
+                      @else
+                      <img id="imagen_lateral" src="https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg" >
                       @endif
                     </div>
                     <div class="dasboard-sidebar-item fl-wrap">

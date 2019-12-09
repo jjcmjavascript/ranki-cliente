@@ -11,7 +11,7 @@
                                 <div class="list-single-main-item-title fl-wrap">
                                     <h3>Crear nueva propiedad</h3>
                                 </div>
-                                <h5 class="text-info">
+                                <h5 class="text-info mb-2">
                             		<span class="fa-stack">
                 					  <i class="fa fa-circle fa-stack-2x icon-background"></i>
                 					  <span class="fa-stack-1x text-black">1</span>
@@ -50,7 +50,7 @@
                                		</div>
                                	</div>
 
-                            	<h5 class="mt-2 text-info">
+                            	<h5 class="mt-2 text-info mb-2">
                             		<span class="fa-stack">
                 					 	<i class="fa fa-circle fa-stack-2x icon-background"></i>
                 					 	<span class="fa-stack-1x text-black">2</span>
@@ -119,9 +119,9 @@
                                         <v-select label="nombre" :options="selects.tipos_pisos" v-model="data.tipo_piso" multiple></v-select>
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                        <div class="checkbox checkbox-css mt-4">
-                                            <input type="checkbox" id="cssCheckbox1" v-model="data.amoblada">
-                                            <label for="cssCheckbox1">Esta propiedad esta amoblada</label>
+                                        <div class="custom-control custom-checkbox mt-4 pt-2">
+                                            <input type="checkbox" class="custom-control-input" id="cssCheckbox1" v-model="data.amoblada">
+                                            <label class="custom-control-label" for="cssCheckbox1">Esta propiedad esta amoblada</label>
                                         </div>
                                     </div>
                                 </div>
@@ -168,9 +168,9 @@
                                             <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                                 <label>Distribución</label>
                                                 <span v-for="(distribucion, key) in selects.distribucion">
-                                                    <div class="checkbox checkbox-css">
-                                                        <input type="checkbox" :id="'cssCheckbox1'+key" @click="colocarAtributo(distribucion.id)">
-                                                        <label class="no_bold" :for="'cssCheckbox1'+key">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" :id="'cssCheckbox1'+key" @click="colocarAtributo(distribucion.id)">
+                                                        <label class="custom-control-label" :for="'cssCheckbox1'+key">
                                                             {{ distribucion.nombre }}
                                                         </label>
                                                     </div>
@@ -179,9 +179,9 @@
                                             <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                                 <label>Servicios</label>
                                                 <span v-for="(servicio, key) in selects.servicios">
-                                                    <div class="checkbox checkbox-css">
-                                                        <input type="checkbox" :id="'cssCheckbox2'+key" @click="colocarAtributo(servicio.id)">
-                                                        <label class="no_bold" :for="'cssCheckbox2'+key">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" :id="'cssCheckbox2'+key" @click="colocarAtributo(servicio.id)">
+                                                        <label class="custom-control-label" :for="'cssCheckbox2'+key">
                                                             {{ servicio.nombre }}
                                                         </label>
                                                     </div>
@@ -190,9 +190,9 @@
                                             <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                                 <label>Cocina</label>
                                                 <span v-for="(cocina, key) in selects.cocina">
-                                                    <div class="checkbox checkbox-css" >
-                                                        <input type="checkbox" :id="'cssCheckbox3'+key" @click="colocarAtributo(cocina.id)">
-                                                        <label class="no_bold" :for="'cssCheckbox3'+key">
+                                                    <div class="custom-control custom-checkbox" >
+                                                        <input type="checkbox" class="custom-control-input" :id="'cssCheckbox3'+key" @click="colocarAtributo(cocina.id)">
+                                                        <label class="custom-control-label" :for="'cssCheckbox3'+key">
                                                             {{ cocina.nombre }}
                                                         </label>
                                                     </div>
@@ -201,9 +201,9 @@
                                             <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                                 <label>Otros</label>
                                                 <span v-for="(otro, key) in selects.otros">
-                                                    <div class="checkbox checkbox-css">
-                                                        <input type="checkbox" :id="'cssCheckbox4'+key" @click="colocarAtributo(otro.id)">
-                                                        <label class="no_bold" :for="'cssCheckbox4'+key">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" :id="'cssCheckbox4'+key" @click="colocarAtributo(otro.id)">
+                                                        <label class="custom-control-label" :for="'cssCheckbox4'+key">
                                                             {{ otro.nombre }}
                                                         </label>
                                                     </div>
@@ -214,7 +214,7 @@
                                 </div>
                                 <hr class="mt-0 mb-5">
 
-                                <h5 class="mt-2 text-info">
+                                <h5 class="mt-2 text-info mb-2">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x icon-background"></i>
                                         <span class="fa-stack-1x text-black">3</span>
@@ -269,7 +269,7 @@
                                     </div>
                                 </div>
 
-                                <h5 class="mt-2 text-info">
+                                <h5 class="mt-2 text-info mb-2">
                                     <span class="fa-stack">
                                         <i class="fa fa-circle fa-stack-2x icon-background"></i>
                                         <span class="fa-stack-1x text-black">4</span>
@@ -297,12 +297,14 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <hr>
+                            <div class="float-right">
+                                <button class="btn btn-success btn-lg">Publicar propiedad</button>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="section-decor"></div>
             </section>
             <!-- section end -->
         </div>
@@ -544,7 +546,7 @@
 				if(this.data.region) {
 					let request = new FormData;
 					request.append('id_region', this.data.region.id);
-					axios.post(this.$root.base_url + '/mantenedor/combo_box/comunas', request)
+					axios.post(this.$root.base_url + 'comun/combo_box/comunas', request)
 					.then(response => {
 						this.selects.comunas = response.data;
 					})

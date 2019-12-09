@@ -44,16 +44,13 @@ html{
 	height: 100%;
 }
 body{
-	font-weight: 600;
-	font-size: 13px;
+	font-size: 14px;
 	height: 100%;
   	width: 100%;
   	margin: 0px;
  	padding: 0px;
-	text-align:center;
 	background: #18458B;
 	color:#000;
-	font-family: 'Nunito', sans-serif;
 }
 @-o-viewport {width: device-width;}
 @-ms-viewport {width: device-width;}

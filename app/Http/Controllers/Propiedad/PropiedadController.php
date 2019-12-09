@@ -24,6 +24,11 @@ class PropiedadController extends Controller
 
     public function index ()
     {
+        
+    }
+
+    public function crear()
+    {
         try {
 
             $response = (new ApiHelper)->sendApiRequest('api/propiedades/crear');
@@ -35,15 +40,9 @@ class PropiedadController extends Controller
         } catch (\Exception $e) {
 
             return response([
-                'error'=> $e->getMessage()
-            ],500);
+                'error' => $e->getMessage()
+            ], 500);
         }
-    }
-
-    public function crear()
-    {
-
-
     }
 
 
