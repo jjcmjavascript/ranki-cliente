@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Crear":"app/Propiedad/Crear","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -83319,6 +83319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_login_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../routes/login.js */ "./resources/js/routes/login.js");
 /* harmony import */ var _routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../routes/usuario.js */ "./resources/js/routes/usuario.js");
 /* harmony import */ var _routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../routes/Sistema.js */ "./resources/js/routes/Sistema.js");
+/* harmony import */ var _routes_propiedad_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../routes/propiedad.js */ "./resources/js/routes/propiedad.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -83330,7 +83331,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
-var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+var baseRoutes = [].concat(_toConsumableArray(_routes_login_js__WEBPACK_IMPORTED_MODULE_0__["default"]), _toConsumableArray(_routes_usuario_js__WEBPACK_IMPORTED_MODULE_1__["default"]), _toConsumableArray(_routes_Sistema_js__WEBPACK_IMPORTED_MODULE_2__["default"]), _toConsumableArray(_routes_propiedad_js__WEBPACK_IMPORTED_MODULE_3__["default"]));
 /* harmony default export */ __webpack_exports__["default"] = (baseRoutes);
 
 /***/ }),
@@ -83395,6 +83397,26 @@ var routes = [{
   path: '/',
   component: function component() {
     return __webpack_require__.e(/*! import() | app/login */ "app/login").then(__webpack_require__.bind(null, /*! ../app/Home */ "./resources/js/app/Home.vue"));
+  }
+}];
+/* harmony default export */ __webpack_exports__["default"] = (routes);
+
+/***/ }),
+
+/***/ "./resources/js/routes/propiedad.js":
+/*!******************************************!*\
+  !*** ./resources/js/routes/propiedad.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var routes = [{
+  path: '/propiedad/crear',
+  name: '/crear_propiedad',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | app/Propiedad/Crear */ "app/Propiedad/Crear").then(__webpack_require__.bind(null, /*! ../app/Propiedad/Crear */ "./resources/js/app/Propiedad/Crear.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

@@ -50,15 +50,15 @@
                       <hr class="iniciar_sm_li">
                       @endauth
                         <li>
-                            <a href="#" class="act-link">Principal <i class="fas fa-caret-down"></i></a>
-                            <!--second level -->
-                            <ul>
-                                <li><a href="index.html">proximanente...</a></li>
-                            </ul>
-                            <!--second level end-->
+                            <a href="{{route('inicio')}}" class="act-link">Principal</a>
                         </li>
                         <li>
-                            <a href="blog.html">proximanente</a>
+                            <a href="#">Usuario <i class="fas fa-caret-down"></i></a>
+                            <ul>
+                                <li><a href="{{route('usuario.perfil')}}"> Editar Perfil</a></li>
+                                <li><a href="{{route('usuario.favoritos')}}"> Favoritos</a></li>
+                                <li><a href="{{route('usuario.publicaciones')}}"> Mis Publicaciones</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -86,6 +86,9 @@
               </div>
               <ul>
                 <li><a href="{{route('usuario.perfil')}}"> Editar Perfil</a></li>
+                <li><a href="{{route('usuario.favoritos')}}"> Favoritos</a></li>
+                <li><a href="{{route('usuario.publicaciones')}}"> Mis Publicaciones</a></li>
+
                 <li><a href="{{route('usuario.salir')}}">Salir</a></li>
               </ul>
               <div>

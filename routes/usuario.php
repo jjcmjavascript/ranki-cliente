@@ -33,5 +33,17 @@ Route::middleware(['auth','verifyToken'])->group(function() {
         Route::post('/','UsuarioController@favoritos')->name('.publicaciones');
 
     });
+});
+
+Route::middleware(['auth','verifyToken'])->group(function() {
+	// Propiedad
+	Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function() {
+		Route::get('crear','PropiedadController@vue')->name('.crear');
+	    Route::post('crear','PropiedadController@crear')->name('.crear');
+        Route::post('guardar','PropiedadController@crear')->name('.crear');
+
+
+
+	});
 
 });

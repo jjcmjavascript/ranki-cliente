@@ -1,94 +1,77 @@
 <template>
+<!--  -->
+<section class="grey-blue-bg small-padding" id="sec1">
+    <div class="container">
+        <div class="row">
+            <!--listing -->
+            <div class="col-md-12">
+                <div class="mobile-list-controls fl-wrap mar-bot-cont">
+                    <div class="mlc show-list-wrap-search fl-wrap"><i class="fal fa-filter"></i> Filter</div>
+                </div>
 
-    <!--   list-single-main-item -->
-    <div class="list-single-main-item fl-wrap" id="sec4">
-        <div class="list-single-main-item-title fl-wrap">
-            <h3>Available Rooms</h3>
+                <div class="col-list-wrap fw-col-list-wrap">
+                    <!-- list-main-wrap-->
+                    <div class="list-main-wrap fl-wrap card-listing">
+                        <!-- list-main-wra
+                            p-opt-->
+                        <div class="list-main-wrap-opt fl-wrap">
+                            <div class="list-main-wrap-title fl-wrap col-title">
+                                <h2> Mis Publicaciones</h2>
+                            </div>
+
+                            <div class="rows">
+                                <div class="col-xs-12 card col-md-3 ml-1" v-if="rows.data.length > 0" v-for="val in rows.data" >
+                                    <img class="card-img-top" src="http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg" alt=""></a>
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            {{val._propiedades.titulo}}
+
+                                        </h5>
+                                        <p class="card-text text-align-lef">
+                                            Tipo : {{ val._propiedades._tipo_operacion.nombre }} <br>
+                                            Moneda: {{val._propiedades._tipo_valor ? val._propiedades._tipo_valor.nombre : ''}}
+                                            Monto : ${{val._propiedades.precio}}
+                                        </p>
+                                        <div class="geodir-category-footer fl-wrap">
+                                            <br>
+                                            <div class="geodir-opt-list">
+                                                <a href="#" class="geodir-js-booking"><i class="fal fa-trash"></i>
+                                                    <span class="geodir-opt-tooltip">Borrar</span>
+                                                </a>
+                                                <a href="#" class="geodir-js-booking"><i class="fal fa-edit"></i>
+                                                    <span class="geodir-opt-tooltip">Editar</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="pagination" v-if="rows.total > 15">
+                            <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                            <a href="#">1</a>
+                            <a href="#" class="current-page">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                        </div>
+                        <!-- pagination end-->
+                    </div>
+                    <!-- list-main-wrap end-->
+                </div>
+                <!--col-list-wrap end -->
+            </div>
+            <!--listing  end-->
         </div>
-        <!--   rooms-container -->
-        <div class="rooms-container fl-wrap">
-            <!--  rooms-item -->
-            <div class="rooms-item fl-wrap">
-                <div class="rooms-media">
-                    <img src="images/gal/1.jpg" alt="">
-                    <div class="dynamic-gal more-photos-button" data-dynamicPath="[{'src': 'images/gal/slider/1.jpg'}, {'src': 'images/gal/slider/1.jpg'},{'src': 'images/gal/slider/1.jpg'}]">  View Gallery <span>3 photos</span> <i class="far fa-long-arrow-right"></i></div>
-                </div>
-                <div class="rooms-details">
-                    <div class="rooms-details-header fl-wrap">
-                        <span class="rooms-price">$81 <strong> / person</strong></span>
-                        <h3>Standard Family Room</h3>
-                        <h5>Max Guests: <span>3 persons</span></h5>
-                    </div>
-                    <p>Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <div class="facilities-list fl-wrap">
-                        <ul>
-                            <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
-                            <li><i class="fal fa-bath"></i><span>1 Bathroom</span></li>
-                            <li><i class="fal fa-snowflake"></i><span>Air conditioner</span></li>
-                            <li><i class="fal fa-tv"></i><span> Tv Inside</span></li>
-                            <li><i class="fas fa-concierge-bell"></i><span>Breakfast</span></li>
-                        </ul>
-                        <a href="rooms/room1.html" class="btn color-bg ajax-link">Details<i class="fas fa-caret-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--  rooms-item end -->
-            <!--  rooms-item -->
-            <div class="rooms-item fl-wrap">
-                <div class="rooms-media">
-                    <img src="images/gal/1.jpg" alt="">
-                    <div class="dynamic-gal more-photos-button" data-dynamicPath="[{'src': 'images/gal/slider/1.jpg'}, {'src': 'images/gal/slider/1.jpg'}, {'src': 'images/gal/slider/1.jpg'} ]">View Gallery <span>3 photos</span> <i class="far fa-long-arrow-right"></i></div>
-                </div>
-                <div class="rooms-details">
-                    <div class="rooms-details-header fl-wrap">
-                        <span class="rooms-price">$122 <strong> / person</strong></span>
-                        <h3>Superior Double Room</h3>
-                        <h5>Max Guests: <span>4 persons</span></h5>
-                    </div>
-                    <p>Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <div class="facilities-list fl-wrap">
-                        <ul>
-                            <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
-                            <li><i class="fal fa-parking"></i><span>Parking</span></li>
-                            <li><i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span></li>
-                            <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
-                        </ul>
-                        <a href="rooms/room2.html" class="btn color-bg ajax-link">Details<i class="fas fa-caret-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--  rooms-item end -->
-            <!--  rooms-item -->
-            <div class="rooms-item fl-wrap">
-                <div class="rooms-media">
-                    <img src="images/gal/1.jpg" alt="">
-                    <div class="dynamic-gal more-photos-button" data-dynamicPath="[{'src': 'images/gal/slider/1.jpg'},{'src': 'images/gal/slider/1.jpg'}, {'src': 'images/gal/slider/1.jpg'},{'src': 'images/gal/slider/1.jpg'}]"> View Gallery <span>4 photos</span> <i class="far fa-long-arrow-right"></i> </div>
-                </div>
-                <div class="rooms-details">
-                    <div class="rooms-details-header fl-wrap">
-                        <span class="rooms-price">$310 <strong> / person</strong></span>
-                        <h3>Deluxe Single Room</h3>
-                        <h5>Max Guests: <span>2 persons</span></h5>
-                    </div>
-                    <p>Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <div class="facilities-list fl-wrap">
-                        <ul>
-                            <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
-                            <li><i class="fal fa-parking"></i><span>Parking</span></li>
-                            <li><i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span></li>
-                            <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
-                        </ul>
-                        <a href="rooms/room3.html" class="btn color-bg ajax-link">Details<i class="fas fa-caret-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!--  rooms-item end -->
-        </div>
-        <!--   rooms-container end -->
+        <!--row end-->
     </div>
-    <!-- list-single-main-item end --
+</section>
+<!--section end -->
 </template>
-
 <script>
 export default {
     data() {
@@ -97,7 +80,7 @@ export default {
             usuario: {
                 nombre: null,
             },
-            activo :1 ,
+            activo: 1,
             rows: {
                 current_page: 0,
                 data: [],
@@ -109,7 +92,7 @@ export default {
                 path: null,
                 per_page: null,
                 prev_page_url: null,
-                total : 0,
+                total: 0,
             }
         }
     },
@@ -130,25 +113,27 @@ export default {
         },
 
         iniciar() {
-            axios.post(this.url, {estado : this.activo})
+            axios.post(this.url, {
+                    estado: this.activo
+                })
                 .then((res) => {
                     this.rows = res.data.rows;
                 })
-                .finally(()=>{
+                .finally(() => {
 
                 })
         },
-        badgeColor( tipo_operacion ){
+        badgeColor(tipo_operacion) {
             switch (tipo_operacion.id) {
                 case 11:
                     return 'sale-window big-sale-two '
-                break;
+                    break;
                 case 12:
                     return 'sale-window big-sale'
-                break;
+                    break;
                 case 13:
                     return
-                break;
+                    break;
             }
         },
     }
