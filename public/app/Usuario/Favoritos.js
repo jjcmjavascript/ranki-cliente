@@ -292,12 +292,12 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            " +
+                                          "\r\n                                            " +
                                             _vm._s(
                                               val._propiedades._tipo_operacion
                                                 .nombre
                                             ) +
-                                            "\n                                        "
+                                            "\r\n                                        "
                                         )
                                       ]
                                     ),
@@ -341,12 +341,12 @@ var render = function() {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades
                                                             .titulo
                                                         ) +
-                                                        "\n                                                    "
+                                                        "\r\n                                                    "
                                                     )
                                                   ]
                                                 )
@@ -372,7 +372,7 @@ var render = function() {
                                                         "fas fa-map-marker-alt"
                                                     }),
                                                     _vm._v(
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades
                                                             .numero_calle
@@ -380,14 +380,14 @@ var render = function() {
                                                                 .numero_calle
                                                             : ""
                                                         ) +
-                                                        "\n                                                        " +
+                                                        "\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades.calle
                                                             ? val._propiedades
                                                                 .calle
                                                             : ""
                                                         ) +
-                                                        "\n                                                        /\n                                                        " +
+                                                        "\r\n                                                        /\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades
                                                             ._comuna
@@ -398,7 +398,7 @@ var render = function() {
                                                                 ","
                                                             : ""
                                                         ) +
-                                                        "\n                                                        " +
+                                                        "\r\n                                                        " +
                                                         _vm._s(
                                                           val._propiedades
                                                             ._region
@@ -408,7 +408,7 @@ var render = function() {
                                                                   .nombre
                                                             : ""
                                                         ) +
-                                                        "\n\n                                                    "
+                                                        "\r\n\r\n                                                    "
                                                     )
                                                   ]
                                                 )
@@ -447,14 +447,14 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                " +
+                                              "\r\n                                                " +
                                                 _vm._s(
                                                   val._propiedades._tipo_valor
                                                     ? val._propiedades
                                                         ._tipo_valor.nombre
                                                     : ""
                                                 ) +
-                                                "\n                                                 "
+                                                "\r\n                                                 "
                                             ),
                                             _c("span", [
                                               _vm._v(
