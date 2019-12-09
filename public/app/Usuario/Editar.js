@@ -326,7 +326,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-477385a8] {\r\n    color: #ef5350;\n}\n@media (max-width: 576px) {}\n@media (min-width: 768px) {}\n.fa-picture-o[data-v-477385a8] {\r\n    margin: 0px;\r\n    padding: 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.danger[data-v-477385a8] {\n    color: #ef5350;\n}\n@media (max-width: 576px) {}\n@media (min-width: 768px) {}\n.fa-picture-o[data-v-477385a8] {\n    margin: 0px;\n    padding: 0px;\n}\n", ""]);
 
 // exports
 
@@ -569,7 +569,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                            Guardar Cambios\r\n                        "
+                    "\n                            Guardar Cambios\n                        "
                   )
                 ]
               )
@@ -703,7 +703,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            Guardar Cambios\r\n                            "
+                        "\n                            Guardar Cambios\n                            "
                       ),
                       _c("i", { staticClass: "fa fa-angle-right" })
                     ]
@@ -736,7 +736,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v(
-        "\r\n                            Nombre\r\n                            "
+        "\n                            Nombre\n                            "
       ),
       _c("i", { staticClass: "fa fa-user" })
     ])
@@ -747,7 +747,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v(
-        "\r\n                            apellidos\r\n                            "
+        "\n                            apellidos\n                            "
       ),
       _c("i", { staticClass: "fa fa-user" })
     ])
@@ -758,7 +758,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v(
-        "\r\n                            Correo\r\n                            "
+        "\n                            Correo\n                            "
       ),
       _c("i", { staticClass: "fa fa-envelope" })
     ])
@@ -769,7 +769,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v(
-        "\r\n                            Telefono Movil\r\n                            "
+        "\n                            Telefono Movil\n                            "
       ),
       _c("i", { staticClass: "fa fa-phone" })
     ])
@@ -780,7 +780,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v(
-        "\r\n                            Telefono Fijo\r\n                            "
+        "\n                            Telefono Fijo\n                            "
       ),
       _c("i", { staticClass: "fa fa-phone" })
     ])
@@ -791,7 +791,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v(
-        "\r\n                            Direccion\r\n                            "
+        "\n                            Direccion\n                            "
       ),
       _c("i", { staticClass: "fa fa-map-marker" })
     ])
@@ -802,7 +802,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _vm._v(
-        "\r\n                            Avatar\r\n                            "
+        "\n                            Avatar\n                            "
       ),
       _c("i", { staticClass: "fa fa-file-image" })
     ])
