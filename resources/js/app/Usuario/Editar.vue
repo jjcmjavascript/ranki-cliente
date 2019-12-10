@@ -10,160 +10,158 @@
                 <h3>Perfil</h3>
             </div>
             <!-- profile-edit-container-->
-            <div class="">
-                <div class="row">
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Nombre
-                        </label>
-                        <div class="input-group mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-user text-yellow"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" v-model="usuario.nombre">
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-6">
+                    <label>
+                        Nombre
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-user text-yellow"></i>
+                            </span>
                         </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Apellidos
-                        </label>
-                        <div class="input-group mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-user text-yellow"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" v-model="usuario.apellidos"  placeholder="Indique sus apellidos">
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-md-12">
-                        <label>
-                            Correo
-                        </label>
-                        <div class="input-group mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-envelope text-yellow"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" v-model="usuario.email"  placeholder="Indique sus correo">
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Telefono Movil
-                        </label>
-                        <div class="input-group mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-phone text-yellow"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control numeros" v-model="usuario.telefono_movil"  placeholder="+9(123)987654">
-                        </div>
-                    </div>
-
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Telefono Fijo
-                        </label>
-                        <div class="input-group mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-phone text-yellow"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control numeros" v-model="usuario.telefono_fijo"  placeholder="+9(123)987654">
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-md-10">
-                        <label>
-                            Dirección
-                        </label>
-                        <div class="input-group mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fa fa-map-marker text-yellow"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control numeros" v-model="usuario.direccion" placeholder="San Joaquin, Santiago de Chile">
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-md-2">
-                        <label>
-                            Avatar
-                            <i class="far fa-thumbs-up text-dark" v-if="file" title="La imagen cargada se encuentra dentro de los parametros establecidos"></i>
-                        </label>
-                        <div>
-                            <label class="btn btn-success c-pointer">
-                                <input type="file" class="hide" accept=".jpeg, .jpg, .png" @change="cambiarImagen($event)"/>
-                                Cargar imagen
-                            </label>
-                            
-                        </div>        
-                        <p>Tamaño max. 2MB</p>
-                    </div>
-                    <div class="col-xs-12 col-lg-12 text-center">
-                        <button class="btn btn-primary" :disabled="send" @click="editar()">
-                            Guardar cambios
-                        </button>
+                        <input type="text" class="form-control" v-model="usuario.nombre">
                     </div>
                 </div>
-                <hr>
-                <div class="profile-edit-container" v-if="!usuario.provider_id">
-                    <div class="box-widget-item-header">
-                        <h3> Cambiar contraseña</h3>
+                <div class="form-group col-xs-12 col-md-6">
+                    <label>
+                        Apellidos
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-user text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" v-model="usuario.apellidos"  placeholder="Indique sus apellidos">
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-12">
+                    <label>
+                        Correo
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-envelope text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" v-model="usuario.email"  placeholder="Indique sus correo">
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-6">
+                    <label>
+                        Telefono Movil
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-phone text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control numeros" v-model="usuario.telefono_movil"  placeholder="+9(123)987654">
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-md-6">
+                    <label>
+                        Telefono Fijo
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-phone text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control numeros" v-model="usuario.telefono_fijo"  placeholder="+9(123)987654">
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-10">
+                    <label>
+                        Dirección
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-map-marker text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control numeros" v-model="usuario.direccion" placeholder="San Joaquin, Santiago de Chile">
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-2">
+                    <label>
+                        Avatar
+                        <i class="far fa-thumbs-up text-dark" v-if="file" title="La imagen cargada se encuentra dentro de los parametros establecidos"></i>
+                    </label>
+                    <div>
+                        <label class="btn btn-success c-pointer">
+                            <input type="file" class="hide" accept=".jpeg, .jpg, .png" @change="cambiarImagen($event)"/>
+                            Subir imagen
+                        </label>
+                        
+                    </div>        
+                    <p>Tamaño max. 2MB</p>
+                </div>
+                <div class="col-xs-12 col-lg-12 text-center">
+                    <button class="btn btn-primary" :disabled="send" @click="editar()">
+                        Guardar cambios
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="profile-edit-container" v-if="!usuario.provider_id">
+                <div class="box-widget-item-header">
+                    <h3> Cambiar contraseña</h3>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-12 col-lg-12">
+                        <label>Contraseña Actual</label>
+                        <div class="input-group mb-1">
+                            <input :type="showPassword[0] ? 'text' : 'password'" class="form-control" v-model="pass.actual"  placeholder="*********">
+                            <div class="input-group-prepend">
+                                <a href="javascript:void(0)" class="input-group-text">
+                                    <i class="fa fa-eye" @click="changeTypeInput(0)"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label>Nueva Contraseña</label>
+                        <div class="input-group mb-1">
+                            <input :type="showPassword[1] ? 'text' : 'password'" class="form-control" v-model="pass.nueva"  placeholder="*********">
+                            <div class="input-group-prepend">
+                                <a href="javascript:void(0)" class="input-group-text">
+                                    <i class="fa fa-eye" @click="changeTypeInput(1)"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label>Confirmar nueva contraseña</label>
+                        <div class="input-group mb-1">
+                            <input :type="showPassword[2] ? 'text' : 'password'" class="form-control" v-model="pass.confirm"  placeholder="*********">
+                            <div class="input-group-prepend">
+                                <a href="javascript:void(0)" class="input-group-text">
+                                    <i class="fa fa-eye" @click="changeTypeInput(2)"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-12 text-center">
+                        <template v-if="pass.nueva != pass.confirm">
+                            <label class="text-danger">Las contraseñas no coinciden</label>
+                        </template>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-lg-12">
-                            <label>Contraseña Actual</label>
-                            <div class="input-group mb-1">
-                                <input :type="showPassword[0] ? 'text' : 'password'" class="form-control" v-model="pass.actual"  placeholder="*********">
-                                <div class="input-group-prepend">
-                                    <a href="javascript:void(0)" class="input-group-text">
-                                        <i class="fa fa-eye" @click="changeTypeInput(0)"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-xs-12 col-md-6">
-                            <label>Nueva Contraseña</label>
-                            <div class="input-group mb-1">
-                                <input :type="showPassword[1] ? 'text' : 'password'" class="form-control" v-model="pass.nueva"  placeholder="*********">
-                                <div class="input-group-prepend">
-                                    <a href="javascript:void(0)" class="input-group-text">
-                                        <i class="fa fa-eye" @click="changeTypeInput(1)"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-group col-xs-12 col-md-6">
-                            <label>Confirmar nueva contraseña</label>
-                            <div class="input-group mb-1">
-                                <input :type="showPassword[2] ? 'text' : 'password'" class="form-control" v-model="pass.confirm"  placeholder="*********">
-                                <div class="input-group-prepend">
-                                    <a href="javascript:void(0)" class="input-group-text">
-                                        <i class="fa fa-eye" @click="changeTypeInput(2)"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-12 text-center">
-                            <template v-if="pass.nueva != pass.confirm">
-                                <label class="text-danger">Las contraseñas no coinciden</label>
-                            </template>
-                        </div>
-
-                        <div class="col-xs-12 col-lg-12 text-center">
-                            <button class="btn btn-primary" :disabled="!pass.nueva || !pass.confirm || !pass.actual" @click="guardarContrasena()">
-                                Guardar cambios
-                                <i class="fa fa-angle-right"></i>
-                            </button>
-                        </div>
+                    <div class="col-xs-12 col-lg-12 text-center">
+                        <button class="btn btn-primary" :disabled="!pass.nueva || !pass.confirm || !pass.actual" @click="guardarContrasena()">
+                            Guardar cambios
+                            <i class="fa fa-angle-right"></i>
+                        </button>
                     </div>
                 </div>
             </div>

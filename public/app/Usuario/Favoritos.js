@@ -159,13 +159,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -535,33 +528,25 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-4 form-group pr-0" }, [
-          _c("label", { staticClass: "col-form-label price-opt-title" }, [
-            _vm._v("Ordenar Por:")
-          ]),
+        _c("div", { staticClass: "form-group col-xs-12 col-sm-6 col-lg-4" }, [
+          _c("label", [_vm._v("Ordenar por")]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-8 col-sm-8 pr-0" }, [
-            _c("select", { staticClass: "form-control" }, [
-              _c("option", [_vm._v("Popularidad")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Mayor Precio")]),
-              _vm._v(" "),
-              _c("option", [_vm._v("Menor Precio")])
-            ])
+          _c("select", { staticClass: "form-control" }, [
+            _c("option", [_vm._v("Popularidad")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("Mayor Precio")]),
+            _vm._v(" "),
+            _c("option", [_vm._v("Menor Precio")])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-4 form-group pl-0" }, [
-          _c("span", { staticClass: "col-form-label price-opt-title" }, [
-            _vm._v("Consultar Por:")
-          ]),
+        _c("div", { staticClass: "form-group col-xs-12 col-sm-6 col-lg-4" }, [
+          _c("label", [_vm._v("Consultar Por")]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-8 col-sm-8" }, [
-            _c("select", { staticClass: "form-control" }, [
-              _c("option", { attrs: { value: "1" } }, [_vm._v("Activas")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "0" } }, [_vm._v("Inactivas")])
-            ])
+          _c("select", { staticClass: "form-control" }, [
+            _c("option", { attrs: { value: "1" } }, [_vm._v("Activas")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "0" } }, [_vm._v("Inactivas")])
           ])
         ])
       ])

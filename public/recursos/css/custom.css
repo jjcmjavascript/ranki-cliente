@@ -284,6 +284,10 @@ a {
     }
 }
 
+.box-widget-item-header, .list-main-wrap-title h2, .list-main-wrap-title.fl-wrap {
+    float: none!important;
+}
+
 /******** VUE SELECT *********/
 
 .vs__dropdown-toggle {

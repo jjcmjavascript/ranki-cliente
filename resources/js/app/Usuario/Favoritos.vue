@@ -39,29 +39,22 @@
                             </div-->
 
                             <div class="row">
-                                        <div class="col-lg-4 form-group pr-0">
-                                            <label class="col-form-label price-opt-title">Ordenar Por:</label>
-                                            <div class="col-lg-8 col-sm-8 pr-0">
-                                                <select class="form-control">
-                                                    <option>Popularidad</option>
-                                                    <option>Mayor Precio</option>
-                                                    <option>Menor Precio</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4 form-group pl-0">
-                                            <span class="col-form-label price-opt-title">Consultar Por:</span>
-                                            <div class="col-lg-8 col-sm-8">
-                                            <select class="form-control">
-                                                <option value="1">Activas</option>
-                                                <option value="0">Inactivas</option>
-                                            </select>
-                                            </div>
-                                        </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-lg-4">
+                                    <label>Ordenar por</label>
+                                    <select class="form-control">
+                                        <option>Popularidad</option>
+                                        <option>Mayor Precio</option>
+                                        <option>Menor Precio</option>
+                                    </select>
                                 </div>
-
-
+                                <div class="form-group col-xs-12 col-sm-6 col-lg-4">
+                                    <label>Consultar Por</label>
+                                    <select class="form-control">
+                                        <option value="1">Activas</option>
+                                        <option value="0">Inactivas</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <!-- list-main-wrap-opt end-->
                         <!-- listing-item-container -->
