@@ -9,7 +9,7 @@ Route::namespace('Usuario')->name('usuario')->group(function(){
 });
 
 // RUTAS CON PERMISOS
-Route::middleware('auth')->group(function() {
+Route::middleware(['auth','verifyToken'])->group(function() {
 
 	// PERFIL DE USUARIO
 	Route::namespace('Usuario')->prefix('perfil')->name('usuario')->group(function() {
@@ -17,14 +17,27 @@ Route::middleware('auth')->group(function() {
 	    Route::post('/','UsuarioController@perfil')->name('.perfil');
 
 	    Route::post('guardar','UsuarioController@guardar')->name('.guardar');
-
 	    Route::post('clave','UsuarioController@editar_clave')->name('.editar_clave');
 
-	    // Route::post('avatar', 'UsuarioController@avatar')->name('.avatar');
-
-	    Route::get('favoritos','UsuarioController@vue')->name('.favoritos');
-	    Route::post('favoritos','UsuarioController@vue')->name('.favoritos');
-
 	    Route::get('logout', 'UsuarioController@logout')->name('.salir');
+	});
+
+    // FAVORITOS
+    Route::namespace('Usuario')->prefix('favoritos')->name('usuario')->group(function() {
+        Route::get('/','UsuarioController@vue')->name('.favoritos');
+        Route::post('/','UsuarioController@favoritos')->name('.favoritos');
+    });
+
+    // PUBLICACIONES
+    Route::namespace('Usuario')->prefix('publicaciones')->name('usuario')->group(function() {
+        Route::get('/','UsuarioController@vue')->name('.publicaciones');
+        Route::post('/','UsuarioController@favoritos')->name('.publicaciones');
+    });
+
+    // PROPIEDADES
+	Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function() {
+		Route::get('crear','PropiedadController@vue')->name('.crear');
+	    Route::post('crear','PropiedadController@crear')->name('.crear');
+        Route::post('guardar','PropiedadController@crear')->name('.guardar');
 	});
 });

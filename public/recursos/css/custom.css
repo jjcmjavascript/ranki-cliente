@@ -1,0 +1,386 @@
+/* MIN */
+.card {
+    padding: 0px;
+}
+section.middle-padding {
+    padding: 8px 0;
+}
+body, section, .grey-blue-bg {
+    background: #fafafa;
+}
+li{
+    padding-left: 3px;
+}
+
+@media screen and (min-width: 769px) {
+    .iniciar_sm_li {
+        display: none;
+    }
+}
+
+/* maxx */
+@media screen and (max-width: 480px) {}
+
+@media screen and (max-width: 768px) {
+    .header-user-menu {
+        display: none;
+    }
+
+    /* boton de inicio registro */
+    .show-reg-form {
+        display: none;
+    }
+
+    .main-menu {
+        top: 0px;
+        padding: 15px 0px;
+        height: 100vh;
+        width: 80%;
+        background: rgba(255, 255, 255, 0.9);
+        color: black;
+    }
+
+    .iniciar_sm {
+        text-align: center;
+        background: silver;
+        padding: 6px;
+        color:
+            white;
+        background: #42a5f5;
+        cursor: pointer;
+        font-size: 0.8rem;
+        border-radius: 3px;
+    }
+}
+
+
+/* ///////////////// */
+.sale-window::before{
+    border-top: none;
+}
+.sale-window::after{
+    border-bottom: none;
+}
+.sale-window.big-sale::before{
+    border-top: none;
+}
+.sale-window.big-sale::after{
+    border-bottom: none;
+}
+.sale-window{
+    background:rgba(128, 203, 196, 0.6)
+}
+.sale-window.big-sale {
+    background:rgba(244, 143, 177, 0.6);
+}
+/* //////////////// */
+.sale-window .big-sale-two {
+    background:rgba(33, 150, 243, 0.6);
+}
+/*  */
+
+
+/* ////////////////// HEADER */
+/* contenedor principal del header */
+.main-header {
+    height: 80px;
+}
+/* contenedor segundario */
+.header-top {
+    height: 80px;
+}
+/* menu principal en grande */
+.nav-holder {
+    float: none !important;
+    position: relative !important;
+    left: auto;
+    right: 30px;
+    top: 17px;
+    right: 25%;
+}
+
+/* JM spa logo */
+.logo-holder {
+    float: left;
+    position: absolute;
+    top: 2px;
+    height: 80px;
+}
+
+/*  icono de usuario en grande */
+.header-user-menu {
+    position: relative;
+    top: 24px;
+    right: -10%;
+}
+
+/* boton agregar propiedad */
+.add_propiedad {
+    box-shadow: 0px 0px 0px 7px rgba(255, 255, 255, 0.2);
+    background:
+        #4DB7FE;
+    position: relative;
+    right: -80%;
+    width: 100px;
+    padding: 13px 32px;
+    cursor: pointer;
+    display: flex;
+    border-radius: 30px;
+    color:
+        #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    top: -27px;
+    margin-left: 30%;
+    align-content: center;
+    justify-content: center;
+}
+.add_propiedad:hover {
+    box-shadow: 0px 0px 0px 7px rgba(255, 255, 255, 0.1);
+}
+
+/* ////////////////// END HEADER */
+
+/* /////////////////// FA ICONS */
+.fa.fa-search {
+    color:
+        #4DB7FE;
+}
+.fa-search {
+    cursor: pointer;
+}
+.fa.fa-plus {
+    margin-left: 5px;
+}
+/*///////////////////////END FA ICONS */
+
+/* /////////TAGS/////////////////TAGS */
+hr { display: block; height: 1px;
+    border: 0; border-top: 1px solid #ccc;
+    margin: 1em 0; padding: 0; }
+/* /////// END TAGS */
+
+.show-reg-form {
+    top: 9px;
+    font-size: 13px;
+    font-weight: bolder;
+}
+
+
+#wrapper {
+    padding-top: 60px;
+}
+
+.show-search-button {
+    border: none;
+}
+
+.show-search-button::before {
+    content: none;
+}
+
+.nav-button-wrap {
+    float: right;
+    top: 20px;
+    right: 10px;
+}
+
+
+.buscar {
+    color: white;
+    font-size: 0.9rem;
+    margin-left: 13px;
+    cursor: pointer;
+}
+.buscar:hover {
+    text-shadow: 0px 0px 2px #4DB7FE;
+}
+
+/* boton de inciar session en modal */
+.soc-log a {
+    padding: 0px 0px 0px 0px !important;
+    font-weight: bolder;
+    text-align: center;
+}
+
+/*  placeholder*/
+::-webkit-input-placeholder {
+    /* Edge */
+    color: #C1C1C1!important;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #C1C1C1!important;
+}
+
+::placeholder {
+    color: #C1C1C1!important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.dasboard-sidebar-item {
+    text-align: center;
+}
+
+.dasboard-sidebar-item h3 span {
+    font-size: 13px;
+}
+
+.dasboard-avatar {
+    padding: 0 25px;
+}
+
+.input-group-text {
+    background-color: white;
+    border: 1px solid #ced4da;
+}
+
+.form-group label {
+    margin-bottom: 0.5em;
+}
+
+.text-yellow {
+    color: #F9B90F;
+}
+
+.text-black {
+    color: #000!important;
+}
+
+.dasboard-menu li a {
+    font-size: 13px;
+}
+
+.dasboard-breadcrumbs .breadcrumbs {
+    font-size: 13px;
+}
+
+.c-pointer {
+    cursor: pointer;
+}
+
+/* */
+
+.home-intro, .section-title, .sw-btn, .to-top, .slick-dots, .main-register, .profile-edit-header, .show-list-wrap-search {
+    text-align: center;
+}
+
+.log-out-btn {
+    font-size: 12px;
+}
+
+.box-widget-item-header {
+    color: #888DA0;
+}
+
+@media only screen and (max-width: 1064px) {
+    .mlc {
+        font-size: 14px;
+    }
+}
+
+.box-widget-item-header, .list-main-wrap-title h2, .list-main-wrap-title.fl-wrap {
+    float: none!important;
+}
+
+/******** VUE SELECT *********/
+
+.vs__dropdown-toggle {
+    padding: 3px 0 6px !important;
+}
+
+.clear-none .vs__clear {
+    display: none;
+}
+
+/******** IMAGENES ***********/
+
+.containerImage {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 0 0;
+}
+
+.containerImage > .imageLoad {
+    display: flex;
+    height: 130px;
+    width: 130px;
+    margin: .2rem;
+    position: relative;
+    order: 2;
+    align-items: center;
+    justify-content: center;
+    background-color: #EEE;
+    border: 1px solid silver;
+}
+
+.containerImage > .imageLoad > .imagePrincipal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    font-size: 8px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+
+.containerImage > .imageLoad > .actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: right;
+    background-color: rgba(256,256,256,.85);
+}
+
+/******** CUSTOM CHECKBOX *************/
+
+.checkbox.checkbox-css {
+    line-height: 16px;
+    padding-top: 7px;
+}
+
+.checkbox.checkbox-css input {
+    display: none;
+}
+
+.checkbox.checkbox-css label {
+    margin-bottom: .7rem !important;
+    padding-left: 24px;
+    margin: 0;
+    position: relative;
+}
+
+.checkbox.checkbox-css label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background: #d5dbe0;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.checkbox.checkbox-css input:checked+label:after {
+    content: '';
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' v…M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    height: 16px;
+    width: 16px;
+    text-align: center;
+}

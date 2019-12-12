@@ -325,10 +325,12 @@ function initCitybook() {
     });
     var headSearch = $(".header-search"),
         ssbut = $(".show-search-button"),
+        // buscar = $(".buscar-grupo"),
         wlwrp = $(".wishlist-wrap"),
         wllink = $(".wishlist-link");
     function showSearch() {
         headSearch.addClass("vis-head-search").removeClass("vis-search");
+
         ssbut.find("span").text("Close");
         ssbut.find("i").addClass("vis-head-search-close");
         hideWishlist();

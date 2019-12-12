@@ -1,119 +1,165 @@
 <template>
 <div class="container">
+
     <!--dasboard-wrap-->
     <div class="dasboard-wrap fl-wrap">
         <!-- dashboard-content-->
         <div class="dashboard-content fl-wrap">
+            <br>
             <div class="box-widget-item-header">
-                <h3> Perfil</h3>
+                <h3>Perfil</h3>
             </div>
             <!-- profile-edit-container-->
-            <div class="profile-edit-container">
-                <div class="custom-form">
-                    <div class="form-group col-xs-12">
-
-                    </div>
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Nombre
-                            <i class="fa fa-user"></i>
-                        </label>
-                        <input type="text" placeholder="Nombre" v-model="usuario.nombre" />
-                    </div>
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            apellidos
-                            <i class="fa fa-user"></i>
-                        </label>
-                        <input type="text" placeholder="Apellidos" v-model="usuario.apellidos" />
-                    </div>
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Correo
-                            <i class="fa fa-envelope"></i>
-                        </label>
-                        <input type="text" placeholder="Correo" v-model="usuario.email" />
-                    </div>
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Telefono Movil
-                            <i class="fa fa-phone"></i>
-                        </label>
-                        <input type="text" placeholder="+9(123)987654" class="numeros" v-model="usuario.telefono_movil" />
-                    </div>
-
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Telefono Fijo
-                            <i class="fa fa-phone"></i>
-                        </label>
-                        <input type="text" placeholder="+9(123)987654" class="numeros" v-model="usuario.telefono_fijo" />
-                    </div>
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Direccion
-                            <i class="fa fa-map-marker"></i>
-                        </label>
-                        <input type="text" placeholder="Santiago" v-model="usuario.direccion" />
-                    </div>
-                    <div class="form-group col-xs-12 col-md-6">
-                        <label>
-                            Avatar
-                            <i class="fa fa-file-image"></i>
-                        </label>
-                        <input type="file" accept=".jpeg, .jpg, .png" class="form-control" @change="cambiarImagen($event)" />
-                        <p>Tamaño maximo 2MB</p>
-                    </div>
-                    <div class="col-xs-12">
-
-                        <button class="btn small-btn color-bg flat-btn" :disabled="send" @click="editar()">
-                            Guardar Cambios
-                        </button>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-6">
+                    <label>
+                        Nombre
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-user text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" v-model="usuario.nombre">
                     </div>
                 </div>
-                <div class="profile-edit-container" v-if="!usuario.provider_id">
-                    <div class="profile-edit-header fl-wrap" style="margin-top:30px">
-                        <h4>Cambiar contraseña</h4>
+                <div class="form-group col-xs-12 col-md-6">
+                    <label>
+                        Apellidos
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-user text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" v-model="usuario.apellidos"  placeholder="Indique sus apellidos">
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-12">
+                    <label>
+                        Correo
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-envelope text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" v-model="usuario.email"  placeholder="Indique sus correo">
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-6">
+                    <label>
+                        Telefono Movil
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-phone text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control numeros" v-model="usuario.telefono_movil"  placeholder="+9(123)987654">
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-md-6">
+                    <label>
+                        Telefono Fijo
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-phone text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control numeros" v-model="usuario.telefono_fijo"  placeholder="+9(123)987654">
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-10">
+                    <label>
+                        Dirección
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-map-marker text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control numeros" v-model="usuario.direccion" placeholder="San Joaquin, Santiago de Chile">
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 col-md-2">
+                    <label>
+                        Avatar
+                        <i class="far fa-thumbs-up text-dark" v-if="file" title="La imagen cargada se encuentra dentro de los parametros establecidos"></i>
+                    </label>
+                    <div>
+                        <label class="btn btn-success c-pointer">
+                            <input type="file" class="hide" accept=".jpeg, .jpg, .png" @change="cambiarImagen($event)"/>
+                            Subir imagen
+                        </label>
+
+                    </div>
+                    <p>Tamaño max. 2MB</p>
+                </div>
+                <div class="col-xs-12 col-lg-12 text-center">
+                    <button class="btn btn-primary" :disabled="send" @click="editar()">
+                        Guardar cambios
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="profile-edit-container" v-if="!usuario.provider_id">
+                <div class="box-widget-item-header">
+                    <h3> Cambiar contraseña</h3>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-12 col-lg-12">
+                        <label>Contraseña Actual</label>
+                        <div class="input-group mb-1">
+                            <input :type="showPassword[0] ? 'text' : 'password'" class="form-control" v-model="pass.actual"  placeholder="*********">
+                            <div class="input-group-prepend">
+                                <a href="javascript:void(0)" class="input-group-text">
+                                    <i class="fa fa-eye" @click="changeTypeInput(0)"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label>Nueva Contraseña</label>
+                        <div class="input-group mb-1">
+                            <input :type="showPassword[1] ? 'text' : 'password'" class="form-control" v-model="pass.nueva"  placeholder="*********">
+                            <div class="input-group-prepend">
+                                <a href="javascript:void(0)" class="input-group-text">
+                                    <i class="fa fa-eye" @click="changeTypeInput(1)"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label>Confirmar nueva contraseña</label>
+                        <div class="input-group mb-1">
+                            <input :type="showPassword[2] ? 'text' : 'password'" class="form-control" v-model="pass.confirm"  placeholder="*********">
+                            <div class="input-group-prepend">
+                                <a href="javascript:void(0)" class="input-group-text">
+                                    <i class="fa fa-eye" @click="changeTypeInput(2)"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-12 text-center">
+                        <template v-if="pass.nueva != pass.confirm">
+                            <label class="text-danger">Las contraseñas no coinciden</label>
+                        </template>
                     </div>
 
-                    <div class="custom-form no-icons">
-                      <div class="form-group col-xs-12">
-                        <div class="pass-input-wrap fl-wrap">
-                          <label>Contraseña Actual</label>
-                          <input type="password" class="pass-input" v-model="pass.actual" />
-                          <span class="eye">
-                            <i class="fa fa-eye" aria-hidden="true"></i>
-                          </span>
-                        </div>
-
-                      </div>
-                        <div class="form-group col-xs-12 col-md-6">
-                            <div class="pass-input-wrap fl-wrap">
-                                <label>Nueva Contraseña</label>
-                                <input type="password" class="pass-input" v-model="pass.nueva" />
-                                <span class="eye">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </span>
-                            </div>
-
-                        </div>
-                        <div class="form-group col-xs-12 col-md-6">
-                            <div class="pass-input-wrap fl-wrap">
-                                <label>Confirma</label>
-                                <input type="password" class="pass-input" v-model="pass.confirm" />
-                                <span class="eye">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div>
-                            <template v-if="pass.nueva != pass.confirm">
-                                <label class="danger">Las contraseñas no coinciden</label>
-                            </template>
-                        </div>
-
-                        <button class="btn big-btn color-bg flat-btn" :disabled="!pass.nueva || !pass.confirm || !pass.actual" @click="guardarContrasena()">
-                            Guardar Cambios
+                    <div class="col-xs-12 col-lg-12 text-center">
+                        <button class="btn btn-primary" :disabled="!pass.nueva || !pass.confirm || !pass.actual" @click="guardarContrasena()">
+                            Guardar cambios
                             <i class="fa fa-angle-right"></i>
                         </button>
                     </div>
@@ -130,7 +176,6 @@
 export default {
     data() {
         return {
-            file: null,
             url: this.$root.base_url + 'perfil',
             pass: {
                 actual: null,
@@ -145,7 +190,9 @@ export default {
                 telefono_movil: null,
                 email: null,
                 _avatar: null,
-            }
+            },
+            showPassword: [false, false, false],
+            file: null,
         };
     },
     computed: {
@@ -195,13 +242,9 @@ export default {
                 return `/storage/${this.usuario._avatar[ this.usuario._avatar.length -1 ].ruta}`;
 
             } else if (this.usuario && this.usuario.avatar) {
-<<<<<<< HEAD
 
                 return this.usuario.avatar
-                
-=======
-                return this.usuario.avatar
->>>>>>> 65c4ac9f565763381e9d2085538c965ea3f2b9e7
+
             } else {
                 return "https://pgimgmt.com/wp-content/uploads/2018/05/generic-user.jpg";
             }
@@ -212,17 +255,30 @@ export default {
         this.iniciar();
     },
     methods: {
+        start(){
+            this.$root.cargando();
+        },
+
+        stop(){
+            this.$root.stop();
+        },
+
         validarFormato(file) {
             let rules = ['img', 'png', 'jpeg', 'jpg', 'gif'];
 
             return rules.includes(file.name.split('.').pop().toLowerCase());
         },
+
         validarSize(file) {
             //mega
             let size = 2.048;
 
             return ((file.size / 1024) / 1024) < size;
         },
+
+                alerta(tipo, titulo, mensaje = null) {
+                    this.$root.alertas(tipo, titulo, mensaje);
+                },
         guardarContrasena() {
             if (
                 !this.$root.noScript(this.pass.actual) ||
@@ -243,7 +299,6 @@ export default {
                 axios
                     .post(this.url + "/clave", request)
                     .then(res => {
-                        this.stop();
                         this.alerta("success", "Exito", "Tu clave fue modificada!");
                         this.pass.actual = null;
                         this.pass.nueva = null;
@@ -258,28 +313,17 @@ export default {
             }
         },
 
-        start() {
-            this.$root.cargando();
-        },
-
-        stop() {
-            this.$root.stop();
-        },
-
-        alerta(tipo, titulo, mensaje = null) {
-            this.$root.alertas(tipo, titulo, mensaje);
-        },
-
         iniciar() {
             this.start();
             axios
                 .post(this.url, this.usuario)
                 .then(res => {
+                    this.stop();
                     this.usuario = res.data.usuario;
                 })
                 .catch(err => {})
                 .finally(() => {
-                    this.stop();
+                    // this.stop();
                 });
         },
 
@@ -288,6 +332,7 @@ export default {
                 this.alerta("error", "Ups... algunos datos son incorrectos!");
             } else {
                 this.start();
+
                 const request = new FormData();
                 this.usuario.id && request.append("id", this.usuario.id);
                 this.usuario.nombre && request.append("nombre", this.usuario.nombre);
@@ -305,25 +350,16 @@ export default {
                 axios
                     .post(this.url + '/guardar', request)
                     .then(res => {
-                        this.stop();
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");
                         this.usuario = res.data.usuario;
-<<<<<<< HEAD
+
                         document.querySelector("#imagen_header").src = this.urlImagen;
                         document.querySelector("#imagen_lateral").src = this.urlImagen;
-=======
-                        //document.querySelector("#imagen_header").src = this.urlImagen;
-                        //document.querySelector("#imagen_lateral").src = this.urlImagen;
->>>>>>> 65c4ac9f565763381e9d2085538c965ea3f2b9e7
 
                     })
                     .catch(err => {
                         this.stop();
-<<<<<<< HEAD
-                        this.alerta("error", "Ups...!", err);
-=======
                         this.alerta("error", "Lo sentimos!", err);
->>>>>>> 65c4ac9f565763381e9d2085538c965ea3f2b9e7
                     })
             }
         },
@@ -348,30 +384,20 @@ export default {
 
                 this.alerta(
                     "error",
-                    "Ups...!",
+                    "Ha ocurrido un problema!",
                     e
                 );
             }
-
+        },
+        changeTypeInput(key) {
+            if (this.showPassword[key]){
+                Vue.set(this.showPassword, key, false);
+            }
+            else{
+                Vue.set(this.showPassword, key, true);
+            }
         }
 
     }
 };
 </script>
-
-<style scoped>
-.danger {
-    color: #ef5350;
-}
-
-@media (max-width: 576px) {}
-
-@media (min-width: 768px) {}
-
-
-
-.fa-picture-o {
-    margin: 0px;
-    padding: 0px;
-}
-</style>
