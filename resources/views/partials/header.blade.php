@@ -18,7 +18,7 @@
             @endguest
 
             <!-- MENU GRANDE  -->
-            <div class="nav-holder main-menu">
+            <div class="nav-holder main-menu"style='{{ !Auth::check() ? "right: 2%" : '' }}'>
                 <nav>
                     <ul>
                       @guest

@@ -48,7 +48,7 @@ class SocialAuthController extends Controller
             Auth::login($user);
             $response = (new ApiHelper)->sendCredentialsRequest('social');
 
-            if(!$response){
+            if($response['error']){
                 session()->flush();
                 return redirect('/');
             }
@@ -56,7 +56,8 @@ class SocialAuthController extends Controller
             return \Redirect::back();
         }
         catch(\Exception $e) {
-            return response([ 'error'=> $e->getMessage() ],500);
+            session()->flush();
+            return redirect('/');
         }
     }
 }
