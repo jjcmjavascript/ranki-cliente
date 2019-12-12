@@ -1,4 +1,5 @@
 /* MIN */
+
 .form-control{
     border: 1px solid rgba(0,0,0,0.06);
 }
@@ -369,12 +370,15 @@ a {
 }
 @media screen and (min-width :1064px){
     .header-user-menu {
-        right: -35%;
+        right: -30%;
+    }
+    .user-option{
+        display: none;
     }
 }
-@media screen and (min-width :1088px){
+@media screen and (min-width :1160px){
     .header-user-menu {
-        right: -30%;
+        right: -28%;
     }
 }
 
