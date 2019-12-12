@@ -296,10 +296,9 @@ __webpack_require__.r(__webpack_exports__);
 
       this.start();
       axios.post(this.url, this.usuario).then(function (res) {
-        _this2.stop();
-
         _this2.usuario = res.data.usuario;
-      })["catch"](function (err) {})["finally"](function () {// this.stop();
+      })["catch"](function (err) {})["finally"](function () {
+        _this2.stop();
       });
     },
     editar: function editar() {
@@ -386,9 +385,7 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
-              _vm._v(
-                "\r\n                        Nombre\r\n                    "
-              )
+              _vm._v("\n                        Nombre\n                    ")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
@@ -421,7 +418,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v(
-                "\r\n                        Apellidos\r\n                    "
+                "\n                        Apellidos\n                    "
               )
             ]),
             _vm._v(" "),
@@ -454,9 +451,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-xs-12 col-md-12" }, [
             _c("label", [
-              _vm._v(
-                "\r\n                        Correo\r\n                    "
-              )
+              _vm._v("\n                        Correo\n                    ")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
@@ -489,7 +484,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v(
-                "\r\n                        Telefono Movil\r\n                    "
+                "\n                        Telefono Movil\n                    "
               )
             ]),
             _vm._v(" "),
@@ -523,7 +518,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v(
-                "\r\n                        Telefono Fijo\r\n                    "
+                "\n                        Telefono Fijo\n                    "
               )
             ]),
             _vm._v(" "),
@@ -557,7 +552,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-10" }, [
             _c("label", [
               _vm._v(
-                "\r\n                        Dirección\r\n                    "
+                "\n                        Dirección\n                    "
               )
             ]),
             _vm._v(" "),
@@ -594,7 +589,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-2" }, [
             _c("label", [
               _vm._v(
-                "\r\n                        Avatar\r\n                        "
+                "\n                        Avatar\n                        "
               ),
               _vm.file
                 ? _c("i", {
@@ -619,7 +614,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(
-                  "\r\n                            Subir imagen\r\n                        "
+                  "\n                            Subir imagen\n                        "
                 )
               ])
             ]),
@@ -641,7 +636,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\r\n                        Guardar cambios\r\n                    "
+                  "\n                        Guardar cambios\n                    "
                 )
               ]
             )
@@ -1043,7 +1038,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            Guardar cambios\r\n                            "
+                        "\n                            Guardar cambios\n                            "
                       ),
                       _c("i", { staticClass: "fa fa-angle-right" })
                     ]
@@ -1251,14 +1246,15 @@ function normalizeComponent (
 /*!*********************************************!*\
   !*** ./resources/js/app/Usuario/Editar.vue ***!
   \*********************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Editar_vue_vue_type_template_id_477385a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Editar.vue?vue&type=template&id=477385a8& */ "./resources/js/app/Usuario/Editar.vue?vue&type=template&id=477385a8&");
 /* harmony import */ var _Editar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Editar.vue?vue&type=script&lang=js& */ "./resources/js/app/Usuario/Editar.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Editar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Editar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1288,7 +1284,7 @@ component.options.__file = "resources/js/app/Usuario/Editar.vue"
 /*!**********************************************************************!*\
   !*** ./resources/js/app/Usuario/Editar.vue?vue&type=script&lang=js& ***!
   \**********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

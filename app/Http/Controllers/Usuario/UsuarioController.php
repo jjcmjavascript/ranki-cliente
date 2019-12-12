@@ -52,6 +52,7 @@ class UsuarioController extends Controller
         ]);
 
         try {
+            
             $ruta = 'api/usuarios/guardar';
             $form_params = $request->all();
 
@@ -153,7 +154,9 @@ class UsuarioController extends Controller
             {
                 $response = (new ApiHelper)->sendCredentialsRequest();
 
-                if(!$response) throw new \Exception($response);
+                if(!$response){
+                    $this->logout();
+                }
 
                 return response([ 'url' => url()->previous() ], 200);
             }
@@ -161,17 +164,15 @@ class UsuarioController extends Controller
             throw new \Exception('Cotraseña o correo incorrecto.');
         }
         catch(\Exception $e) {
-            session()->flush();
-            Auth::logout();
             return response([ 'error'=> $e->getMessage() ],500);
         }
     }
 
-    public function logout( Request $request )
+    public function logout()
     {
-        session()->flush();
-
         Auth::logout();
+
+        session()->flush();
 
         return redirect()->to('/');
     }
@@ -185,7 +186,7 @@ class UsuarioController extends Controller
             $response = (new ApiHelper)->sendApiRequest('api/usuarios/favoritos',$request->all());
 
             if(isset($response['error'])) throw new \Exception($response);
-            
+
             return response()->json([
                 'rows' => $response
             ], 200);

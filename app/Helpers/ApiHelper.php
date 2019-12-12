@@ -39,6 +39,7 @@ class ApiHelper {
 				case 'default':
 				$form_params = [
 					'grant_type' => 'password',
+
 					'client_id' => \Config::get('app.api_client_id'),
 					'client_secret' => \Config::get('app.api_client_secret'),
 					'username' =>Auth::user()->email,
@@ -83,7 +84,7 @@ class ApiHelper {
 			return false;
 
 		} catch (\Exception $e) {
-			return false;
+			return $e->getMessage();
 		}
 
 	}

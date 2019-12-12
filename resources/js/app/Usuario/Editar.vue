@@ -100,8 +100,8 @@
                             <input type="file" class="hide" accept=".jpeg, .jpg, .png" @change="cambiarImagen($event)"/>
                             Subir imagen
                         </label>
-                        
-                    </div>        
+
+                    </div>
                     <p>Tamaño max. 2MB</p>
                 </div>
                 <div class="col-xs-12 col-lg-12 text-center">
@@ -318,12 +318,11 @@ export default {
             axios
                 .post(this.url, this.usuario)
                 .then(res => {
-                    this.stop();
                     this.usuario = res.data.usuario;
                 })
                 .catch(err => {})
                 .finally(() => {
-                    // this.stop();
+                    this.stop();
                 });
         },
 
@@ -352,6 +351,7 @@ export default {
                     .then(res => {
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");
                         this.usuario = res.data.usuario;
+
                         document.querySelector("#imagen_header").src = this.urlImagen;
                         document.querySelector("#imagen_lateral").src = this.urlImagen;
 

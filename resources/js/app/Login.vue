@@ -120,8 +120,9 @@
                 <div class="log-separator fl-wrap"><span>or</span></div>
                 <div class="soc-log fl-wrap">
                     <p>Inicia o Registrate con tus redes.</p>
-                    <a href="#" class="facebook-log"><i class="fab fa-facebook-f"></i>Connect with Facebook</a>
-                    <a :href="$root.base_url+'/auth/google'" class="google-log">
+                    <a href="auth/facebook" class="facebook-log" >
+                        <i class="fab fa-facebook-f"></i>Iniciar con Facebook</a>
+                    <a :href="$root.base_url+'/auth/google'" class="google-log" >
                         <i class="fab fa-google"></i> Inicia con Google
                     </a>
                 </div>
@@ -219,6 +220,20 @@ export default {
         }
     },
     methods: {
+        iniciarRedes(provider){
+            this.$root.cargando();
+            axios.post('/auth', {provider})
+            .then(res=>{
+                this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
+                //window.location.href = res.data.url;
+            })
+            .catch(err =>{
+                this.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
+            })
+            .finally(()=>{
+                this.$swal.disableLoading();
+            })
+        },
         iniciar() {
             this.alertaEnviar = true;
 
@@ -235,7 +250,7 @@ export default {
                         .then(res => {
                             this.$swal.disableLoading();
                             this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
-                            window.location.href = res.data.url;
+                            //window.location.href = res.data.url;
                         })
                         .catch(error => {
                             this.$swal.disableLoading();
@@ -258,8 +273,6 @@ export default {
                     request.append("apellidos", this.userDos.apellido);
                 this.userDos.rut && request.append("rut", this.userDos.rut);
                 this.userDos.correo && request.append("email", this.userDos.correo);
-                // this.userDos.telefono &&
-                //   request.append("telefono_movil", this.userDos.telefono);
                 this.userDos.clave && request.append("password", this.userDos.clave);
                 this.userDos.claveConfirm &&
                     request.append("password_confirmation", this.userDos.claveConfirm);
