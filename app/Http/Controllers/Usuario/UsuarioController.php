@@ -151,8 +151,9 @@ class UsuarioController extends Controller
 
             if ( Auth::attempt($data,$request->remember) )
             {
-
                 $response = (new ApiHelper)->sendCredentialsRequest();
+
+                if(!$response) throw new \Exception($response);
 
                 return response([ 'url' => url()->previous() ], 200);
             }
@@ -160,6 +161,8 @@ class UsuarioController extends Controller
             throw new \Exception('Cotraseña o correo incorrecto.');
         }
         catch(\Exception $e) {
+            session()->flush();
+            Auth::logout();
             return response([ 'error'=> $e->getMessage() ],500);
         }
     }

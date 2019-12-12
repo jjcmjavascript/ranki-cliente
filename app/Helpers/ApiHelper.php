@@ -28,7 +28,7 @@ class ApiHelper {
      *
      * */
 
-	public function sendCredentialsRequest( $type = 'default', $getOnlyBody = true)
+	public function sendCredentialsRequest( $type = 'default', $getOnlyBody = true )
 	{
 		try {
 			$ruta = 'oauth/token';
@@ -39,8 +39,8 @@ class ApiHelper {
 				case 'default':
 				$form_params = [
 					'grant_type' => 'password',
-					'client_id' => env('API_CLIENT_ID'),
-					'client_secret' => env('API_CLIENT_SECRET'),
+					'client_id' => \Config::get('app.api_client_id'),
+					'client_secret' => \Config::get('app.api_client_secret'),
 					'username' =>Auth::user()->email,
 					'password'=> Auth::user()->password,
 				];
@@ -48,23 +48,23 @@ class ApiHelper {
 				case 'refresh':
 				$form_params = [
 					'grant_type' => 'refresh_token',
-					'client_id' => env('API_CLIENT_ID'),
-					'client_secret' => env('API_CLIENT_SECRET'),
+					'client_id' => \Config::get('app.api_client_id'),
+					'client_secret' => \Config::get('app.api_client_secret'),
 					'refresh_token'=> session('api')->refresh_token,
 				];
 				break;
 				case 'social':
 				$form_params = [
 					'grant_type' => 'social',
-					'client_id' => env('API_CLIENT_ID'),
-					'client_secret' => env('API_CLIENT_SECRET'),
+					'client_id' => \Config::get('app.api_client_id'),
+					'client_secret' => \Config::get('app.api_client_secret'),
 					'provider' => Auth::user()->provider, // provider
 					'access_token' => Auth::user()->provider_id, // provider_id
 				];
 				break;
 			}
 
-			$response = $this->guzzle->post( env('API_CONNECTION').$ruta, [
+			$response = $this->guzzle->post( \Config::get('app.api_connection').$ruta, [
 				'form_params' => $form_params
 			]);
 
@@ -74,7 +74,7 @@ class ApiHelper {
 
 			$response = json_decode( (string) $response, true);
 
-			if( !isset($response['error']) ){
+			if(isset($response) && !isset($response['error']) ){
 				$response = array_merge($response,['created_at'=>Carbon::now()]);
 				session(['api' => (object)$response]);
 
