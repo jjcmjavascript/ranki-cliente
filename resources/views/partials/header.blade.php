@@ -18,7 +18,7 @@
             @endguest
 
             <!-- MENU GRANDE  -->
-            <div class="nav-holder main-menu">
+            <div class="nav-holder main-menu"style='{{ !Auth::check() ? "right: 2%" : '' }}'>
                 <nav>
                     <ul>
                       @guest
@@ -52,7 +52,10 @@
                             <a href="{{route('inicio')}}" class="act-link">Principal</a>
                         </li>
                         <li>
-                            <a href="#">Usuario <i class="fas fa-caret-down"></i></a>
+                            <a href="#">Ofertas</a>
+                        </li>
+                        <li class="user-option">
+                            <a href="#"> Usuario <i class="fas fa-caret-down"></i></a>
                             <ul>
                                 <li><a href="{{route('usuario.perfil')}}"> Editar Perfil</a></li>
                                 <li><a href="{{route('usuario.favoritos')}}"> Favoritos</a></li>

@@ -39,8 +39,8 @@ class ApiHelper {
 				case 'default':
 				$form_params = [
 					'grant_type' => 'password',
-					'client_id' => env('API_CLIENT_ID'),
-					'client_secret' => env('API_CLIENT_SECRET'),
+					'client_id' => 1,
+					'client_secret' => 'ETmkZ9h6ytzjZ5pAFxdTFYDAjQsheByOf5U2yx4Y',
 					'username' =>Auth::user()->email,
 					'password'=> Auth::user()->password,
 				];
@@ -48,16 +48,16 @@ class ApiHelper {
 				case 'refresh':
 				$form_params = [
 					'grant_type' => 'refresh_token',
-					'client_id' => env('API_CLIENT_ID'),
-					'client_secret' => env('API_CLIENT_SECRET'),
+					'client_id' => 1,
+					'client_secret' => 'ETmkZ9h6ytzjZ5pAFxdTFYDAjQsheByOf5U2yx4Y',
 					'refresh_token'=> session('api')->refresh_token,
 				];
 				break;
 				case 'social':
 				$form_params = [
 					'grant_type' => 'social',
-					'client_id' => env('API_CLIENT_ID'),
-					'client_secret' => env('API_CLIENT_SECRET'),
+					'client_id' => 1,
+					'client_secret' => 'ETmkZ9h6ytzjZ5pAFxdTFYDAjQsheByOf5U2yx4Y',
 					'provider' => Auth::user()->provider, // provider
 					'access_token' => Auth::user()->provider_id, // provider_id
 				];
@@ -83,7 +83,7 @@ class ApiHelper {
 			return false;
 
 		} catch (\Exception $e) {
-			return false;
+			return $e->getMessage();
 		}
 
 	}

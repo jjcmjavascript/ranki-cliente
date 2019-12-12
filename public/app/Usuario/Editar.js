@@ -296,10 +296,9 @@ __webpack_require__.r(__webpack_exports__);
 
       this.start();
       axios.post(this.url, this.usuario).then(function (res) {
-        _this2.stop();
-
         _this2.usuario = res.data.usuario;
-      })["catch"](function (err) {})["finally"](function () {// this.stop();
+      })["catch"](function (err) {})["finally"](function () {
+        _this2.stop();
       });
     },
     editar: function editar() {

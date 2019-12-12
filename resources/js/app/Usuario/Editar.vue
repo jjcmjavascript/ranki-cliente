@@ -318,12 +318,11 @@ export default {
             axios
                 .post(this.url, this.usuario)
                 .then(res => {
-                    this.stop();
                     this.usuario = res.data.usuario;
                 })
                 .catch(err => {})
                 .finally(() => {
-                    // this.stop();
+                    this.stop();
                 });
         },
 

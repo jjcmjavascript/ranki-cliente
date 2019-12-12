@@ -304,6 +304,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -364,8 +365,23 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    iniciar: function iniciar() {
+    iniciarRedes: function iniciarRedes(provider) {
       var _this = this;
+
+      this.$root.cargando();
+      axios.post('/auth', {
+        provider: provider
+      }).then(function (res) {
+        _this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo"); //window.location.href = res.data.url;
+
+      })["catch"](function (err) {
+        _this.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
+      })["finally"](function () {
+        _this.$swal.disableLoading();
+      });
+    },
+    iniciar: function iniciar() {
+      var _this2 = this;
 
       this.alertaEnviar = true;
 
@@ -377,15 +393,14 @@ __webpack_require__.r(__webpack_exports__);
           this.user.remember && request.append("remember", this.user.remember);
           this.$root.cargando();
           axios.post("/iniciar", request).then(function (res) {
-            _this.$swal.disableLoading();
+            _this2.$swal.disableLoading();
 
-            _this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
+            _this2.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo"); //window.location.href = res.data.url;
 
-            window.location.href = res.data.url;
           })["catch"](function (error) {
-            _this.$swal.disableLoading();
+            _this2.$swal.disableLoading();
 
-            _this.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
+            _this2.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
           })["finally"](function () {});
         } catch (err) {
           this.alertaEnviar = false;
@@ -394,7 +409,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     registrar: function registrar() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.alertaRegistrar = true;
 
@@ -403,24 +418,22 @@ __webpack_require__.r(__webpack_exports__);
         this.userDos.nombre && request.append("nombre", this.userDos.nombre);
         this.userDos.apellido && request.append("apellidos", this.userDos.apellido);
         this.userDos.rut && request.append("rut", this.userDos.rut);
-        this.userDos.correo && request.append("email", this.userDos.correo); // this.userDos.telefono &&
-        //   request.append("telefono_movil", this.userDos.telefono);
-
+        this.userDos.correo && request.append("email", this.userDos.correo);
         this.userDos.clave && request.append("password", this.userDos.clave);
         this.userDos.claveConfirm && request.append("password_confirmation", this.userDos.claveConfirm);
 
         if (!this.alertaResgistrar) {
           this.$root.cargando();
           axios.post("/crear", request).then(function (res) {
-            _this2.$swal.disableLoading();
+            _this3.$swal.disableLoading();
 
-            _this2.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
+            _this3.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
 
             window.location.href = res.data.url;
           })["catch"](function (error) {
-            _this2.$swal.disableLoading();
+            _this3.$swal.disableLoading();
 
-            _this2.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
+            _this3.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
           })["finally"](function () {});
         }
       } catch (err) {
@@ -1463,10 +1476,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "facebook-log", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fab fa-facebook-f" }),
-      _vm._v("Connect with Facebook")
-    ])
+    return _c(
+      "a",
+      { staticClass: "facebook-log", attrs: { href: "auth/facebook" } },
+      [
+        _c("i", { staticClass: "fab fa-facebook-f" }),
+        _vm._v("Iniciar con Facebook")
+      ]
+    )
   }
 ]
 render._withStripped = true
