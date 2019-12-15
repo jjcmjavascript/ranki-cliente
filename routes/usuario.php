@@ -18,8 +18,9 @@ Route::middleware(['auth','verifyToken'])->group(function() {
 
 	    Route::post('guardar','UsuarioController@guardar')->name('.guardar');
 	    Route::post('clave','UsuarioController@editar_clave')->name('.editar_clave');
-
 	    Route::get('logout', 'UsuarioController@logout')->name('.salir');
+        Route::post('desactivar', 'UsuarioController@desactivar')->name('.desactivar');
+
 	});
 
     // FAVORITOS

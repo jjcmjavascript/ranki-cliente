@@ -104,6 +104,12 @@
                     </div>
                     <p>Tamaño max. 2MB</p>
                 </div>
+                <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="custom-control custom-checkbox mt-4 pt-2">
+                        <input type="checkbox" class="custom-control-input" id="cssCheckbox1" v-model="usuario.notificacion" >
+                        <label class="custom-control-label" for="cssCheckbox1">Recibir Promociones/Notificaciones </label>
+                    </div>
+                </div>
                 <div class="col-xs-12 col-lg-12 text-center">
                     <button class="btn btn-primary" :disabled="send" @click="editar()">
                         Guardar cambios
@@ -165,6 +171,20 @@
                     </div>
                 </div>
             </div>
+            <div class="profile-edit-container" v-if="!usuario.provider_id">
+                <div class="box-widget-item-header">
+                    <h3> Otros</h3>
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-xs-12 col-sm-4 col-md-12 col-lg-12  text-center">
+                        <button class="btn btn-danger" @click.once="desactivar()">
+                            Desactivar Cuenta
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- dashboard-list-box end-->
     </div>
@@ -190,6 +210,7 @@ export default {
                 telefono_movil: null,
                 email: null,
                 _avatar: null,
+                notificacion : null,
             },
             showPassword: [false, false, false],
             file: null,
@@ -275,7 +296,6 @@ export default {
 
             return ((file.size / 1024) / 1024) < size;
         },
-
                 alerta(tipo, titulo, mensaje = null) {
                     this.$root.alertas(tipo, titulo, mensaje);
                 },
@@ -325,7 +345,6 @@ export default {
                     this.stop();
                 });
         },
-
         editar() {
             if (this.all) {
                 this.alerta("error", "Ups... algunos datos son incorrectos!");
@@ -334,6 +353,7 @@ export default {
 
                 const request = new FormData();
                 this.usuario.id && request.append("id", this.usuario.id);
+                request.append("notificacion", (this.usuario.notificacion ? 1 : 0));
                 this.usuario.nombre && request.append("nombre", this.usuario.nombre);
                 this.usuario.apellidos &&
                     request.append("apellidos", this.usuario.apellidos);
@@ -351,7 +371,6 @@ export default {
                     .then(res => {
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");
                         this.usuario = res.data.usuario;
-
                         document.querySelector("#imagen_header").src = this.urlImagen;
                         document.querySelector("#imagen_lateral").src = this.urlImagen;
 
@@ -362,7 +381,26 @@ export default {
                     })
             }
         },
+        desactivar(){
+            this.$swal.fire({
+                title  : 'Alerta',
+                html: 'Esta seguro de desactivar su cuenta?',
+                showConfirmButton : true
+            })
+            .then(res =>{
+                if(res && res.value){
+                    this.start();
+                    axios.post(this.url + '/desactivar')
+                    .then(res=>{
 
+                    })
+                    .catch((err)=>{
+                        this.stop();
+                        this.alerta("error", "Ups...!", err);
+                    })
+                }
+            })
+        },
         cambiarImagen(event) {
             this.file = null;
             try {

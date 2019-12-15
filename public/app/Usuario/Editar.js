@@ -183,6 +183,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -199,7 +219,8 @@ __webpack_require__.r(__webpack_exports__);
         telefono_fijo: null,
         telefono_movil: null,
         email: null,
-        _avatar: null
+        _avatar: null,
+        notificacion: null
       },
       showPassword: [false, false, false],
       file: null
@@ -310,6 +331,7 @@ __webpack_require__.r(__webpack_exports__);
         this.start();
         var request = new FormData();
         this.usuario.id && request.append("id", this.usuario.id);
+        request.append("notificacion", this.usuario.notificacion ? 1 : 0);
         this.usuario.nombre && request.append("nombre", this.usuario.nombre);
         this.usuario.apellidos && request.append("apellidos", this.usuario.apellidos);
         this.usuario.direccion && request.append("direccion", this.usuario.direccion);
@@ -329,6 +351,25 @@ __webpack_require__.r(__webpack_exports__);
           _this3.alerta("error", "Lo sentimos!", err);
         });
       }
+    },
+    desactivar: function desactivar() {
+      var _this4 = this;
+
+      this.$swal.fire({
+        title: 'Alerta',
+        html: 'Esta seguro de desactivar su cuenta?',
+        showConfirmButton: true
+      }).then(function (res) {
+        if (res && res.value) {
+          _this4.start();
+
+          axios.post(_this4.url + '/desactivar').then(function (res) {})["catch"](function (err) {
+            _this4.stop();
+
+            _this4.alerta("error", "Ups...!", err);
+          });
+        }
+      });
     },
     cambiarImagen: function cambiarImagen(event) {
       this.file = null;
@@ -621,6 +662,73 @@ var render = function() {
             _vm._v(" "),
             _c("p", [_vm._v("Tamaño max. 2MB")])
           ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4" },
+            [
+              _c(
+                "div",
+                { staticClass: "custom-control custom-checkbox mt-4 pt-2" },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.usuario.notificacion,
+                        expression: "usuario.notificacion"
+                      }
+                    ],
+                    staticClass: "custom-control-input",
+                    attrs: { type: "checkbox", id: "cssCheckbox1" },
+                    domProps: {
+                      checked: Array.isArray(_vm.usuario.notificacion)
+                        ? _vm._i(_vm.usuario.notificacion, null) > -1
+                        : _vm.usuario.notificacion
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.usuario.notificacion,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                _vm.usuario,
+                                "notificacion",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.usuario,
+                                "notificacion",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.usuario, "notificacion", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "custom-control-label",
+                      attrs: { for: "cssCheckbox1" }
+                    },
+                    [_vm._v("Recibir Promociones/Notificaciones ")]
+                  )
+                ]
+              )
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "col-xs-12 col-lg-12 text-center" }, [
             _c(
@@ -1046,6 +1154,40 @@ var render = function() {
                 ])
               ])
             ])
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.usuario.provider_id
+          ? _c("div", { staticClass: "profile-edit-container" }, [
+              _vm._m(8),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "form-group col-xs-12 col-sm-4 col-md-12 col-lg-12  text-center"
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          "~click": function($event) {
+                            return _vm.desactivar()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Desactivar Cuenta\n                        "
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ])
+            ])
           : _vm._e()
       ])
     ])
@@ -1126,6 +1268,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-widget-item-header" }, [
       _c("h3", [_vm._v(" Cambiar contraseña")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-widget-item-header" }, [
+      _c("h3", [_vm._v(" Otros")])
     ])
   }
 ]
@@ -1246,15 +1396,14 @@ function normalizeComponent (
 /*!*********************************************!*\
   !*** ./resources/js/app/Usuario/Editar.vue ***!
   \*********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Editar_vue_vue_type_template_id_477385a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Editar.vue?vue&type=template&id=477385a8& */ "./resources/js/app/Usuario/Editar.vue?vue&type=template&id=477385a8&");
 /* harmony import */ var _Editar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Editar.vue?vue&type=script&lang=js& */ "./resources/js/app/Usuario/Editar.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Editar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Editar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1284,7 +1433,7 @@ component.options.__file = "resources/js/app/Usuario/Editar.vue"
 /*!**********************************************************************!*\
   !*** ./resources/js/app/Usuario/Editar.vue?vue&type=script&lang=js& ***!
   \**********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
