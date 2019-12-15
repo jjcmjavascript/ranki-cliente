@@ -36,8 +36,10 @@ Route::middleware(['auth','verifyToken'])->group(function() {
 
     // PROPIEDADES
 	Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function() {
-		Route::get('crear','PropiedadController@vue')->name('.crear');
-	    Route::post('crear','PropiedadController@crear')->name('.crear');
-        Route::post('guardar','PropiedadController@crear')->name('.guardar');
+        Route::get('crear','PropiedadController@vue')->name('.guardar');
+        Route::post('crear','PropiedadController@crear')->name('.guardar');
+        Route::post('crear/guardar','PropiedadController@guardar')->name('.guardar');
+        Route::post('crear/comuna','PropiedadController@comuna')->name('.comuna');
+
 	});
 });

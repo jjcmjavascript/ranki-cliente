@@ -323,11 +323,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      error: [],
-      success: [],
       section: {
         name: ''
       },
@@ -343,29 +342,23 @@ __webpack_require__.r(__webpack_exports__);
         comuna: null,
         calle: null,
         numero_calle: null,
-        numero_departamento: null,
-        piso: null,
+        numero_domicilio: null,
+        numero_piso: null,
         superficie_util: null,
         superficie_terraza: null,
-        baños: null,
+        banio: null,
         tipo_piso: null,
         descripcion: null,
         anio_construccion: null,
-        privados: null,
+        privado: null,
         bodega: null,
         estacionamiento: null,
         orientacion: null,
         imagenes: [],
-        imagen_principal: null,
-        codigo_telefono: {
-          label: '9',
-          value: 9
-        },
+        portada_imagen: null,
+        codigo_telefono: 9,
         telefono: null,
-        codigo_telefono2: {
-          label: '9',
-          value: 9
-        },
+        codigo_telefono2: 9,
         telefono2: null,
         tipo_operacion: null,
         tipo_valor: null,
@@ -394,13 +387,7 @@ __webpack_require__.r(__webpack_exports__);
         orientaciones: [],
         periodicidades: [],
         usuarios: [],
-        tipos_telefonos: [{
-          label: '2',
-          value: 2
-        }, {
-          label: '9',
-          value: 9
-        }],
+        tipos_telefonos: [9, 2],
         conteo_generico: [],
         distribucion: [],
         servicios: [],
@@ -410,25 +397,82 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.iniciar(); // this.iniciarCampoConteoGenerico();
+    this.iniciar();
+    this.iniciarCampoConteoGenerico();
+    document.querySelector('html').style['overflow-y'] = 'auto';
   },
-  computed: {// inhabilitarGuardar: function() {
-    // 	return !(
-    // 		this.data.nombre &&
-    // 		this.data.apellidos &&
-    // 		this.data.boletines &&
-    // 		this.valid.rut == 'is-valid' &&
-    // 		this.valid.email == 'is-valid' &&
-    // 		this.valid.password == 'is-valid' &&
-    // 		this.valid.confirmPassword == 'is-valid'
-    // 	);
-    // },
-  },
+  computed: {},
   methods: {
+    start: function start() {
+      this.$root.cargando();
+    },
+    stop: function stop() {
+      this.$root.stop();
+    },
+    alerta: function alerta(tipo, titulo) {
+      var mensaje = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      this.$root.alertas(tipo, titulo, mensaje);
+    },
+    limpiarMensajes: function limpiarMensajes() {
+      this.success = [];
+      this.error = [];
+    },
+    limpiar: function limpiar() {
+      this.data = {
+        titulo: null,
+        tipo_propiedad: null,
+        subtipo_propiedad: null,
+        region: null,
+        comuna: null,
+        calle: null,
+        numero_calle: null,
+        numero_domicilio: null,
+        numero_piso: null,
+        superficie_util: null,
+        superficie_terraza: null,
+        banio: null,
+        tipo_piso: null,
+        descripcion: null,
+        anio_construccion: null,
+        privado: null,
+        bodega: null,
+        estacionamiento: null,
+        orientacion: null,
+        imagenes: [],
+        portada_imagen: null,
+        codigo_telefono: 9,
+        telefono: null,
+        codigo_telefono2: 9,
+        telefono2: null,
+        tipo_operacion: null,
+        tipo_valor: null,
+        precio: null,
+        periodicidad_arriendo: null,
+        amoblada: 0,
+        usuario: null,
+        latitud: null,
+        longitud: null,
+        atributos: []
+      };
+      this.limpiarAtributos();
+    },
+    limpiarAtributos: function limpiarAtributos() {
+      var atributos = ['distribucion', 'servicios', 'cocina', 'otros'];
+
+      for (var i = 0; i < atributos.length; i++) {
+        for (var j = 0; j < this.selects[atributos[i]].length; j++) {
+          $('#cssCheckbox' + i + j).prop('checked', false);
+        }
+      }
+    },
     iniciar: function iniciar() {
       var _this = this;
 
+      this.start();
       axios.post(this.url.current).then(function (response) {
+        _this.stop(); //this.alerta("success", "Exito", "Tu clave fue modificada!");
+
+
         _this.selects.regiones = response.data.regiones;
         _this.selects.tipos_propiedades = response.data.tipos_propiedades;
         _this.selects.subtipos_propiedades = response.data.subtipos_propiedades;
@@ -443,60 +487,79 @@ __webpack_require__.r(__webpack_exports__);
         _this.selects.servicios = response.data.servicios;
         _this.selects.cocina = response.data.cocina;
         _this.selects.otros = response.data.otros;
-      })["catch"](function (error) {})["finally"](function () {});
+      })["catch"](function (error) {
+        _this.stop();
+
+        _this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
+      });
     },
     guardar: function guardar() {
       var _this2 = this;
 
-      var telefono, telefono2;
+      this.start();
       var request = new FormData();
       request.append('amoblada', this.data.amoblada);
       this.data.titulo && request.append('titulo', this.data.titulo);
-      this.data.tipo_propiedad && request.append('tipo_propiedad', this.data.tipo_propiedad.id);
-      this.data.subtipo_propiedad && request.append('subtipo_propiedad', this.data.subtipo_propiedad.id);
+      this.data.tipo_propiedad && request.append('id_tipo_propiedad', this.data.tipo_propiedad.id);
+      this.data.subtipo_propiedad && request.append('id_subtipo_propiedad', this.data.subtipo_propiedad.id);
       this.data.region && request.append('region_id', this.data.region.id);
       this.data.comuna && request.append('comuna_id', this.data.comuna.id);
       this.data.calle && request.append('calle', this.data.calle);
       this.data.numero_calle && request.append('numero_calle', this.data.numero_calle);
-      this.data.numero_departamento && request.append('numero_departamento', this.data.numero_departamento);
-      this.data.piso && request.append('piso', this.data.piso);
+      this.data.numero_domicilio && request.append('numero_domicilio', this.data.numero_domicilio);
+      this.data.numero_piso && request.append('numero_piso', this.data.numero_piso);
       this.data.superficie_util && request.append('superficie_util', this.data.superficie_util);
       this.data.superficie_terraza && request.append('superficie_terraza', this.data.superficie_terraza);
-      this.data.baños && request.append('baños', this.data.baños.value);
+      this.data.banio && request.append('banio', this.data.banio.value);
       this.data.tipo_piso && request.append('tipo_piso', JSON.stringify(this.data.tipo_piso));
       this.data.descripcion && request.append('descripcion', this.data.descripcion);
       this.data.anio_construccion && request.append('anio_construccion', this.data.anio_construccion);
-      this.data.privados && request.append('privados', this.data.privados.value);
+      this.data.privado && request.append('privado', this.data.privado.value);
       this.data.bodega && request.append('bodega', this.data.bodega.value);
       this.data.estacionamiento && request.append('estacionamiento', this.data.estacionamiento.value);
-      this.data.orientacion && request.append('orientacion', this.data.orientacion.id);
-      this.data.tipo_operacion && request.append('tipo_operacion', this.tipo_operacion.id);
-      this.data.tipo_valor && request.append('tipo_valor', this.data.tipo_valor.id);
+      this.data.orientacion && request.append('id_orientacion', this.data.orientacion.id);
+      this.data.tipo_operacion && request.append('id_tipo_operacion', this.data.tipo_operacion.id);
+      this.data.tipo_valor && request.append('id_tipo_valor', this.data.tipo_valor.id);
       this.data.precio && request.append('precio', this.data.precio);
-      this.data.periodicidad_arriendo && request.append('periodicidad_arriendo', this.data.periodicidad_arriendo.id);
+      this.data.periodicidad_arriendo && request.append('id_periodicidad_arriendo', this.data.periodicidad_arriendo.id);
       this.data.usuario && request.append('usuario_id', this.data.usuario.id);
       this.data.latitud && request.append('latitud', this.data.latitud);
       this.data.longitud && request.append('longitud', this.data.longitud);
-      this.data.imagen_principal && request.append('imagen_principal', this.data.imagen_principal);
-      this.data.imagenes && request.append('imagenes', JSON.stringify(this.data.imagenes));
       this.data.atributos && request.append('atributos', JSON.stringify(this.data.atributos));
+      this.data.telefono && request.append('telefono', this.data.telefono);
+      this.data.codigo_telefono && request.append('codigo_telefono', this.data.codigo_telefono);
+      this.data.telefono2 && request.append('telefono2', this.data.telefono2);
+      this.data.codigo_telefono2 && request.append('codigo_telefono2', this.data.codigo_telefono2);
 
-      if (this.data.codigo_telefono && this.data.telefono) {
-        request('telefono', this.data.codigo_telefono.value + this.data.telefono);
+      if (this.data.portada_imagen != null) {
+        request.append('portada_imagen_key', this.data.portada_imagen);
       }
 
-      if (this.data.codigo_telefono2 && this.data.telefono2) {
-        request('telefono', this.data.codigo_telefono2.value + this.data.telefono2);
+      if (this.data.imagenes.length > 0) {
+        this.data.imagenes.forEach(function (e) {
+          var arr = e.contenido.split(','),
+              mime = arr[0].match(/:(.*?);/)[1],
+              bstr = atob(arr[1]),
+              n = bstr.length,
+              u8arr = new Uint8Array(n); // milqui
+
+          while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+          }
+
+          var file = new File([u8arr], e.nombre, {
+            type: mime
+          });
+          request.append('imagenes[]', file);
+        });
       }
 
       axios.post(this.url.current + '/guardar', request).then(function (response) {
-        _this2.success = response.data;
-
-        _this2.limpiar();
+        _this2.alerta("success", "Exito", response.data.exito);
       })["catch"](function (error) {
-        _this2.error = _this2.$root.arrayResponse(error);
-      })["finally"](function () {
-        load.hide();
+        _this2.stop();
+
+        _this2.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
       });
     },
     mostrarMasInformación: function mostrarMasInformaciN() {
@@ -529,34 +592,39 @@ __webpack_require__.r(__webpack_exports__);
         var reader = new FileReader();
 
         if (this.data.imagenes.length == 0) {
-          this.data.imagen_principal = 0;
+          this.data.portada_imagen = 0;
         }
 
-        reader.onload = function (e) {
-          _this3.data.imagenes.push(e.target.result);
+        reader.onload = function (e, nombre) {
+          _this3.data.imagenes.push({
+            nombre: e.target.filename,
+            contenido: e.target.result
+          });
         };
 
+        reader.filename = e.target.files[0].name;
         reader.readAsDataURL(e.target.files[0]);
       }
     },
     removerImagen: function removerImagen(key) {
       this.data.imagenes.splice(key, 1);
-      this.data.imagen_principal = key > 0 ? key - 1 : null;
+      this.data.portada_imagen = key > 0 ? key - 1 : null;
     },
     marcarPrincipalImagen: function marcarPrincipalImagen(key) {
-      this.data.imagen_principal = key;
+      this.data.portada_imagen = key;
     },
     actualizarComuna: function actualizarComuna() {
       var _this4 = this;
 
+      this.limpiarMensajes();
       this.data.comuna = null;
       this.selects.comunas = [];
 
       if (this.data.region) {
         var request = new FormData();
         request.append('id_region', this.data.region.id);
-        axios.post(this.$root.base_url + 'comun/combo_box/comunas', request).then(function (response) {
-          _this4.selects.comunas = response.data;
+        axios.post(this.$root.base_url + 'propiedad/crear', request).then(function (response) {
+          _this4.selects.comunas = response.data.regiones;
         })["catch"](function (error) {
           _this4.error = _this4.$root.arrayResponse(error);
         });
@@ -620,34 +688,6 @@ __webpack_require__.r(__webpack_exports__);
           this.valid.confirmPassword = 'is-invalid';
         }
       }
-    },
-    limpiar: function limpiar() {
-      this.data = {
-        rut: null,
-        nombre: null,
-        apellidos: null,
-        email: null,
-        telefono_movil: null,
-        telefono_fijo: null,
-        boletines: {
-          label: 'No',
-          value: 0
-        },
-        password: null,
-        confirmPassword: null,
-        avatar: {
-          image: null,
-          file: null
-        }
-      };
-      this.valid = {
-        rut: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-      };
-      $('#avatarFile').val('');
-      this.cargarAvatar();
     }
   }
 });
@@ -830,7 +870,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _c("label", [_vm._v("Calle")]),
+                        _vm._m(5),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -863,7 +903,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _c("label", [_vm._v("Número")]),
+                        _vm._m(6),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -907,13 +947,13 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.data.numero_departamento,
-                              expression: "data.numero_departamento"
+                              value: _vm.data.numero_domicilio,
+                              expression: "data.numero_domicilio"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: { type: "text" },
-                          domProps: { value: _vm.data.numero_departamento },
+                          domProps: { value: _vm.data.numero_domicilio },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -921,7 +961,7 @@ var render = function() {
                               }
                               _vm.$set(
                                 _vm.data,
-                                "numero_departamento",
+                                "numero_domicilio",
                                 $event.target.value
                               )
                             }
@@ -931,7 +971,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(5),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c("hr", { staticClass: "mt-0" }),
                   _vm._v(" "),
@@ -943,7 +983,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
                       },
                       [
-                        _vm._m(6),
+                        _vm._m(8),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -976,7 +1016,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-12 col-lg-12"
                       },
                       [
-                        _vm._m(7),
+                        _vm._m(9),
                         _vm._v(" "),
                         _c("div", [
                           _c(
@@ -995,7 +1035,7 @@ var render = function() {
                                 }
                               }),
                               _vm._v(
-                                "\n                                            Agregar imagen\n                                        "
+                                "\n            \t\t\t\t\t\t\t   \tAgregar imagen\n            \t\t\t\t\t\t\t"
                               )
                             ]
                           )
@@ -1003,11 +1043,13 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(8),
+                    _vm._m(10),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "col-xs-12 col-sm-4 col-md-12 col-lg-12" },
+                      {
+                        staticClass: "col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                      },
                       [
                         _c(
                           "div",
@@ -1017,7 +1059,7 @@ var render = function() {
                           },
                           _vm._l(_vm.data.imagenes, function(imagen, index) {
                             return _c("div", { staticClass: "imageLoad" }, [
-                              _vm.data.imagen_principal == index
+                              _vm.data.portada_imagen == index
                                 ? _c(
                                     "span",
                                     { staticClass: "imagePrincipal" },
@@ -1027,7 +1069,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("img", {
                                 attrs: {
-                                  src: imagen,
+                                  src: imagen.contenido,
                                   height: "100",
                                   width: "100"
                                 }
@@ -1081,7 +1123,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _vm._m(9),
+                        _vm._m(11),
                         _vm._v(" "),
                         _c("v-select", {
                           attrs: {
@@ -1089,11 +1131,11 @@ var render = function() {
                             options: _vm.selects.subtipos_propiedades
                           },
                           model: {
-                            value: _vm.data.tipo_propiedad,
+                            value: _vm.data.subtipo_propiedad,
                             callback: function($$v) {
-                              _vm.$set(_vm.data, "tipo_propiedad", $$v)
+                              _vm.$set(_vm.data, "subtipo_propiedad", $$v)
                             },
-                            expression: "data.tipo_propiedad"
+                            expression: "data.subtipo_propiedad"
                           }
                         })
                       ],
@@ -1107,7 +1149,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _vm._m(10),
+                        _vm._m(12),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -1144,7 +1186,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _vm._m(11),
+                        _vm._m(13),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -1181,7 +1223,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _vm._m(12),
+                        _c("label", [_vm._v("Baños")]),
                         _vm._v(" "),
                         _c("v-select", {
                           attrs: {
@@ -1189,11 +1231,11 @@ var render = function() {
                             placeholder: "Seleccione"
                           },
                           model: {
-                            value: _vm.data.baño,
+                            value: _vm.data.banio,
                             callback: function($$v) {
-                              _vm.$set(_vm.data, "baño", $$v)
+                              _vm.$set(_vm.data, "banio", $$v)
                             },
-                            expression: "data.baño"
+                            expression: "data.banio"
                           }
                         })
                       ],
@@ -1236,10 +1278,7 @@ var render = function() {
                       [
                         _c(
                           "div",
-                          {
-                            staticClass:
-                              "custom-control custom-checkbox mt-4 pt-2"
-                          },
+                          { staticClass: "checkbox checkbox-css mt-4" },
                           [
                             _c("input", {
                               directives: [
@@ -1250,18 +1289,22 @@ var render = function() {
                                   expression: "data.amoblada"
                                 }
                               ],
-                              staticClass: "custom-control-input",
-                              attrs: { type: "checkbox", id: "cssCheckbox1" },
+                              attrs: {
+                                type: "checkbox",
+                                id: "cssCheckbox1",
+                                "true-value": 1,
+                                "false-value": 0
+                              },
                               domProps: {
                                 checked: Array.isArray(_vm.data.amoblada)
                                   ? _vm._i(_vm.data.amoblada, null) > -1
-                                  : _vm.data.amoblada
+                                  : _vm._q(_vm.data.amoblada, 1)
                               },
                               on: {
                                 change: function($event) {
                                   var $$a = _vm.data.amoblada,
                                     $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
+                                    $$c = $$el.checked ? 1 : 0
                                   if (Array.isArray($$a)) {
                                     var $$v = null,
                                       $$i = _vm._i($$a, $$v)
@@ -1289,14 +1332,9 @@ var render = function() {
                               }
                             }),
                             _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "custom-control-label",
-                                attrs: { for: "cssCheckbox1" }
-                              },
-                              [_vm._v("Esta propiedad esta amoblada")]
-                            )
+                            _c("label", { attrs: { for: "cssCheckbox1" } }, [
+                              _vm._v("Esta propiedad esta amoblada")
+                            ])
                           ]
                         )
                       ]
@@ -1311,7 +1349,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
                       },
                       [
-                        _vm._m(13),
+                        _vm._m(14),
                         _vm._v(" "),
                         _c("textarea", {
                           directives: [
@@ -1358,7 +1396,7 @@ var render = function() {
                         attrs: { id: "infoIcon" }
                       }),
                       _vm._v(
-                        " Agregar más información\n                            "
+                        " Agregar más información\n                           \t"
                       )
                     ]
                   ),
@@ -1414,16 +1452,16 @@ var render = function() {
                             "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                         },
                         [
-                          _c("label", [_vm._v("Privados")]),
+                          _c("label", [_vm._v("Privado")]),
                           _vm._v(" "),
                           _c("v-select", {
                             attrs: { options: _vm.selects.conteo_generico },
                             model: {
-                              value: _vm.data.privados,
+                              value: _vm.data.privado,
                               callback: function($$v) {
-                                _vm.$set(_vm.data, "privados", $$v)
+                                _vm.$set(_vm.data, "privado", $$v)
                               },
-                              expression: "data.privados"
+                              expression: "data.privado"
                             }
                           })
                         ],
@@ -1444,19 +1482,23 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.data.piso,
-                                expression: "data.piso"
+                                value: _vm.data.numero_piso,
+                                expression: "data.numero_piso"
                               }
                             ],
                             staticClass: "form-control",
                             attrs: { type: "text" },
-                            domProps: { value: _vm.data.piso },
+                            domProps: { value: _vm.data.numero_piso },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.$set(_vm.data, "piso", $event.target.value)
+                                _vm.$set(
+                                  _vm.data,
+                                  "numero_piso",
+                                  $event.target.value
+                                )
                               }
                             }
                           })
@@ -1475,11 +1517,11 @@ var render = function() {
                           _c("v-select", {
                             attrs: { options: _vm.selects.conteo_generico },
                             model: {
-                              value: _vm.data.privados,
+                              value: _vm.data.bodega,
                               callback: function($$v) {
-                                _vm.$set(_vm.data, "privados", $$v)
+                                _vm.$set(_vm.data, "bodega", $$v)
                               },
-                              expression: "data.privados"
+                              expression: "data.bodega"
                             }
                           })
                         ],
@@ -1516,7 +1558,7 @@ var render = function() {
                             "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                         },
                         [
-                          _vm._m(14),
+                          _c("label", [_vm._v("Orientación")]),
                           _vm._v(" "),
                           _c("v-select", {
                             attrs: {
@@ -1565,16 +1607,12 @@ var render = function() {
                                   return _c("span", [
                                     _c(
                                       "div",
-                                      {
-                                        staticClass:
-                                          "custom-control custom-checkbox"
-                                      },
+                                      { staticClass: "checkbox checkbox-css" },
                                       [
                                         _c("input", {
-                                          staticClass: "custom-control-input",
                                           attrs: {
                                             type: "checkbox",
-                                            id: "cssCheckbox1" + key
+                                            id: "cssCheckbox0" + key
                                           },
                                           on: {
                                             click: function($event) {
@@ -1588,14 +1626,14 @@ var render = function() {
                                         _c(
                                           "label",
                                           {
-                                            staticClass: "custom-control-label",
-                                            attrs: { for: "cssCheckbox1" + key }
+                                            staticClass: "no_bold",
+                                            attrs: { for: "cssCheckbox0" + key }
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                        " +
+                                              "\n            \t\t\t\t\t\t\t\t\t\t\t" +
                                                 _vm._s(distribucion.nombre) +
-                                                "\n                                                    "
+                                                "\n            \t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -1623,16 +1661,12 @@ var render = function() {
                                   return _c("span", [
                                     _c(
                                       "div",
-                                      {
-                                        staticClass:
-                                          "custom-control custom-checkbox"
-                                      },
+                                      { staticClass: "checkbox checkbox-css" },
                                       [
                                         _c("input", {
-                                          staticClass: "custom-control-input",
                                           attrs: {
                                             type: "checkbox",
-                                            id: "cssCheckbox2" + key
+                                            id: "cssCheckbox1" + key
                                           },
                                           on: {
                                             click: function($event) {
@@ -1646,14 +1680,14 @@ var render = function() {
                                         _c(
                                           "label",
                                           {
-                                            staticClass: "custom-control-label",
-                                            attrs: { for: "cssCheckbox2" + key }
+                                            staticClass: "no_bold",
+                                            attrs: { for: "cssCheckbox1" + key }
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                        " +
+                                              "\n            \t\t\t\t\t\t\t\t\t\t\t" +
                                                 _vm._s(servicio.nombre) +
-                                                "\n                                                    "
+                                                "\n            \t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -1681,16 +1715,12 @@ var render = function() {
                                   return _c("span", [
                                     _c(
                                       "div",
-                                      {
-                                        staticClass:
-                                          "custom-control custom-checkbox"
-                                      },
+                                      { staticClass: "checkbox checkbox-css" },
                                       [
                                         _c("input", {
-                                          staticClass: "custom-control-input",
                                           attrs: {
                                             type: "checkbox",
-                                            id: "cssCheckbox3" + key
+                                            id: "cssCheckbox2" + key
                                           },
                                           on: {
                                             click: function($event) {
@@ -1704,14 +1734,14 @@ var render = function() {
                                         _c(
                                           "label",
                                           {
-                                            staticClass: "custom-control-label",
-                                            attrs: { for: "cssCheckbox3" + key }
+                                            staticClass: "no_bold",
+                                            attrs: { for: "cssCheckbox2" + key }
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                        " +
+                                              "\n            \t\t\t\t\t\t\t\t\t\t\t" +
                                                 _vm._s(cocina.nombre) +
-                                                "\n                                                    "
+                                                "\n            \t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -1736,16 +1766,12 @@ var render = function() {
                                   return _c("span", [
                                     _c(
                                       "div",
-                                      {
-                                        staticClass:
-                                          "custom-control custom-checkbox"
-                                      },
+                                      { staticClass: "checkbox checkbox-css" },
                                       [
                                         _c("input", {
-                                          staticClass: "custom-control-input",
                                           attrs: {
                                             type: "checkbox",
-                                            id: "cssCheckbox4" + key
+                                            id: "cssCheckbox3" + key
                                           },
                                           on: {
                                             click: function($event) {
@@ -1759,14 +1785,14 @@ var render = function() {
                                         _c(
                                           "label",
                                           {
-                                            staticClass: "custom-control-label",
-                                            attrs: { for: "cssCheckbox4" + key }
+                                            staticClass: "no_bold",
+                                            attrs: { for: "cssCheckbox3" + key }
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                        " +
+                                              "\n            \t\t\t\t\t\t\t\t\t\t\t" +
                                                 _vm._s(otro.nombre) +
-                                                "\n                                                    "
+                                                "\n            \t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -1794,7 +1820,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "form-group col-xs-12 col-sm-4 col-md-8 col-lg-8"
+                          "form-group col-xs-12 col-sm-12 col-md-8 col-lg-8"
                       },
                       [
                         _vm._m(16),
@@ -1816,7 +1842,7 @@ var render = function() {
                                       "\n                                                " +
                                         _vm._s(option.nombre_completo) +
                                         " (" +
-                                        _vm._s(_vm._f("rut")(option.rut)) +
+                                        _vm._s(option.rut) +
                                         ")\n                                            "
                                     )
                                   ])
@@ -1835,7 +1861,7 @@ var render = function() {
                                         "\n                                                " +
                                           _vm._s(option.nombre_completo) +
                                           " (" +
-                                          _vm._s(_vm._f("rut")(option.rut)) +
+                                          _vm._s(option.rut) +
                                           ")\n                                            "
                                       )
                                     ]
@@ -1843,7 +1869,14 @@ var render = function() {
                                 ]
                               }
                             }
-                          ])
+                          ]),
+                          model: {
+                            value: _vm.data.usuario,
+                            callback: function($$v) {
+                              _vm.$set(_vm.data, "usuario", $$v)
+                            },
+                            expression: "data.usuario"
+                          }
                         })
                       ],
                       1
@@ -1858,7 +1891,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _vm._m(17),
+                        _c("label", [_vm._v("Teléfono de contacto")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "input-group clear-none" }, [
                           _c("div", { staticClass: "input-group-prepend" }, [
@@ -1925,7 +1958,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _vm._m(18),
+                        _c("label", [_vm._v("Teléfono de contacto 2")]),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -1992,7 +2025,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(19),
+                  _vm._m(17),
                   _vm._v(" "),
                   _c("hr", { staticClass: "mt-0" }),
                   _vm._v(" "),
@@ -2004,7 +2037,7 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _vm._m(20),
+                        _vm._m(18),
                         _vm._v(" "),
                         _c("v-select", {
                           attrs: {
@@ -2012,11 +2045,11 @@ var render = function() {
                             options: _vm.selects.periodicidades
                           },
                           model: {
-                            value: _vm.data.periodicidad,
+                            value: _vm.data.periodicidad_arriendo,
                             callback: function($$v) {
-                              _vm.$set(_vm.data, "periodicidad", $$v)
+                              _vm.$set(_vm.data, "periodicidad_arriendo", $$v)
                             },
-                            expression: "data.periodicidad"
+                            expression: "data.periodicidad_arriendo"
                           }
                         })
                       ],
@@ -2030,12 +2063,15 @@ var render = function() {
                           "form-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
                       },
                       [
-                        _vm._m(21),
+                        _vm._m(19),
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
                           _c(
                             "div",
-                            { staticClass: "col-lg-2" },
+                            {
+                              staticClass:
+                                "col-xs-12 col-sm-3 col-md-3 col-lg-2"
+                            },
                             [
                               _c("v-select", {
                                 attrs: {
@@ -2055,40 +2091,51 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-lg-5" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.data.precio,
-                                  expression: "data.precio"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                placeholder: "Indique el valor de la propiedad"
-                              },
-                              domProps: { value: _vm.data.precio },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-xs-12 col-sm-5 col-md-5 col-lg-5"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.data.precio,
+                                    expression: "data.precio"
                                   }
-                                  _vm.$set(
-                                    _vm.data,
-                                    "precio",
-                                    $event.target.value
-                                  )
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  placeholder:
+                                    "Indique el valor de la propiedad"
+                                },
+                                domProps: { value: _vm.data.precio },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.data,
+                                      "precio",
+                                      $event.target.value
+                                    )
+                                  }
                                 }
-                              }
-                            })
-                          ]),
+                              })
+                            ]
+                          ),
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "col-lg-5" },
+                            {
+                              staticClass:
+                                "col-xs-12 col-sm-5 col-md-5 col-lg-5"
+                            },
                             [
                               _c("v-select", {
                                 attrs: {
@@ -2114,7 +2161,16 @@ var render = function() {
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
-                  _vm._m(22)
+                  _c("div", { staticClass: "float-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-lg",
+                        on: { click: _vm.guardar }
+                      },
+                      [_vm._v("Publicar propiedad")]
+                    )
+                  ])
                 ])
               ])
             ])
@@ -2177,7 +2233,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "mt-2 text-info mb-2" }, [
+    return _c("label", [
+      _vm._v("Calle "),
+      _c("span", { staticClass: "text-red" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("Número "),
+      _c("span", { staticClass: "text-red" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mt-2 text-info" }, [
       _c("span", { staticClass: "fa-stack" }, [
         _c("i", { staticClass: "fa fa-circle fa-stack-2x icon-background" }),
         _vm._v(" "),
@@ -2216,7 +2290,7 @@ var staticRenderFns = [
       [
         _c("div", { staticClass: "alert alert-warning" }, [
           _vm._v(
-            "\n                                        Debes cargar al menos tres fotos. Se recomienda subir fotos apaisadas. De no ser asi, puedes rotarlas en la edicion.\n                                    "
+            "\n            \t\t\t\t\t\t\tDebes cargar al menos tres fotos. Se recomienda subir fotos apaisadas. De no ser asi, puedes rotarlas en la edicion.\n            \t\t\t\t\t\t"
           )
         ])
       ]
@@ -2238,7 +2312,8 @@ var staticRenderFns = [
     return _c("label", [
       _vm._v("Superficie útil (m"),
       _c("sup", [_vm._v("2")]),
-      _vm._v(")")
+      _vm._v(") "),
+      _c("span", { staticClass: "text-red" }, [_vm._v("*")])
     ])
   },
   function() {
@@ -2256,15 +2331,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("Baños "),
-      _c("span", { staticClass: "text-red" }, [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
       _vm._v("Descripción "),
       _c("span", { staticClass: "text-red" }, [_vm._v("*")])
     ])
@@ -2273,23 +2339,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("Orientación "),
-      _c("span", { staticClass: "text-red" }, [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "mt-2 text-info mb-2" }, [
+    return _c("h5", { staticClass: "mt-2 text-info" }, [
       _c("span", { staticClass: "fa-stack" }, [
         _c("i", { staticClass: "fa fa-circle fa-stack-2x icon-background" }),
         _vm._v(" "),
         _c("span", { staticClass: "fa-stack-1x text-black" }, [_vm._v("3")])
       ]),
       _vm._v(
-        "\n                                INFORMACION DE CONTACTO\n                            "
+        "\n            \t\t\t\t\tINFORMACION DE CONTACTO\n            \t\t\t\t"
       )
     ])
   },
@@ -2298,7 +2355,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("Usuario responsable "),
+      _vm._v("Dueño de propiedad "),
       _c("span", { staticClass: "text-red" }, [_vm._v("*")])
     ])
   },
@@ -2306,32 +2363,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("Teléfono de contacto "),
-      _c("span", { staticClass: "text-red" }, [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("Teléfono de contacto 2"),
-      _c("span", { staticClass: "text-red" }, [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "mt-2 text-info mb-2" }, [
+    return _c("h5", { staticClass: "mt-2 text-info" }, [
       _c("span", { staticClass: "fa-stack" }, [
         _c("i", { staticClass: "fa fa-circle fa-stack-2x icon-background" }),
         _vm._v(" "),
         _c("span", { staticClass: "fa-stack-1x text-black" }, [_vm._v("4")])
       ]),
       _vm._v(
-        "\n                                CARACTERISTICAS DE LA PROPIEDAD\n                            "
+        "\n            \t\t\t\t\tCARACTERISTICAS DE LA PROPIEDAD\n            \t\t\t\t"
       )
     ])
   },
@@ -2351,16 +2390,6 @@ var staticRenderFns = [
     return _c("label", [
       _vm._v("Precio de publicación "),
       _c("span", { staticClass: "text-red" }, [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "float-right" }, [
-      _c("button", { staticClass: "btn btn-success btn-lg" }, [
-        _vm._v("Publicar propiedad")
-      ])
     ])
   }
 ]

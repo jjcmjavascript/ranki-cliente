@@ -24,7 +24,7 @@ class PropiedadController extends Controller
 
     public function index ()
     {
-        
+
     }
 
     public function crear()
@@ -45,5 +45,86 @@ class PropiedadController extends Controller
         }
     }
 
+    public function guardar( Request $request)
+    {
 
+        $request->merge(['tipo_piso' => json_decode($request->tipo_piso)]);
+        $request->merge(['amoblada' => filter_var($request->amoblada, FILTER_VALIDATE_BOOLEAN)]);
+
+            $this->validate($request, [
+                'titulo' => 'required|string',
+                'id_tipo_propiedad' => 'required|integer|exists:subtipos,id',
+                'id_subtipo_propiedad' => 'required|integer|exists:subtipos,id',
+                'region_id' => 'required|integer|exists:regiones,id',
+                'comuna_id' => 'required|integer|exists:comunas,id',
+                'calle' => 'required|string',
+                'numero_calle' => 'required|integer',
+                'numero_departamento' => 'nullable|integer',
+                'numero_piso' => 'nullable|integer',
+                'superficie_util' => 'required|integer',
+                'superficie_terraza' => 'nullable|integer',
+                'banio' => 'nullable|integer',
+                'descripcion' => 'required|string',
+                'tipo_piso' => 'nullable|array',
+                'anio_construccion' => 'nullable|integer',
+                'privado' => 'nullable|integer',
+                'bodega' => 'nullable|integer',
+                'estacionamiento' => 'nullable|integer',
+                'telefono' => 'nullable|integer|digits:8',
+                'codigo_telefono' => 'required_with:telefono|integer',
+                'telefono2' => 'nullable|integer|digits:8',
+                'codigo_telefono2' => 'required_with:telefono2|integer',
+                'id_orientacion' => 'nullable|integer',
+                'id_tipo_operacion' => 'required|integer|exists:subtipos,id',
+                'id_tipo_valor' => 'required|integer|exists:subtipos,id',
+                'precio' => 'required|numeric',
+                'id_periodicidad_arriendo' => 'required|integer|exists:subtipos,id',
+                'usuario_id' => 'required|integer|exists:usuarios,id',
+                'latitud' => 'nullable|numeric',
+                'longitud' => 'nullable|numeric',
+                'amoblada' => 'required|boolean',
+                'imagenes'=>'required',
+                'imagenes.*' => 'file|mimes:jpg,png,jpeg,ico,svg|max:2048',
+            ]);
+
+        try {
+            $request->merge(['usuario_id'=>Auth::user()->id]);
+            $request->merge(['tipo_piso' => json_encode($request->tipo_piso)]);
+            $request->merge(['imagenes' => json_encode($request->tipo_piso)]);
+
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/guardar', $request->all());
+
+            if(isset($response['error'])) throw new \Exception($response['error']);
+
+            return response($response,200);
+
+        } catch (\Exception $e) {
+
+            $e = $e->getMessage();
+
+            return response([
+                'error' => $e
+            ], 500);
+        }
+    }
+
+    public function comuna ( Request $request )
+    {
+        try {
+
+            $response = (new ApiHelper)->sendApiRequest('combo_box.comunas',$request->all());
+
+            if(isset($response['error'])) throw new \Exception($response);
+            return response($response,200);
+
+        } catch (\Exception $e) {
+
+            return response([
+                'error' => $e->getMessage()
+            ], 500);
+
+        }
+
+
+    }
 }

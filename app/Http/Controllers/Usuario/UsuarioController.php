@@ -52,7 +52,7 @@ class UsuarioController extends Controller
         ]);
 
         try {
-            
+
             $ruta = 'api/usuarios/guardar';
             $form_params = $request->all();
 
@@ -183,7 +183,18 @@ class UsuarioController extends Controller
 
             $request->merge(['id_usuario' => Auth::user()->id]);
 
-            $response = (new ApiHelper)->sendApiRequest('api/usuarios/favoritos',$request->all());
+            if(!$request->telefono || !$request->codigo_telefono ){
+                $request->remove('telefono');
+                $request->remove('codigo_telefono');
+            }
+
+            if(!$request->telefono2 || !$request->codigo_telefono2)
+            {
+                $request->remove('telefono2');
+                $request->remove('codigo_telefono2');
+            }
+
+            $response = (new ApiHelper)->sendApiRequest('api/usuarios/propiedades',$request->all());
 
             if(isset($response['error'])) throw new \Exception($response);
 
