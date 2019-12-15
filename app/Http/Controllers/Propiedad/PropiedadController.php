@@ -48,7 +48,6 @@ class PropiedadController extends Controller
     public function guardar( Request $request)
     {
 
-        $request->merge(['tipo_piso' => json_decode($request->tipo_piso)]);
         $request->merge(['amoblada' => filter_var($request->amoblada, FILTER_VALIDATE_BOOLEAN)]);
 
             $this->validate($request, [
@@ -83,20 +82,20 @@ class PropiedadController extends Controller
                 'latitud' => 'nullable|numeric',
                 'longitud' => 'nullable|numeric',
                 'amoblada' => 'required|boolean',
-                'imagenes'=>'required',
-                'imagenes.*' => 'file|mimes:jpg,png,jpeg,ico,svg|max:2048',
+                'imagenes_lista'=>'required',
+                'imagenes_lista.*' => 'file|mimes:jpg,png,jpeg,ico,svg|max:2048',
             ]);
 
         try {
-            $request->merge(['usuario_id'=>Auth::user()->id]);
-            $request->merge(['tipo_piso' => json_encode($request->tipo_piso)]);
-            $request->merge(['imagenes' => json_encode($request->tipo_piso)]);
 
+            $request->merge(['usuario_id'=>Auth::user()->id]);
+            $files = json_encode($request->imagenes_lista);
+            $request->merge(['imagenes'=>$files]);
             $response = (new ApiHelper)->sendApiRequest('api/propiedades/guardar', $request->all());
 
             if(isset($response['error'])) throw new \Exception($response['error']);
 
-            return response($response,200);
+            return response(['url' => route('usuario.publicaciones') ],200);
 
         } catch (\Exception $e) {
 
@@ -125,6 +124,49 @@ class PropiedadController extends Controller
 
         }
 
+
+    }
+
+    public function desactivar ( Request $request ){
+
+        $this->validate($request,[
+            'id'=>'required|integer|exists:propiedades'
+        ]);
+
+        try {
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/desactivar',[
+                'id'=>$request->id,
+                'id_usuario'=>Auth::user()->id]);
+                
+            if(isset($response['error'])) throw new \Exception($response);
+
+            return response($response,200);
+
+        } catch (\Exception $e) {
+            return response([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+
+    }
+
+    public function reactivar ( Request $request)
+    {
+        $this->validate($request,[
+            'id'=>'required|integer|exists:propiedades'
+        ]);
+
+        try {
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/reactivar',['id'=>$request->id, 'id_usuario'=>Auth::user()->id]);
+            if(isset($response['error'])) throw new \Exception($response);
+
+            return response($response,200);
+
+        } catch (\Exception $e) {
+            return response([
+                'error' => $e->getMessage()
+            ], 500);
+        }
 
     }
 }

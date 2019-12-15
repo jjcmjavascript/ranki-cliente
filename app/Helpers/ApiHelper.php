@@ -89,10 +89,10 @@ class ApiHelper {
 
 	}
 
-	public function sendApiRequest($ruta, $form_params = null, $getOnlyBody = true)
+	public function sendApiRequest($ruta, $form_params = null, $getOnlyBody = true, $headers=null)
     {
 
-		$headers = [
+		$headers = $headers ? $headers : [
 			'Accept' => 'application/json',
 			'Authorization' => session('api')->token_type.' '.session('api')->access_token
 		];

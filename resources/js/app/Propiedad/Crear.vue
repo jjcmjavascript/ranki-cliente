@@ -300,7 +300,7 @@
                                	</div>
                                 <hr>
                             <div class="float-right">
-                                <button class="btn btn-success btn-lg"  @click="guardar">Publicar propiedad</button>
+                                <button class="btn btn-success btn-lg"  :disable="enviando" @click="guardar">Publicar propiedad</button>
                             </div>
                             </div>
                         </div>
@@ -383,7 +383,8 @@
 					servicios: [],
 					cocina: [],
 					otros: [],
-				}
+				},
+                enviando : false,
 			}
 		},
 		created() {
@@ -491,7 +492,7 @@
 			},
 			guardar() {
                 this.start();
-
+                this.enviando = true;
 				let request = new FormData;
 				request.append('amoblada', this.data.amoblada);
 				this.data.titulo && request.append('titulo', this.data.titulo);
@@ -506,7 +507,7 @@
 				this.data.superficie_util && request.append('superficie_util', this.data.superficie_util);
 				this.data.superficie_terraza && request.append('superficie_terraza', this.data.superficie_terraza);
 				this.data.banio && request.append('banio', this.data.banio.value);
-				this.data.tipo_piso && request.append('tipo_piso', JSON.stringify(this.data.tipo_piso));
+
 				this.data.descripcion && request.append('descripcion', this.data.descripcion);
 				this.data.anio_construccion && request.append('anio_construccion', this.data.anio_construccion);
 				this.data.privado && request.append('privado', this.data.privado.value);
@@ -521,7 +522,6 @@
 				this.data.latitud && request.append('latitud', this.data.latitud);
 				this.data.longitud && request.append('longitud', this.data.longitud);
 
-				this.data.atributos && request.append('atributos', JSON.stringify(this.data.atributos));
 				this.data.telefono && request.append('telefono', this.data.telefono);
 				this.data.codigo_telefono && request.append('codigo_telefono', this.data.codigo_telefono);
 				this.data.telefono2 && request.append('telefono2',this.data.telefono2);
@@ -543,16 +543,28 @@
                             u8arr[n] = bstr.charCodeAt(n);
                         }
                         let file = new File([u8arr], e.nombre, {type:mime})
-                        request.append('imagenes[]', file);
+                        request.append('imagenes_lista[]', file);
 
                     })
 				}
+                if(this.data.tipo_piso.length > 0){
+                        this.data.tipo_piso.forEach(e => {
+                            request.append('tipo_piso[]', e.id);
+                        })
+                }
+                if(this.data.atributos.length > 0){
+                        this.data.atributos.forEach(e => {
+                            request.append('atributos[]', e);
+                        })
+                }
 
 				axios.post(this.url.current + '/guardar', request)
 				.then(response => {
-                    this.alerta("success", "Exito", response.data.exito);
+                    // this.alerta("success", "Exito", 'Lo estamos redirigiendo');
+                    window.location = response.data.url;
 				})
 				.catch(error => {
+                    this.enviando = false;
                     this.stop();
                     this.alerta('error','Lo sentimos un error ha ocurrido.',error);
 				})

@@ -40,6 +40,7 @@ Route::middleware(['auth','verifyToken'])->group(function() {
         Route::post('crear','PropiedadController@crear')->name('.guardar');
         Route::post('crear/guardar','PropiedadController@guardar')->name('.guardar');
         Route::post('crear/comuna','PropiedadController@comuna')->name('.comuna');
-
+        Route::post('/desactivar','PropiedadController@desactivar')->name('.desactivar');
+        Route::post('/reactivar','PropiedadController@reactivar')->name('.reactivar');
 	});
 });

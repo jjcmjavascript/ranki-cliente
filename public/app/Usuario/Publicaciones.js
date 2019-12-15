@@ -85,6 +85,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -109,6 +114,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    document.querySelector('html').style['overflow-y'] = 'auto';
     this.iniciar();
   },
   methods: {
@@ -125,11 +131,14 @@ __webpack_require__.r(__webpack_exports__);
     iniciar: function iniciar() {
       var _this = this;
 
+      this.start();
       axios.post(this.url, {
         estado: this.activo
       }).then(function (res) {
         _this.rows = res.data.rows;
-      })["finally"](function () {});
+      })["finally"](function () {
+        _this.stop();
+      });
     },
     badgeColor: function badgeColor(tipo_operacion) {
       switch (tipo_operacion.id) {
@@ -145,6 +154,38 @@ __webpack_require__.r(__webpack_exports__);
           return;
           break;
       }
+    },
+    deshabilitar: function deshabilitar(index) {
+      var _this2 = this;
+
+      this.start();
+      axios.post(window.origin + '/propiedad/desactivar', {
+        id: this.rows.data[index].id
+      }).then(function (res) {
+        _this2.alerta('success', 'Exito', 'Propiedad desactivada.');
+
+        _this2.rows.data[index] = res.data.success;
+      })["catch"](function (err) {
+        _this2.stop();
+
+        _this2.alerta('error', 'Un error ha ocurrido', err);
+      });
+    },
+    reactivar: function reactivar(index) {
+      var _this3 = this;
+
+      this.start();
+      axios.post(window.origin + '/propiedad/desactivar', {
+        id: this.rows.data[index].id
+      }).then(function (res) {
+        _this3.alerta('success', 'Exito', 'Propiedad reactivada.');
+
+        _this3.rows.data[index] = res.data.propiedad;
+      })["catch"](function (err) {
+        _this3.stop();
+
+        _this3.alerta('error', 'Un error ha ocurrido', err);
+      });
     }
   }
 });
@@ -186,13 +227,13 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "row" },
-                      _vm._l(_vm.rows.data, function(val) {
+                      _vm._l(_vm.rows.data, function(val, i) {
                         return _vm.rows.data.length > 0
                           ? _c(
                               "div",
                               {
                                 staticClass:
-                                  "col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1"
+                                  "col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1 mb-2"
                               },
                               [
                                 _c("div", { staticClass: "card" }, [
@@ -209,7 +250,7 @@ var render = function() {
                                     _c("h5", { staticClass: "card-title" }, [
                                       _vm._v(
                                         "\n                                                " +
-                                          _vm._s(val._propiedades.titulo) +
+                                          _vm._s(val.titulo.toUpperCase()) +
                                           "\n\n                                            "
                                       )
                                     ]),
@@ -222,29 +263,113 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                Tipo : " +
-                                            _vm._s(
-                                              val._propiedades._tipo_operacion
-                                                .nombre
-                                            ) +
+                                            _vm._s(val._tipo_operacion.nombre) +
                                             " "
                                         ),
                                         _c("br"),
                                         _vm._v(
                                           "\n                                                Moneda: " +
                                             _vm._s(
-                                              val._propiedades._tipo_valor
-                                                ? val._propiedades._tipo_valor
-                                                    .nombre
+                                              val._tipo_valor
+                                                ? val._tipo_valor.nombre
                                                 : ""
                                             ) +
-                                            "\n                                                Monto : $" +
-                                            _vm._s(val._propiedades.precio) +
-                                            "\n                                            "
-                                        )
+                                            "\n                                                Monto : " +
+                                            _vm._s(val.precio) +
+                                            " "
+                                        ),
+                                        _c("br"),
+                                        _vm._v(
+                                          "\n                                                Estado : " +
+                                            _vm._s(
+                                              val.estado == 1
+                                                ? "ACTIVA"
+                                                : "INACTIVA"
+                                            ) +
+                                            " "
+                                        ),
+                                        _c("br")
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(2, true)
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "geodir-category-footer fl-wrap"
+                                      },
+                                      [
+                                        _c("br"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "geodir-opt-list" },
+                                          [
+                                            val.estado == 1
+                                              ? _c(
+                                                  "a",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-js-booking",
+                                                    attrs: { href: "#" },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.deshabilitar(
+                                                          i
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass:
+                                                        "fal fa-trash"
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "geodir-opt-tooltip"
+                                                      },
+                                                      [_vm._v("Deshabilitar")]
+                                                    )
+                                                  ]
+                                                )
+                                              : _c(
+                                                  "a",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-js-booking",
+                                                    attrs: { href: "#" },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.reactivar(i)
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass:
+                                                        "fal fa-check"
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "geodir-opt-tooltip"
+                                                      },
+                                                      [_vm._v("Reactivar")]
+                                                    )
+                                                  ]
+                                                ),
+                                            _vm._v(" "),
+                                            _vm._m(2, true)
+                                          ]
+                                        )
+                                      ]
+                                    )
                                   ])
                                 ])
                               ]
@@ -313,22 +438,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "geodir-category-footer fl-wrap" }, [
-      _c("br"),
+    return _c("a", { staticClass: "geodir-js-booking", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fal fa-edit" }),
       _vm._v(" "),
-      _c("div", { staticClass: "geodir-opt-list" }, [
-        _c("a", { staticClass: "geodir-js-booking", attrs: { href: "#" } }, [
-          _c("i", { staticClass: "fal fa-trash" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "geodir-opt-tooltip" }, [_vm._v("Borrar")])
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "geodir-js-booking", attrs: { href: "#" } }, [
-          _c("i", { staticClass: "fal fa-edit" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "geodir-opt-tooltip" }, [_vm._v("Editar")])
-        ])
-      ])
+      _c("span", { staticClass: "geodir-opt-tooltip" }, [_vm._v("Editar")])
     ])
   },
   function() {

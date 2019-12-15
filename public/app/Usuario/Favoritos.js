@@ -281,16 +281,13 @@ var render = function() {
                                       "div",
                                       {
                                         class: _vm.badgeColor(
-                                          val._propiedades._tipo_operacion
+                                          val._tipo_operacion
                                         )
                                       },
                                       [
                                         _vm._v(
                                           "\n                                            " +
-                                            _vm._s(
-                                              val._propiedades._tipo_operacion
-                                                .nombre
-                                            ) +
+                                            _vm._s(val._tipo_operacion.nombre) +
                                             "\n                                        "
                                         )
                                       ]
@@ -336,10 +333,7 @@ var render = function() {
                                                   [
                                                     _vm._v(
                                                       "\n                                                        " +
-                                                        _vm._s(
-                                                          val._propiedades
-                                                            .titulo
-                                                        ) +
+                                                        _vm._s(val.titulo) +
                                                         "\n                                                    "
                                                     )
                                                   ]
@@ -368,37 +362,30 @@ var render = function() {
                                                     _vm._v(
                                                       "\n                                                        " +
                                                         _vm._s(
-                                                          val._propiedades
-                                                            .numero_calle
-                                                            ? val._propiedades
-                                                                .numero_calle
+                                                          val.numero_calle
+                                                            ? val.numero_calle
                                                             : ""
                                                         ) +
                                                         "\n                                                        " +
                                                         _vm._s(
-                                                          val._propiedades.calle
-                                                            ? val._propiedades
-                                                                .calle
+                                                          val.calle
+                                                            ? val.calle
                                                             : ""
                                                         ) +
                                                         "\n                                                        /\n                                                        " +
                                                         _vm._s(
-                                                          val._propiedades
-                                                            ._comuna
+                                                          val._comuna
                                                             ? "Comuna: " +
-                                                                val._propiedades
-                                                                  ._comuna
+                                                                val._comuna
                                                                   .nombre +
                                                                 ","
                                                             : ""
                                                         ) +
                                                         "\n                                                        " +
                                                         _vm._s(
-                                                          val._propiedades
-                                                            ._region
+                                                          val._region
                                                             ? "Region: " +
-                                                                val._propiedades
-                                                                  ._region
+                                                                val._region
                                                                   .nombre
                                                             : ""
                                                         ) +
@@ -413,13 +400,13 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    val._propiedades.descripcion
+                                    val.descripcion
                                       ? _c("p", [
                                           _c("span", {
                                             domProps: {
                                               innerHTML: _vm._s(
                                                 _vm.$options.filters.nl2br(
-                                                  val._propiedades.descripcion
+                                                  val.descripcion
                                                 )
                                               )
                                             }
@@ -443,20 +430,14 @@ var render = function() {
                                             _vm._v(
                                               "\n                                                " +
                                                 _vm._s(
-                                                  val._propiedades._tipo_valor
-                                                    ? val._propiedades
-                                                        ._tipo_valor.nombre
+                                                  val._tipo_valor
+                                                    ? val._tipo_valor.nombre
                                                     : ""
                                                 ) +
                                                 "\n                                                 "
                                             ),
                                             _c("span", [
-                                              _vm._v(
-                                                "$" +
-                                                  _vm._s(
-                                                    val._propiedades.precio
-                                                  )
-                                              )
+                                              _vm._v("$" + _vm._s(val.precio))
                                             ])
                                           ]
                                         ),

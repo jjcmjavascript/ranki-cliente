@@ -1,5 +1,14 @@
 /* MIN */
-
+.geodir-opt-list a {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.geodir-opt-tooltip {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
 .form-control{
     border: 1px solid rgba(0,0,0,0.06);
 }

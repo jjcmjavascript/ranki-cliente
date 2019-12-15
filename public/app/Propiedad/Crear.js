@@ -393,7 +393,8 @@ __webpack_require__.r(__webpack_exports__);
         servicios: [],
         cocina: [],
         otros: []
-      }
+      },
+      enviando: false
     };
   },
   created: function created() {
@@ -497,6 +498,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.start();
+      this.enviando = true;
       var request = new FormData();
       request.append('amoblada', this.data.amoblada);
       this.data.titulo && request.append('titulo', this.data.titulo);
@@ -511,7 +513,6 @@ __webpack_require__.r(__webpack_exports__);
       this.data.superficie_util && request.append('superficie_util', this.data.superficie_util);
       this.data.superficie_terraza && request.append('superficie_terraza', this.data.superficie_terraza);
       this.data.banio && request.append('banio', this.data.banio.value);
-      this.data.tipo_piso && request.append('tipo_piso', JSON.stringify(this.data.tipo_piso));
       this.data.descripcion && request.append('descripcion', this.data.descripcion);
       this.data.anio_construccion && request.append('anio_construccion', this.data.anio_construccion);
       this.data.privado && request.append('privado', this.data.privado.value);
@@ -525,7 +526,6 @@ __webpack_require__.r(__webpack_exports__);
       this.data.usuario && request.append('usuario_id', this.data.usuario.id);
       this.data.latitud && request.append('latitud', this.data.latitud);
       this.data.longitud && request.append('longitud', this.data.longitud);
-      this.data.atributos && request.append('atributos', JSON.stringify(this.data.atributos));
       this.data.telefono && request.append('telefono', this.data.telefono);
       this.data.codigo_telefono && request.append('codigo_telefono', this.data.codigo_telefono);
       this.data.telefono2 && request.append('telefono2', this.data.telefono2);
@@ -550,13 +550,28 @@ __webpack_require__.r(__webpack_exports__);
           var file = new File([u8arr], e.nombre, {
             type: mime
           });
-          request.append('imagenes[]', file);
+          request.append('imagenes_lista[]', file);
+        });
+      }
+
+      if (this.data.tipo_piso.length > 0) {
+        this.data.tipo_piso.forEach(function (e) {
+          request.append('tipo_piso[]', e.id);
+        });
+      }
+
+      if (this.data.atributos.length > 0) {
+        this.data.atributos.forEach(function (e) {
+          request.append('atributos[]', e);
         });
       }
 
       axios.post(this.url.current + '/guardar', request).then(function (response) {
-        _this2.alerta("success", "Exito", response.data.exito);
+        // this.alerta("success", "Exito", 'Lo estamos redirigiendo');
+        window.location = response.data.url;
       })["catch"](function (error) {
+        _this2.enviando = false;
+
         _this2.stop();
 
         _this2.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
@@ -2166,6 +2181,7 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-success btn-lg",
+                        attrs: { disable: _vm.enviando },
                         on: { click: _vm.guardar }
                       },
                       [_vm._v("Publicar propiedad")]

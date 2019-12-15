@@ -184,14 +184,14 @@ class UsuarioController extends Controller
             $request->merge(['id_usuario' => Auth::user()->id]);
 
             if(!$request->telefono || !$request->codigo_telefono ){
-                $request->remove('telefono');
-                $request->remove('codigo_telefono');
+                $request->request->remove('telefono');
+                $request->request->remove('codigo_telefono');
             }
 
             if(!$request->telefono2 || !$request->codigo_telefono2)
             {
-                $request->remove('telefono2');
-                $request->remove('codigo_telefono2');
+                $request->request->remove('telefono2');
+                $request->request->remove('codigo_telefono2');
             }
 
             $response = (new ApiHelper)->sendApiRequest('api/usuarios/propiedades',$request->all());
@@ -209,7 +209,7 @@ class UsuarioController extends Controller
             ], 500);
         }
     }
-
+    // propiedades ajustes
     public function mis_propiedades(Request $request){
 
         try {
