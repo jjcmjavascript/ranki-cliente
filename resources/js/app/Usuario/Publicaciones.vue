@@ -18,9 +18,18 @@
                             <div class="list-main-wrap-title fl-wrap col-title">
                                 <h2> Mis Publicaciones</h2>
                             </div>
-
                             <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1 mb-2" v-if="rows.data.length > 0" v-for="(val, i) in rows.data" >
+                                <div class="form-group col-xs-12 col-sm-6 col-lg-4">
+                                    <label>Ordenar por</label>
+                                    <v-select class="clear-none" :options="selects.orden" v-model="filters.orden" @input="filtrar()"></v-select>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-lg-4">
+                                    <label>Consultar Por</label>
+                                    <v-select class="clear-none" :options="selects.estados" v-model="filters.estado" @input="filtrar()"></v-select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1 mb-2" v-if="!filtrando && rows.data.length > 0" v-for="val in rows.data" >
                                     <div class="card">
                                         <img class="card-img-top" src="http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg" alt=""></a>
 
@@ -56,9 +65,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div v-else-if="!filtrando">Sin información para mostrar</div>
                             </div>
-
-
                         </div>
 
                         <div class="pagination" v-if="rows.total > 15">
@@ -90,7 +98,7 @@ export default {
             usuario: {
                 nombre: null,
             },
-            activo: 1,
+            filtrando: false,
             rows: {
                 current_page: 0,
                 data: [],
@@ -103,12 +111,29 @@ export default {
                 per_page: null,
                 prev_page_url: null,
                 total: 0,
+            },
+            filters: {
+                estado: {'label': 'Activo', value: 1},
+                orden: {'label': 'Fecha de creación', value: 1},
+            },
+            selects: {
+                estados: [
+                    {'label': 'Activo', value: 1},
+                    {'label': 'Inactivo', value: 0}
+                ],
+                orden: [
+                    {'label': 'Fecha de favorito', value: 1},
+                    {'label': 'Popularidad', value: 2},
+                    {'label': 'Mayor Precio', value: 3},
+                    {'label': 'Menor Precio', value: 4},
+
+                ],
             }
         }
     },
     mounted() {
-        document.querySelector('html').style['overflow-y'] = 'auto';
-        this.iniciar();
+        //document.querySelector('html').style['overflow-y'] = 'auto';
+        this.filtrar();
     },
     methods: {
         start() {
@@ -123,17 +148,22 @@ export default {
             this.$root.alertas(tipo, titulo, mensaje);
         },
 
-        iniciar() {
+        filtrar() {
             this.start();
-            axios.post(this.url, {
-                    estado: this.activo
-                })
-                .then((res) => {
-                    this.rows = res.data.rows;
-                })
-                .finally(() => {
-                    this.stop();
-                })
+            this.filtrando = true;
+
+            let request = new FormData;
+            this.filters.estado && request.append('estado', this.filters.estado.value);
+            this.filters.orden && request.append('orden', this.filters.orden.value);
+
+            axios.post(this.url, request)
+            .then((res) => {
+                this.rows = res.data.rows;
+            })
+            .finally(() => {
+                this.stop();
+                this.filtrando = false;
+            })
         },
 
         badgeColor(tipo_operacion) {
