@@ -71,6 +71,18 @@ li{
     opacity: 0.1;
 }
 
+/*********** BREADCRUMBS ******************/
+
+/*.dasboard-breadcrumbs a, .dasboard-breadcrumbs span {
+    padding: 0 0 0 32px;
+    color: #fff;
+}*/
+
+.dasboard-breadcrumbs a:before {
+    right: -25px;
+    margin-top: -10px;
+}
+
 
 /* ////////////////// HEADER */
 /* contenedor principal del header */
@@ -104,6 +116,16 @@ li{
     position: relative;
     top: 21px;
     right: -10%;
+}
+
+/* ICONO AL LADO DE DESPLEGAR USUARIO */
+
+.header-user-name:before {
+    right: -16px;
+}
+
+.header-user-name span {
+    left: -40px;
 }
 
 /* boton agregar propiedad */
@@ -413,7 +435,7 @@ a {
 
 
 /* maxx */
-@media screen and (max-width: 480px) {}
+
 
 @media screen and (max-width: 540px) {
     .dasboard-sidebar-content {
@@ -443,8 +465,7 @@ a {
         text-align: center;
         background: silver;
         padding: 6px;
-        color:
-            white;
+        color: white;
         background: #42a5f5;
         cursor: pointer;
         font-size: 0.8rem;
