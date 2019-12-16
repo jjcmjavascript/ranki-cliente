@@ -194,7 +194,7 @@ class UsuarioController extends Controller
                 $request->request->remove('codigo_telefono2');
             }
 
-            $response = (new ApiHelper)->sendApiRequest('api/usuarios/propiedades',$request->all());
+            $response = (new ApiHelper)->sendApiRequest('api/usuarios/favoritos',$request->all());
 
             if(isset($response['error'])) throw new \Exception($response);
 

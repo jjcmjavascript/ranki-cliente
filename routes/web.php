@@ -14,6 +14,8 @@
 // Auth::routes();
 
 Route::get('/','HomeController@index')->name('inicio');
+Route::post('/ultimas_propieades','HomeController@ultimas_propieades')->name('inicio.ultimas_propieades');
+
 
 // SOCIAL LOGIN
 

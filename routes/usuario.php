@@ -31,7 +31,7 @@ Route::middleware(['auth','verifyToken'])->group(function() {
     // PUBLICACIONES
     Route::namespace('Usuario')->prefix('publicaciones')->name('usuario')->group(function() {
         Route::get('/','UsuarioController@vue')->name('.publicaciones');
-        Route::post('/','UsuarioController@favoritos')->name('.publicaciones');
+        Route::post('/','UsuarioController@mis_propiedades')->name('.publicaciones');
     });
 
     // PROPIEDADES
