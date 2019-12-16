@@ -14,3 +14,17 @@
 .profile-edit-header {
     margin-top: 12px;
 }
+
+a {
+	text-decoration: none;
+}
+.geodir-opt-list a {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.geodir-opt-tooltip {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}

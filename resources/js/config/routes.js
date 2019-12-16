@@ -1,12 +1,16 @@
 import login 	  from '../routes/login.js';
-import cliente  from '../routes/cliente.js';
+import usuario  from '../routes/usuario.js';
 import sistema  from '../routes/Sistema.js';
+import propiedad  from '../routes/propiedad.js';
+
 
 
 const baseRoutes =  [
     ...login,
-    ...cliente,
+    ...usuario,
     ...sistema,
+    ...propiedad,
+
 ];
 
 export default baseRoutes;

@@ -1,4 +1,4 @@
-f@charset "utf-8";
+@charset "utf-8";
 /*======================================
  [ -Main Stylesheet-
   Theme: EasyBook
@@ -44,16 +44,13 @@ html{
 	height: 100%;
 }
 body{
-	font-weight: 600;
-	font-size: 13px;
+	font-size: 14px;
 	height: 100%;
   	width: 100%;
   	margin: 0px;
  	padding: 0px;
-	text-align:center;
 	background: #18458B;
 	color:#000;
-	font-family: 'Nunito', sans-serif;
 }
 @-o-viewport {width: device-width;}
 @-ms-viewport {width: device-width;}
@@ -291,7 +288,7 @@ blockquote p {
 	padding:0 !important;
 }
 /*-------------Button---------------------------------------*/
-.btn{
+/*.btn{
 	padding:0 80px 0 30px;
 	height:44px;
 	line-height:44px;
@@ -344,7 +341,7 @@ blockquote p {
 }
 .btn.flat-btn {
 	color:#fff;
-}
+}*/
 .down-btn {
 	float:left;
 	padding:15px 20px;
@@ -8829,10 +8826,10 @@ section.hero-section  {
 /* modificaciones */
 
 /* header */
-.show-search-button
+/* .show-search-button
 {
   border-right : 0px;
-}
+} */
 /* alertas swal */
 .swal2-container {
   background: rgba(0.0.0.0,6) !important;
@@ -8844,7 +8841,7 @@ section.hero-section  {
  	background: rgba(0,0,0,0.6);
 
 }
-.main-header{
+/* .main-header{
   background: #1565c0 !important;
   height: 70px;
   padding-top: 5px;
@@ -8852,7 +8849,7 @@ section.hero-section  {
 }
 #wrapper{
   padding-top: 70px;
-}
+} */
 .accordion a.toggle.act-accordion, .banner-wdget-content a, .box-image-widget-media a:hover,
 .rooms-media-btn-item, .sw-btn, .bt n:hover, .more-photos-button, .box-item a.gal-link:hover, .dasboard-sidebar-content,
 .tfp-det-btn:hover, .color3-bg, .team-social, .text-carousel-wrap .sw-btn:hover,

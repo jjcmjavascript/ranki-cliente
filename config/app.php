@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -125,6 +125,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | API Connection
+    |--------------------------------------------------------------------------
+    |
+    | Variables de conexión de la API
+    |
+    */
+
+    'api_connection' => env('API_CONNECTION'),
+    'api_client_id' => env('API_CLIENT_ID'),
+    'api_client_secret' => env('API_CLIENT_SECRET'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -169,6 +182,12 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
+         * Custom Providers...
+         */
+
+        App\Providers\HelperServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -192,6 +211,7 @@ return [
     'aliases' => [
 
         'App' => Illuminate\Support\Facades\App::class,
+        'ApiHelper' => App\Helpers\ApiHelper::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,

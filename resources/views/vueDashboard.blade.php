@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
-
 @section('content')
-
-
 
 <div id="wrapper">
 		<!-- content-->
@@ -23,5 +20,4 @@
 
 @section('script')
   <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-	
 @endsection

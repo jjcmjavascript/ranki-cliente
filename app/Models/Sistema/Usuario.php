@@ -16,16 +16,14 @@ class Usuario extends Authenticatable
      * @var array
      */
 
-     public $api;
-
     protected $table = 'usuarios';
     protected $primaryKey = 'id';
     protected $fillable = [
         'id','nombre', 'apellidos', 'email', 'rut', 'direccion',
         'telefono_movil', 'telefono_fijo', 'avatar', 'provider',
-        'provider_id', 'perfil_id', 'activo', 'password',
+        'provider_id', 'perfil_id', 'activo'
     ];
-    protected $appends = [ 'api_token'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -75,10 +73,4 @@ class Usuario extends Authenticatable
 
         return $query;
     }
-
-    public function getApiTokenAttribute()
-    {
-      return $this->api;
-    }
-
 }
