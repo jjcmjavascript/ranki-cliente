@@ -56,91 +56,94 @@
             </section>
             <!-- section end -->
             <!-- section-->
-                <div class="container-fluid">
-                    <h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner row w-100 mx-auto">
-                            <div class="carousel-item col-md-4 active">
-                                <div class="card">
-                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card 1</h4>
-                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item col-md-4">
-                                <div class="card">
-                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/418cf4/fff" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card 2</h4>
-                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item col-md-4">
-                                <div class="card">
-                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/3ed846/fff" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card 3</h4>
-                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item col-md-4">
-                                <div class="card">
-                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/42ebf4/fff" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card 4</h4>
-                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item col-md-4">
-                                <div class="card">
-                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f49b41/fff" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card 5</h4>
-                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item col-md-4">
-                                <div class="card">
-                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f4f141/fff" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card 6</h4>
-                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item col-md-4">
-                                <div class="card">
-                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/8e41f4/fff" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card 7</h4>
-                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+            <section class="grey-blue-bg">
+
+                <!-- container-->
+                <div class="container">
+                    <div class="section-title">
+                        <div class="section-title-separator"><span></span></div>
+                        <h2>Recently Added Hotels</h2>
+                        <span class="section-separator"></span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
                     </div>
                 </div>
+                <!-- container end-->
+                <!-- carousel -->
+                <div class="list-carousel fl-wrap card-listing ">
+                    <!--listing-carousel-->
+                    <div class="listing-carousel  fl-wrap ">
+                        <!--slick-slide-item-->
+                        <div class="slick-slide-item" v-for="i in 8">
+                            <!-- listing-item  -->
+                            <div class="listing-item">
+                                <article class="geodir-category-listing fl-wrap">
+                                    <div class="geodir-category-img">
+                                        <a href="listing-single.html"><img :src="app_url+'images/portada.jpg'" alt=""></a>
+                                        <template v-if="rows[i] && rows[i]._tipo_operacion">
+                                            <div :class="badgeColor( rows[i-1]._tipo_operacion)">
+                                                {{ rows[i-1]._tipo_operacion.nombre }}
+                                            </div>
+                                        </template>
+                                        <div class="geodir-category-opt">
+                                            <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
+                                            <div class="rate-class-name">
+                                                <div class="score"><strong>Very Good</strong>27 Reviews </div>
+                                                <span>5.0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="geodir-category-content fl-wrap title-sin_item">
+                                        <div class="geodir-category-content-title fl-wrap">
+                                            <div class="geodir-category-content-title-item">
+                                                <h3 class="title-sin_map">
+                                                    <a href="listing-single.html">
+                                                        {{rows[i-1] && rows[i-1].titulo ? rows[i-1].titulo : ''}}
+                                                    </a>
+                                                </h3>
+                                                <div class="geodir-category-location fl-wrap">
+                                                    <a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i>
+                                                        {{rows[i-1] && rows[i-1].numero_calle ? rows[i-1].numero_calle : ''}}
+                                                        {{rows[i-1] && rows[i-1].calle ? rows[i-1].calle : ''}}
+                                                        /
+                                                        {{rows[i-1] && rows[i-1]._comuna ? 'Comuna: '+rows[i-1]._comuna.nombre+',' : ''}}
+                                                        {{rows[i-1] && rows[i-1]._region ? 'Region: '+rows[i-1]._region.nombre : ''}}
+                                                    </a></div>
+                                            </div>
+                                        </div>
+                                        <template v-if="rows[i-1] && rows[i-1].descripcion">
+                                            <p v-html="$options.filters.nl2br(rows[i-1].descripcion)"></p>
+                                        </template>
+
+                                        <div class="geodir-category-footer fl-wrap">
+                                            <div class="btn btn-primary btn-lg btn-block">Precio
+                                                <template v-if="rows[i-1] && rows[i-1].precio">
+                                                    <span>{{rows[i-1]._tipo_valor.nombre}} :</span>
+                                                    <span>{{rows[i-1].precio}}</span>
+                                                </template>
+                                            </div>
+
+                                        </div>
+                                        <div class="geodir-category-footer fl-wrap">
+                                            Precio
+                                            <template v-if="rows[i-1] && rows[i-1].precio">
+                                                <span>{{rows[i-1]._tipo_valor.nombre}} :</span>
+                                                <span>{{rows[i-1].precio}}</span>
+                                            </template>
+                                        </div>
+
+
+                                    </div>
+                                </article>
+                            </div>
+                            <!-- listing-item end -->
+                        </div>
+                    </div>
+                    <!--listing-carousel end-->
+                    <div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
+                    <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
+                </div>
+                <!--  carousel end-->
+            </section>
             <!-- section end -->
         </div>
         <!-- content end-->
@@ -183,39 +186,25 @@ export default {
             axios.post(this.app_url + 'ultimas_propieades')
                 .then(res => {
                     this.rows = res.data.propiedades;
-                    this.list();
                 })
                 .catch(err => {
 
                 })
         },
-
+        badgeColor(tipo_operacion) {
+            switch (tipo_operacion.id) {
+                case 11:
+                    return 'sale-window big-sale-two '
+                    break;
+                case 12:
+                    return 'sale-window big-sale'
+                    break;
+                case 13:
+                    return
+                    break;
+            }
+        },
 
     }
 }
-$(document).ready(function() {
-  $("#myCarousel").on("slide.bs.carousel", function(e) {
-    var $e = $(e.relatedTarget);
-    var idx = $e.index();
-    var itemsPerSlide = 3;
-    var totalItems = $(".carousel-item").length;
-
-    if (idx >= totalItems - (itemsPerSlide - 1)) {
-      var it = itemsPerSlide - (totalItems - idx);
-      for (var i = 0; i < it; i++) {
-        // append slides to end
-        if (e.direction == "left") {
-          $(".carousel-item")
-            .eq(i)
-            .appendTo(".carousel-inner");
-        } else {
-          $(".carousel-item")
-            .eq(0)
-            .appendTo($(this).find(".carousel-inner"));
-        }
-      }
-    }
-  });
-});
-
 </script>
