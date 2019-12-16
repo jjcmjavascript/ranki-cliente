@@ -25,6 +25,25 @@
                           {{Auth::user()->nombre}}
                         </h3>
                     </div>
+                    <a href="dashboard-add-listing.html" class="ed-btn">
+                        Añadir propiedad
+                    </a>                                        
+                                        <div class="user-stats fl-wrap">
+                                            <ul>
+                                                <li>
+                                                    Listings    
+                                                    <span>4</span>
+                                                </li>
+                                                <li>
+                                                    Bookings
+                                                    <span>32</span> 
+                                                </li>
+                                                <li>
+                                                    Reviews 
+                                                    <span>9</span>  
+                                                </li>
+                                            </ul>
+                                        </div>
                     <a href="{{route('usuario.salir')}}" class="log-out-btn color-bg">Salir <i class="far fa-sign-out"></i></a>
                 </div>
             </div>
