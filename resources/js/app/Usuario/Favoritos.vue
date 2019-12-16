@@ -18,41 +18,14 @@
                             <div class="list-main-wrap-title fl-wrap col-title">
                                 <h2> Mis favoritos</h2>
                             </div>
-                            <!-- price-opt-->
-                            <!--div class="price-opt">
-                                <span class="price-opt-title">Ordenar Por:</span>
-                                <div class="listsearch-input-item">
-                                    <select data-placeholder="Popularity" class="chosen-select no-search-select" @change="console.log($event)">
-                                        <option>Popularidad</option>
-                                        <option>Mayor Precio</option>
-                                        <option>Menor Precio</option>
-                                    </select>
-                                </div>
-                                <span class="price-opt-title"> &nbsp;&nbsp;Consultar Por:</span>
-                                <div class="listsearch-input-item">
-
-                                    <select data-placeholder="Popularity" class="chosen-select no-search-select" id="estavaina" @change="console.log($event)" @input="alert($event)">
-                                        <option value="1">Activas</option>
-                                        <option value="0">Inactivas</option>
-                                    </select>
-                                </div>
-                            </div-->
-
                             <div class="row">
                                 <div class="form-group col-xs-12 col-sm-6 col-lg-4">
                                     <label>Ordenar por</label>
-                                    <select class="form-control">
-                                        <option>Popularidad</option>
-                                        <option>Mayor Precio</option>
-                                        <option>Menor Precio</option>
-                                    </select>
+                                    <v-select class="clear-none" :options="selects.orden" v-model="filters.orden" @input="filtrar()"></v-select>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-6 col-lg-4">
                                     <label>Consultar Por</label>
-                                    <select class="form-control">
-                                        <option value="1">Activas</option>
-                                        <option value="0">Inactivas</option>
-                                    </select>
+                                    <v-select class="clear-none" :options="selects.estados" v-model="filters.estado" @input="filtrar()"></v-select>
                                 </div>
                             </div>
                         </div>
@@ -60,14 +33,14 @@
                         <!-- listing-item-container -->
                         <div class="listing-item-container init-grid-items fl-wrap three-columns-grid">
                             <!-- listing-item  -->
-                            <div class="listing-item" v-if="rows.data.length > 0" v-for="val in rows.data">
+                            <div class="listing-item" v-if="!filtrando && rows.data.length > 0" v-for="val in rows.data">
                                 <article class="geodir-category-listing fl-wrap">
                                     <div class="geodir-category-img">
                                         <a href="listing-single.html">
                                             <img src="http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg" alt=""></a>
 
-                                        <div :class="badgeColor(val._propiedades._tipo_operacion)">
-                                            {{ val._propiedades._tipo_operacion.nombre }}
+                                        <div :class="badgeColor(val._tipo_operacion)">
+                                            {{ val._tipo_operacion.nombre }}
                                         </div>
 
                                         <div class="geodir-category-opt">
@@ -83,23 +56,23 @@
                                             <div class="geodir-category-content-title-item">
                                                 <h3 class="title-sin_map">
                                                     <a href="listing-single.html">
-                                                        {{val._propiedades.titulo}}
+                                                        {{val.titulo}}
                                                     </a>
                                                 </h3>
                                                 <div class="geodir-category-location fl-wrap">
                                                     <a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i>
-                                                        {{val._propiedades.numero_calle ? val._propiedades.numero_calle : ''}}
-                                                        {{val._propiedades.calle ? val._propiedades.calle : ''}}
+                                                        {{val.numero_calle ? val.numero_calle : ''}}
+                                                        {{val.calle ? val.calle : ''}}
                                                         /
-                                                        {{val._propiedades._comuna ? 'Comuna: '+val._propiedades._comuna.nombre+',' : ''}}
-                                                        {{val._propiedades._region ? 'Region: '+val._propiedades._region.nombre : ''}}
+                                                        {{val._comuna ? 'Comuna: '+val._comuna.nombre+',' : ''}}
+                                                        {{val._region ? 'Region: '+val._region.nombre : ''}}
 
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <p v-if="val._propiedades.descripcion">
-                                            <span v-html="$options.filters.nl2br(val._propiedades.descripcion)">
+                                        <p v-if="val.descripcion">
+                                            <span v-html="$options.filters.nl2br(val.descripcion)">
 
                                             </span>
                                         </p>
@@ -111,8 +84,8 @@
                                         </ul> -->
                                         <div class="geodir-category-footer fl-wrap">
                                             <div class="geodir-category-price">
-                                                {{val._propiedades._tipo_valor ? val._propiedades._tipo_valor.nombre : ''}}
-                                                 <span>${{val._propiedades.precio}}</span></div>
+                                                {{val._tipo_valor ? val._tipo_valor.nombre : ''}}
+                                                 <span>${{val.precio}}</span></div>
                                             <div class="geodir-opt-list">
                                                 <a href="#" class="geodir-js-booking"><i class="fal fa-trash"></i>
                                                     <span class="geodir-opt-tooltip">Borrar</span>
@@ -122,7 +95,7 @@
                                     </div>
                                 </article>
                             </div>
-
+                            <div v-else-if="!filtrando">Sin información para mostrar</div>
                         </div>
                         <!-- listing-item-container end-->
                         <!-- pagination-->
@@ -156,7 +129,7 @@ export default {
             usuario: {
                 nombre: null,
             },
-            activo :1 ,
+            filtrando: false,
             rows: {
                 current_page: 0,
                 data: [],
@@ -169,11 +142,28 @@ export default {
                 per_page: null,
                 prev_page_url: null,
                 total : 0,
+            },
+            filters: {
+                estado: {'label': 'Activo', value: 1},
+                orden: {'label': 'Fecha de creación', value: 1},
+            },
+            selects: {
+                estados: [
+                    {'label': 'Activo', value: 1},
+                    {'label': 'Inactivo', value: 0}
+                ],
+                orden: [
+                    {'label': 'Fecha de favorito', value: 1},
+                    {'label': 'Popularidad', value: 2},
+                    {'label': 'Mayor Precio', value: 3},
+                    {'label': 'Menor Precio', value: 4},
+
+                ],
             }
         }
     },
     mounted() {
-        this.iniciar();
+        this.filtrar();
     },
     methods: {
         start() {
@@ -188,14 +178,22 @@ export default {
             this.$root.alertas(tipo, titulo, mensaje);
         },
 
-        iniciar() {
-            axios.post(this.url, {estado : this.activo})
-                .then((res) => {
-                    this.rows = res.data.rows;
-                })
-                .finally(()=>{
+        filtrar() {
+            this.start();
+            this.filtrando = true;
 
-                })
+            let request = new FormData;
+            this.filters.estado && request.append('estado', this.filters.estado.value);
+            this.filters.orden && request.append('orden', this.filters.orden.value);
+
+            axios.post(this.url, request)
+            .then((res) => {
+                this.rows = res.data.rows;
+            })
+            .finally(()=>{
+                this.stop();
+                this.filtrando = false;
+            })
         },
         badgeColor( tipo_operacion ){
             switch (tipo_operacion.id) {

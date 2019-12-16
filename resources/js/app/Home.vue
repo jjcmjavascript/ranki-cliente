@@ -57,6 +57,7 @@
             <!-- section end -->
             <!-- section-->
             <section class="grey-blue-bg">
+
                 <!-- container-->
                 <div class="container">
                     <div class="section-title">
@@ -72,14 +73,17 @@
                     <!--listing-carousel-->
                     <div class="listing-carousel  fl-wrap ">
                         <!--slick-slide-item-->
-                        <div class="slick-slide-item" v-for="i in 10">
+                        <div class="slick-slide-item" v-for="i in 8">
                             <!-- listing-item  -->
                             <div class="listing-item">
                                 <article class="geodir-category-listing fl-wrap">
                                     <div class="geodir-category-img">
                                         <a href="listing-single.html"><img :src="app_url+'images/portada.jpg'" alt=""></a>
-
-                                        <div class="sale-window">Sale 20%</div>
+                                        <template v-if="rows[i-1] && rows[i-1]._tipo_operacion">
+                                            <div :class="badgeColor( rows[i-1]._tipo_operacion)">
+                                                {{ rows[i-1]._tipo_operacion.nombre }}
+                                            </div>
+                                        </template>
                                         <div class="geodir-category-opt">
                                             <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
                                             <div class="rate-class-name">
@@ -91,23 +95,43 @@
                                     <div class="geodir-category-content fl-wrap title-sin_item">
                                         <div class="geodir-category-content-title fl-wrap">
                                             <div class="geodir-category-content-title-item">
-                                                <h3 class="title-sin_map"><a href="listing-single.html">Premium Plaza Hotel</a></h3>
-                                                <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 27th Brooklyn New York, USA</a></div>
+                                                <h3 class="title-sin_map">
+                                                    <a href="listing-single.html">
+                                                        {{rows[i-1] && rows[i-1].titulo ? rows[i-1].titulo : ''}}
+                                                    </a>
+                                                </h3>
+                                                <div class="geodir-category-location fl-wrap">
+                                                    <a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i>
+                                                        {{rows[i-1] && rows[i-1].numero_calle ? rows[i-1].numero_calle : ''}}
+                                                        {{rows[i-1] && rows[i-1].calle ? rows[i-1].calle : ''}}
+                                                        /
+                                                        {{rows[i-1] && rows[i-1]._comuna ? rows[i-1]._comuna.nombre+',' : ''}}
+                                                        {{rows[i-1] && rows[i-1]._region ? rows[i-1]._region.nombre : ''}}
+                                                    </a></div>
                                             </div>
                                         </div>
-                                        <p>Sed interdum metus at nisi tempor laoreet. Integer gravida orci a justo sodales.</p>
-                                        <ul class="facilities-list fl-wrap">
-                                            <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
-                                            <li><i class="fal fa-parking"></i><span>Parking</span></li>
-                                            <li><i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span></li>
-                                            <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
-                                        </ul>
+                                        <template v-if="rows[i-1] && rows[i-1].descripcion">
+                                            <p v-html="$options.filters.nl2br(rows[i-1].descripcion)"></p>
+                                        </template>
+
                                         <div class="geodir-category-footer fl-wrap">
-                                            <div class="geodir-category-price">Awg/Night <span>$ 320</span></div>
+                                            <!--div class="btn btn-primary btn-lg btn-block">Precio
+                                                <template v-if="rows[i-1] && rows[i-1].precio">
+                                                    <span>{{rows[i-1]._tipo_valor.nombre}} :</span>
+                                                    <span>{{rows[i-1].precio}}</span>
+                                                </template>
+                                            </div-->
+                                            <div class="geodir-category-price">
+                                                Precio 
+                                                <br>
+                                                <template v-if="rows[i-1] && rows[i-1].precio">
+                                                    <span>{{rows[i-1]._tipo_valor.nombre}}</span>
+                                                    <span>{{rows[i-1].precio | currency}}</span>
+                                                </template>
+                                            </div>
                                             <div class="geodir-opt-list">
-                                                <a href="#" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map</span></a>
-                                                <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Save</span></a>
-                                                <a href="#" class="geodir-js-booking"><i class="fal fa-exchange"></i><span class="geodir-opt-tooltip">Find Directions</span></a>
+                                                <a href="#" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">Ubicar en el mapa</span></a>
+                                                <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Marcar favorito</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -144,8 +168,45 @@ export default {
     data() {
         return {
             app_url: this.$root.base_url,
+            rows: [],
         }
     },
+    mounted() {
+        this.iniciar();
+    },
+    methods: {
+        start() {
+            this.$root.cargando();
+        },
+        stop() {
+            this.$root.stop();
+        },
+        alerta(tipo, titulo, mensaje = null) {
+            this.$root.alertas(tipo, titulo, mensaje);
+        },
+        iniciar() {
+            axios.post(this.app_url + 'ultimas_propieades')
+                .then(res => {
+                    this.rows = res.data.propiedades;
+                })
+                .catch(err => {
 
+                })
+        },
+        badgeColor(tipo_operacion) {
+            switch (tipo_operacion.id) {
+                case 11:
+                    return 'sale-window big-sale-two '
+                    break;
+                case 12:
+                    return 'sale-window big-sale'
+                    break;
+                case 13:
+                    return
+                    break;
+            }
+        },
+
+    }
 }
 </script>

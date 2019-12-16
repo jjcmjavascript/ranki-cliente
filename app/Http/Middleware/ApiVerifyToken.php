@@ -73,6 +73,7 @@ class ApiVerifyToken
             '/perfil/logout',
             '/auth/google',
             '/auth/facebook',
+            '/propiedad/detalle'
         ];
 
         return in_array($ruta , $exceptions );

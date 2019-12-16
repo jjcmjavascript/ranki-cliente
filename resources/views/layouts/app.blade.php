@@ -40,6 +40,8 @@
     <script type="text/javascript" src="{{asset('recursos/js/plugins.js')}}"></script>
     <script type="text/javascript" src="{{asset('recursos/js/scripts.js')}}"></script>
     <script type="text/javascript" src="{{asset('recursos/js/custom.js')}}"></script>
+    <script type="text/javascript" src="{{asset('recursos/js/bootstrap.min.js')}}"></script>
+
 
 </body>
 </html>
