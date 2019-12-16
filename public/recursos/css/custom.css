@@ -1,10 +1,27 @@
 /* MIN */
-
+.geodir-opt-list a {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.geodir-opt-tooltip {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.geodir-category-footer {
+    
+    ---padding-top: 50px;
+    padding-right: 35px;
+}
+.geodir-category-price {
+    
+}
 .form-control{
-    border: 1px solid rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.2);
 }
 .input-group-text{
-    border: 1px solid rgba(0,0,0,0.06)!important;
+    border: 1px solid rgba(0,0,0,0.2)!important;
 }
 .card {
     padding: 0px;
@@ -42,6 +59,11 @@ li{
     background:rgba(33, 150, 243, 0.6);
 }
 /*  */
+
+.wave-bg.wave-bg2 {
+    background: url(../../images/background/pattern.png) repeat;
+    opacity: 0.1;
+}
 
 
 /* ////////////////// HEADER */
@@ -432,4 +454,66 @@ a {
     .mlc {
         font-size: 14px;
     }
+}
+
+@media (min-width: 768px) {
+  /* show 3 items */
+  .carousel-inner .active,
+  .carousel-inner .active + .carousel-item,
+  .carousel-inner .active + .carousel-item + .carousel-item {
+    display: block !important;
+  }
+
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+    transition: none !important;
+  }
+
+  .carousel-inner .carousel-item-next,
+  .carousel-inner .carousel-item-prev {
+    position: relative !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: absolute !important;
+    top: 0 !important;
+    right: -33.3333% !important;
+    z-index: -1 !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* left or forward direction */
+  .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+  .carousel-item-next.carousel-item-left + .carousel-item,
+  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+    position: relative !important;
+    transform: translate3d(-100%, 0, 0) !important;
+    visibility: visible !important;
+  }
+
+  /* farthest right hidden item must be abso position for animations */
+  .carousel-inner .carousel-item-prev.carousel-item-right {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0;
+    z-index: -1 !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* right or prev direction */
+  .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+  .carousel-item-prev.carousel-item-right + .carousel-item,
+  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+    position: relative !important;
+    transform: translate3d(100%, 0, 0) !important;
+    visibility: visible !important;
+    display: block !important;
+    visibility: visible !important;
+  }
 }

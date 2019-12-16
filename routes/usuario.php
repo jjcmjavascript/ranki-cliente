@@ -4,7 +4,7 @@
 Route::namespace('Usuario')->name('usuario')->group(function(){
 
   Route::post('iniciar','UsuarioController@login')->name('.login');
-  Route::post('crear','UsuarioController@crear')->name('.crear');
+  Route::post('crear','UsuarisucoController@crear')->name('.crear');
 
 });
 
@@ -31,13 +31,19 @@ Route::middleware(['auth','verifyToken'])->group(function() {
     // PUBLICACIONES
     Route::namespace('Usuario')->prefix('publicaciones')->name('usuario')->group(function() {
         Route::get('/','UsuarioController@vue')->name('.publicaciones');
-        Route::post('/','UsuarioController@favoritos')->name('.publicaciones');
+        Route::post('/','UsuarioController@mis_propiedades')->name('.publicaciones');
     });
 
     // PROPIEDADES
 	Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function() {
-		Route::get('crear','PropiedadController@vue')->name('.crear');
-	    Route::post('crear','PropiedadController@crear')->name('.crear');
-        Route::post('guardar','PropiedadController@crear')->name('.guardar');
+        Route::get('crear','PropiedadController@vue')->name('.crear');
+        Route::post('crear','PropiedadController@crear')->name('.guardar');
+        Route::post('crear/guardar','PropiedadController@guardar')->name('.guardar');
+        Route::post('crear/comuna','PropiedadController@comuna')->name('.comuna');
+        Route::get('{id}/editar','PropiedadController@vue')->name('.editar');
+        Route::post('editar','PropiedadController@editar')->name('.editar');
+        Route::post('actualizar','PropiedadController@actualizar')->name('.actualizar');
+        Route::post('desactivar','PropiedadController@desactivar')->name('.desactivar');
+        Route::post('reactivar','PropiedadController@reactivar')->name('.reactivar');
 	});
 });

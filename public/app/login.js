@@ -146,6 +146,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  // api/publicaciones/recientes
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -154,8 +178,46 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      app_url: this.$root.base_url
+      app_url: this.$root.base_url,
+      rows: []
     };
+  },
+  mounted: function mounted() {
+    this.iniciar();
+  },
+  methods: {
+    start: function start() {
+      this.$root.cargando();
+    },
+    stop: function stop() {
+      this.$root.stop();
+    },
+    alerta: function alerta(tipo, titulo) {
+      var mensaje = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      this.$root.alertas(tipo, titulo, mensaje);
+    },
+    iniciar: function iniciar() {
+      var _this = this;
+
+      axios.post(this.app_url + 'ultimas_propieades').then(function (res) {
+        _this.rows = res.data.propiedades;
+      })["catch"](function (err) {});
+    },
+    badgeColor: function badgeColor(tipo_operacion) {
+      switch (tipo_operacion.id) {
+        case 11:
+          return 'sale-window big-sale-two ';
+          break;
+
+        case 12:
+          return 'sale-window big-sale';
+          break;
+
+        case 13:
+          return;
+          break;
+      }
+    }
   }
 });
 
@@ -372,8 +434,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/auth', {
         provider: provider
       }).then(function (res) {
-        _this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo"); //window.location.href = res.data.url;
+        _this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
 
+        window.location.href = res.data.url;
       })["catch"](function (err) {
         _this.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
       })["finally"](function () {
@@ -395,8 +458,9 @@ __webpack_require__.r(__webpack_exports__);
           axios.post("/iniciar", request).then(function (res) {
             _this2.$swal.disableLoading();
 
-            _this2.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo"); //window.location.href = res.data.url;
+            _this2.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
 
+            window.location.href = res.data.url;
           })["catch"](function (error) {
             _this2.$swal.disableLoading();
 
@@ -462,7 +526,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.danger[data-v-3d6ea3cd] {\n    border: 1px solid #ef5350 !important;\n}\n.n-padding[data-v-3d6ea3cd] {\n    padding: 0px;\n}\nli[data-v-3d6ea3cd] {\n    text-align: left;\n    padding-bottom: 3px;\n}\nlabel[data-v-3d6ea3cd] {\n    color: #ef5350;\n}\n.google-log[data-v-3d6ea3cd] {\n    background: #f44336;\n}\n.google-log[data-v-3d6ea3cd]:hover {\n    background: #ef5350;\n}\n", ""]);
+exports.push([module.i, "\n.danger[data-v-3d6ea3cd] {\r\n    border: 1px solid #ef5350 !important;\n}\n.n-padding[data-v-3d6ea3cd] {\r\n    padding: 0px;\n}\nli[data-v-3d6ea3cd] {\r\n    text-align: left;\r\n    padding-bottom: 3px;\n}\nlabel[data-v-3d6ea3cd] {\r\n    color: #ef5350;\n}\n.google-log[data-v-3d6ea3cd] {\r\n    background: #f44336;\n}\n.google-log[data-v-3d6ea3cd]:hover {\r\n    background: #ef5350;\n}\r\n", ""]);
 
 // exports
 
@@ -534,7 +598,7 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "listing-carousel  fl-wrap " },
-                    _vm._l(10, function(i) {
+                    _vm._l(8, function(i) {
                       return _c("div", { staticClass: "slick-slide-item" }, [
                         _c("div", { staticClass: "listing-item" }, [
                           _c(
@@ -559,15 +623,215 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _c("div", { staticClass: "sale-window" }, [
-                                    _vm._v("Sale 20%")
-                                  ]),
+                                  _vm.rows[i - 1] &&
+                                  _vm.rows[i - 1]._tipo_operacion
+                                    ? [
+                                        _c(
+                                          "div",
+                                          {
+                                            class: _vm.badgeColor(
+                                              _vm.rows[i - 1]._tipo_operacion
+                                            )
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\r\n                                                " +
+                                                _vm._s(
+                                                  _vm.rows[i - 1]
+                                                    ._tipo_operacion.nombre
+                                                ) +
+                                                "\r\n                                            "
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    : _vm._e(),
                                   _vm._v(" "),
                                   _vm._m(2, true)
-                                ]
+                                ],
+                                2
                               ),
                               _vm._v(" "),
-                              _vm._m(3, true)
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "geodir-category-content fl-wrap title-sin_item"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "geodir-category-content-title fl-wrap"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "geodir-category-content-title-item"
+                                        },
+                                        [
+                                          _c(
+                                            "h3",
+                                            { staticClass: "title-sin_map" },
+                                            [
+                                              _c(
+                                                "a",
+                                                {
+                                                  attrs: {
+                                                    href: "listing-single.html"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\r\n                                                        " +
+                                                      _vm._s(
+                                                        _vm.rows[i - 1] &&
+                                                          _vm.rows[i - 1].titulo
+                                                          ? _vm.rows[i - 1]
+                                                              .titulo
+                                                          : ""
+                                                      ) +
+                                                      "\r\n                                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "geodir-category-location fl-wrap"
+                                            },
+                                            [
+                                              _c(
+                                                "a",
+                                                {
+                                                  staticClass: "map-item",
+                                                  attrs: { href: "#" }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fas fa-map-marker-alt"
+                                                  }),
+                                                  _vm._v(
+                                                    "\r\n                                                        " +
+                                                      _vm._s(
+                                                        _vm.rows[i - 1] &&
+                                                          _vm.rows[i - 1]
+                                                            .numero_calle
+                                                          ? _vm.rows[i - 1]
+                                                              .numero_calle
+                                                          : ""
+                                                      ) +
+                                                      "\r\n                                                        " +
+                                                      _vm._s(
+                                                        _vm.rows[i - 1] &&
+                                                          _vm.rows[i - 1].calle
+                                                          ? _vm.rows[i - 1]
+                                                              .calle
+                                                          : ""
+                                                      ) +
+                                                      "\r\n                                                        /\r\n                                                        " +
+                                                      _vm._s(
+                                                        _vm.rows[i - 1] &&
+                                                          _vm.rows[i - 1]
+                                                            ._comuna
+                                                          ? _vm.rows[i - 1]
+                                                              ._comuna.nombre +
+                                                              ","
+                                                          : ""
+                                                      ) +
+                                                      "\r\n                                                        " +
+                                                      _vm._s(
+                                                        _vm.rows[i - 1] &&
+                                                          _vm.rows[i - 1]
+                                                            ._region
+                                                          ? _vm.rows[i - 1]
+                                                              ._region.nombre
+                                                          : ""
+                                                      ) +
+                                                      "\r\n                                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.rows[i - 1] && _vm.rows[i - 1].descripcion
+                                    ? [
+                                        _c("p", {
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.$options.filters.nl2br(
+                                                _vm.rows[i - 1].descripcion
+                                              )
+                                            )
+                                          }
+                                        })
+                                      ]
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "geodir-category-footer fl-wrap"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "geodir-category-price"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\r\n                                                Precio \r\n                                                "
+                                          ),
+                                          _c("br"),
+                                          _vm._v(" "),
+                                          _vm.rows[i - 1] &&
+                                          _vm.rows[i - 1].precio
+                                            ? [
+                                                _c("span", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.rows[i - 1]
+                                                        ._tipo_valor.nombre
+                                                    )
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("span", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm._f("currency")(
+                                                        _vm.rows[i - 1].precio
+                                                      )
+                                                    )
+                                                  )
+                                                ])
+                                              ]
+                                            : _vm._e()
+                                        ],
+                                        2
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._m(3, true)
+                                    ]
+                                  )
+                                ],
+                                2
+                              )
                             ]
                           )
                         ])
@@ -792,105 +1056,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "geodir-category-content fl-wrap title-sin_item" },
-      [
-        _c("div", { staticClass: "geodir-category-content-title fl-wrap" }, [
-          _c("div", { staticClass: "geodir-category-content-title-item" }, [
-            _c("h3", { staticClass: "title-sin_map" }, [
-              _c("a", { attrs: { href: "listing-single.html" } }, [
-                _vm._v("Premium Plaza Hotel")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "geodir-category-location fl-wrap" }, [
-              _c("a", { staticClass: "map-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fas fa-map-marker-alt" }),
-                _vm._v(" 27th Brooklyn New York, USA")
-              ])
-            ])
+    return _c("div", { staticClass: "geodir-opt-list" }, [
+      _c(
+        "a",
+        {
+          staticClass: "single-map-item",
+          attrs: {
+            href: "#",
+            "data-newlatitude": "40.72956781",
+            "data-newlongitude": "-73.99726866"
+          }
+        },
+        [
+          _c("i", { staticClass: "fal fa-map-marker-alt" }),
+          _c("span", { staticClass: "geodir-opt-tooltip" }, [
+            _vm._v("Ubicar en el mapa")
           ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Sed interdum metus at nisi tempor laoreet. Integer gravida orci a justo sodales."
-          )
-        ]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "facilities-list fl-wrap" }, [
-          _c("li", [
-            _c("i", { staticClass: "fal fa-wifi" }),
-            _c("span", [_vm._v("Free WiFi")])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("i", { staticClass: "fal fa-parking" }),
-            _c("span", [_vm._v("Parking")])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("i", { staticClass: "fal fa-smoking-ban" }),
-            _c("span", [_vm._v("Non-smoking Rooms")])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("i", { staticClass: "fal fa-utensils" }),
-            _c("span", [_vm._v(" Restaurant")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "geodir-category-footer fl-wrap" }, [
-          _c("div", { staticClass: "geodir-category-price" }, [
-            _vm._v("Awg/Night "),
-            _c("span", [_vm._v("$ 320")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "geodir-opt-list" }, [
-            _c(
-              "a",
-              {
-                staticClass: "single-map-item",
-                attrs: {
-                  href: "#",
-                  "data-newlatitude": "40.72956781",
-                  "data-newlongitude": "-73.99726866"
-                }
-              },
-              [
-                _c("i", { staticClass: "fal fa-map-marker-alt" }),
-                _c("span", { staticClass: "geodir-opt-tooltip" }, [
-                  _vm._v("On the map")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "geodir-js-favorite", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fal fa-heart" }),
-                _c("span", { staticClass: "geodir-opt-tooltip" }, [
-                  _vm._v("Save")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "geodir-js-booking", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fal fa-exchange" }),
-                _c("span", { staticClass: "geodir-opt-tooltip" }, [
-                  _vm._v("Find Directions")
-                ])
-              ]
-            )
-          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("a", { staticClass: "geodir-js-favorite", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fal fa-heart" }),
+        _c("span", { staticClass: "geodir-opt-tooltip" }, [
+          _vm._v("Marcar favorito")
         ])
-      ]
-    )
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -1393,7 +1584,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "fab fa-google" }),
-                _vm._v(" Inicia con Google\n                    ")
+                _vm._v(" Inicia con Google\r\n                    ")
               ]
             )
           ])
@@ -1437,11 +1628,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", [
       _vm._v(
-        "\n                            INICIA\n                            "
+        "\r\n                            INICIA\r\n                            "
       ),
       _c("span", [
         _vm._v(
-          "\n                                en\n                                "
+          "\r\n                                en\r\n                                "
         ),
         _c("strong", [_vm._v("Metro Cuadrado")])
       ])

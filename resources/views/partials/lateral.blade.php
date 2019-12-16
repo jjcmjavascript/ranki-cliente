@@ -21,7 +21,7 @@
                     </div>
                     <div class="dasboard-sidebar-item fl-wrap">
                         <h3>
-                            <span>Bievenid@ </span>
+                            <span>Bievenido </span>
                           {{Auth::user()->nombre}}
                         </h3>
                     </div>

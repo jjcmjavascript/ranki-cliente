@@ -34,7 +34,7 @@
                                 <i class="fa fa-user text-yellow"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" v-model="usuario.apellidos"  placeholder="Indique sus apellidos">
+                        <input type="text" class="form-control" v-model="usuario.apellidos" placeholder="Indique sus apellidos">
                     </div>
                 </div>
                 <div class="form-group col-xs-12 col-md-12">
@@ -47,7 +47,7 @@
                                 <i class="fa fa-envelope text-yellow"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" v-model="usuario.email"  placeholder="Indique sus correo">
+                        <input type="text" class="form-control" v-model="usuario.email" placeholder="Indique sus correo">
                     </div>
                 </div>
                 <div class="form-group col-xs-12 col-md-6">
@@ -60,7 +60,7 @@
                                 <i class="fa fa-phone text-yellow"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control numeros" v-model="usuario.telefono_movil"  placeholder="+9(123)987654">
+                        <input type="text" class="form-control numeros" v-model="usuario.telefono_movil" placeholder="+9(123)987654">
                     </div>
                 </div>
 
@@ -74,7 +74,7 @@
                                 <i class="fa fa-phone text-yellow"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control numeros" v-model="usuario.telefono_fijo"  placeholder="+9(123)987654">
+                        <input type="text" class="form-control numeros" v-model="usuario.telefono_fijo" placeholder="+9(123)987654">
                     </div>
                 </div>
                 <div class="form-group col-xs-12 col-md-10">
@@ -97,7 +97,7 @@
                     </label>
                     <div>
                         <label class="btn btn-success c-pointer">
-                            <input type="file" class="hide" accept=".jpeg, .jpg, .png" @change="cambiarImagen($event)"/>
+                            <input type="file" class="hide" accept=".jpeg, .jpg, .png" @change="cambiarImagen($event)" />
                             Subir imagen
                         </label>
 
@@ -120,7 +120,7 @@
                     <div class="form-group col-sm-12 col-lg-12">
                         <label>Contraseña Actual</label>
                         <div class="input-group mb-1">
-                            <input :type="showPassword[0] ? 'text' : 'password'" class="form-control" v-model="pass.actual"  placeholder="*********">
+                            <input :type="showPassword[0] ? 'text' : 'password'" class="form-control" v-model="pass.actual" placeholder="*********">
                             <div class="input-group-prepend">
                                 <a href="javascript:void(0)" class="input-group-text">
                                     <i class="fa fa-eye" @click="changeTypeInput(0)"></i>
@@ -131,7 +131,7 @@
                     <div class="form-group col-xs-12 col-md-6">
                         <label>Nueva Contraseña</label>
                         <div class="input-group mb-1">
-                            <input :type="showPassword[1] ? 'text' : 'password'" class="form-control" v-model="pass.nueva"  placeholder="*********">
+                            <input :type="showPassword[1] ? 'text' : 'password'" class="form-control" v-model="pass.nueva" placeholder="*********">
                             <div class="input-group-prepend">
                                 <a href="javascript:void(0)" class="input-group-text">
                                     <i class="fa fa-eye" @click="changeTypeInput(1)"></i>
@@ -143,7 +143,7 @@
                     <div class="form-group col-xs-12 col-md-6">
                         <label>Confirmar nueva contraseña</label>
                         <div class="input-group mb-1">
-                            <input :type="showPassword[2] ? 'text' : 'password'" class="form-control" v-model="pass.confirm"  placeholder="*********">
+                            <input :type="showPassword[2] ? 'text' : 'password'" class="form-control" v-model="pass.confirm" placeholder="*********">
                             <div class="input-group-prepend">
                                 <a href="javascript:void(0)" class="input-group-text">
                                     <i class="fa fa-eye" @click="changeTypeInput(2)"></i>
@@ -255,11 +255,11 @@ export default {
         this.iniciar();
     },
     methods: {
-        start(){
+        start() {
             this.$root.cargando();
         },
 
-        stop(){
+        stop() {
             this.$root.stop();
         },
 
@@ -275,10 +275,9 @@ export default {
 
             return ((file.size / 1024) / 1024) < size;
         },
-
-                alerta(tipo, titulo, mensaje = null) {
-                    this.$root.alertas(tipo, titulo, mensaje);
-                },
+        alerta(tipo, titulo, mensaje = null) {
+            this.$root.alertas(tipo, titulo, mensaje);
+        },
         guardarContrasena() {
             if (
                 !this.$root.noScript(this.pass.actual) ||
@@ -389,10 +388,9 @@ export default {
             }
         },
         changeTypeInput(key) {
-            if (this.showPassword[key]){
+            if (this.showPassword[key]) {
                 Vue.set(this.showPassword, key, false);
-            }
-            else{
+            } else {
                 Vue.set(this.showPassword, key, true);
             }
         }

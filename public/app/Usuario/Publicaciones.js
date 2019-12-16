@@ -85,6 +85,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -92,7 +108,7 @@ __webpack_require__.r(__webpack_exports__);
       usuario: {
         nombre: null
       },
-      activo: 1,
+      filtrando: false,
       rows: {
         current_page: 0,
         data: [],
@@ -105,11 +121,44 @@ __webpack_require__.r(__webpack_exports__);
         per_page: null,
         prev_page_url: null,
         total: 0
+      },
+      filters: {
+        estado: {
+          'label': 'Activo',
+          value: 1
+        },
+        orden: {
+          'label': 'Fecha de creación',
+          value: 1
+        }
+      },
+      selects: {
+        estados: [{
+          'label': 'Activo',
+          value: 1
+        }, {
+          'label': 'Inactivo',
+          value: 0
+        }],
+        orden: [{
+          'label': 'Fecha de favorito',
+          value: 1
+        }, {
+          'label': 'Popularidad',
+          value: 2
+        }, {
+          'label': 'Mayor Precio',
+          value: 3
+        }, {
+          'label': 'Menor Precio',
+          value: 4
+        }]
       }
     };
   },
   mounted: function mounted() {
-    this.iniciar();
+    //document.querySelector('html').style['overflow-y'] = 'auto';
+    this.filtrar();
   },
   methods: {
     start: function start() {
@@ -122,14 +171,21 @@ __webpack_require__.r(__webpack_exports__);
       var mensaje = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       this.$root.alertas(tipo, titulo, mensaje);
     },
-    iniciar: function iniciar() {
+    filtrar: function filtrar() {
       var _this = this;
 
-      axios.post(this.url, {
-        estado: this.activo
-      }).then(function (res) {
+      this.start();
+      this.filtrando = true;
+      var request = new FormData();
+      this.filters.estado && request.append('estado', this.filters.estado.value);
+      this.filters.orden && request.append('orden', this.filters.orden.value);
+      axios.post(this.url, request).then(function (res) {
         _this.rows = res.data.rows;
-      })["finally"](function () {});
+      })["finally"](function () {
+        _this.stop();
+
+        _this.filtrando = false;
+      });
     },
     badgeColor: function badgeColor(tipo_operacion) {
       switch (tipo_operacion.id) {
@@ -145,6 +201,42 @@ __webpack_require__.r(__webpack_exports__);
           return;
           break;
       }
+    },
+    deshabilitar: function deshabilitar(index) {
+      var _this2 = this;
+
+      this.start();
+      axios.post(window.origin + '/propiedad/desactivar', {
+        id: this.rows.data[index].id
+      }).then(function (res) {
+        _this2.alerta('success', 'Exito', 'Propiedad desactivada.');
+
+        _this2.rows.data[index] = res.data.propiedad;
+
+        _this2.$forceUpdate();
+      })["catch"](function (err) {
+        _this2.stop();
+
+        _this2.alerta('error', 'Un error ha ocurrido', err);
+      });
+    },
+    reactivar: function reactivar(index) {
+      var _this3 = this;
+
+      this.start();
+      axios.post(window.origin + '/propiedad/reactivar', {
+        id: this.rows.data[index].id
+      }).then(function (res) {
+        _this3.alerta('success', 'Exito', 'Propiedad reactivada.');
+
+        _this3.rows.data[index] = res.data.propiedad;
+
+        _this3.$forceUpdate();
+      })["catch"](function (err) {
+        _this3.stop();
+
+        _this3.alerta('error', 'Un error ha ocurrido', err);
+      });
     }
   }
 });
@@ -183,16 +275,74 @@ var render = function() {
                   _c("div", { staticClass: "list-main-wrap-opt fl-wrap" }, [
                     _vm._m(1),
                     _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group col-xs-12 col-sm-6 col-lg-4"
+                        },
+                        [
+                          _c("label", [_vm._v("Ordenar por")]),
+                          _vm._v(" "),
+                          _c("v-select", {
+                            staticClass: "clear-none",
+                            attrs: { options: _vm.selects.orden },
+                            on: {
+                              input: function($event) {
+                                return _vm.filtrar()
+                              }
+                            },
+                            model: {
+                              value: _vm.filters.orden,
+                              callback: function($$v) {
+                                _vm.$set(_vm.filters, "orden", $$v)
+                              },
+                              expression: "filters.orden"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group col-xs-12 col-sm-6 col-lg-4"
+                        },
+                        [
+                          _c("label", [_vm._v("Consultar Por")]),
+                          _vm._v(" "),
+                          _c("v-select", {
+                            staticClass: "clear-none",
+                            attrs: { options: _vm.selects.estados },
+                            on: {
+                              input: function($event) {
+                                return _vm.filtrar()
+                              }
+                            },
+                            model: {
+                              value: _vm.filters.estado,
+                              callback: function($$v) {
+                                _vm.$set(_vm.filters, "estado", $$v)
+                              },
+                              expression: "filters.estado"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "row" },
-                      _vm._l(_vm.rows.data, function(val) {
-                        return _vm.rows.data.length > 0
+                      _vm._l(_vm.rows.data, function(val, i) {
+                        return !_vm.filtrando && _vm.rows.data.length > 0
                           ? _c(
                               "div",
                               {
                                 staticClass:
-                                  "col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1"
+                                  "col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1 mb-2"
                               },
                               [
                                 _c("div", { staticClass: "card" }, [
@@ -208,9 +358,9 @@ var render = function() {
                                   _c("div", { staticClass: "card-body" }, [
                                     _c("h5", { staticClass: "card-title" }, [
                                       _vm._v(
-                                        "\n                                                " +
-                                          _vm._s(val._propiedades.titulo) +
-                                          "\n\n                                            "
+                                        "\r\n                                                " +
+                                          _vm._s(val.titulo.toUpperCase()) +
+                                          "\r\n\r\n                                            "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -221,34 +371,177 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                                Tipo : " +
-                                            _vm._s(
-                                              val._propiedades._tipo_operacion
-                                                .nombre
-                                            ) +
+                                          "\r\n                                                Tipo : " +
+                                            _vm._s(val._tipo_operacion.nombre) +
                                             " "
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\n                                                Moneda: " +
+                                          "\r\n                                                Moneda: " +
                                             _vm._s(
-                                              val._propiedades._tipo_valor
-                                                ? val._propiedades._tipo_valor
-                                                    .nombre
+                                              val._tipo_valor
+                                                ? val._tipo_valor.nombre
                                                 : ""
                                             ) +
-                                            "\n                                                Monto : $" +
-                                            _vm._s(val._propiedades.precio) +
-                                            "\n                                            "
-                                        )
+                                            "\r\n                                                Monto : " +
+                                            _vm._s(val.precio) +
+                                            " "
+                                        ),
+                                        _c("br"),
+                                        _vm._v(
+                                          "\r\n                                                Estado : " +
+                                            _vm._s(
+                                              val.estado == 1
+                                                ? "ACTIVA"
+                                                : "INACTIVA"
+                                            ) +
+                                            " "
+                                        ),
+                                        _c("br")
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(2, true)
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "geodir-category-footer fl-wrap"
+                                      },
+                                      [
+                                        _c("br"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "geodir-opt-list" },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "geodir-js-booking",
+                                                attrs: {
+                                                  target: "_blank",
+                                                  href:
+                                                    _vm.$root.base_url +
+                                                    "propiedad/" +
+                                                    val.id +
+                                                    "/detalle"
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "fal fa-eye"
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-opt-tooltip"
+                                                  },
+                                                  [_vm._v("Detalle")]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            val.estado == 1
+                                              ? _c(
+                                                  "a",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-js-booking",
+                                                    attrs: { href: "#" },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.deshabilitar(
+                                                          i
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass:
+                                                        "fal fa-trash"
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "geodir-opt-tooltip"
+                                                      },
+                                                      [_vm._v("Deshabilitar")]
+                                                    )
+                                                  ]
+                                                )
+                                              : _c(
+                                                  "a",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-js-booking",
+                                                    attrs: { href: "#" },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.reactivar(i)
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass:
+                                                        "fal fa-check"
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "geodir-opt-tooltip"
+                                                      },
+                                                      [_vm._v("Reactivar")]
+                                                    )
+                                                  ]
+                                                ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "geodir-js-booking",
+                                                attrs: {
+                                                  href:
+                                                    _vm.$root.base_url +
+                                                    "propiedad/" +
+                                                    val.id +
+                                                    "/editar"
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "fal fa-edit"
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-opt-tooltip"
+                                                  },
+                                                  [_vm._v("Editar")]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
                                   ])
                                 ])
                               ]
                             )
+                          : !_vm.filtrando
+                          ? _c("div", [_vm._v("Sin información para mostrar")])
                           : _vm._e()
                       }),
                       0
@@ -257,7 +550,7 @@ var render = function() {
                   _vm._v(" "),
                   _vm.rows.total > 15
                     ? _c("div", { staticClass: "pagination" }, [
-                        _vm._m(3),
+                        _vm._m(2),
                         _vm._v(" "),
                         _c("a", { attrs: { href: "#" } }, [_vm._v("1")]),
                         _vm._v(" "),
@@ -271,7 +564,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("a", { attrs: { href: "#" } }, [_vm._v("4")]),
                         _vm._v(" "),
-                        _vm._m(4)
+                        _vm._m(3)
                       ])
                     : _vm._e()
                 ]
@@ -308,28 +601,6 @@ var staticRenderFns = [
       { staticClass: "list-main-wrap-title fl-wrap col-title" },
       [_c("h2", [_vm._v(" Mis Publicaciones")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "geodir-category-footer fl-wrap" }, [
-      _c("br"),
-      _vm._v(" "),
-      _c("div", { staticClass: "geodir-opt-list" }, [
-        _c("a", { staticClass: "geodir-js-booking", attrs: { href: "#" } }, [
-          _c("i", { staticClass: "fal fa-trash" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "geodir-opt-tooltip" }, [_vm._v("Borrar")])
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "geodir-js-booking", attrs: { href: "#" } }, [
-          _c("i", { staticClass: "fal fa-edit" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "geodir-opt-tooltip" }, [_vm._v("Editar")])
-        ])
-      ])
-    ])
   },
   function() {
     var _vm = this
