@@ -98,6 +98,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -208,7 +211,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this2.alerta('success', 'Exito', 'Propiedad desactivada.');
 
-        _this2.rows.data[index] = res.data.success;
+        _this2.rows.data[index] = res.data.propiedad;
+
+        _this2.$forceUpdate();
       })["catch"](function (err) {
         _this2.stop();
 
@@ -219,12 +224,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.start();
-      axios.post(window.origin + '/propiedad/desactivar', {
+      axios.post(window.origin + '/propiedad/reactivar', {
         id: this.rows.data[index].id
       }).then(function (res) {
         _this3.alerta('success', 'Exito', 'Propiedad reactivada.');
 
         _this3.rows.data[index] = res.data.propiedad;
+
+        _this3.$forceUpdate();
       })["catch"](function (err) {
         _this3.stop();
 
@@ -407,6 +414,36 @@ var render = function() {
                                           "div",
                                           { staticClass: "geodir-opt-list" },
                                           [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "geodir-js-booking",
+                                                attrs: {
+                                                  target: "_blank",
+                                                  href:
+                                                    _vm.$root.base_url +
+                                                    "propiedad/" +
+                                                    val.id +
+                                                    "/detalle"
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "fal fa-eye"
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-opt-tooltip"
+                                                  },
+                                                  [_vm._v("Detalle")]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
                                             val.estado == 1
                                               ? _c(
                                                   "a",

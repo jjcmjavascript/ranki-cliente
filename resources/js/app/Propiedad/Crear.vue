@@ -354,7 +354,7 @@
 					tipo_valor: null,
 					precio: null,
 					periodicidad_arriendo: null,
-					amoblada: false,
+					amoblada: 0,
 					usuario: null,
 					latitud: null,
 					longitud: null,
@@ -399,11 +399,9 @@
             start() {
                 this.$root.cargando();
             },
-
             stop() {
                 this.$root.stop();
             },
-
             alerta(tipo, titulo, mensaje = null) {
                 this.$root.alertas(tipo, titulo, mensaje);
             },

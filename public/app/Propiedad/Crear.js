@@ -364,7 +364,7 @@ __webpack_require__.r(__webpack_exports__);
         tipo_valor: null,
         precio: null,
         periodicidad_arriendo: null,
-        amoblada: false,
+        amoblada: 0,
         usuario: null,
         latitud: null,
         longitud: null,

@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1 mb-2" v-if="!filtrando && rows.data.length > 0" v-for="(val, i) in rows.data" >
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1 mb-2" v-if="!filtrando && rows.data.length > 0" v-for="(val,i) in rows.data" >
                                     <div class="card">
                                         <img class="card-img-top" src="http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg" alt=""></a>
 
@@ -48,6 +48,9 @@
                                             <div class="geodir-category-footer fl-wrap">
                                                 <br>
                                                 <div class="geodir-opt-list">
+                                                    <a target="_blank" :href="`${$root.base_url}propiedad/${val.id}/detalle`" class="geodir-js-booking"><i class="fal fa-eye"></i>
+                                                        <span class="geodir-opt-tooltip">Detalle</span>
+                                                    </a>
                                                     <a v-if="val.estado == 1" href="#" class="geodir-js-booking" @click="deshabilitar(i)"><i class="fal fa-trash"></i>
                                                         <span class="geodir-opt-tooltip">Deshabilitar</span>
                                                     </a>
@@ -182,7 +185,8 @@ export default {
             axios.post( window.origin+'/propiedad/desactivar' ,{id : this.rows.data[index].id} )
             .then( (res ) =>{
                 this.alerta('success', 'Exito','Propiedad desactivada.');
-                this.rows.data[index] = res.data.success;
+                this.rows.data[index] = res.data.propiedad;
+                this.$forceUpdate();
             })
             .catch(err=>{
                 this.stop();
@@ -192,10 +196,12 @@ export default {
 
         reactivar(index){
             this.start()
-            axios.post( window.origin+'/propiedad/desactivar' ,{id : this.rows.data[index].id} )
+            axios.post( window.origin+'/propiedad/reactivar' ,{id : this.rows.data[index].id} )
             .then( (res ) =>{
                 this.alerta('success', 'Exito','Propiedad reactivada.');
                 this.rows.data[index] = res.data.propiedad;
+                this.$forceUpdate();
+
             })
             .catch(err=>{
                 this.stop();

@@ -170,7 +170,7 @@
 				               		</div>
 				               		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 				               			<div class="checkbox checkbox-css mt-4">
-											<input type="checkbox" id="cssCheckbox1" v-model="data.amoblada">
+											<input type="checkbox" id="cssCheckbox1" :true-value="1" :false-value="0" v-model="data.amoblada">
 											<label for="cssCheckbox1">Esta propiedad esta amoblada</label>
 										</div>
 				               		</div>
@@ -404,7 +404,7 @@
 					tipo_valor: null,
 					precio: null,
 					periodicidad_arriendo: null,
-					amoblada: false,
+					amoblada: 0,
 					usuario: null,
 					latitud: null,
 					longitud: null,
@@ -612,14 +612,16 @@
 
 				axios.post(this.url.current + '/actualizar', request)
 				.then(response => {
-					this.success = response.data;
+					this.alerta("success", "Exito", response.data.success);
+                    //window.location = response.data.url;
 				})
 				.catch(error => {
 					this.error = this.$root.arrayResponse(error);
+					this.stop();
+					this.alerta('error','Lo sentimos un error ha ocurrido.',error);
 				})
 				.finally(() => {
-					this.stop();
-					window.scroll(0, 0);
+					this.enviando = false;
 				})
 			},
 			mostrarMasInformación() {

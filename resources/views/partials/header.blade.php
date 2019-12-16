@@ -94,9 +94,9 @@
                 <li><a href="{{route('usuario.salir')}}">Salir</a></li>
               </ul>
               <div>
-              <div class="add_propiedad">
+              <a class="add_propiedad" href="{{route('propiedad.crear')}}">
                   Agregar  <i class="fa fa-plus"></i>
-              </div>
+              </a>
             @endauth
         </div>
 

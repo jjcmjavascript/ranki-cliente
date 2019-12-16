@@ -56,72 +56,91 @@
             </section>
             <!-- section end -->
             <!-- section-->
-            <section class="grey-blue-bg">
-                <!-- container-->
-                <div class="container">
-                    <div class="section-title">
-                        <div class="section-title-separator"><span></span></div>
-                        <h2>Recently Added Hotels</h2>
-                        <span class="section-separator"></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                    </div>
-                </div>
-                <!-- container end-->
-                <!-- carousel -->
-                <div class="list-carousel fl-wrap card-listing ">
-                    <!--listing-carousel-->
-                    <div class="listing-carousel  fl-wrap ">
-                        <!--slick-slide-item-->
-                        <div class="slick-slide-item" v-for="i in 10">
-                            <!-- listing-item  -->
-                            <div class="listing-item">
-                                <article class="geodir-category-listing fl-wrap">
-                                    <div class="geodir-category-img">
-                                        <a href="listing-single.html"><img :src="app_url+'images/portada.jpg'" alt=""></a>
-
-                                        <div class="sale-window">Sale 20%</div>
-                                        <div class="geodir-category-opt">
-                                            <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                            <div class="rate-class-name">
-                                                <div class="score"><strong>Very Good</strong>27 Reviews </div>
-                                                <span>5.0</span>
-                                            </div>
-                                        </div>
+                <div class="container-fluid">
+                    <h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner row w-100 mx-auto">
+                            <div class="carousel-item col-md-4 active">
+                                <div class="card">
+                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card 1</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                     </div>
-                                    <div class="geodir-category-content fl-wrap title-sin_item">
-                                        <div class="geodir-category-content-title fl-wrap">
-                                            <div class="geodir-category-content-title-item">
-                                                <h3 class="title-sin_map"><a href="listing-single.html">Premium Plaza Hotel</a></h3>
-                                                <div class="geodir-category-location fl-wrap"><a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i> 27th Brooklyn New York, USA</a></div>
-                                            </div>
-                                        </div>
-                                        <p>Sed interdum metus at nisi tempor laoreet. Integer gravida orci a justo sodales.</p>
-                                        <ul class="facilities-list fl-wrap">
-                                            <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
-                                            <li><i class="fal fa-parking"></i><span>Parking</span></li>
-                                            <li><i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span></li>
-                                            <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
-                                        </ul>
-                                        <div class="geodir-category-footer fl-wrap">
-                                            <div class="geodir-category-price">Awg/Night <span>$ 320</span></div>
-                                            <div class="geodir-opt-list">
-                                                <a href="#" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map</span></a>
-                                                <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Save</span></a>
-                                                <a href="#" class="geodir-js-booking"><i class="fal fa-exchange"></i><span class="geodir-opt-tooltip">Find Directions</span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
+                                </div>
                             </div>
-                            <!-- listing-item end -->
+                            <div class="carousel-item col-md-4">
+                                <div class="card">
+                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/418cf4/fff" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card 2</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-4">
+                                <div class="card">
+                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/3ed846/fff" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card 3</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-4">
+                                <div class="card">
+                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/42ebf4/fff" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card 4</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-4">
+                                <div class="card">
+                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f49b41/fff" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card 5</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-4">
+                                <div class="card">
+                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f4f141/fff" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card 6</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item col-md-4">
+                                <div class="card">
+                                    <img class="card-img-top img-fluid" src="http://placehold.it/800x600/8e41f4/fff" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card 7</h4>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
-                    <!--listing-carousel end-->
-                    <div class="swiper-button-prev sw-btn"><i class="fa fa-long-arrow-left"></i></div>
-                    <div class="swiper-button-next sw-btn"><i class="fa fa-long-arrow-right"></i></div>
                 </div>
-                <!--  carousel end-->
-            </section>
             <!-- section end -->
         </div>
         <!-- content end-->
@@ -144,8 +163,59 @@ export default {
     data() {
         return {
             app_url: this.$root.base_url,
+            rows: [],
         }
     },
+    mounted() {
+        this.iniciar();
+    },
+    methods: {
+        start() {
+            this.$root.cargando();
+        },
+        stop() {
+            this.$root.stop();
+        },
+        alerta(tipo, titulo, mensaje = null) {
+            this.$root.alertas(tipo, titulo, mensaje);
+        },
+        iniciar() {
+            axios.post(this.app_url + 'ultimas_propieades')
+                .then(res => {
+                    this.rows = res.data.propiedades;
+                    this.list();
+                })
+                .catch(err => {
 
+                })
+        },
+
+
+    }
 }
+$(document).ready(function() {
+  $("#myCarousel").on("slide.bs.carousel", function(e) {
+    var $e = $(e.relatedTarget);
+    var idx = $e.index();
+    var itemsPerSlide = 3;
+    var totalItems = $(".carousel-item").length;
+
+    if (idx >= totalItems - (itemsPerSlide - 1)) {
+      var it = itemsPerSlide - (totalItems - idx);
+      for (var i = 0; i < it; i++) {
+        // append slides to end
+        if (e.direction == "left") {
+          $(".carousel-item")
+            .eq(i)
+            .appendTo(".carousel-inner");
+        } else {
+          $(".carousel-item")
+            .eq(0)
+            .appendTo($(this).find(".carousel-inner"));
+        }
+      }
+    }
+  });
+});
+
 </script>

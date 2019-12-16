@@ -108,4 +108,23 @@ class ApiHelper {
 
         return json_decode((string) $response, true);
     }
+
+	public function publicRequest ($ruta , $form_params = null, $getOnlyBody=true)
+	{
+		$headers = [
+			'Accept' => 'application/json',
+		];
+
+		$response = $this->guzzle->post( \Config::get('app.api_connection'). $ruta, [
+		  'headers' => $headers,
+		  'form_params' => $form_params,
+		]);
+
+		if($getOnlyBody){
+			$response = $response->getBody();
+		}
+
+		return json_decode((string) $response, true);
+	}
+
 }

@@ -146,6 +146,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  // api/publicaciones/recientes
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -154,9 +173,55 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      app_url: this.$root.base_url
+      app_url: this.$root.base_url,
+      rows: []
     };
+  },
+  mounted: function mounted() {
+    this.iniciar();
+  },
+  methods: {
+    start: function start() {
+      this.$root.cargando();
+    },
+    stop: function stop() {
+      this.$root.stop();
+    },
+    alerta: function alerta(tipo, titulo) {
+      var mensaje = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      this.$root.alertas(tipo, titulo, mensaje);
+    },
+    iniciar: function iniciar() {
+      var _this = this;
+
+      axios.post(this.app_url + 'ultimas_propieades').then(function (res) {
+        _this.rows = res.data.propiedades;
+
+        _this.list();
+      })["catch"](function (err) {});
+    }
   }
+});
+$(document).ready(function () {
+  $("#myCarousel").on("slide.bs.carousel", function (e) {
+    var $e = $(e.relatedTarget);
+    var idx = $e.index();
+    var itemsPerSlide = 3;
+    var totalItems = $(".carousel-item").length;
+
+    if (idx >= totalItems - (itemsPerSlide - 1)) {
+      var it = itemsPerSlide - (totalItems - idx);
+
+      for (var i = 0; i < it; i++) {
+        // append slides to end
+        if (e.direction == "left") {
+          $(".carousel-item").eq(i).appendTo(".carousel-inner");
+        } else {
+          $(".carousel-item").eq(0).appendTo($(this).find(".carousel-inner"));
+        }
+      }
+    }
+  });
 });
 
 /***/ }),
@@ -372,8 +437,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/auth', {
         provider: provider
       }).then(function (res) {
-        _this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo"); //window.location.href = res.data.url;
+        _this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
 
+        window.location.href = res.data.url;
       })["catch"](function (err) {
         _this.mostrarAlerta("error", "Ups, ha ocurrido un error", error);
       })["finally"](function () {
@@ -395,8 +461,9 @@ __webpack_require__.r(__webpack_exports__);
           axios.post("/iniciar", request).then(function (res) {
             _this2.$swal.disableLoading();
 
-            _this2.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo"); //window.location.href = res.data.url;
+            _this2.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
 
+            window.location.href = res.data.url;
           })["catch"](function (error) {
             _this2.$swal.disableLoading();
 
@@ -516,80 +583,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _c(
-        "div",
-        { staticStyle: { "padding-top": "80px" }, attrs: { id: "wrapper" } },
-        [
-          _c("div", { staticClass: "content" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("section", { staticClass: "grey-blue-bg" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "list-carousel fl-wrap card-listing " },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "listing-carousel  fl-wrap " },
-                    _vm._l(10, function(i) {
-                      return _c("div", { staticClass: "slick-slide-item" }, [
-                        _c("div", { staticClass: "listing-item" }, [
-                          _c(
-                            "article",
-                            { staticClass: "geodir-category-listing fl-wrap" },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "geodir-category-img" },
-                                [
-                                  _c(
-                                    "a",
-                                    { attrs: { href: "listing-single.html" } },
-                                    [
-                                      _c("img", {
-                                        attrs: {
-                                          src:
-                                            _vm.app_url + "images/portada.jpg",
-                                          alt: ""
-                                        }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "sale-window" }, [
-                                    _vm._v("Sale 20%")
-                                  ]),
-                                  _vm._v(" "),
-                                  _vm._m(2, true)
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _vm._m(3, true)
-                            ]
-                          )
-                        ])
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _vm._m(5)
-                ]
-              )
-            ])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("login"),
-      _vm._v(" "),
-      _vm._m(6)
-    ],
+    [_vm._m(0), _vm._v(" "), _c("login"), _vm._v(" "), _vm._m(1)],
     1
   )
 }
@@ -599,134 +593,393 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "section",
-      {
-        staticClass: "hero-section",
-        attrs: { "data-scrollax-parent": "true", id: "sec1" }
-      },
+      "div",
+      { staticStyle: { "padding-top": "80px" }, attrs: { id: "wrapper" } },
       [
-        _c("div", { staticClass: "hero-parallax" }, [
-          _c("div", {
-            staticClass: "bg",
-            attrs: {
-              "data-bg": "images/portada.jpg",
-              "data-scrollax": "properties: { translateY: '200px' }"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "overlay op7" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "hero-section-wrap fl-wrap" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "home-intro" }, [
-              _c("div", { staticClass: "section-title-separator" }, [
-                _c("span")
+        _c("div", { staticClass: "content" }, [
+          _c(
+            "section",
+            {
+              staticClass: "hero-section",
+              attrs: { "data-scrollax-parent": "true", id: "sec1" }
+            },
+            [
+              _c("div", { staticClass: "hero-parallax" }, [
+                _c("div", {
+                  staticClass: "bg",
+                  attrs: {
+                    "data-bg": "images/portada.jpg",
+                    "data-scrollax": "properties: { translateY: '200px' }"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "overlay op7" })
               ]),
               _vm._v(" "),
-              _c("h2", [_vm._v("EasyBook Hotel Booking System")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "section-separator" }),
-              _vm._v(" "),
-              _c("h3", [
-                _vm._v("Let's start exploring the world together with EasyBook")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "main-search-input-wrap" }, [
-              _c("div", { staticClass: "main-search-input fl-wrap" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "main-search-input-item location",
-                    attrs: { id: "autocomplete-container" }
-                  },
-                  [
-                    _c("span", { staticClass: "inpt_dec" }, [
-                      _c("i", { staticClass: "fal fa-map-marker" })
+              _c("div", { staticClass: "hero-section-wrap fl-wrap" }, [
+                _c("div", { staticClass: "container" }, [
+                  _c("div", { staticClass: "home-intro" }, [
+                    _c("div", { staticClass: "section-title-separator" }, [
+                      _c("span")
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      staticClass: "autocomplete-input",
-                      attrs: {
-                        type: "text",
-                        placeholder: "Hotel , City...",
-                        id: "autocompleteid2",
-                        value: ""
-                      }
-                    }),
+                    _c("h2", [_vm._v("EasyBook Hotel Booking System")]),
                     _vm._v(" "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fal fa-dot-circle" })
+                    _c("span", { staticClass: "section-separator" }),
+                    _vm._v(" "),
+                    _c("h3", [
+                      _vm._v(
+                        "Let's start exploring the world together with EasyBook"
+                      )
                     ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "main-search-input-item main-date-parent main-search-input-item_small"
-                  },
-                  [
-                    _c("span", { staticClass: "inpt_dec" }, [
-                      _c("i", { staticClass: "fal fa-calendar-check" })
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: {
-                        type: "text",
-                        placeholder: "When",
-                        name: "main-input-search",
-                        value: ""
-                      }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "main-search-input-item" }, [
-                  _c("div", { staticClass: "qty-dropdown fl-wrap" }, [
-                    _c("div", { staticClass: "qty-dropdown-header fl-wrap" }, [
-                      _c("i", { staticClass: "fal fa-users" }),
-                      _vm._v(" Persons")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "qty-dropdown-content fl-wrap" }, [
-                      _c("div", { staticClass: "quantity-item" }, [
-                        _c("label", [
-                          _c("i", { staticClass: "fas fa-male" }),
-                          _vm._v(" Adults")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "quantity" }, [
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "main-search-input-wrap" }, [
+                    _c("div", { staticClass: "main-search-input fl-wrap" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "main-search-input-item location",
+                          attrs: { id: "autocomplete-container" }
+                        },
+                        [
+                          _c("span", { staticClass: "inpt_dec" }, [
+                            _c("i", { staticClass: "fal fa-map-marker" })
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "autocomplete-input",
+                            attrs: {
+                              type: "text",
+                              placeholder: "Hotel , City...",
+                              id: "autocompleteid2",
+                              value: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c("i", { staticClass: "fal fa-dot-circle" })
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "main-search-input-item main-date-parent main-search-input-item_small"
+                        },
+                        [
+                          _c("span", { staticClass: "inpt_dec" }, [
+                            _c("i", { staticClass: "fal fa-calendar-check" })
+                          ]),
+                          _vm._v(" "),
                           _c("input", {
                             attrs: {
-                              type: "number",
-                              min: "1",
-                              max: "3",
-                              step: "1",
-                              value: "1"
+                              type: "text",
+                              placeholder: "When",
+                              name: "main-input-search",
+                              value: ""
                             }
                           })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "main-search-input-item" }, [
+                        _c("div", { staticClass: "qty-dropdown fl-wrap" }, [
+                          _c(
+                            "div",
+                            { staticClass: "qty-dropdown-header fl-wrap" },
+                            [
+                              _c("i", { staticClass: "fal fa-users" }),
+                              _vm._v(" Persons")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "qty-dropdown-content fl-wrap" },
+                            [
+                              _c("div", { staticClass: "quantity-item" }, [
+                                _c("label", [
+                                  _c("i", { staticClass: "fas fa-male" }),
+                                  _vm._v(" Adults")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "quantity" }, [
+                                  _c("input", {
+                                    attrs: {
+                                      type: "number",
+                                      min: "1",
+                                      max: "3",
+                                      step: "1",
+                                      value: "1"
+                                    }
+                                  })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "quantity-item" }, [
+                                _c("label", [
+                                  _c("i", { staticClass: "fas fa-child" }),
+                                  _vm._v(" Children")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "quantity" }, [
+                                  _c("input", {
+                                    attrs: {
+                                      type: "number",
+                                      min: "0",
+                                      max: "3",
+                                      step: "1",
+                                      value: "0"
+                                    }
+                                  })
+                                ])
+                              ])
+                            ]
+                          )
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "quantity-item" }, [
-                        _c("label", [
-                          _c("i", { staticClass: "fas fa-child" }),
-                          _vm._v(" Children")
+                      _c(
+                        "button",
+                        {
+                          staticClass: "main-search-button color2-bg",
+                          attrs: {
+                            onclick: "window.location.href='listing.html'"
+                          }
+                        },
+                        [
+                          _vm._v("Search "),
+                          _c("i", { staticClass: "fal fa-search" })
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "container-fluid" }, [
+            _c("h1", { staticClass: "text-center mb-3" }, [
+              _vm._v("Bootstrap Multi-Card Carousel")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "carousel slide",
+                attrs: { id: "myCarousel", "data-ride": "carousel" }
+              },
+              [
+                _c("div", { staticClass: "carousel-inner row w-100 mx-auto" }, [
+                  _c("div", { staticClass: "carousel-item col-md-4 active" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("img", {
+                        staticClass: "card-img-top img-fluid",
+                        attrs: {
+                          src: "http://placehold.it/800x600/f44242/fff",
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v("Card 1")
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "quantity" }, [
-                          _c("input", {
-                            attrs: {
-                              type: "number",
-                              min: "0",
-                              max: "3",
-                              step: "1",
-                              value: "0"
-                            }
-                          })
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(
+                            "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Last updated 3 mins ago")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "carousel-item col-md-4" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("img", {
+                        staticClass: "card-img-top img-fluid",
+                        attrs: {
+                          src: "http://placehold.it/800x600/418cf4/fff",
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v("Card 2")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(
+                            "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Last updated 3 mins ago")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "carousel-item col-md-4" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("img", {
+                        staticClass: "card-img-top img-fluid",
+                        attrs: {
+                          src: "http://placehold.it/800x600/3ed846/fff",
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v("Card 3")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(
+                            "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Last updated 3 mins ago")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "carousel-item col-md-4" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("img", {
+                        staticClass: "card-img-top img-fluid",
+                        attrs: {
+                          src: "http://placehold.it/800x600/42ebf4/fff",
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v("Card 4")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(
+                            "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Last updated 3 mins ago")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "carousel-item col-md-4" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("img", {
+                        staticClass: "card-img-top img-fluid",
+                        attrs: {
+                          src: "http://placehold.it/800x600/f49b41/fff",
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v("Card 5")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(
+                            "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Last updated 3 mins ago")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "carousel-item col-md-4" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("img", {
+                        staticClass: "card-img-top img-fluid",
+                        attrs: {
+                          src: "http://placehold.it/800x600/f4f141/fff",
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v("Card 6")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(
+                            "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Last updated 3 mins ago")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "carousel-item col-md-4" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("img", {
+                        staticClass: "card-img-top img-fluid",
+                        attrs: {
+                          src: "http://placehold.it/800x600/8e41f4/fff",
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v("Card 7")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(
+                            "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Last updated 3 mins ago")
+                          ])
                         ])
                       ])
                     ])
@@ -734,179 +987,50 @@ var staticRenderFns = [
                 ]),
                 _vm._v(" "),
                 _c(
-                  "button",
+                  "a",
                   {
-                    staticClass: "main-search-button color2-bg",
-                    attrs: { onclick: "window.location.href='listing.html'" }
+                    staticClass: "carousel-control-prev",
+                    attrs: {
+                      href: "#myCarousel",
+                      role: "button",
+                      "data-slide": "prev"
+                    }
                   },
-                  [_vm._v("Search "), _c("i", { staticClass: "fal fa-search" })]
+                  [
+                    _c("span", {
+                      staticClass: "carousel-control-prev-icon",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "carousel-control-next",
+                    attrs: {
+                      href: "#myCarousel",
+                      role: "button",
+                      "data-slide": "next"
+                    }
+                  },
+                  [
+                    _c("span", {
+                      staticClass: "carousel-control-next-icon",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+                  ]
                 )
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "section-title" }, [
-        _c("div", { staticClass: "section-title-separator" }, [_c("span")]),
-        _vm._v(" "),
-        _c("h2", [_vm._v("Recently Added Hotels")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "section-separator" }),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar."
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "geodir-category-opt" }, [
-      _c("div", {
-        staticClass: "listing-rating card-popup-rainingvis",
-        attrs: { "data-starrating2": "5" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "rate-class-name" }, [
-        _c("div", { staticClass: "score" }, [
-          _c("strong", [_vm._v("Very Good")]),
-          _vm._v("27 Reviews ")
-        ]),
-        _vm._v(" "),
-        _c("span", [_vm._v("5.0")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "geodir-category-content fl-wrap title-sin_item" },
-      [
-        _c("div", { staticClass: "geodir-category-content-title fl-wrap" }, [
-          _c("div", { staticClass: "geodir-category-content-title-item" }, [
-            _c("h3", { staticClass: "title-sin_map" }, [
-              _c("a", { attrs: { href: "listing-single.html" } }, [
-                _vm._v("Premium Plaza Hotel")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "geodir-category-location fl-wrap" }, [
-              _c("a", { staticClass: "map-item", attrs: { href: "#" } }, [
-                _c("i", { staticClass: "fas fa-map-marker-alt" }),
-                _vm._v(" 27th Brooklyn New York, USA")
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Sed interdum metus at nisi tempor laoreet. Integer gravida orci a justo sodales."
-          )
-        ]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "facilities-list fl-wrap" }, [
-          _c("li", [
-            _c("i", { staticClass: "fal fa-wifi" }),
-            _c("span", [_vm._v("Free WiFi")])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("i", { staticClass: "fal fa-parking" }),
-            _c("span", [_vm._v("Parking")])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("i", { staticClass: "fal fa-smoking-ban" }),
-            _c("span", [_vm._v("Non-smoking Rooms")])
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("i", { staticClass: "fal fa-utensils" }),
-            _c("span", [_vm._v(" Restaurant")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "geodir-category-footer fl-wrap" }, [
-          _c("div", { staticClass: "geodir-category-price" }, [
-            _vm._v("Awg/Night "),
-            _c("span", [_vm._v("$ 320")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "geodir-opt-list" }, [
-            _c(
-              "a",
-              {
-                staticClass: "single-map-item",
-                attrs: {
-                  href: "#",
-                  "data-newlatitude": "40.72956781",
-                  "data-newlongitude": "-73.99726866"
-                }
-              },
-              [
-                _c("i", { staticClass: "fal fa-map-marker-alt" }),
-                _c("span", { staticClass: "geodir-opt-tooltip" }, [
-                  _vm._v("On the map")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "geodir-js-favorite", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fal fa-heart" }),
-                _c("span", { staticClass: "geodir-opt-tooltip" }, [
-                  _vm._v("Save")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "geodir-js-booking", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fal fa-exchange" }),
-                _c("span", { staticClass: "geodir-opt-tooltip" }, [
-                  _vm._v("Find Directions")
-                ])
               ]
             )
           ])
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "swiper-button-prev sw-btn" }, [
-      _c("i", { staticClass: "fa fa-long-arrow-left" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "swiper-button-next sw-btn" }, [
-      _c("i", { staticClass: "fa fa-long-arrow-right" })
-    ])
   },
   function() {
     var _vm = this

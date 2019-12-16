@@ -416,7 +416,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tipo_valor: null,
         precio: null,
         periodicidad_arriendo: null,
-        amoblada: false,
+        amoblada: 0,
         usuario: null,
         latitud: null,
         longitud: null,
@@ -630,13 +630,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       axios.post(this.url.current + '/actualizar', request).then(function (response) {
-        _this4.success = response.data;
+        _this4.alerta("success", "Exito", response.data.success); //window.location = response.data.url;
+
       })["catch"](function (error) {
         _this4.error = _this4.$root.arrayResponse(error);
-      })["finally"](function () {
+
         _this4.stop();
 
-        window.scroll(0, 0);
+        _this4.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
+      })["finally"](function () {
+        _this4.enviando = false;
       });
     },
     mostrarMasInformación: function mostrarMasInformaciN() {
@@ -1366,17 +1369,22 @@ var render = function() {
                                   expression: "data.amoblada"
                                 }
                               ],
-                              attrs: { type: "checkbox", id: "cssCheckbox1" },
+                              attrs: {
+                                type: "checkbox",
+                                id: "cssCheckbox1",
+                                "true-value": 1,
+                                "false-value": 0
+                              },
                               domProps: {
                                 checked: Array.isArray(_vm.data.amoblada)
                                   ? _vm._i(_vm.data.amoblada, null) > -1
-                                  : _vm.data.amoblada
+                                  : _vm._q(_vm.data.amoblada, 1)
                               },
                               on: {
                                 change: function($event) {
                                   var $$a = _vm.data.amoblada,
                                     $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
+                                    $$c = $$el.checked ? 1 : 0
                                   if (Array.isArray($$a)) {
                                     var $$v = null,
                                       $$i = _vm._i($$a, $$v)
