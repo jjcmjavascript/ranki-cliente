@@ -1,6 +1,3 @@
-
-
-
 /* MIN */
 .geodir-opt-list a {
     display: flex !important;
@@ -11,6 +8,14 @@
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+}
+.geodir-category-footer {
+    
+    ---padding-top: 50px;
+    padding-right: 35px;
+}
+.geodir-category-price {
+    
 }
 .form-control{
     border: 1px solid rgba(0,0,0,0.2);
@@ -54,6 +59,11 @@ li{
     background:rgba(33, 150, 243, 0.6);
 }
 /*  */
+
+.wave-bg.wave-bg2 {
+    background: url(../../images/background/pattern.png) repeat;
+    opacity: 0.1;
+}
 
 
 /* ////////////////// HEADER */

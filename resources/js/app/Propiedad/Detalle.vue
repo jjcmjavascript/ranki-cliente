@@ -26,7 +26,7 @@
                                 <div class="list-single-main-media fl-wrap" id="sec1">
                                     <div class="single-slider-wrapper fl-wrap">
                                         <div class="slider-for fl-wrap"  >
-                                            <div class="slick-slide-item"><img src="https://s1.latercera.com/wp-content/uploads/2019/06/portada-1.jpg" alt=""></div>
+                                            <div class="slick-slide-item image-popup"><img src="https://s1.latercera.com/wp-content/uploads/2019/06/portada-1.jpg" alt=""></div>
                                             <div class="slick-slide-item"><img src="https://www.welivesecurity.com/wp-content/uploads/2019/04/ciberataques-edificios-inteligentes.jpg" alt=""></div>
                                             <div class="slick-slide-item"><img src="https://www.solerpalau.com/es-es/blog/wp-content/uploads/2018/01/shutterstock_359459864-1.jpg" alt=""></div>
 
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="list-single-hero-price fl-wrap">Precio<span>
-                                    {{rows._tipo_valor ? rows._tipo_valor.nombre : ''}} {{rows.precio}}</span></div>
+                                    {{rows._tipo_valor ? rows._tipo_valor.nombre : ''}} {{rows.precio | currency}}</span></div>
                                 <!--reviews-score-wrap-->
                                 <div class="reviews-score-wrap fl-wrap">
                                     <div class="rate-class-name-wrap fl-wrap">
@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                                 <!-- reviews-score-wrap end -->
-                                <a href="booking-single.html" class="btn flat-btn color2-bg big-btn float-btn image-popup">Cotizar <i class="far fa-bookmark"></i></a>
+                                <a href="booking-single.html" class="btn btn-warning btn-lg btn-block">Cotizar <i class="far fa-bookmark"></i></a>
                             </div>
                             <!--   flat-hero-container end -->
                         </div>

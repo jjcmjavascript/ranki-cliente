@@ -168,6 +168,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
  // api/publicaciones/recientes
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -621,7 +623,8 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _vm.rows[i] && _vm.rows[i]._tipo_operacion
+                                  _vm.rows[i - 1] &&
+                                  _vm.rows[i - 1]._tipo_operacion
                                     ? [
                                         _c(
                                           "div",
@@ -632,12 +635,12 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                " +
+                                              "\r\n                                                " +
                                                 _vm._s(
                                                   _vm.rows[i - 1]
                                                     ._tipo_operacion.nombre
                                                 ) +
-                                                "\n                                            "
+                                                "\r\n                                            "
                                             )
                                           ]
                                         )
@@ -683,7 +686,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                                        " +
+                                                    "\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1].titulo
@@ -691,7 +694,7 @@ var render = function() {
                                                               .titulo
                                                           : ""
                                                       ) +
-                                                      "\n                                                    "
+                                                      "\r\n                                                    "
                                                   )
                                                 ]
                                               )
@@ -717,7 +720,7 @@ var render = function() {
                                                       "fas fa-map-marker-alt"
                                                   }),
                                                   _vm._v(
-                                                    "\n                                                        " +
+                                                    "\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1]
@@ -726,7 +729,7 @@ var render = function() {
                                                               .numero_calle
                                                           : ""
                                                       ) +
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1].calle
@@ -734,29 +737,26 @@ var render = function() {
                                                               .calle
                                                           : ""
                                                       ) +
-                                                      "\n                                                        /\n                                                        " +
+                                                      "\r\n                                                        /\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1]
                                                             ._comuna
-                                                          ? "Comuna: " +
-                                                              _vm.rows[i - 1]
-                                                                ._comuna
-                                                                .nombre +
+                                                          ? _vm.rows[i - 1]
+                                                              ._comuna.nombre +
                                                               ","
                                                           : ""
                                                       ) +
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1]
                                                             ._region
-                                                          ? "Region: " +
-                                                              _vm.rows[i - 1]
-                                                                ._region.nombre
+                                                          ? _vm.rows[i - 1]
+                                                              ._region.nombre
                                                           : ""
                                                       ) +
-                                                      "\n                                                    "
+                                                      "\r\n                                                    "
                                                   )
                                                 ]
                                               )
@@ -791,13 +791,14 @@ var render = function() {
                                       _c(
                                         "div",
                                         {
-                                          staticClass:
-                                            "btn btn-primary btn-lg btn-block"
+                                          staticClass: "geodir-category-price"
                                         },
                                         [
                                           _vm._v(
-                                            "Precio\n                                                "
+                                            "\r\n                                                Precio \r\n                                                "
                                           ),
+                                          _c("br"),
+                                          _vm._v(" "),
                                           _vm.rows[i - 1] &&
                                           _vm.rows[i - 1].precio
                                             ? [
@@ -806,14 +807,16 @@ var render = function() {
                                                     _vm._s(
                                                       _vm.rows[i - 1]
                                                         ._tipo_valor.nombre
-                                                    ) + " :"
+                                                    )
                                                   )
                                                 ]),
                                                 _vm._v(" "),
                                                 _c("span", [
                                                   _vm._v(
                                                     _vm._s(
-                                                      _vm.rows[i - 1].precio
+                                                      _vm._f("currency")(
+                                                        _vm.rows[i - 1].precio
+                                                      )
                                                     )
                                                   )
                                                 ])
@@ -821,40 +824,10 @@ var render = function() {
                                             : _vm._e()
                                         ],
                                         2
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "geodir-category-footer fl-wrap"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            Precio\n                                            "
                                       ),
-                                      _vm.rows[i - 1] && _vm.rows[i - 1].precio
-                                        ? [
-                                            _c("span", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.rows[i - 1]._tipo_valor
-                                                    .nombre
-                                                ) + " :"
-                                              )
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("span", [
-                                              _vm._v(
-                                                _vm._s(_vm.rows[i - 1].precio)
-                                              )
-                                            ])
-                                          ]
-                                        : _vm._e()
-                                    ],
-                                    2
+                                      _vm._v(" "),
+                                      _vm._m(3, true)
+                                    ]
                                   )
                                 ],
                                 2
@@ -867,9 +840,9 @@ var render = function() {
                     0
                   ),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(4),
                   _vm._v(" "),
-                  _vm._m(4)
+                  _vm._m(5)
                 ]
               )
             ])
@@ -879,7 +852,7 @@ var render = function() {
       _vm._v(" "),
       _c("login"),
       _vm._v(" "),
-      _vm._m(5)
+      _vm._m(6)
     ],
     1
   )
@@ -1076,6 +1049,37 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("span", [_vm._v("5.0")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "geodir-opt-list" }, [
+      _c(
+        "a",
+        {
+          staticClass: "single-map-item",
+          attrs: {
+            href: "#",
+            "data-newlatitude": "40.72956781",
+            "data-newlongitude": "-73.99726866"
+          }
+        },
+        [
+          _c("i", { staticClass: "fal fa-map-marker-alt" }),
+          _c("span", { staticClass: "geodir-opt-tooltip" }, [
+            _vm._v("Ubicar en el mapa")
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("a", { staticClass: "geodir-js-favorite", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fal fa-heart" }),
+        _c("span", { staticClass: "geodir-opt-tooltip" }, [
+          _vm._v("Marcar favorito")
+        ])
       ])
     ])
   },

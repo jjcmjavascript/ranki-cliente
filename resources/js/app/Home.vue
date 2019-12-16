@@ -79,7 +79,7 @@
                                 <article class="geodir-category-listing fl-wrap">
                                     <div class="geodir-category-img">
                                         <a href="listing-single.html"><img :src="app_url+'images/portada.jpg'" alt=""></a>
-                                        <template v-if="rows[i] && rows[i]._tipo_operacion">
+                                        <template v-if="rows[i-1] && rows[i-1]._tipo_operacion">
                                             <div :class="badgeColor( rows[i-1]._tipo_operacion)">
                                                 {{ rows[i-1]._tipo_operacion.nombre }}
                                             </div>
@@ -105,8 +105,8 @@
                                                         {{rows[i-1] && rows[i-1].numero_calle ? rows[i-1].numero_calle : ''}}
                                                         {{rows[i-1] && rows[i-1].calle ? rows[i-1].calle : ''}}
                                                         /
-                                                        {{rows[i-1] && rows[i-1]._comuna ? 'Comuna: '+rows[i-1]._comuna.nombre+',' : ''}}
-                                                        {{rows[i-1] && rows[i-1]._region ? 'Region: '+rows[i-1]._region.nombre : ''}}
+                                                        {{rows[i-1] && rows[i-1]._comuna ? rows[i-1]._comuna.nombre+',' : ''}}
+                                                        {{rows[i-1] && rows[i-1]._region ? rows[i-1]._region.nombre : ''}}
                                                     </a></div>
                                             </div>
                                         </div>
@@ -115,23 +115,25 @@
                                         </template>
 
                                         <div class="geodir-category-footer fl-wrap">
-                                            <div class="btn btn-primary btn-lg btn-block">Precio
+                                            <!--div class="btn btn-primary btn-lg btn-block">Precio
                                                 <template v-if="rows[i-1] && rows[i-1].precio">
                                                     <span>{{rows[i-1]._tipo_valor.nombre}} :</span>
                                                     <span>{{rows[i-1].precio}}</span>
                                                 </template>
+                                            </div-->
+                                            <div class="geodir-category-price">
+                                                Precio 
+                                                <br>
+                                                <template v-if="rows[i-1] && rows[i-1].precio">
+                                                    <span>{{rows[i-1]._tipo_valor.nombre}}</span>
+                                                    <span>{{rows[i-1].precio | currency}}</span>
+                                                </template>
                                             </div>
-
+                                            <div class="geodir-opt-list">
+                                                <a href="#" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">Ubicar en el mapa</span></a>
+                                                <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Marcar favorito</span></a>
+                                            </div>
                                         </div>
-                                        <div class="geodir-category-footer fl-wrap">
-                                            Precio
-                                            <template v-if="rows[i-1] && rows[i-1].precio">
-                                                <span>{{rows[i-1]._tipo_valor.nombre}} :</span>
-                                                <span>{{rows[i-1].precio}}</span>
-                                            </template>
-                                        </div>
-
-
                                     </div>
                                 </article>
                             </div>

@@ -374,7 +374,7 @@ var render = function() {
                               : ""
                           ) +
                           " " +
-                          _vm._s(_vm.rows.precio)
+                          _vm._s(_vm._f("currency")(_vm.rows.precio))
                       )
                     ])
                   ]),
@@ -693,7 +693,7 @@ var staticRenderFns = [
           [
             _c("div", { staticClass: "single-slider-wrapper fl-wrap" }, [
               _c("div", { staticClass: "slider-for fl-wrap" }, [
-                _c("div", { staticClass: "slick-slide-item" }, [
+                _c("div", { staticClass: "slick-slide-item image-popup" }, [
                   _c("img", {
                     attrs: {
                       src:
@@ -804,7 +804,7 @@ var staticRenderFns = [
     return _c(
       "a",
       {
-        staticClass: "btn flat-btn color2-bg big-btn float-btn image-popup",
+        staticClass: "btn btn-warning btn-lg btn-block",
         attrs: { href: "booking-single.html" }
       },
       [_vm._v("Cotizar "), _c("i", { staticClass: "far fa-bookmark" })]
