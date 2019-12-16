@@ -358,9 +358,9 @@ var render = function() {
                                   _c("div", { staticClass: "card-body" }, [
                                     _c("h5", { staticClass: "card-title" }, [
                                       _vm._v(
-                                        "\n                                                " +
+                                        "\r\n                                                " +
                                           _vm._s(val.titulo.toUpperCase()) +
-                                          "\n\n                                            "
+                                          "\r\n\r\n                                            "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -371,25 +371,25 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                                Tipo : " +
+                                          "\r\n                                                Tipo : " +
                                             _vm._s(val._tipo_operacion.nombre) +
                                             " "
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\n                                                Moneda: " +
+                                          "\r\n                                                Moneda: " +
                                             _vm._s(
                                               val._tipo_valor
                                                 ? val._tipo_valor.nombre
                                                 : ""
                                             ) +
-                                            "\n                                                Monto : " +
+                                            "\r\n                                                Monto : " +
                                             _vm._s(val.precio) +
                                             " "
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\n                                                Estado : " +
+                                          "\r\n                                                Estado : " +
                                             _vm._s(
                                               val.estado == 1
                                                 ? "ACTIVA"
@@ -504,7 +504,34 @@ var render = function() {
                                                   ]
                                                 ),
                                             _vm._v(" "),
-                                            _vm._m(2, true)
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "geodir-js-booking",
+                                                attrs: {
+                                                  href:
+                                                    _vm.$root.base_url +
+                                                    "propiedad/" +
+                                                    val.id +
+                                                    "/editar"
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "fal fa-edit"
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-opt-tooltip"
+                                                  },
+                                                  [_vm._v("Editar")]
+                                                )
+                                              ]
+                                            )
                                           ]
                                         )
                                       ]
@@ -523,7 +550,7 @@ var render = function() {
                   _vm._v(" "),
                   _vm.rows.total > 15
                     ? _c("div", { staticClass: "pagination" }, [
-                        _vm._m(3),
+                        _vm._m(2),
                         _vm._v(" "),
                         _c("a", { attrs: { href: "#" } }, [_vm._v("1")]),
                         _vm._v(" "),
@@ -537,7 +564,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("a", { attrs: { href: "#" } }, [_vm._v("4")]),
                         _vm._v(" "),
-                        _vm._m(4)
+                        _vm._m(3)
                       ])
                     : _vm._e()
                 ]
@@ -574,16 +601,6 @@ var staticRenderFns = [
       { staticClass: "list-main-wrap-title fl-wrap col-title" },
       [_c("h2", [_vm._v(" Mis Publicaciones")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "geodir-js-booking", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fal fa-edit" }),
-      _vm._v(" "),
-      _c("span", { staticClass: "geodir-opt-tooltip" }, [_vm._v("Editar")])
-    ])
   },
   function() {
     var _vm = this

@@ -358,9 +358,9 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                            " +
+                                          "\r\n                                            " +
                                             _vm._s(val._tipo_operacion.nombre) +
-                                            "\n                                        "
+                                            "\r\n                                        "
                                         )
                                       ]
                                     ),
@@ -404,9 +404,9 @@ var render = function() {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                         _vm._s(val.titulo) +
-                                                        "\n                                                    "
+                                                        "\r\n                                                    "
                                                     )
                                                   ]
                                                 )
@@ -432,19 +432,19 @@ var render = function() {
                                                         "fas fa-map-marker-alt"
                                                     }),
                                                     _vm._v(
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                         _vm._s(
                                                           val.numero_calle
                                                             ? val.numero_calle
                                                             : ""
                                                         ) +
-                                                        "\n                                                        " +
+                                                        "\r\n                                                        " +
                                                         _vm._s(
                                                           val.calle
                                                             ? val.calle
                                                             : ""
                                                         ) +
-                                                        "\n                                                        /\n                                                        " +
+                                                        "\r\n                                                        /\r\n                                                        " +
                                                         _vm._s(
                                                           val._comuna
                                                             ? "Comuna: " +
@@ -453,7 +453,7 @@ var render = function() {
                                                                 ","
                                                             : ""
                                                         ) +
-                                                        "\n                                                        " +
+                                                        "\r\n                                                        " +
                                                         _vm._s(
                                                           val._region
                                                             ? "Region: " +
@@ -461,7 +461,7 @@ var render = function() {
                                                                   .nombre
                                                             : ""
                                                         ) +
-                                                        "\n\n                                                    "
+                                                        "\r\n\r\n                                                    "
                                                     )
                                                   ]
                                                 )
@@ -500,13 +500,13 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                " +
+                                              "\r\n                                                " +
                                                 _vm._s(
                                                   val._tipo_valor
                                                     ? val._tipo_valor.nombre
                                                     : ""
                                                 ) +
-                                                "\n                                                 "
+                                                "\r\n                                                 "
                                             ),
                                             _c("span", [
                                               _vm._v("$" + _vm._s(val.precio))

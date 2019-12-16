@@ -45,6 +45,28 @@ class PropiedadController extends Controller
         }
     }
 
+    public function editar( Request $request )
+    {
+        $this->validate($request, [
+            'id' => 'required|integer|exists:propiedades,id'
+        ]);
+
+        try {
+
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/editar', $request->all());
+
+            if(isset($response['error'])) throw new \Exception($response);
+
+            return response($response,200);
+
+        } catch (\Exception $e) {
+
+            return response([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function guardar( Request $request)
     {
 
@@ -103,6 +125,67 @@ class PropiedadController extends Controller
 
             return response([
                 'error' => $e
+            ], 500);
+        }
+    }
+
+    public function actualizar ( Request $request )
+    {
+        $this->validate($request, [
+            'id' => 'required|integer|exists:propiedades,id',
+            'titulo' => 'required|string',
+            'id_tipo_propiedad' => 'required|integer|exists:subtipos,id',
+            'id_subtipo_propiedad' => 'required|integer|exists:subtipos,id',
+            'region_id' => 'required|integer|exists:regiones,id',
+            'comuna_id' => 'required|integer|exists:comunas,id',
+            'calle' => 'required|string',
+            'numero_calle' => 'required|integer',
+            'numero_domicilio' => 'nullable|integer',
+            'numero_piso' => 'nullable|integer',
+            'superficie_util' => 'required|integer',
+            'superficie_terraza' => 'nullable|integer',
+            'banio' => 'nullable|integer',
+            'descripcion' => 'required|string',
+            'tipo_piso' => 'nullable|array',
+            'anio_construccion' => 'nullable|integer',
+            'privado' => 'nullable|integer',
+            'bodega' => 'nullable|integer',
+            'estacionamiento' => 'nullable|integer',
+            'telefono' => 'nullable|integer|digits:8',
+            'codigo_telefono' => 'required_with:telefono|integer',
+            'telefono2' => 'nullable|integer|digits:8',
+            'codigo_telefono2' => 'required_with:telefono2|integer',
+            'id_orientacion' => 'nullable|integer',
+            'id_tipo_operacion' => 'required|integer|exists:subtipos,id',
+            'id_tipo_valor' => 'required|integer|exists:subtipos,id',
+            'precio' => 'required|numeric',
+            'id_periodicidad_arriendo' => 'required|integer|exists:subtipos,id',
+            //'usuario_id' => 'required|integer|exists:usuarios,id',
+            'latitud' => 'nullable|numeric',
+            'longitud' => 'nullable|numeric',
+            'amoblada' => 'required|boolean',
+            'portada_imagen_key' => 'required|integer',
+            'portada_imagen_type' => 'required|string',
+            //'imagenes.*' => 'file|mimes:jpg,png,jpeg,ico,svg|max:2048',
+            //'imagenes_new.*' => 'file|mimes:jpg,png,jpeg,ico,svg|max:2048',
+        ]);
+
+        try {
+            $request->merge(['usuario_id'=>Auth::user()->id]);
+            //$files = json_encode($request->imagenes_lista);
+            //$request->merge(['imagenes'=>$files]);
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/actualizar', $request->all());
+
+            if(isset($response['error'])) throw new \Exception($response['error']);
+
+            return response([
+                'success' => $response['success'],
+                'url' => route('usuario.publicaciones') 
+            ],200);
+        }
+        catch(\Exception $e) {
+            return response([
+                'error' => $e->getMessage()
             ], 500);
         }
     }

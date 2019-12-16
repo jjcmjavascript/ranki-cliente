@@ -50,7 +50,7 @@
                                		</div>
                                	</div>
 
-                            	<h5 class="mt-2 text-info">
+                            	<h5 class="mt-2 text-info mb-2">
                             		<span class="fa-stack">
                 					 	<i class="fa fa-circle fa-stack-2x icon-background"></i>
                 					 	<span class="fa-stack-1x text-black">2</span>
@@ -215,7 +215,7 @@
                            		</div>
                            		<hr class="mt-0 mb-5">
 
-                           		<h5 class="mt-2 text-info">
+                           		<h5 class="mt-2 text-info mb-2">
                            			<span class="fa-stack">
                 					 	<i class="fa fa-circle fa-stack-2x icon-background"></i>
                 					 	<span class="fa-stack-1x text-black">3</span>
@@ -225,7 +225,7 @@
                                	<hr class="mt-0">
 
                                	<div class="row">
-                               		<div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                               		<!--div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 						<label>Dueño de propiedad <span class="text-red">*</span></label>
 
                 						 <v-select :options="selects.usuarios" label="nombre" placeholder="Indique el usuario responsable de la publicación" v-model="data.usuario">
@@ -240,7 +240,7 @@
                                                 </div>
                                             </template>
                                         </v-select>
-                               		</div>
+                               		</div-->
                                	</div>
 
                                	<div class="row">
@@ -270,7 +270,7 @@
                                		</div>
                                	</div>
 
-                               	<h5 class="mt-2 text-info">
+                               	<h5 class="mt-2 text-info mb-2">
                                		<span class="fa-stack">
                 					 	<i class="fa fa-circle fa-stack-2x icon-background"></i>
                 					 	<span class="fa-stack-1x text-black">4</span>
@@ -354,7 +354,7 @@
 					tipo_valor: null,
 					precio: null,
 					periodicidad_arriendo: null,
-					amoblada: false,
+					amoblada: 0,
 					usuario: null,
 					latitud: null,
 					longitud: null,
@@ -405,10 +405,6 @@
             alerta(tipo, titulo, mensaje = null) {
                 this.$root.alertas(tipo, titulo, mensaje);
             },
-            limpiarMensajes() {
-				this.success = [];
-				this.error = [];
-			},
 			limpiar() {
 				this.data = {
 					titulo: null,
@@ -515,7 +511,7 @@
 				this.data.tipo_valor && request.append('id_tipo_valor', this.data.tipo_valor.id);
 				this.data.precio && request.append('precio', this.data.precio);
 				this.data.periodicidad_arriendo && request.append('id_periodicidad_arriendo', this.data.periodicidad_arriendo.id);
-				this.data.usuario && request.append('usuario_id', this.data.usuario.id);
+				//this.data.usuario && request.append('usuario_id', this.data.usuario.id);
 				this.data.latitud && request.append('latitud', this.data.latitud);
 				this.data.longitud && request.append('longitud', this.data.longitud);
 
@@ -618,7 +614,6 @@
 				this.data.portada_imagen = key;
 			},
 			actualizarComuna() {
-				this.limpiarMensajes();
 				this.data.comuna = null;
 				this.selects.comunas = [];
 
@@ -649,50 +644,6 @@
 					this.data.atributos.push(id);
 				}
 			},
-			validarRut() {
-				if(this.data.rut) {
-					this.data.rut = this.data.rut.replace(/\./g, '');
-					if(this.$root.modulo11(this.data.rut).valid) {
-						this.valid.rut = 'is-valid';
-					}
-					else {
-						this.valid.rut = 'is-invalid';
-					}
-				}
-			},
-			validarEmail() {
-				if(this.data.email) {
-			    	let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-			      	if(re.test(this.data.email)) {
-			      		this.valid.email = 'is-valid';
-			      	}
-			      	else {
-			      		this.valid.email = 'is-invalid';
-			      	};
-			    }
-		    },
-		    validarPassword() {
-		    	if(this.data.password) {
-		    		if(this.data.password.toString().length > 7) {
-		    			this.valid.password = 'is-valid';
-		    		}
-		    		else {
-		    			this.valid.password = 'is-invalid';
-		    		}
-		    	}
-		    },
-		    validarConfirmPassword() {
-		    	if(this.data.confirmPassword) {
-		    		if(this.data.confirmPassword.toString().length > 7 &&
-		    		   this.data.password == this.data.confirmPassword
-		    		) {
-		    			this.valid.confirmPassword = 'is-valid';
-		    		}
-		    		else {
-		    			this.valid.confirmPassword = 'is-invalid';
-		    		}
-		    	}
-		    },
 		}
 	}
 </script>

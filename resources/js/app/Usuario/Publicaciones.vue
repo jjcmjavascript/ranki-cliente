@@ -57,7 +57,7 @@
                                                     <a v-else href="#" class="geodir-js-booking" @click="reactivar(i)"><i class="fal fa-check"></i>
                                                         <span class="geodir-opt-tooltip">Reactivar</span>
                                                     </a>
-                                                    <a href="#" class="geodir-js-booking"><i class="fal fa-edit"></i>
+                                                    <a :href="$root.base_url+'propiedad/'+val.id+'/editar'" class="geodir-js-booking"><i class="fal fa-edit"></i>
                                                         <span class="geodir-opt-tooltip">Editar</span>
                                                     </a>
                                                 </div>
