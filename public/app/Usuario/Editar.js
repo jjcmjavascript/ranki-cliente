@@ -385,7 +385,9 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
-              _vm._v("\n                        Nombre\n                    ")
+              _vm._v(
+                "\r\n                        Nombre\r\n                    "
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
@@ -418,7 +420,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v(
-                "\n                        Apellidos\n                    "
+                "\r\n                        Apellidos\r\n                    "
               )
             ]),
             _vm._v(" "),
@@ -451,7 +453,9 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-xs-12 col-md-12" }, [
             _c("label", [
-              _vm._v("\n                        Correo\n                    ")
+              _vm._v(
+                "\r\n                        Correo\r\n                    "
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
@@ -484,7 +488,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v(
-                "\n                        Telefono Movil\n                    "
+                "\r\n                        Telefono Movil\r\n                    "
               )
             ]),
             _vm._v(" "),
@@ -518,7 +522,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v(
-                "\n                        Telefono Fijo\n                    "
+                "\r\n                        Telefono Fijo\r\n                    "
               )
             ]),
             _vm._v(" "),
@@ -552,7 +556,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-10" }, [
             _c("label", [
               _vm._v(
-                "\n                        Dirección\n                    "
+                "\r\n                        Dirección\r\n                    "
               )
             ]),
             _vm._v(" "),
@@ -589,7 +593,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-2" }, [
             _c("label", [
               _vm._v(
-                "\n                        Avatar\n                        "
+                "\r\n                        Avatar\r\n                        "
               ),
               _vm.file
                 ? _c("i", {
@@ -614,7 +618,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(
-                  "\n                            Subir imagen\n                        "
+                  "\r\n                            Subir imagen\r\n                        "
                 )
               ])
             ]),
@@ -636,7 +640,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n                        Guardar cambios\n                    "
+                  "\r\n                        Guardar cambios\r\n                    "
                 )
               ]
             )
@@ -1038,7 +1042,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            Guardar cambios\n                            "
+                        "\r\n                            Guardar cambios\r\n                            "
                       ),
                       _c("i", { staticClass: "fa fa-angle-right" })
                     ]
@@ -1246,15 +1250,14 @@ function normalizeComponent (
 /*!*********************************************!*\
   !*** ./resources/js/app/Usuario/Editar.vue ***!
   \*********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Editar_vue_vue_type_template_id_477385a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Editar.vue?vue&type=template&id=477385a8& */ "./resources/js/app/Usuario/Editar.vue?vue&type=template&id=477385a8&");
 /* harmony import */ var _Editar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Editar.vue?vue&type=script&lang=js& */ "./resources/js/app/Usuario/Editar.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Editar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Editar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1284,7 +1287,7 @@ component.options.__file = "resources/js/app/Usuario/Editar.vue"
 /*!**********************************************************************!*\
   !*** ./resources/js/app/Usuario/Editar.vue?vue&type=script&lang=js& ***!
   \**********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

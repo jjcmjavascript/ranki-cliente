@@ -208,9 +208,9 @@ var render = function() {
                                   _c("div", { staticClass: "card-body" }, [
                                     _c("h5", { staticClass: "card-title" }, [
                                       _vm._v(
-                                        "\n                                                " +
+                                        "\r\n                                                " +
                                           _vm._s(val._propiedades.titulo) +
-                                          "\n\n                                            "
+                                          "\r\n\r\n                                            "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -221,7 +221,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                                Tipo : " +
+                                          "\r\n                                                Tipo : " +
                                             _vm._s(
                                               val._propiedades._tipo_operacion
                                                 .nombre
@@ -230,16 +230,16 @@ var render = function() {
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\n                                                Moneda: " +
+                                          "\r\n                                                Moneda: " +
                                             _vm._s(
                                               val._propiedades._tipo_valor
                                                 ? val._propiedades._tipo_valor
                                                     .nombre
                                                 : ""
                                             ) +
-                                            "\n                                                Monto : $" +
+                                            "\r\n                                                Monto : $" +
                                             _vm._s(val._propiedades.precio) +
-                                            "\n                                            "
+                                            "\r\n                                            "
                                         )
                                       ]
                                     ),

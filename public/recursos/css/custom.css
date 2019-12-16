@@ -41,7 +41,13 @@ li{
 .sale-window .big-sale-two {
     background:rgba(33, 150, 243, 0.6);
 }
-/*  */
+
+/*********** BACKGROUND TOP PERFIL ********/
+
+.wave-bg.wave-bg2 {
+    background: url(../../images/background/pattern.png) repeat;
+    opacity: 0.1;
+}
 
 
 /* ////////////////// HEADER */
@@ -286,9 +292,7 @@ a {
     text-decoration: none !important;
 }
 
-.dasboard-sidebar-item {
-    text-align: center;
-}
+
 
 .dasboard-sidebar-item h3 span {
     font-size: 13px;
@@ -375,6 +379,9 @@ a {
     .user-option{
         display: none;
     }
+    .dasboard-sidebar-content {
+        text-align: center;
+    }
 }
 @media screen and (min-width :1160px){
     .header-user-menu {
@@ -385,6 +392,12 @@ a {
 
 /* maxx */
 @media screen and (max-width: 480px) {}
+
+@media screen and (max-width: 540px) {
+    .dasboard-sidebar-content {
+        text-align: center;
+    }
+}
 
 @media screen and (max-width: 850px) {
     .header-user-menu {
@@ -427,9 +440,21 @@ a {
         background: rgba(255, 255, 255, 0.9);
         color: black;
     }
+    .user-stats {
+        text-align: center;
+    } 
 }
 @media only screen and (max-width: 1064px) {
     .mlc {
         font-size: 14px;
     }
 }
+
+/* MIXTO MAX - MIN */
+
+@media only screen and (min-width: 540px) and (max-width: 850px) {
+    .ed-btn {
+        margin-left: 30%;
+    }
+}
+
