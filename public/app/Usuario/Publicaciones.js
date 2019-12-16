@@ -90,6 +90,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -305,6 +308,36 @@ var render = function() {
                                           "div",
                                           { staticClass: "geodir-opt-list" },
                                           [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "geodir-js-booking",
+                                                attrs: {
+                                                  target: "_blank",
+                                                  href:
+                                                    _vm.$root.base_url +
+                                                    "propiedad/" +
+                                                    val.id +
+                                                    "/detalle"
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "fal fa-eye"
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-opt-tooltip"
+                                                  },
+                                                  [_vm._v("Detalle")]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
                                             val.estado == 1
                                               ? _c(
                                                   "a",

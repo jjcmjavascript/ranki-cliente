@@ -39,6 +39,9 @@
                                             <div class="geodir-category-footer fl-wrap">
                                                 <br>
                                                 <div class="geodir-opt-list">
+                                                    <a target="_blank" :href="`${$root.base_url}propiedad/${val.id}/detalle`" class="geodir-js-booking"><i class="fal fa-eye"></i>
+                                                        <span class="geodir-opt-tooltip">Detalle</span>
+                                                    </a>
                                                     <a v-if="val.estado == 1" href="#" class="geodir-js-booking" @click="deshabilitar(i)"><i class="fal fa-trash"></i>
                                                         <span class="geodir-opt-tooltip">Deshabilitar</span>
                                                     </a>

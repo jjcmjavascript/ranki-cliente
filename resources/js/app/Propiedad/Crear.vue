@@ -399,15 +399,12 @@
             start() {
                 this.$root.cargando();
             },
-
             stop() {
                 this.$root.stop();
             },
-
             alerta(tipo, titulo, mensaje = null) {
                 this.$root.alertas(tipo, titulo, mensaje);
             },
-
             limpiarMensajes() {
 				this.success = [];
 				this.error = [];

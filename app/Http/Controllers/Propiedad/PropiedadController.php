@@ -137,7 +137,7 @@ class PropiedadController extends Controller
             $response = (new ApiHelper)->sendApiRequest('api/propiedades/desactivar',[
                 'id'=>$request->id,
                 'id_usuario'=>Auth::user()->id]);
-                
+
             if(isset($response['error'])) throw new \Exception($response);
 
             return response($response,200);
@@ -169,4 +169,23 @@ class PropiedadController extends Controller
         }
 
     }
+
+    public function detalle($id_propieda)
+    {
+
+        try {
+            $response = (new ApiHelper)->publicRequest('api/propiedades/mostrar',['id'=>$id_propieda]);
+            if(isset($response['error'])) throw new \Exception($response);
+
+            return response($response,200);
+
+        } catch (\Exception $e) {
+            return response([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+
+    }
+
+
 }

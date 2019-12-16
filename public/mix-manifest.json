@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/app/Propiedad/Crear.js": "/app/Propiedad/Crear.js",
+    "/app/Propiedad/Detalle.js": "/app/Propiedad/Detalle.js",
     "/app/Usuario/Editar.js": "/app/Usuario/Editar.js",
     "/app/Usuario/Favoritos.js": "/app/Usuario/Favoritos.js",
     "/app/Usuario/Publicaciones.js": "/app/Usuario/Publicaciones.js",
