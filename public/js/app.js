@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Crear":"app/Propiedad/Crear","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Crear":"app/Propiedad/Crear","app/Propiedad/Editar":"app/Propiedad/Editar","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","app/login":"app/login","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -83304,6 +83304,34 @@ Vue.filter('nl2br', function (str, is_xhtml) {
 
   return '';
 });
+Vue.filter('rut', function (value) {
+  if (!value) return '';
+  var actual = value.replace(/^0+/, "");
+  var rutPuntos = "";
+
+  if (actual != '' && actual.length > 1) {
+    var sinPuntos = actual.replace(/\./g, "");
+    var actualLimpio = sinPuntos.replace(/-/g, "");
+    var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
+    var j = 1;
+
+    for (var i = inicio.length - 1; i >= 0; i--) {
+      var letra = inicio.charAt(i);
+      rutPuntos = letra + rutPuntos;
+
+      if (j % 3 == 0 && j <= inicio.length - 1) {
+        rutPuntos = "." + rutPuntos;
+      }
+
+      j++;
+    }
+
+    var dv = actualLimpio.substring(actualLimpio.length - 1);
+    rutPuntos = rutPuntos + "-" + dv;
+  }
+
+  return rutPuntos;
+});
 
 /***/ }),
 
@@ -83418,6 +83446,12 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() | app/Propiedad/Crear */ "app/Propiedad/Crear").then(__webpack_require__.bind(null, /*! ../app/Propiedad/Crear */ "./resources/js/app/Propiedad/Crear.vue"));
   }
+}, {
+  path: '/propiedad/:id/editar',
+  name: '/editar_propiedad',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | app/Propiedad/Editar */ "app/Propiedad/Editar").then(__webpack_require__.bind(null, /*! ../app/Propiedad/Editar */ "./resources/js/app/Propiedad/Editar.vue"));
+  }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
 
@@ -83473,8 +83507,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/jmspa-m2/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/jmspa-m2/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\jmspa-m2-cliente\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\jmspa-m2-cliente\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

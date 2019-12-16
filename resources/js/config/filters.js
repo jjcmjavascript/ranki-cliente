@@ -89,3 +89,25 @@ Vue.filter('nl2br', function(str, is_xhtml) {
     }
     return '';
 })
+Vue.filter('rut', function(value) {
+    if(!value) return '';
+    let actual = value.replace(/^0+/, "");
+    let rutPuntos = "";
+    if (actual != '' && actual.length > 1) {
+        let sinPuntos = actual.replace(/\./g, "");
+        let actualLimpio = sinPuntos.replace(/-/g, "");
+        let inicio = actualLimpio.substring(0, actualLimpio.length - 1);
+        let j = 1;
+        for (let i = inicio.length - 1; i >= 0; i--) {
+            let letra = inicio.charAt(i);
+            rutPuntos = letra + rutPuntos;
+            if (j % 3 == 0 && j <= inicio.length - 1) {
+                rutPuntos = "." + rutPuntos;
+            }
+            j++;
+        }
+        let dv = actualLimpio.substring(actualLimpio.length - 1);
+        rutPuntos = rutPuntos + "-" + dv;
+    }
+    return rutPuntos;
+})

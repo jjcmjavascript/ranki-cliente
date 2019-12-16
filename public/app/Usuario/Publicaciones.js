@@ -90,6 +90,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -97,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
       usuario: {
         nombre: null
       },
-      activo: 1,
+      filtrando: false,
       rows: {
         current_page: 0,
         data: [],
@@ -110,12 +118,44 @@ __webpack_require__.r(__webpack_exports__);
         per_page: null,
         prev_page_url: null,
         total: 0
+      },
+      filters: {
+        estado: {
+          'label': 'Activo',
+          value: 1
+        },
+        orden: {
+          'label': 'Fecha de creación',
+          value: 1
+        }
+      },
+      selects: {
+        estados: [{
+          'label': 'Activo',
+          value: 1
+        }, {
+          'label': 'Inactivo',
+          value: 0
+        }],
+        orden: [{
+          'label': 'Fecha de favorito',
+          value: 1
+        }, {
+          'label': 'Popularidad',
+          value: 2
+        }, {
+          'label': 'Mayor Precio',
+          value: 3
+        }, {
+          'label': 'Menor Precio',
+          value: 4
+        }]
       }
     };
   },
   mounted: function mounted() {
-    document.querySelector('html').style['overflow-y'] = 'auto';
-    this.iniciar();
+    //document.querySelector('html').style['overflow-y'] = 'auto';
+    this.filtrar();
   },
   methods: {
     start: function start() {
@@ -128,16 +168,20 @@ __webpack_require__.r(__webpack_exports__);
       var mensaje = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       this.$root.alertas(tipo, titulo, mensaje);
     },
-    iniciar: function iniciar() {
+    filtrar: function filtrar() {
       var _this = this;
 
       this.start();
-      axios.post(this.url, {
-        estado: this.activo
-      }).then(function (res) {
+      this.filtrando = true;
+      var request = new FormData();
+      this.filters.estado && request.append('estado', this.filters.estado.value);
+      this.filters.orden && request.append('orden', this.filters.orden.value);
+      axios.post(this.url, request).then(function (res) {
         _this.rows = res.data.rows;
       })["finally"](function () {
         _this.stop();
+
+        _this.filtrando = false;
       });
     },
     badgeColor: function badgeColor(tipo_operacion) {
@@ -224,11 +268,69 @@ var render = function() {
                   _c("div", { staticClass: "list-main-wrap-opt fl-wrap" }, [
                     _vm._m(1),
                     _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group col-xs-12 col-sm-6 col-lg-4"
+                        },
+                        [
+                          _c("label", [_vm._v("Ordenar por")]),
+                          _vm._v(" "),
+                          _c("v-select", {
+                            staticClass: "clear-none",
+                            attrs: { options: _vm.selects.orden },
+                            on: {
+                              input: function($event) {
+                                return _vm.filtrar()
+                              }
+                            },
+                            model: {
+                              value: _vm.filters.orden,
+                              callback: function($$v) {
+                                _vm.$set(_vm.filters, "orden", $$v)
+                              },
+                              expression: "filters.orden"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group col-xs-12 col-sm-6 col-lg-4"
+                        },
+                        [
+                          _c("label", [_vm._v("Consultar Por")]),
+                          _vm._v(" "),
+                          _c("v-select", {
+                            staticClass: "clear-none",
+                            attrs: { options: _vm.selects.estados },
+                            on: {
+                              input: function($event) {
+                                return _vm.filtrar()
+                              }
+                            },
+                            model: {
+                              value: _vm.filters.estado,
+                              callback: function($$v) {
+                                _vm.$set(_vm.filters, "estado", $$v)
+                              },
+                              expression: "filters.estado"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "row" },
                       _vm._l(_vm.rows.data, function(val, i) {
-                        return _vm.rows.data.length > 0
+                        return !_vm.filtrando && _vm.rows.data.length > 0
                           ? _c(
                               "div",
                               {
@@ -249,9 +351,9 @@ var render = function() {
                                   _c("div", { staticClass: "card-body" }, [
                                     _c("h5", { staticClass: "card-title" }, [
                                       _vm._v(
-                                        "\n                                                " +
+                                        "\r\n                                                " +
                                           _vm._s(val.titulo.toUpperCase()) +
-                                          "\n\n                                            "
+                                          "\r\n\r\n                                            "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -262,25 +364,25 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                                Tipo : " +
+                                          "\r\n                                                Tipo : " +
                                             _vm._s(val._tipo_operacion.nombre) +
                                             " "
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\n                                                Moneda: " +
+                                          "\r\n                                                Moneda: " +
                                             _vm._s(
                                               val._tipo_valor
                                                 ? val._tipo_valor.nombre
                                                 : ""
                                             ) +
-                                            "\n                                                Monto : " +
+                                            "\r\n                                                Monto : " +
                                             _vm._s(val.precio) +
                                             " "
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\n                                                Estado : " +
+                                          "\r\n                                                Estado : " +
                                             _vm._s(
                                               val.estado == 1
                                                 ? "ACTIVA"
@@ -365,7 +467,34 @@ var render = function() {
                                                   ]
                                                 ),
                                             _vm._v(" "),
-                                            _vm._m(2, true)
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "geodir-js-booking",
+                                                attrs: {
+                                                  href:
+                                                    _vm.$root.base_url +
+                                                    "propiedad/" +
+                                                    val.id +
+                                                    "/editar"
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "fal fa-edit"
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-opt-tooltip"
+                                                  },
+                                                  [_vm._v("Editar")]
+                                                )
+                                              ]
+                                            )
                                           ]
                                         )
                                       ]
@@ -374,6 +503,8 @@ var render = function() {
                                 ])
                               ]
                             )
+                          : !_vm.filtrando
+                          ? _c("div", [_vm._v("Sin información para mostrar")])
                           : _vm._e()
                       }),
                       0
@@ -382,7 +513,7 @@ var render = function() {
                   _vm._v(" "),
                   _vm.rows.total > 15
                     ? _c("div", { staticClass: "pagination" }, [
-                        _vm._m(3),
+                        _vm._m(2),
                         _vm._v(" "),
                         _c("a", { attrs: { href: "#" } }, [_vm._v("1")]),
                         _vm._v(" "),
@@ -396,7 +527,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("a", { attrs: { href: "#" } }, [_vm._v("4")]),
                         _vm._v(" "),
-                        _vm._m(4)
+                        _vm._m(3)
                       ])
                     : _vm._e()
                 ]
@@ -433,16 +564,6 @@ var staticRenderFns = [
       { staticClass: "list-main-wrap-title fl-wrap col-title" },
       [_c("h2", [_vm._v(" Mis Publicaciones")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "geodir-js-booking", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fal fa-edit" }),
-      _vm._v(" "),
-      _c("span", { staticClass: "geodir-opt-tooltip" }, [_vm._v("Editar")])
-    ])
   },
   function() {
     var _vm = this

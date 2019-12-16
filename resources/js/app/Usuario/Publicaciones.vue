@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1 mb-2" v-if="!filtrando && rows.data.length > 0" v-for="val in rows.data" >
+                                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pl-1 pr-1 mb-2" v-if="!filtrando && rows.data.length > 0" v-for="(val, i) in rows.data" >
                                     <div class="card">
                                         <img class="card-img-top" src="http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg" alt=""></a>
 
@@ -54,7 +54,7 @@
                                                     <a v-else href="#" class="geodir-js-booking" @click="reactivar(i)"><i class="fal fa-check"></i>
                                                         <span class="geodir-opt-tooltip">Reactivar</span>
                                                     </a>
-                                                    <a href="#" class="geodir-js-booking"><i class="fal fa-edit"></i>
+                                                    <a :href="$root.base_url+'propiedad/'+val.id+'/editar'" class="geodir-js-booking"><i class="fal fa-edit"></i>
                                                         <span class="geodir-opt-tooltip">Editar</span>
                                                     </a>
                                                 </div>
