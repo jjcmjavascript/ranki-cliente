@@ -573,7 +573,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
       });
     },
-    mostrarMasInformación: function mostrarMasInformaciN() {
+    mostrarMasInformacion: function mostrarMasInformacion() {
       $('#adicionalInfo').toggleClass("d-none");
 
       if ($('#infoIcon').hasClass('fa-plus-circle')) {
@@ -633,8 +633,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.data.region) {
         var request = new FormData();
         request.append('id_region', this.data.region.id);
-        axios.post(this.$root.base_url + 'propiedad/crear', request).then(function (response) {
-          _this4.selects.comunas = response.data.regiones;
+        axios.post(this.$root.base_url + 'propiedad/crear/comunas', request).then(function (response) {
+          _this4.selects.comunas = response.data.comunas;
         })["catch"](function (error) {
           _this4.error = _this4.$root.arrayResponse(error);
         });
@@ -1354,7 +1354,7 @@ var render = function() {
                       staticClass: "c-pointer text-info",
                       on: {
                         click: function($event) {
-                          _vm.mostrarMasInformación()
+                          return _vm.mostrarMasInformacion()
                         }
                       }
                     },

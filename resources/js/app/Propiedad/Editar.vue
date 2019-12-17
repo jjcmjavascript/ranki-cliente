@@ -686,22 +686,6 @@
 					type: type
 				};
 			},
-			actualizarComuna() {
-				this.data.comuna = null;
-				this.selects.comunas = [];
-
-				if(this.data.region) {
-					let request = new FormData;
-					request.append('id_region', this.data.region.id);
-					axios.post(this.$root.base_url + '/mantenedor/combo_box/comunas', request)
-					.then(response => {
-						this.selects.comunas = response.data;
-					})
-					.catch(error => {
-						this.error = this.$root.arrayResponse(error);
-					})
-				}
-			},
 			colocarAtributo(id) {
 				let encontrado = false;
 

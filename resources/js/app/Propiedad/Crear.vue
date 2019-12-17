@@ -133,7 +133,7 @@
                                		</div>
                                	</div>
 
-                               	<h5 class="c-pointer text-info" @click="mostrarMasInformación()">
+                               	<h5 class="c-pointer text-info" @click="mostrarMasInformacion()">
                                		<i id="infoIcon" class="fa fa-plus-circle"></i> Agregar más información
                                	</h5 >
 
@@ -563,7 +563,7 @@
 				})
 
 			},
-			mostrarMasInformación() {
+			mostrarMasInformacion() {
 				$('#adicionalInfo').toggleClass("d-none");
 
 				if($('#infoIcon').hasClass('fa-plus-circle')) {
@@ -620,9 +620,9 @@
 				if(this.data.region) {
 					let request = new FormData;
 					request.append('id_region', this.data.region.id);
-					axios.post(this.$root.base_url + 'propiedad/crear', request)
+					axios.post(this.$root.base_url + 'propiedad/crear/comunas', request)
 					.then(response => {
-						this.selects.comunas = response.data.regiones;
+						this.selects.comunas = response.data.comunas;
 					})
 					.catch(error => {
 						this.error = this.$root.arrayResponse(error);

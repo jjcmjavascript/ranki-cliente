@@ -703,30 +703,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: key,
         type: type
       };
-    },
-    actualizarComuna: function actualizarComuna() {
-      var _this6 = this;
-
-      this.data.comuna = null;
-      this.selects.comunas = [];
-
-      if (this.data.region) {
-        var request = new FormData();
-        request.append('id_region', this.data.region.id);
-        axios.post(this.$root.base_url + '/mantenedor/combo_box/comunas', request).then(function (response) {
-          _this6.selects.comunas = response.data;
-        })["catch"](function (error) {
-          _this6.error = _this6.$root.arrayResponse(error);
-        });
-      }
     }
   }, "colocarAtributo", function colocarAtributo(id) {
-    var _this7 = this;
+    var _this6 = this;
 
     var encontrado = false;
     this.data.atributos.map(function (atributo, index) {
       if (atributo == id) {
-        _this7.data.atributos.splice(index, 1);
+        _this6.data.atributos.splice(index, 1);
 
         encontrado = true;
         return;

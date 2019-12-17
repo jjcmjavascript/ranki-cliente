@@ -100,7 +100,6 @@ class PropiedadController extends Controller
                 'id_tipo_valor' => 'required|integer|exists:subtipos,id',
                 'precio' => 'required|numeric',
                 'id_periodicidad_arriendo' => 'required|integer|exists:subtipos,id',
-                'usuario_id' => 'required|integer|exists:usuarios,id',
                 'latitud' => 'nullable|numeric',
                 'longitud' => 'nullable|numeric',
                 'amoblada' => 'required|boolean',
@@ -190,11 +189,11 @@ class PropiedadController extends Controller
         }
     }
 
-    public function comuna ( Request $request )
+    public function comunas ( Request $request )
     {
         try {
 
-            $response = (new ApiHelper)->sendApiRequest('combo_box.comunas',$request->all());
+            $response = (new ApiHelper)->sendApiRequest('api/combo_box/comunas',$request->all());
 
             if(isset($response['error'])) throw new \Exception($response);
             return response($response,200);

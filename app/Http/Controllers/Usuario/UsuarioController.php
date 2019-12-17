@@ -154,7 +154,7 @@ class UsuarioController extends Controller
             {
                 $response = (new ApiHelper)->sendCredentialsRequest();
 
-                if(!$response){
+                if(!$response || isset($response['error'])){
                     $this->logout();
                 }
 

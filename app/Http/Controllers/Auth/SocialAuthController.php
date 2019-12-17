@@ -48,12 +48,12 @@ class SocialAuthController extends Controller
             Auth::login($user);
             $response = (new ApiHelper)->sendCredentialsRequest('social');
 
-            if($response['error']){
+            if(!$response || isset($response['error'])){
                 session()->flush();
                 return redirect('/');
             }
             // SET API SESSION WITH CREDENTIALS
-            return \Redirect::back();
+            return redirect('/');
         }
         catch(\Exception $e) {
             session()->flush();

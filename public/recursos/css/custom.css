@@ -495,9 +495,9 @@ a {
 
 /* MIXTO MAX - MIN */
 
-@media only screen and (min-width: 540px) and (max-width: 850px) {
+@media only screen and (min-width: 541px) and (max-width: 1064px) {
     .ed-btn {
-        margin-left: 30%;
+        float: left;
     }
 }
 
