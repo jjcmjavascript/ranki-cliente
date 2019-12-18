@@ -358,9 +358,9 @@ var render = function() {
                                   _c("div", { staticClass: "card-body" }, [
                                     _c("h5", { staticClass: "card-title" }, [
                                       _vm._v(
-                                        "\r\n                                                " +
+                                        "\n                                                " +
                                           _vm._s(val.titulo.toUpperCase()) +
-                                          "\r\n\r\n                                            "
+                                          "\n\n                                            "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -371,25 +371,25 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\r\n                                                Tipo : " +
+                                          "\n                                                Tipo : " +
                                             _vm._s(val._tipo_operacion.nombre) +
                                             " "
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\r\n                                                Moneda: " +
+                                          "\n                                                Moneda: " +
                                             _vm._s(
                                               val._tipo_valor
                                                 ? val._tipo_valor.nombre
                                                 : ""
                                             ) +
-                                            "\r\n                                                Monto : " +
+                                            "\n                                                Monto : " +
                                             _vm._s(val.precio) +
                                             " "
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\r\n                                                Estado : " +
+                                          "\n                                                Estado : " +
                                             _vm._s(
                                               val.estado == 1
                                                 ? "ACTIVA"

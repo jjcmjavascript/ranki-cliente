@@ -26,6 +26,8 @@ Route::middleware(['auth','verifyToken'])->group(function() {
     Route::namespace('Usuario')->prefix('favoritos')->name('usuario')->group(function() {
         Route::get('/','UsuarioController@vue')->name('.favoritos');
         Route::post('/','UsuarioController@favoritos')->name('.favoritos');
+        Route::get('exportar','UsuarioController@exportar')->name('.favoritos.exportar');
+
     });
 
     // PUBLICACIONES

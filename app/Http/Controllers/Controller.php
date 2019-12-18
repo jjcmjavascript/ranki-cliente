@@ -8,10 +8,11 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Recursos\ApiFuntions;
+use App\Traits\Funciones;
+
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, Funciones;
 
 }

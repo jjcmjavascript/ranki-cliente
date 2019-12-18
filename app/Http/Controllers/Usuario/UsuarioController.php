@@ -177,7 +177,8 @@ class UsuarioController extends Controller
         return redirect()->to('/');
     }
 
-    public function favoritos(Request $request){
+    public function favoritos(Request $request)
+    {
 
         try {
 
@@ -209,8 +210,9 @@ class UsuarioController extends Controller
             ], 500);
         }
     }
-    // propiedades ajustes
-    public function mis_propiedades(Request $request){
+
+    public function mis_propiedades(Request $request)
+    {
 
         try {
             $request->merge([ 'id_usuario'=>Auth::user()->id ]);
@@ -222,6 +224,71 @@ class UsuarioController extends Controller
             return response()->json([
                 'rows' => $response
             ],200);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'error' => $e->getLine().': '.$e->getMessage()
+            ],500);
+        }
+    }
+
+    public function exportar( Request $request )
+    {
+        try {
+            $request->merge([ 'id_usuario'=>Auth::user()->id ]);
+
+            $response = (new ApiHelper)->sendApiRequest('api/usuarios/exportar', $request->all() );
+
+            if(isset($response['error'])) throw new \Exception($response);
+
+            if( count($response) ){
+                $cabeza =[
+                    'Titulo',
+                    'Condicion',
+                    'Tipo de Propiedad',
+                    'Numero de piso',
+                    'Numero de Domicilio',
+                    'Numero de calle',
+                    'Region',
+                    'Comuna',
+                    'Superficie',
+                    'Terraza',
+                    'Baños',
+                    'Amoblado',
+                    'Privado',
+                    'Bodega',
+                    'Estacionamiento',
+                    'Estado'
+                ];
+
+
+                $response  = array_column($response, '_propiedades');
+                $datos = [];
+                foreach ($response as $key => $propiedad) {
+
+                    $propiedad =(object) $propiedad;
+                    $temp[$key]['Titulo'] = $propiedad->titulo ? $propiedad->titulo  : '-----';
+                    $temp[$key]['Condicion'] = isset($propiedad->_tipo_propiedad) ? $propiedad->_tipo_propiedad :  '-----';
+                    $temp[$key]['Tipo de Propiedad']=isset($propiedad->_subtipo_propiedad) ? $propiedad->_subtipo_propiedad : '-----';
+                    $temp[$key]['Numero de piso'] = $propiedad->numero_piso ? $propiedad->numero_piso : '-----';
+                    $temp[$key]['Numero de Domicilio'] = $propiedad->numero_domilicio ? $propiedad->numero_domilicio : '-----';
+                    $temp[$key]['Numero de Calle'] = $propiedad->numero_calle ? $propiedad->numero_calle : '-----';
+                    $temp[$key]['Region'] =  isset($propiedad->_region) ? $propiedad->_region['nombre'] : '-----';
+                    $temp[$key]['Comuna'] = isset($propiedad->_comuna) ? $propiedad->_comuna['nombre'] : '-----';
+                    $temp[$key]['Superficie'] = $propiedad->superficie_util ? $propiedad->superficie_util.' mts2' : '-----';
+                    $temp[$key]['Terraza'] = $propiedad->superficie_terraza ? $propiedad->superficie_terraza.' mts2' : '-----';
+                    $temp[$key]['Baños'] = $propiedad->banio > 0 ? $propiedad->banio : '0';
+                    $temp[$key]['Amoblado'] = $propiedad->amoblada == 1 ? 'SI' : 'NO';
+                    $temp[$key]['Privado'] = $propiedad->privado > 0 ? $propiedad->privado : '0';
+                    $temp[$key]['Bodega'] = $propiedad->bodega > 0 ? $propiedad->bodega : '0';
+                    $temp[$key]['Estacionamiento'] = $propiedad->estacionamiento > 0 ? $propiedad->estacionamiento : '0';
+                    $temp[$key]['Estado'] = $propiedad->estado == 1 ? 'Activa' : 'Inactiva';
+                    $datos[]= $temp;
+                }
+            }
+
+            $this->excel($cabeza,$datos,'mis_favoritos_'.date('d-m-y'));
 
         } catch (\Exception $e) {
 
