@@ -54,9 +54,24 @@ class UsuarioController extends Controller
         try {
 
             $ruta = 'api/usuarios/guardar';
-            $form_params = $request->all();
 
-            $response = (new ApiHelper)->sendApiRequest($ruta, $form_params);
+            // Cargando avatar
+            $multipart = [
+                [
+                    'name'         => 'avatar',
+                    'Mime-Type'    => $request->avatar->getmimeType(),
+                    'filename'    => $request->avatar->getClientOriginalName(),
+                    'contents'     => fopen($request->avatar->getPathname(), 'r')
+                ],
+            ];
+
+            $multipart = $this->formatMultipartRequest($multipart, $request->except('avatar'));
+
+            /*$form_params = [
+                'image' => base64_encode(file_get_contents($request->avatar->path()))
+            ];*/
+
+            $response = (new ApiHelper)->sendApiRequest($ruta, null, $multipart);
 
             if(isset($response['error'])) throw new \Exception($response);
 
@@ -177,22 +192,11 @@ class UsuarioController extends Controller
         return redirect()->to('/');
     }
 
-    public function favoritos(Request $request){
-
+    public function favoritos(Request $request)
+    {
         try {
 
             $request->merge(['id_usuario' => Auth::user()->id]);
-
-            if(!$request->telefono || !$request->codigo_telefono ){
-                $request->request->remove('telefono');
-                $request->request->remove('codigo_telefono');
-            }
-
-            if(!$request->telefono2 || !$request->codigo_telefono2)
-            {
-                $request->request->remove('telefono2');
-                $request->request->remove('codigo_telefono2');
-            }
 
             $response = (new ApiHelper)->sendApiRequest('api/usuarios/favoritos',$request->all());
 
@@ -209,9 +213,9 @@ class UsuarioController extends Controller
             ], 500);
         }
     }
-    // propiedades ajustes
-    public function mis_propiedades(Request $request){
 
+    public function mis_propiedades ( Request $request )
+    {
         try {
             $request->merge([ 'id_usuario'=>Auth::user()->id ]);
 

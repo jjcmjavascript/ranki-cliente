@@ -13,5 +13,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
+    function formatMultipartRequest($multipart, $request = [])
+    {
+    	foreach ($request as $key => $value) {
+    		$data = [
+    			'name' => $key,
+    			'contents' => $value
+    		];
+    		$multipart[] = $data;
+    	}
+    	
+    	return $multipart;
+    }
 }

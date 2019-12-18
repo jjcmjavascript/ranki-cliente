@@ -9,7 +9,14 @@ class ApiHelper {
 
 	function __construct()
 	{
-		$this->guzzle = new \GuzzleHttp\Client();
+		$this->guzzle = new \GuzzleHttp\Client(
+			/*[
+	            'exceptions' => false,
+	            'cookies' => true, 
+	            'redirect.disable' => true, 
+	            'base_uri' => 'api'
+        	]*/
+    	);
 	}
 
 	 /**
@@ -39,7 +46,6 @@ class ApiHelper {
 				case 'default':
 				$form_params = [
 					'grant_type' => 'password',
-
 					'client_id' => \Config::get('app.api_client_id'),
 					'client_secret' => \Config::get('app.api_client_secret'),
 					'username' =>Auth::user()->email,
@@ -89,7 +95,7 @@ class ApiHelper {
 
 	}
 
-	public function sendApiRequest($ruta, $form_params = null, $getOnlyBody = true, $headers=null)
+	public function sendApiRequest($ruta, $form_params = null, $multipart = null, $getOnlyBody = true, $headers = null)
     {
 
 		$headers = $headers ? $headers : [
@@ -97,10 +103,16 @@ class ApiHelper {
 			'Authorization' => session('api')->token_type.' '.session('api')->access_token
 		];
 
-        $response = $this->guzzle->post( \Config::get('app.api_connection'). $ruta, [
-          'headers' => $headers,
-          'form_params' => $form_params,
-        ]);
+		$body = ['headers' => $headers];
+
+		if($form_params) {
+			$body['form_params'] = $form_params;
+		}
+		else if ($multipart) {
+			$body['multipart'] = $multipart;
+		}
+
+        $response = $this->guzzle->post( \Config::get('app.api_connection'). $ruta, $body);
 
         if($getOnlyBody){
         	$response = $response->getBody();
