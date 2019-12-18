@@ -14,9 +14,9 @@
                     <div class="container">
                         <div class="home-intro">
                             <div class="section-title-separator"><span></span></div>
-                            <h2>EasyBook Hotel Booking System</h2>
+                            <h2>JM INMOBILIARIA</h2>
                             <span class="section-separator"></span>
-                            <h3>Let's start exploring the world together with EasyBook</h3>
+                            <h3>¡Consigue el domilicio que buscas aqui!</h3>
                         </div>
                         <div class="main-search-input-wrap">
                             <div class="main-search-input fl-wrap">

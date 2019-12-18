@@ -13,14 +13,49 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    function formatMultipartRequest($multipart, $request = [])
+    function formatFileMultipartRequest($multipart, $request = [], $array_name = null, $set_array = true)
+    {
+        $array = $array_name ? $request[$array_name] : $request;
+
+        foreach($array as $key => $value) {
+            if(is_file($value->getPathname())) {
+                $name = $array_name ? $array_name : $key;
+                $name .= $set_array ? '[]' : '';
+                
+                $data = [
+                    'name'         => $name,
+                    'Mime-Type'    => $value->getmimeType(),
+                    'filename'     => $value->getClientOriginalName(),
+                    'contents'     => fopen($value->getPathname(), 'r')
+                ];
+
+                $multipart[] = $data;
+            }
+        }
+
+        return $multipart;
+    }
+
+    function formatDataMultipartRequest($multipart, $request = [], $array_name = null, $set_array = false)
     {
     	foreach ($request as $key => $value) {
-    		$data = [
-    			'name' => $key,
-    			'contents' => $value
-    		];
-    		$multipart[] = $data;
+            if(is_array($value)) {
+                $multipart = array_merge(
+                    $multipart, 
+                    $this->formatDataMultipartRequest([], $value, $key, true)
+                );
+            }
+            else {
+                $name = $array_name ? $array_name : $key;
+                $name .= $set_array ? '[]' : '';
+
+                $data = [
+                    'name' => $name,
+                    'contents' => $value
+                ];   
+
+                $multipart[] = $data; 
+            }
     	}
     	
     	return $multipart;

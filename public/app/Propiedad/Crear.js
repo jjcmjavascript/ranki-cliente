@@ -531,13 +531,13 @@ __webpack_require__.r(__webpack_exports__);
         request.append('portada_imagen_key', this.data.portada_imagen);
       }
 
-      if (this.data.imagenes.length > 0) {
+      if (this.data.imagenes && this.data.imagenes.length > 0) {
         this.data.imagenes.forEach(function (e) {
           var arr = e.contenido.split(','),
               mime = arr[0].match(/:(.*?);/)[1],
               bstr = atob(arr[1]),
               n = bstr.length,
-              u8arr = new Uint8Array(n); // milqui
+              u8arr = new Uint8Array(n);
 
           while (n--) {
             u8arr[n] = bstr.charCodeAt(n);
@@ -546,17 +546,17 @@ __webpack_require__.r(__webpack_exports__);
           var file = new File([u8arr], e.nombre, {
             type: mime
           });
-          request.append('imagenes_lista[]', file);
+          request.append('imagenes[]', file);
         });
       }
 
-      if (this.data.tipo_piso.length > 0) {
+      if (this.data.tipo_piso && this.data.tipo_piso.length > 0) {
         this.data.tipo_piso.forEach(function (e) {
           request.append('tipo_piso[]', e.id);
         });
       }
 
-      if (this.data.atributos.length > 0) {
+      if (this.data.tipo_piso && this.data.atributos.length > 0) {
         this.data.atributos.forEach(function (e) {
           request.append('atributos[]', e);
         });

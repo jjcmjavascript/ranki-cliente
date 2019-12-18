@@ -888,13 +888,11 @@ var staticRenderFns = [
                 _c("span")
               ]),
               _vm._v(" "),
-              _c("h2", [_vm._v("EasyBook Hotel Booking System")]),
+              _c("h2", [_vm._v("JM INMOBILIARIA")]),
               _vm._v(" "),
               _c("span", { staticClass: "section-separator" }),
               _vm._v(" "),
-              _c("h3", [
-                _vm._v("Let's start exploring the world together with EasyBook")
-              ])
+              _c("h3", [_vm._v("¡Consigue el domilicio que buscas aqui!")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "main-search-input-wrap" }, [

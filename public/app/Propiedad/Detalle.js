@@ -278,6 +278,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -801,14 +803,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "btn btn-warning btn-lg btn-block",
-        attrs: { href: "booking-single.html" }
-      },
-      [_vm._v("Cotizar "), _c("i", { staticClass: "far fa-bookmark" })]
-    )
+    return _c("div", [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-warning btn-lg",
+          staticStyle: { width: "100%" },
+          attrs: { href: "booking-single.html" }
+        },
+        [_vm._v("Cotizar "), _c("i", { staticClass: "far fa-bookmark" })]
+      )
+    ])
   },
   function() {
     var _vm = this

@@ -58,18 +58,14 @@ class UsuarioController extends Controller
             // Cargando avatar
             $multipart = [
                 [
-                    'name'         => 'avatar',
-                    'Mime-Type'    => $request->avatar->getmimeType(),
-                    'filename'    => $request->avatar->getClientOriginalName(),
-                    'contents'     => fopen($request->avatar->getPathname(), 'r')
+                    'name'      => 'avatar',
+                    'Mime-Type' => $request->avatar->getmimeType(),
+                    'filename'  => $request->avatar->getClientOriginalName(),
+                    'contents'  => fopen($request->avatar->getPathname(), 'r')
                 ],
             ];
 
             $multipart = $this->formatMultipartRequest($multipart, $request->except('avatar'));
-
-            /*$form_params = [
-                'image' => base64_encode(file_get_contents($request->avatar->path()))
-            ];*/
 
             $response = (new ApiHelper)->sendApiRequest($ruta, null, $multipart);
 
