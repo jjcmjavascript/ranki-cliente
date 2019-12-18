@@ -509,7 +509,14 @@ var render = function() {
                                                 "\r\n                                                 "
                                             ),
                                             _c("span", [
-                                              _vm._v("$" + _vm._s(val.precio))
+                                              _vm._v(
+                                                "$" +
+                                                  _vm._s(
+                                                    _vm._f("currency")(
+                                                      val.precio
+                                                    )
+                                                  )
+                                              )
                                             ])
                                           ]
                                         ),

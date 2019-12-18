@@ -41,7 +41,7 @@
                                             <p class="card-text text-align-lef">
                                                 Tipo : {{ val._tipo_operacion.nombre }} <br>
                                                 Moneda: {{val._tipo_valor ? val._tipo_valor.nombre : ''}}
-                                                Monto : {{val.precio}} <br>
+                                                Monto : {{val.precio | currency}} <br>
                                                 Estado : {{val.estado == 1 ? 'ACTIVA' : 'INACTIVA'}} <br>
 
                                             </p>

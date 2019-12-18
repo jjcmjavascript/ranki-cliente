@@ -384,7 +384,9 @@ var render = function() {
                                                 : ""
                                             ) +
                                             "\r\n                                                Monto : " +
-                                            _vm._s(val.precio) +
+                                            _vm._s(
+                                              _vm._f("currency")(val.precio)
+                                            ) +
                                             " "
                                         ),
                                         _c("br"),

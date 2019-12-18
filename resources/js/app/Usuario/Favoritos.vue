@@ -85,7 +85,7 @@
                                         <div class="geodir-category-footer fl-wrap">
                                             <div class="geodir-category-price">
                                                 {{val._tipo_valor ? val._tipo_valor.nombre : ''}}
-                                                 <span>${{val.precio}}</span></div>
+                                                 <span>${{val.precio | currency}}</span></div>
                                             <div class="geodir-opt-list">
                                                 <a href="#" class="geodir-js-booking"><i class="fal fa-trash"></i>
                                                     <span class="geodir-opt-tooltip">Borrar</span>
