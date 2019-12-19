@@ -378,6 +378,11 @@ const app = new Vue({
 
             return true;
         },
+        /**
+         * Filtra letras y caracteres de la entrada de un input
+         * @param  {String} Tecla presionada
+         * @return Retorna TRUE si la tecla presionada es un número
+         */
         isNumberKey: function (evt)
         {
            var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -386,7 +391,7 @@ const app = new Vue({
            }
              
            return true;
-       },
+        },
         /**
          * Indica si el correo electrónico ingresado es válido o no
          * @param  {String} email Correo electrónico
