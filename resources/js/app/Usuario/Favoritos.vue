@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-6 col-lg-4">
                                     <label>Exportar Favoritos</label><br>
-                                    <a target="_blank" class="btn btn-success" :href="exportar" :disabled="rows.data.length==0"> Exportar</a>
+                                    <button class="btn btn-success" @click="exportar" :disabled="rows.data.length==0"> Exportar</button>
                                 </div>
                             </div>
                         </div>
@@ -169,15 +169,6 @@ export default {
     mounted() {
         this.filtrar();
     },
-    computed : {
-        exportar(){
-            if(this.rows.data.length > 0 ){
-                let { estado,orden } = this.filters;
-
-                return `${this.url}/exportar?estado=${estado ? estado.value : ''}&orden=${orden ? orden.value: ''}`
-            }
-        }
-    },
     methods: {
         start() {
             this.$root.cargando();
@@ -221,6 +212,14 @@ export default {
                 break;
             }
         },
+        exportar(){
+            if(this.rows.data.length > 0 ){
+                let { estado,orden } = this.filters;
+                let parametros = `estado=${estado ? estado.value : ''}&orden=${orden ? orden.value: ''}`;
+
+                window.open(`${this.url}/exportar?${parametros}`, '_blank');
+            }
+        }
     }
 }
 </script>

@@ -257,6 +257,7 @@ class UsuarioController extends Controller
                     'Privado',
                     'Bodega',
                     'Estacionamiento',
+                    'Precio',
                     'Estado'
                 ];
 
@@ -264,6 +265,8 @@ class UsuarioController extends Controller
                 $datos = [];
                 foreach ($response as $key => $propiedad) {
                     $propiedad =(object) $propiedad;
+                    $tipo_valor = $propiedad->_tipo_valor ? $propiedad->_tipo_valor['nombre'] : '';
+
                     $temp['Titulo'] = $propiedad->titulo ? $propiedad->titulo  : '-----';
                     $temp['Condicion'] = isset($propiedad->_tipo_propiedad) ? $propiedad->_tipo_propiedad['nombre'] :  '-----';
                     $temp['Tipo de Propiedad']=isset($propiedad->_subtipo_propiedad) ? $propiedad->_subtipo_propiedad['nombre'] : '-----';
@@ -279,6 +282,7 @@ class UsuarioController extends Controller
                     $temp['Privado'] = $propiedad->privado > 0 ? $propiedad->privado : '0';
                     $temp['Bodega'] = $propiedad->bodega > 0 ? $propiedad->bodega : '0';
                     $temp['Estacionamiento'] = $propiedad->estacionamiento > 0 ? $propiedad->estacionamiento : '0';
+                    $temp['Precio'] = $propiedad->precio > 0 ? $tipo_valor.' '.$propiedad->precio : '0';
                     $temp['Estado'] = $propiedad->estado == 1 ? 'Activa' : 'Inactiva';
                     $datos[]= $temp;
                 }

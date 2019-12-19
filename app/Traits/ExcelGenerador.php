@@ -21,6 +21,6 @@ class ExcelGenerador implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-           return  $this->cabezera;
+        return $this->cabezera;
     }
 }

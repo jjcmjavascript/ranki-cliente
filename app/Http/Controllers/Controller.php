@@ -63,7 +63,7 @@ class Controller extends BaseController
     	return $multipart;
     }
 
-    public function generarExcel($datos,$cabezera,$nombre,$ext = 'xlsx')
+    public function generarExcel($datos, $cabezera, $nombre, $ext = 'xlsx')
     {
         return Excel::download(new ExcelGenerador($datos,$cabezera), $nombre.'.'.$ext);
     }
