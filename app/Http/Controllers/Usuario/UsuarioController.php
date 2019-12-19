@@ -262,33 +262,31 @@ class UsuarioController extends Controller
                     'Estado'
                 ];
 
-
                 $response  = array_column($response, '_propiedades');
                 $datos = [];
                 foreach ($response as $key => $propiedad) {
-
                     $propiedad =(object) $propiedad;
-                    $temp[$key]['Titulo'] = $propiedad->titulo ? $propiedad->titulo  : '-----';
-                    $temp[$key]['Condicion'] = isset($propiedad->_tipo_propiedad) ? $propiedad->_tipo_propiedad :  '-----';
-                    $temp[$key]['Tipo de Propiedad']=isset($propiedad->_subtipo_propiedad) ? $propiedad->_subtipo_propiedad : '-----';
-                    $temp[$key]['Numero de piso'] = $propiedad->numero_piso ? $propiedad->numero_piso : '-----';
-                    $temp[$key]['Numero de Domicilio'] = $propiedad->numero_domilicio ? $propiedad->numero_domilicio : '-----';
-                    $temp[$key]['Numero de Calle'] = $propiedad->numero_calle ? $propiedad->numero_calle : '-----';
-                    $temp[$key]['Region'] =  isset($propiedad->_region) ? $propiedad->_region['nombre'] : '-----';
-                    $temp[$key]['Comuna'] = isset($propiedad->_comuna) ? $propiedad->_comuna['nombre'] : '-----';
-                    $temp[$key]['Superficie'] = $propiedad->superficie_util ? $propiedad->superficie_util.' mts2' : '-----';
-                    $temp[$key]['Terraza'] = $propiedad->superficie_terraza ? $propiedad->superficie_terraza.' mts2' : '-----';
-                    $temp[$key]['Baños'] = $propiedad->banio > 0 ? $propiedad->banio : '0';
-                    $temp[$key]['Amoblado'] = $propiedad->amoblada == 1 ? 'SI' : 'NO';
-                    $temp[$key]['Privado'] = $propiedad->privado > 0 ? $propiedad->privado : '0';
-                    $temp[$key]['Bodega'] = $propiedad->bodega > 0 ? $propiedad->bodega : '0';
-                    $temp[$key]['Estacionamiento'] = $propiedad->estacionamiento > 0 ? $propiedad->estacionamiento : '0';
-                    $temp[$key]['Estado'] = $propiedad->estado == 1 ? 'Activa' : 'Inactiva';
+                    $temp['Titulo'] = $propiedad->titulo ? $propiedad->titulo  : '-----';
+                    $temp['Condicion'] = isset($propiedad->_tipo_propiedad) ? $propiedad->_tipo_propiedad['nombre'] :  '-----';
+                    $temp['Tipo de Propiedad']=isset($propiedad->_subtipo_propiedad) ? $propiedad->_subtipo_propiedad['nombre'] : '-----';
+                    $temp['Numero de piso'] = $propiedad->numero_piso ? $propiedad->numero_piso['nombre'] : '-----';
+                    $temp['Numero de Domicilio'] = $propiedad->numero_domilicio ? $propiedad->numero_domilicio : '-----';
+                    $temp['Numero de Calle'] = $propiedad->numero_calle ? $propiedad->numero_calle : '-----';
+                    $temp['Region'] =  isset($propiedad->_region) ? $propiedad->_region['nombre'] : '-----';
+                    $temp['Comuna'] = isset($propiedad->_comuna) ? $propiedad->_comuna['nombre'] : '-----';
+                    $temp['Superficie'] = $propiedad->superficie_util ? $propiedad->superficie_util.' mts2' : '-----';
+                    $temp['Terraza'] = $propiedad->superficie_terraza ? $propiedad->superficie_terraza.' mts2' : '-----';
+                    $temp['Baños'] = $propiedad->banio > 0 ? $propiedad->banio : '0';
+                    $temp['Amoblado'] = $propiedad->amoblada == 1 ? 'SI' : 'NO';
+                    $temp['Privado'] = $propiedad->privado > 0 ? $propiedad->privado : '0';
+                    $temp['Bodega'] = $propiedad->bodega > 0 ? $propiedad->bodega : '0';
+                    $temp['Estacionamiento'] = $propiedad->estacionamiento > 0 ? $propiedad->estacionamiento : '0';
+                    $temp['Estado'] = $propiedad->estado == 1 ? 'Activa' : 'Inactiva';
                     $datos[]= $temp;
                 }
             }
 
-            $this->excel($cabeza,$datos,'mis_favoritos_'.date('d-m-y'));
+            return $this->generarExcel($datos, $cabeza , 'mis_favoritos_'.date('d-m-ys'));
 
         } catch (\Exception $e) {
 
