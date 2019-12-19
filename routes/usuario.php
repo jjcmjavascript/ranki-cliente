@@ -4,7 +4,7 @@
 Route::namespace('Usuario')->name('usuario')->group(function(){
 
   Route::post('iniciar','UsuarioController@login')->name('.login');
-  Route::post('crear','UsuarisucoController@crear')->name('.crear');
+  Route::post('crear','UsuarioController@crear')->name('.crear');
 
 });
 

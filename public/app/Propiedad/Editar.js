@@ -375,6 +375,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -520,7 +522,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this3.selects.tipos_valores = response.data.tipos_valores;
         _this3.selects.orientaciones = response.data.orientaciones;
         _this3.selects.periodicidades = response.data.periodicidades;
-        _this3.selects.usuarios = response.data.usuarios; // ATRIBUTOS
+        _this3.selects.usuarios = response.data.usuarios;
+        _this3.data.tipo_valor = _this3.selects.tipos_valores.find(function (e) {
+          return e.nombre.toUpperCase() == 'CLP';
+        });
+
+        _this3.reordenarRegion(); // ATRIBUTOS
+
 
         _this3.selects.distribucion = response.data.distribucion;
         _this3.selects.servicios = response.data.servicios;
@@ -541,6 +549,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this3.obtenerAtributos();
       });
+    },
+    reordenarRegion: function reordenarRegion() {
+      if (this.selects.regiones.length > 0) {
+        // COLOCANDO REGIÓN METROPOLITANA AL INICIO DE SELECT
+        var region = this.selects.regiones.splice(this.selects.regiones.map(function (e) {
+          return e.id;
+        }).indexOf(13), 1);
+        this.selects.regiones.unshift(region[0]);
+      }
     },
     guardar: function guardar() {
       var _this4 = this;
@@ -737,7 +754,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\ninput[type=\"file\"][data-v-0af2e02e] {\n    display: none;\n}\n\n", ""]);
+exports.push([module.i, "\ninput[type=\"file\"][data-v-0af2e02e] {\r\n    display: none;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -1340,67 +1357,67 @@ var render = function() {
                           "form-group col-xs-12 col-sm-4 col-md-4 col-lg-4"
                       },
                       [
-                        _c(
-                          "div",
-                          { staticClass: "checkbox checkbox-css mt-4" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.data.amoblada,
-                                  expression: "data.amoblada"
-                                }
-                              ],
-                              attrs: {
-                                type: "checkbox",
-                                id: "cssCheckbox1",
-                                "true-value": 1,
-                                "false-value": 0
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.data.amoblada)
-                                  ? _vm._i(_vm.data.amoblada, null) > -1
-                                  : _vm._q(_vm.data.amoblada, 1)
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.data.amoblada,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? 1 : 0
-                                  if (Array.isArray($$a)) {
-                                    var $$v = null,
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.data,
-                                          "amoblada",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.data,
-                                          "amoblada",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
+                        _c("label", { staticStyle: { color: "transparent" } }, [
+                          _vm._v("    ")
+                        ]),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "checktainer" }, [
+                          _vm._v(
+                            "\n                                            Esta propiedad esta amoblada\n                                          "
+                          ),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.data.amoblada,
+                                expression: "data.amoblada"
+                              }
+                            ],
+                            attrs: {
+                              type: "checkbox",
+                              "true-value": 1,
+                              "false-value": 0
+                            },
+                            domProps: {
+                              checked: Array.isArray(_vm.data.amoblada)
+                                ? _vm._i(_vm.data.amoblada, null) > -1
+                                : _vm._q(_vm.data.amoblada, 1)
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.data.amoblada,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? 1 : 0
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.data,
+                                        "amoblada",
+                                        $$a.concat([$$v])
+                                      )
                                   } else {
-                                    _vm.$set(_vm.data, "amoblada", $$c)
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.data,
+                                        "amoblada",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
                                   }
+                                } else {
+                                  _vm.$set(_vm.data, "amoblada", $$c)
                                 }
                               }
-                            }),
-                            _vm._v(" "),
-                            _c("label", { attrs: { for: "cssCheckbox1" } }, [
-                              _vm._v("Esta propiedad esta amoblada")
-                            ])
-                          ]
-                        )
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "checkmark" })
+                        ])
                       ]
                     )
                   ]),
@@ -1927,10 +1944,14 @@ var render = function() {
                             staticClass: "form-control",
                             attrs: {
                               type: "text",
+                              maxlength: "8",
                               placeholder: "Ingresa un teléfono"
                             },
                             domProps: { value: _vm.data.telefono },
                             on: {
+                              keypress: function($event) {
+                                return _vm.$root.isNumberKey($event)
+                              },
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
@@ -2001,10 +2022,14 @@ var render = function() {
                               staticClass: "form-control",
                               attrs: {
                                 type: "text",
+                                maxlength: "8",
                                 placeholder: "Ingresa un teléfono"
                               },
                               domProps: { value: _vm.data.telefono2 },
                               on: {
+                                keypress: function($event) {
+                                  return _vm.$root.isNumberKey($event)
+                                },
                                 input: function($event) {
                                   if ($event.target.composing) {
                                     return

@@ -482,10 +482,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.selects.periodicidades = response.data.periodicidades;
         _this.selects.usuarios = response.data.usuarios;
         _this.data.tipo_valor = _this.selects.tipos_valores.find(function (e) {
-          return e.nombre == 'Pesos';
+          return e.nombre.toUpperCase() == 'CLP';
         });
 
-        _this.ordenarRegion(); // ATRIBUTOS
+        _this.reordenarRegion(); // ATRIBUTOS
 
 
         _this.selects.distribucion = response.data.distribucion;
@@ -498,11 +498,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
       });
     },
-    ordenarRegion: function ordenarRegion() {
+    reordenarRegion: function reordenarRegion() {
       if (this.selects.regiones.length > 0) {
-        this.selects.regiones = this.selects.regiones.sort(function (ini, fin) {
-          return ini.nombre > fin.nombre;
-        });
+        // COLOCANDO REGIÓN METROPOLITANA AL INICIO DE SELECT
         var region = this.selects.regiones.splice(this.selects.regiones.map(function (e) {
           return e.id;
         }).indexOf(13), 1);
@@ -693,7 +691,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\ninput[type=\"file\"][data-v-1f51cce4] {\n    display: none;\n}\n\n", ""]);
+exports.push([module.i, "\ninput[type=\"file\"][data-v-1f51cce4] {\r\n    display: none;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -1269,7 +1267,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("label", { staticClass: "checktainer" }, [
                           _vm._v(
-                            "\n                                            Esta propiedad esta amoblada\n                                          "
+                            "\n                                        Esta propiedad esta amoblada\n                                      "
                           ),
                           _c("input", {
                             directives: [
@@ -1855,7 +1853,7 @@ var render = function() {
                             },
                             domProps: { value: _vm.data.telefono },
                             on: {
-                              click: function($event) {
+                              keypress: function($event) {
                                 return _vm.$root.isNumberKey($event)
                               },
                               input: function($event) {
@@ -1933,7 +1931,7 @@ var render = function() {
                               },
                               domProps: { value: _vm.data.telefono2 },
                               on: {
-                                click: function($event) {
+                                keypress: function($event) {
                                   return _vm.$root.isNumberKey($event)
                                 },
                                 input: function($event) {

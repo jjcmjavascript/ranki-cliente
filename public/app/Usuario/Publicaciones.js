@@ -358,9 +358,9 @@ var render = function() {
                                   _c("div", { staticClass: "card-body" }, [
                                     _c("h5", { staticClass: "card-title" }, [
                                       _vm._v(
-                                        "\n                                                " +
+                                        "\r\n                                                " +
                                           _vm._s(val.titulo.toUpperCase()) +
-                                          "\n\n                                            "
+                                          "\r\n\r\n                                            "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -371,19 +371,19 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                                Tipo : " +
+                                          "\r\n                                                Tipo : " +
                                             _vm._s(val._tipo_operacion.nombre) +
                                             " "
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\n                                                Moneda: " +
+                                          "\r\n                                                Moneda: " +
                                             _vm._s(
                                               val._tipo_valor
                                                 ? val._tipo_valor.nombre
                                                 : ""
                                             ) +
-                                            "\n                                                Monto : " +
+                                            "\r\n                                                Monto : " +
                                             _vm._s(
                                               _vm._f("currency")(val.precio)
                                             ) +
@@ -391,7 +391,7 @@ var render = function() {
                                         ),
                                         _c("br"),
                                         _vm._v(
-                                          "\n                                                Estado : " +
+                                          "\r\n                                                Estado : " +
                                             _vm._s(
                                               val.estado == 1
                                                 ? "ACTIVA"
