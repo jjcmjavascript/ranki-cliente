@@ -27,6 +27,10 @@
                                     <label>Consultar Por</label>
                                     <v-select class="clear-none" :options="selects.estados" v-model="filters.estado" @input="filtrar()"></v-select>
                                 </div>
+                                <div class="form-group col-xs-12 col-sm-6 col-lg-4">
+                                    <label>Exportar Favoritos</label><br>
+                                    <a target="_blank" class="btn btn-success" :href="exportar" :disabled="rows.data.length==0"> Exportar</a>
+                                </div>
                             </div>
                         </div>
                         <!-- list-main-wrap-opt end-->
@@ -39,8 +43,8 @@
                                         <a href="listing-single.html">
                                             <img src="http://goplaceit.s3.amazonaws.com/propiedades/mexico/construerearmosproyectos/91839236050701756619557877236813463652389665941533814656466866664975708287859-64x64.jpg" alt=""></a>
 
-                                        <div :class="badgeColor(val._tipo_operacion)">
-                                            {{ val._tipo_operacion.nombre }}
+                                        <div :class="badgeColor(val._propiedades._tipo_operacion)">
+                                            {{ val._propiedades._tipo_operacion.nombre }}
                                         </div>
 
                                         <div class="geodir-category-opt">
@@ -56,23 +60,23 @@
                                             <div class="geodir-category-content-title-item">
                                                 <h3 class="title-sin_map">
                                                     <a href="listing-single.html">
-                                                        {{val.titulo}}
+                                                        {{val._propiedades.titulo}}
                                                     </a>
                                                 </h3>
                                                 <div class="geodir-category-location fl-wrap">
                                                     <a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i>
-                                                        {{val.numero_calle ? val.numero_calle : ''}}
-                                                        {{val.calle ? val.calle : ''}}
+                                                        {{val._propiedades.numero_calle ? val._propiedades.numero_calle : ''}}
+                                                        {{val._propiedades.calle ? val._propiedades.calle : ''}}
                                                         /
-                                                        {{val._comuna ? 'Comuna: '+val._comuna.nombre+',' : ''}}
-                                                        {{val._region ? 'Region: '+val._region.nombre : ''}}
+                                                        {{val._propiedades._comuna ? 'Comuna: '+val._propiedades._comuna.nombre+',' : ''}}
+                                                        {{val._propiedades._region ? 'Region: '+val._propiedades._region.nombre : ''}}
 
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <p v-if="val.descripcion">
-                                            <span v-html="$options.filters.nl2br(val.descripcion)">
+                                        <p v-if="val._propiedades.descripcion">
+                                            <span v-html="$options.filters.nl2br(val._propiedades.descripcion)">
 
                                             </span>
                                         </p>
@@ -84,8 +88,8 @@
                                         </ul> -->
                                         <div class="geodir-category-footer fl-wrap">
                                             <div class="geodir-category-price">
-                                                {{val._tipo_valor ? val._tipo_valor.nombre : ''}}
-                                                 <span>${{val.precio | currency}}</span></div>
+                                                {{val._propiedades._tipo_valor ? val._propiedades._tipo_valor.nombre : ''}}
+                                                 <span>${{val._propiedades.precio | currency}}</span></div>
                                             <div class="geodir-opt-list">
                                                 <a href="#" class="geodir-js-booking"><i class="fal fa-trash"></i>
                                                     <span class="geodir-opt-tooltip">Borrar</span>
@@ -164,6 +168,15 @@ export default {
     },
     mounted() {
         this.filtrar();
+    },
+    computed : {
+        exportar(){
+            if(this.rows.data.length > 0 ){
+                let { estado,orden } = this.filters;
+
+                return `${this.url}/exportar?estado=${estado ? estado.value : ''}&orden=${orden ? orden.value: ''}`
+            }
+        }
     },
     methods: {
         start() {

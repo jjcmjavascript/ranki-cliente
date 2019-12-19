@@ -132,6 +132,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -189,6 +193,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.filtrar();
+  },
+  computed: {
+    exportar: function exportar() {
+      if (this.rows.data.length > 0) {
+        var _this$filters = this.filters,
+            estado = _this$filters.estado,
+            orden = _this$filters.orden;
+        return "".concat(this.url, "/exportar?estado=").concat(estado ? estado.value : '', "&orden=").concat(orden ? orden.value : '');
+      }
+    }
   },
   methods: {
     start: function start() {
@@ -324,6 +338,30 @@ var render = function() {
                           })
                         ],
                         1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group col-xs-12 col-sm-6 col-lg-4"
+                        },
+                        [
+                          _c("label", [_vm._v("Exportar Favoritos")]),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-success",
+                              attrs: {
+                                target: "_blank",
+                                href: _vm.exportar,
+                                disabled: _vm.rows.data.length == 0
+                              }
+                            },
+                            [_vm._v(" Exportar")]
+                          )
+                        ]
                       )
                     ])
                   ]),
@@ -353,14 +391,17 @@ var render = function() {
                                       "div",
                                       {
                                         class: _vm.badgeColor(
-                                          val._tipo_operacion
+                                          val._propiedades._tipo_operacion
                                         )
                                       },
                                       [
                                         _vm._v(
-                                          "\r\n                                            " +
-                                            _vm._s(val._tipo_operacion.nombre) +
-                                            "\r\n                                        "
+                                          "\n                                            " +
+                                            _vm._s(
+                                              val._propiedades._tipo_operacion
+                                                .nombre
+                                            ) +
+                                            "\n                                        "
                                         )
                                       ]
                                     ),
@@ -404,9 +445,12 @@ var render = function() {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\r\n                                                        " +
-                                                        _vm._s(val.titulo) +
-                                                        "\r\n                                                    "
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          val._propiedades
+                                                            .titulo
+                                                        ) +
+                                                        "\n                                                    "
                                                     )
                                                   ]
                                                 )
@@ -432,36 +476,43 @@ var render = function() {
                                                         "fas fa-map-marker-alt"
                                                     }),
                                                     _vm._v(
-                                                      "\r\n                                                        " +
+                                                      "\n                                                        " +
                                                         _vm._s(
-                                                          val.numero_calle
-                                                            ? val.numero_calle
+                                                          val._propiedades
+                                                            .numero_calle
+                                                            ? val._propiedades
+                                                                .numero_calle
                                                             : ""
                                                         ) +
-                                                        "\r\n                                                        " +
+                                                        "\n                                                        " +
                                                         _vm._s(
-                                                          val.calle
-                                                            ? val.calle
+                                                          val._propiedades.calle
+                                                            ? val._propiedades
+                                                                .calle
                                                             : ""
                                                         ) +
-                                                        "\r\n                                                        /\r\n                                                        " +
+                                                        "\n                                                        /\n                                                        " +
                                                         _vm._s(
-                                                          val._comuna
+                                                          val._propiedades
+                                                            ._comuna
                                                             ? "Comuna: " +
-                                                                val._comuna
+                                                                val._propiedades
+                                                                  ._comuna
                                                                   .nombre +
                                                                 ","
                                                             : ""
                                                         ) +
-                                                        "\r\n                                                        " +
+                                                        "\n                                                        " +
                                                         _vm._s(
-                                                          val._region
+                                                          val._propiedades
+                                                            ._region
                                                             ? "Region: " +
-                                                                val._region
+                                                                val._propiedades
+                                                                  ._region
                                                                   .nombre
                                                             : ""
                                                         ) +
-                                                        "\r\n\r\n                                                    "
+                                                        "\n\n                                                    "
                                                     )
                                                   ]
                                                 )
@@ -472,13 +523,13 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    val.descripcion
+                                    val._propiedades.descripcion
                                       ? _c("p", [
                                           _c("span", {
                                             domProps: {
                                               innerHTML: _vm._s(
                                                 _vm.$options.filters.nl2br(
-                                                  val.descripcion
+                                                  val._propiedades.descripcion
                                                 )
                                               )
                                             }
@@ -500,20 +551,21 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\r\n                                                " +
+                                              "\n                                                " +
                                                 _vm._s(
-                                                  val._tipo_valor
-                                                    ? val._tipo_valor.nombre
+                                                  val._propiedades._tipo_valor
+                                                    ? val._propiedades
+                                                        ._tipo_valor.nombre
                                                     : ""
                                                 ) +
-                                                "\r\n                                                 "
+                                                "\n                                                 "
                                             ),
                                             _c("span", [
                                               _vm._v(
                                                 "$" +
                                                   _vm._s(
                                                     _vm._f("currency")(
-                                                      val.precio
+                                                      val._propiedades.precio
                                                     )
                                                   )
                                               )

@@ -8,6 +8,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Recursos\ApiFuntions;
+use App\Traits\ExcelGenerador;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Controller extends BaseController
 {
@@ -21,7 +23,7 @@ class Controller extends BaseController
             if(is_file($value->getPathname())) {
                 $name = $array_name ? $array_name : $key;
                 $name .= $set_array ? '[]' : '';
-                
+
                 $data = [
                     'name'         => $name,
                     'Mime-Type'    => $value->getmimeType(),
@@ -41,7 +43,7 @@ class Controller extends BaseController
     	foreach ($request as $key => $value) {
             if(is_array($value)) {
                 $multipart = array_merge(
-                    $multipart, 
+                    $multipart,
                     $this->formatDataMultipartRequest([], $value, $key, true)
                 );
             }
@@ -52,12 +54,17 @@ class Controller extends BaseController
                 $data = [
                     'name' => $name,
                     'contents' => $value
-                ];   
+                ];
 
-                $multipart[] = $data; 
+                $multipart[] = $data;
             }
     	}
-    	
+
     	return $multipart;
+    }
+
+    public function generarExcel($datos,$cabezera,$nombre,$ext = 'xlsx')
+    {
+        return Excel::download(new ExcelGenerador($datos,$cabezera), $nombre.'.'.$ext);
     }
 }
