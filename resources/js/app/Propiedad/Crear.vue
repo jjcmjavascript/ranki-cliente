@@ -120,10 +120,12 @@
                 						<v-select label="nombre" :options="selects.tipos_pisos" v-model="data.tipo_piso" multiple></v-select>
                                		</div>
                                		<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                               			<div class="checkbox checkbox-css mt-4">
-                							<input type="checkbox" id="cssCheckbox1" v-model="data.amoblada" :true-value="1" :false-value="0">
-                							<label for="cssCheckbox1">Esta propiedad esta amoblada</label>
-                						</div>
+                                        <label style="color:transparent;"> &nbsp; &nbsp;</label>
+                                            <label class="checktainer">
+                                                Esta propiedad esta amoblada
+                                              <input type="checkbox" v-model="data.amoblada" :true-value="1" :false-value="0">
+                                              <span class="checkmark"></span>
+                                            </label>
                                		</div>
                                	</div>
                                	<div class="row">
@@ -252,7 +254,7 @@
                 							    	<v-select label="label" :options="selects.tipos_telefonos" v-model="data.codigo_telefono"></v-select>
                 							    </span>
                 							</div>
-                							<input type="text" class="form-control" v-model="data.telefono" placeholder="Ingresa un teléfono" />
+                							<input type="text" class="form-control" @click="$root.isNumberKey($event)" maxlength="8" v-model="data.telefono" placeholder="Ingresa un teléfono" />
                 						</div>
                                		</div>
                                	</div>
@@ -265,7 +267,7 @@
                 							    	<v-select label="label" :options="selects.tipos_telefonos" v-model="data.codigo_telefono2"></v-select>
                 							    </span>
                 							</div>
-                							<input type="text" class="form-control" v-model="data.telefono2" placeholder="Ingresa un teléfono" />
+                							<input type="text" @click="$root.isNumberKey($event)" maxlength="8" class="form-control" v-model="data.telefono2" placeholder="Ingresa un teléfono" />
                 						</div>
                                		</div>
                                	</div>
@@ -472,6 +474,10 @@
 					this.selects.periodicidades = response.data.periodicidades;
 					this.selects.usuarios = response.data.usuarios;
 
+                    this.data.tipo_valor = this.selects.tipos_valores.find(e =>{
+                        return e.nombre == 'Pesos';
+                    });
+                    this.ordenarRegion();
 					// ATRIBUTOS
 					this.selects.distribucion = response.data.distribucion;
 					this.selects.servicios = response.data.servicios;
@@ -483,6 +489,15 @@
                     this.alerta('error','Lo sentimos un error ha ocurrido.',error);
 				})
 			},
+            ordenarRegion() {
+                if(this.selects.regiones.length > 0){
+                    this.selects.regiones = this.selects.regiones.sort((ini, fin) => {
+                        return ini.nombre > fin.nombre;
+                    });
+                    let region = this.selects.regiones.splice(this.selects.regiones.map(e => e.id).indexOf(13),1);
+                    this.selects.regiones.unshift(region[0]);
+                }
+            },
 			guardar() {
                 this.start();
                 this.enviando = true;

@@ -82910,7 +82910,9 @@ var app = new Vue({
       });
     },
     stop: function stop() {
-      document.querySelector('.swal2-container').remove();
+      if (document.querySelector('.swal2-container')) {
+        document.querySelector('.swal2-container').remove();
+      }
     },
     alertas: function alertas(tipo, titulo) {
       var mensaje = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
@@ -83043,6 +83045,11 @@ var app = new Vue({
         return !regexp.test(string.toString());
       }
 
+      return true;
+    },
+    isNumberKey: function isNumberKey(evt) {
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) return false;
       return true;
     },
 
