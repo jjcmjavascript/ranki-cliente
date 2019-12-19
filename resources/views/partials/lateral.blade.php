@@ -26,7 +26,7 @@
                         </h3>
                     </div>
                     <a href="{{route('propiedad.crear')}}" class="ed-btn btn-info">
-                        Añadir propiedad
+                        Publicar
                     </a>                                        
                     <div class="user-stats fl-wrap">
                         <ul>
