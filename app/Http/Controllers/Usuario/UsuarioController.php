@@ -24,17 +24,19 @@ class UsuarioController extends Controller
 
     public function perfil()
     {
-        try{
-            $usuario = Usuario::where('id', Auth::user()->id)
-            ->with('_avatar')
-            ->first();
+        try {
 
-            return response([ 'usuario' => $usuario ], 200);
+            $response = (new ApiHelper)->sendApiRequest('api/usuarios/editar',['id_usuario' => Auth::user()->id]);
 
-        }
-        catch( \Exception $e){
+            if(isset($response['error'])) throw new \Exception($response);
 
-            return response([ 'error' => $e->getMessage() ], 500);
+            return response()->json($response, 200);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'error' => $e->getLine().': '.$e->getMessage()
+            ], 500);
         }
 
     }
@@ -54,20 +56,24 @@ class UsuarioController extends Controller
         try {
 
             $ruta = 'api/usuarios/guardar';
-
             // Cargando avatar
-            $multipart = [
-                [
-                    'name'      => 'avatar',
-                    'Mime-Type' => $request->avatar->getmimeType(),
-                    'filename'  => $request->avatar->getClientOriginalName(),
-                    'contents'  => fopen($request->avatar->getPathname(), 'r')
-                ],
-            ];
+            $multipart = [];
+            if($request->avatar){
+                $multipart = [
+                    [
+                        'name'      => 'avatar',
+                        'Mime-Type' => $request->avatar->getmimeType(),
+                        'filename'  => $request->avatar->getClientOriginalName(),
+                        'contents'  => fopen($request->avatar->getPathname(), 'r')
+                    ],
+                ];
+                $multipart = $this->formatMultipartRequest($multipart, $request->except('avatar'));
+                $response = (new ApiHelper)->sendApiRequest($ruta, null, $multipart);
+            }else {
+                $response = (new ApiHelper)->sendApiRequest($ruta,$request->except('avatar'));
+            }
 
-            $multipart = $this->formatMultipartRequest($multipart, $request->except('avatar'));
 
-            $response = (new ApiHelper)->sendApiRequest($ruta, null, $multipart);
 
             if(isset($response['error'])) throw new \Exception($response);
 
