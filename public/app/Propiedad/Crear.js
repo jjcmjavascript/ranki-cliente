@@ -691,7 +691,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\ninput[type=\"file\"][data-v-1f51cce4] {\r\n    display: none;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\ninput[type=\"file\"][data-v-1f51cce4] {\n    display: none;\n}\n\n", ""]);
 
 // exports
 
@@ -1591,37 +1591,89 @@ var render = function() {
                                 ) {
                                   return _c("span", [
                                     _c(
-                                      "div",
-                                      { staticClass: "checkbox checkbox-css" },
+                                      "label",
+                                      { staticStyle: { color: "transparent" } },
+                                      [_vm._v("    ")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      { staticClass: "checktainer" },
                                       [
+                                        _vm._v(
+                                          "\n                                                         " +
+                                            _vm._s(distribucion.nombre) +
+                                            "\n                                                      "
+                                        ),
                                         _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.data.amoblada,
+                                              expression: "data.amoblada"
+                                            }
+                                          ],
                                           attrs: {
                                             type: "checkbox",
                                             id: "cssCheckbox0" + key
+                                          },
+                                          domProps: {
+                                            checked: Array.isArray(
+                                              _vm.data.amoblada
+                                            )
+                                              ? _vm._i(
+                                                  _vm.data.amoblada,
+                                                  null
+                                                ) > -1
+                                              : _vm.data.amoblada
                                           },
                                           on: {
                                             click: function($event) {
                                               return _vm.colocarAtributo(
                                                 distribucion.id
                                               )
+                                            },
+                                            change: function($event) {
+                                              var $$a = _vm.data.amoblada,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = null,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    _vm.$set(
+                                                      _vm.data,
+                                                      "amoblada",
+                                                      $$a.concat([$$v])
+                                                    )
+                                                } else {
+                                                  $$i > -1 &&
+                                                    _vm.$set(
+                                                      _vm.data,
+                                                      "amoblada",
+                                                      $$a
+                                                        .slice(0, $$i)
+                                                        .concat(
+                                                          $$a.slice($$i + 1)
+                                                        )
+                                                    )
+                                                }
+                                              } else {
+                                                _vm.$set(
+                                                  _vm.data,
+                                                  "amoblada",
+                                                  $$c
+                                                )
+                                              }
                                             }
                                           }
                                         }),
                                         _vm._v(" "),
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass: "no_bold",
-                                            attrs: { for: "cssCheckbox0" + key }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n            \t\t\t\t\t\t\t\t\t\t\t" +
-                                                _vm._s(distribucion.nombre) +
-                                                "\n            \t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
+                                        _c("span", { staticClass: "checkmark" })
                                       ]
                                     )
                                   ])
@@ -1645,9 +1697,20 @@ var render = function() {
                                 ) {
                                   return _c("span", [
                                     _c(
-                                      "div",
-                                      { staticClass: "checkbox checkbox-css" },
+                                      "label",
+                                      { staticStyle: { color: "transparent" } },
+                                      [_vm._v("    ")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      { staticClass: "checktainer" },
                                       [
+                                        _vm._v(
+                                          "\n                                                    " +
+                                            _vm._s(servicio.nombre) +
+                                            "\n                                                  "
+                                        ),
                                         _c("input", {
                                           attrs: {
                                             type: "checkbox",
@@ -1662,20 +1725,7 @@ var render = function() {
                                           }
                                         }),
                                         _vm._v(" "),
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass: "no_bold",
-                                            attrs: { for: "cssCheckbox1" + key }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n            \t\t\t\t\t\t\t\t\t\t\t" +
-                                                _vm._s(servicio.nombre) +
-                                                "\n            \t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
+                                        _c("span", { staticClass: "checkmark" })
                                       ]
                                     )
                                   ])

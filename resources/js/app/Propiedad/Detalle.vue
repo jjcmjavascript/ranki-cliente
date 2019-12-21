@@ -98,7 +98,7 @@
                                 </div>
                                 <!-- reviews-score-wrap end -->
                                 <div>
-                                    <a href="booking-single.html" class="btn btn-warning btn-lg" style="width: 100%">Cotizar <i class="far fa-bookmark"></i></a>
+                                    <a :disabled="rows.cotizar" href="booking-single.html" class="btn btn-warning btn-lg" style="width: 100%">Cotizar <i class="far fa-bookmark"></i></a>
                                 </div>
                             </div>
                             <!--   flat-hero-container end -->

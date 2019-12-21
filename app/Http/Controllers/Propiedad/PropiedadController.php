@@ -181,7 +181,7 @@ class PropiedadController extends Controller
 
             return response([
                 'success' => $response['success'],
-                'url' => route('usuario.publicaciones') 
+                'url' => route('usuario.publicaciones')
             ],200);
         }
         catch(\Exception $e) {
@@ -260,6 +260,12 @@ class PropiedadController extends Controller
         try {
             $response = (new ApiHelper)->publicRequest('api/propiedades/mostrar',['id'=>$id_propieda]);
             if(isset($response['error'])) throw new \Exception($response);
+
+                if($response['_usuario']['id'] == !Auth::user()->id){
+                    $response['cotizar'] = true;
+                }else{
+                    $response['cotizar'] = false;
+                };
 
             return response($response,200);
 
