@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sistema\Usuario;
 use App\Models\Comun\Imagen;
 use Carbon\Carbon;
+use App\Extendidos\URL;
 
 class UsuarioController extends Controller
 {
@@ -175,7 +176,7 @@ class UsuarioController extends Controller
                     $this->logout();
                 }
 
-                return response([ 'url' => url()->previous() ], 200);
+                return response([ 'url' => URL::previo() ], 200);
             }
 
             throw new \Exception('Cotraseña o correo incorrecto.');
@@ -235,6 +236,28 @@ class UsuarioController extends Controller
                 'error' => $e->getLine().': '.$e->getMessage()
             ],500);
         }
+    }
+
+    public function desactivar ( Request $request )
+    {
+        try {
+
+            $response = (new ApiHelper)->sendApiRequest('api/usuarios/desactivar', ['id' => Auth::user()->id]);
+
+            if(isset($response['error']) ) throw new \Exception($response);
+
+            session()->flush();
+
+            return response()->json([
+                'exit' => route('inicio')
+            ],200);
+        }catch (\Exception $e) {
+
+            return response()->json([
+                'error' => $e->getLine().': '.$e->getMessage()
+            ],500);
+        }
+
     }
 
     public function exportar( Request $request )

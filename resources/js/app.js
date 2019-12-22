@@ -248,7 +248,7 @@ const app = new Vue({
                 })
                 mensaje = temp+'</ul>';
             }
-            mensaje = mensaje.indexOf('undefine') > 0? '' : mensaje;
+            mensaje = !mensaje || mensaje.indexOf('undefine') > 0 ? '' : mensaje;
             this.$swal.fire({
                 showCloseButton: button ? true : false ,
                 title : titulo,
@@ -389,7 +389,7 @@ const app = new Vue({
            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
                 evt.preventDefault();
            }
-             
+
            return true;
         },
         /**

@@ -33,7 +33,7 @@ class CreateClientesTable extends Migration
             $table->text('direccion')->nullable();
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
-            $table->boolean('notificaciones')->default(0)->comment('Marca para recibir notificaciones');
+            $table->boolean('notificacion')->default(0)->comment('Marca para recibir notificaciones');
             $table->boolean('activo')->default(1);
             $table->integer('configuracion')->unsigned()->nullable();
             $table->rememberToken();
