@@ -21,9 +21,28 @@
                     </div>
                     <div class="dasboard-sidebar-item fl-wrap">
                         <h3>
-                            <span>Bievenid@ </span>
+                            <span>Bievenido </span>
                           {{Auth::user()->nombre}}
                         </h3>
+                    </div>
+                    <a href="{{route('propiedad.crear')}}" class="ed-btn btn-info">
+                        Publicar
+                    </a>                                        
+                    <div class="user-stats fl-wrap">
+                        <ul>
+                            <li>
+                                Publicaciones    
+                                <span>4</span>
+                            </li>
+                            <li>
+                                Favoritos
+                                <span>32</span> 
+                            </li>
+                            <li>
+                                Reseñas 
+                                <span>2</span>  
+                            </li>
+                        </ul>
                     </div>
                     <a href="{{route('usuario.salir')}}" class="log-out-btn color-bg">Salir <i class="far fa-sign-out"></i></a>
                 </div>

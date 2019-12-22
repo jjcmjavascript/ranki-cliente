@@ -60,6 +60,8 @@
                                 <li><a href="{{route('usuario.perfil')}}"> Editar Perfil</a></li>
                                 <li><a href="{{route('usuario.favoritos')}}"> Favoritos</a></li>
                                 <li><a href="{{route('usuario.publicaciones')}}"> Mis Publicaciones</a></li>
+                                <li><a href="{{route('propiedad.crear')}}"> Publicar</a></li>
+                                <li><a href="#"> Contratar plan</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -90,13 +92,14 @@
                 <li><a href="{{route('usuario.perfil')}}"> Editar Perfil</a></li>
                 <li><a href="{{route('usuario.favoritos')}}"> Favoritos</a></li>
                 <li><a href="{{route('usuario.publicaciones')}}"> Mis Publicaciones</a></li>
-
+                <li><a href="{{route('propiedad.crear')}}"> Publicar</a></li>
+                <li><a href="#"> Contratar plan</a></li>
                 <li><a href="{{route('usuario.salir')}}">Salir</a></li>
               </ul>
               <div>
-              <div class="add_propiedad">
-                  Agregar  <i class="fa fa-plus"></i>
-              </div>
+              <a class="add_propiedad btn-info" href="{{route('propiedad.crear')}}">
+                  Publicar  <i class="fa fa-plus"></i>
+              </a>
             @endauth
         </div>
 

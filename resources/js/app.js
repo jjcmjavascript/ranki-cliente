@@ -235,7 +235,9 @@ const app = new Vue({
               })
         },
         stop(){
-            document.querySelector('.swal2-container').remove();
+            if(document.querySelector('.swal2-container')){
+                document.querySelector('.swal2-container').remove();
+            }
         },
         alertas(tipo, titulo, mensaje= null, button = true){
             if(mensaje){
@@ -246,7 +248,7 @@ const app = new Vue({
                 })
                 mensaje = temp+'</ul>';
             }
-            mensaje = mensaje.indexOf('undefine') > 0? '' : mensaje;
+            mensaje = !mensaje || mensaje.indexOf('undefine') > 0 ? '' : mensaje;
             this.$swal.fire({
                 showCloseButton: button ? true : false ,
                 title : titulo,
@@ -375,6 +377,20 @@ const app = new Vue({
             }
 
             return true;
+        },
+        /**
+         * Filtra letras y caracteres de la entrada de un input
+         * @param  {String} Tecla presionada
+         * @return Retorna TRUE si la tecla presionada es un número
+         */
+        isNumberKey: function (evt)
+        {
+           var charCode = (evt.which) ? evt.which : evt.keyCode;
+           if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                evt.preventDefault();
+           }
+
+           return true;
         },
         /**
          * Indica si el correo electrónico ingresado es válido o no

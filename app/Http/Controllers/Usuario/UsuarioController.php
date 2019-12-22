@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sistema\Usuario;
 use App\Models\Comun\Imagen;
 use Carbon\Carbon;
+use App\Extendidos\URL;
 
 class UsuarioController extends Controller
 {
@@ -54,9 +55,20 @@ class UsuarioController extends Controller
         try {
 
             $ruta = 'api/usuarios/guardar';
-            $form_params = $request->all();
 
-            $response = (new ApiHelper)->sendApiRequest($ruta, $form_params);
+            // Cargando avatar
+            $multipart = [
+                [
+                    'name'      => 'avatar',
+                    'Mime-Type' => $request->avatar->getmimeType(),
+                    'filename'  => $request->avatar->getClientOriginalName(),
+                    'contents'  => fopen($request->avatar->getPathname(), 'r')
+                ],
+            ];
+
+            $multipart = $this->formatMultipartRequest($multipart, $request->except('avatar'));
+
+            $response = (new ApiHelper)->sendApiRequest($ruta, null, $multipart);
 
             if(isset($response['error'])) throw new \Exception($response);
 
@@ -154,11 +166,11 @@ class UsuarioController extends Controller
             {
                 $response = (new ApiHelper)->sendCredentialsRequest();
 
-                if(!$response){
+                if(!$response || isset($response['error'])){
                     $this->logout();
                 }
 
-                return response([ 'url' => url()->previous() ], 200);
+                return response([ 'url' => URL::previo() ], 200);
             }
 
             throw new \Exception('Cotraseña o correo incorrecto.');
@@ -177,8 +189,8 @@ class UsuarioController extends Controller
         return redirect()->to('/');
     }
 
-    public function favoritos(Request $request){
-
+    public function favoritos(Request $request)
+    {
         try {
 
             $request->merge(['id_usuario' => Auth::user()->id]);
@@ -199,8 +211,8 @@ class UsuarioController extends Controller
         }
     }
 
-    public function mis_propiedades(Request $request){
-
+    public function mis_propiedades ( Request $request )
+    {
         try {
             $request->merge([ 'id_usuario'=>Auth::user()->id ]);
 
@@ -227,12 +239,79 @@ class UsuarioController extends Controller
             $response = (new ApiHelper)->sendApiRequest('api/usuarios/desactivar', ['id' => Auth::user()->id]);
 
             if(isset($response['error']) ) throw new \Exception($response);
-            
+
             session()->flush();
 
             return response()->json([
                 'exit' => route('inicio')
             ],200);
+        }catch (\Exception $e) {
+
+            return response()->json([
+                'error' => $e->getLine().': '.$e->getMessage()
+            ],500);
+        }
+
+    }
+
+    public function exportar( Request $request )
+    {
+        try {
+            $request->merge([ 'id_usuario'=>Auth::user()->id ]);
+
+            $response = (new ApiHelper)->sendApiRequest('api/usuarios/exportar', $request->all() );
+
+            if(isset($response['error'])) throw new \Exception($response);
+
+            if( count($response) ){
+                $cabeza =[
+                    'Titulo',
+                    'Condicion',
+                    'Tipo de Propiedad',
+                    'Numero de piso',
+                    'Numero de Domicilio',
+                    'Numero de calle',
+                    'Region',
+                    'Comuna',
+                    'Superficie',
+                    'Terraza',
+                    'Baños',
+                    'Amoblado',
+                    'Privado',
+                    'Bodega',
+                    'Estacionamiento',
+                    'Precio',
+                    'Estado'
+                ];
+
+                $response  = array_column($response, '_propiedades');
+                $datos = [];
+                foreach ($response as $key => $propiedad) {
+                    $propiedad =(object) $propiedad;
+                    $tipo_valor = $propiedad->_tipo_valor ? $propiedad->_tipo_valor['nombre'] : '';
+
+                    $temp['Titulo'] = $propiedad->titulo ? $propiedad->titulo  : '-----';
+                    $temp['Condicion'] = isset($propiedad->_tipo_propiedad) ? $propiedad->_tipo_propiedad['nombre'] :  '-----';
+                    $temp['Tipo de Propiedad']=isset($propiedad->_subtipo_propiedad) ? $propiedad->_subtipo_propiedad['nombre'] : '-----';
+                    $temp['Numero de piso'] = $propiedad->numero_piso ? $propiedad->numero_piso['nombre'] : '-----';
+                    $temp['Numero de Domicilio'] = $propiedad->numero_domilicio ? $propiedad->numero_domilicio : '-----';
+                    $temp['Numero de Calle'] = $propiedad->numero_calle ? $propiedad->numero_calle : '-----';
+                    $temp['Region'] =  isset($propiedad->_region) ? $propiedad->_region['nombre'] : '-----';
+                    $temp['Comuna'] = isset($propiedad->_comuna) ? $propiedad->_comuna['nombre'] : '-----';
+                    $temp['Superficie'] = $propiedad->superficie_util ? $propiedad->superficie_util.' mts2' : '-----';
+                    $temp['Terraza'] = $propiedad->superficie_terraza ? $propiedad->superficie_terraza.' mts2' : '-----';
+                    $temp['Baños'] = $propiedad->banio > 0 ? $propiedad->banio : '0';
+                    $temp['Amoblado'] = $propiedad->amoblada == 1 ? 'SI' : 'NO';
+                    $temp['Privado'] = $propiedad->privado > 0 ? $propiedad->privado : '0';
+                    $temp['Bodega'] = $propiedad->bodega > 0 ? $propiedad->bodega : '0';
+                    $temp['Estacionamiento'] = $propiedad->estacionamiento > 0 ? $propiedad->estacionamiento : '0';
+                    $temp['Precio'] = $propiedad->precio > 0 ? $tipo_valor.' '.$propiedad->precio : '0';
+                    $temp['Estado'] = $propiedad->estado == 1 ? 'Activa' : 'Inactiva';
+                    $datos[]= $temp;
+                }
+            }
+
+            return $this->generarExcel($datos, $cabeza , 'mis_favoritos_'.date('d-m-ys'));
 
         } catch (\Exception $e) {
 
@@ -240,6 +319,5 @@ class UsuarioController extends Controller
                 'error' => $e->getLine().': '.$e->getMessage()
             ],500);
         }
-
     }
 }
