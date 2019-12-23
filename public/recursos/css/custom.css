@@ -1,3 +1,10 @@
+.background-search{
+    background: white;
+}
+.background-search .vs__search {
+    border-color: transparent;
+}
+
 /* MIN */
 .geodir-opt-list a {
     display: flex !important;
