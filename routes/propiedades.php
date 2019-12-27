@@ -8,9 +8,12 @@ Route::post('obtener_comuna', 'HomeController@obtener_comuna');
 Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function(){
     Route::get('{id}/detalle', 'PropiedadController@vue')->name('.ver_detalle');
     Route::post('{id}/detalle', 'PropiedadController@detalle')->name('.ver_detalle');
+    Route::get('results', 'PropiedadController@vue');
+    Route::post('results', 'PropiedadController@result');
 });
+
 // PROPIEDADES
-Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function() {
+Route::middleware(['auth','verifyToken'])->namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function() {
     Route::get('crear','PropiedadController@vue')->name('.crear');
     Route::post('crear','PropiedadController@crear')->name('.guardar');
     Route::post('crear/guardar','PropiedadController@guardar')->name('.guardar');

@@ -47,28 +47,25 @@
                             </div> -->
                             <div class="row">
                                 <div class="input-group">
-                                    <div class="col-xs-12 background-search">
-                                            <v-select class="col-xs-12 col-md-4" :clearable="false" label="nombre" :options="selects.subtipo_propiedad" v-model="filters.subtipo_propiedad" />
-                                            <v-select class="col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipos_operaciones" />
-                                            <v-select label="nombre" :filterable="false" v-model="filters.localidad" :options="selects.results"
-                                                @search="onSearch" class="col-md-5" @input="searchQuery">
-                                                <template slot="no-options">
-                                                    Busque su propiedad
-                                                </template>
-                                                <template slot="option" slot-scope="option">
-                                                    <div class="selected d-center">
-                                                        {{ option.nombre }},{{option.lateral}} <small class="ml-2">{{option.tipo}}</small>
-                                                    </div>
-                                                </template>
-                                                <template slot="selected-option" slot-scope="option">
-                                                    <div class="selected d-center">
-                                                        {{ option.nombre }},{{option.lateral}} <small class="ml-2">{{option.tipo}}</small>
-                                                    </div>
-                                                </template>
-                                            </v-select>
-                                        <div class="input-group-append">
-                                            <a class="btn btn-warning" type="button" :href="query">Buscar</a>
-                                        </div>
+                                    <div class="col-xs-12 col-md-12">
+                                        <v-select class="bg-light mt-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.subtipo_propiedad" v-model="filters.subtipo_propiedad" />
+                                        <v-select class="bg-light mt-1 ml-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipos_operaciones" />
+                                        <v-select class="bg-light mt-1 col-xs-12 ml-1 col-md-4" label="nombre" :filterable="false"  v-model="filters.localidad" :options="selects.results" @search="onSearch" >
+                                            <template slot="no-options">
+                                                Busque su propiedad
+                                            </template>
+                                            <template slot="option" slot-scope="option">
+                                                <div class="selected d-center">
+                                                    {{ option.nombre }},{{option.lateral}} <small class="ml-2">{{option.tipo}}</small>
+                                                </div>
+                                            </template>
+                                            <template slot="selected-option" slot-scope="option">
+                                                <div class="selected d-center">
+                                                    {{ option.nombre }},{{option.lateral}} <small class="ml-2">{{option.tipo}}</small>
+                                                </div>
+                                            </template>
+                                        </v-select>
+                                        <a class="btn btn-warning col-md-1 mt-1 mt-1" type="button" :href="query">Ir</a>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +127,8 @@
                                                         /
                                                         {{rows[i-1] && rows[i-1]._comuna ? rows[i-1]._comuna.nombre+',' : ''}}
                                                         {{rows[i-1] && rows[i-1]._region ? rows[i-1]._region.nombre : ''}}
-                                                    </a></div>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                         <template v-if="rows[i-1] && rows[i-1].descripcion">
@@ -192,18 +190,15 @@ export default {
         return {
             app_url: this.$root.base_url,
             rows: [],
-            selects : {
-                subtipo_propiedad : [],
-                tipos_operaciones : [],
-                results:[]
+            selects: {
+                subtipo_propiedad: [],
+                tipos_operaciones: [],
+                results: []
             },
-            filters : {
-                subtipo_propiedad : null,
-                tipos_operaciones : null,
-                localidad :  {
-                    id : null,
-                    tipo : null,
-                }
+            filters: {
+                subtipo_propiedad: null,
+                tipos_operaciones: null,
+                localidad:null,
             }
         }
     },
@@ -211,18 +206,22 @@ export default {
         this.iniciar();
     },
     computed: {
-        query(){
-            let { subtipo_propiedad : propiedad , tipos_operaciones : operacion, localidad }  = this.filters;
+        query() {
+            let {
+                subtipo_propiedad: propiedad,
+                tipos_operaciones: operacion,
+                localidad
+            } = this.filters;
 
             let query =
-                `${this.app_url}propiedad/busqueda?operacion=${operacion ? operacion.id: ''}&propiedad=${propiedad ? propiedad.id : ''}&localidad=${localidad.id ? localidad.id : ''}&tipo=${localidad.tipo ? localidad.tipo : ''}`;
+                `${this.app_url}propiedad/results?operacion=${operacion ? operacion.id: ''}&propiedad=${propiedad ? propiedad.id : ''}&localidad=${localidad && localidad.id ? localidad.id : ''}&tipo=${localidad && localidad.tipo ? localidad.tipo : ''}`;
 
             return query;
         }
     },
     methods: {
-        searchQuery(){
-            window.location.href =this.query;
+        searchQuery() {
+            window.location.href = this.query;
         },
         start() {
             this.$root.cargando();
@@ -237,7 +236,7 @@ export default {
             this.getPropiedades();
             this.getFiltros();
         },
-        getPropiedades(){
+        getPropiedades() {
             axios.post(this.app_url + 'ultimas_propieades')
                 .then(res => {
                     this.rows = res.data.propiedades;
@@ -246,11 +245,11 @@ export default {
 
                 })
         },
-        getFiltros(){
+        getFiltros() {
             axios.post(this.app_url + 'filtros')
                 .then(res => {
                     this.selects.subtipo_propiedad = res.data.subtipo_propiedad;
-                    this.selects.tipos_operaciones =  res.data.tipos_operaciones;
+                    this.selects.tipos_operaciones = res.data.tipos_operaciones;
                     this.filters.subtipo_propiedad = this.selects.subtipo_propiedad[0];
                     this.filters.tipos_operaciones = this.selects.tipos_operaciones[0];
                 })
@@ -269,15 +268,17 @@ export default {
             }
         },
         onSearch(search, loading) {
-          loading(true);
+            loading(true);
             this.buscar(loading, search, this);
         },
-        buscar(loading, search, self){
-            if(search.length > 2){
-                axios.post(this.app_url + 'obtener_comuna', {nombre : search})
-                .then(res =>{
-                    this.selects.results = res.data;
-                })
+        buscar(loading, search, self) {
+            if (search.length > 2) {
+                axios.post(this.app_url + 'obtener_comuna', {
+                        nombre: search
+                    })
+                    .then(res => {
+                        this.selects.results = res.data;
+                    })
             }
             loading(false);
         },

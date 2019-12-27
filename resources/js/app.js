@@ -12,8 +12,9 @@ window.Vue = require('vue');
 import Loading from 'vue-loading-overlay';
 import VueRouter from 'vue-router';
 import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+
 // IMPORTANDO ESTILOS
+import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import 'vue-select/dist/vue-select.css';
 

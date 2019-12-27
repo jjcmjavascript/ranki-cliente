@@ -191,8 +191,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
  // api/publicaciones/recientes
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -211,10 +209,7 @@ __webpack_require__.r(__webpack_exports__);
       filters: {
         subtipo_propiedad: null,
         tipos_operaciones: null,
-        localidad: {
-          id: null,
-          tipo: null
-        }
+        localidad: null
       }
     };
   },
@@ -227,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
           propiedad = _this$filters.subtipo_propiedad,
           operacion = _this$filters.tipos_operaciones,
           localidad = _this$filters.localidad;
-      var query = "".concat(this.app_url, "propiedad/busqueda?operacion=").concat(operacion ? operacion.id : '', "&propiedad=").concat(propiedad ? propiedad.id : '', "&localidad=").concat(localidad.id ? localidad.id : '', "&tipo=").concat(localidad.tipo ? localidad.tipo : '');
+      var query = "".concat(this.app_url, "propiedad/results?operacion=").concat(operacion ? operacion.id : '', "&propiedad=").concat(propiedad ? propiedad.id : '', "&localidad=").concat(localidad && localidad.id ? localidad.id : '', "&tipo=").concat(localidad && localidad.tipo ? localidad.tipo : '');
       return query;
     }
   },
@@ -344,10 +339,10 @@ var render = function() {
                         _c("div", { staticClass: "input-group" }, [
                           _c(
                             "div",
-                            { staticClass: "col-xs-12 background-search" },
+                            { staticClass: "col-xs-12 col-md-12" },
                             [
                               _c("v-select", {
-                                staticClass: "col-xs-12 col-md-4",
+                                staticClass: "bg-light mt-1 col-xs-12 col-md-3",
                                 attrs: {
                                   clearable: false,
                                   label: "nombre",
@@ -367,7 +362,8 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("v-select", {
-                                staticClass: "col-xs-12 col-md-3",
+                                staticClass:
+                                  "bg-light mt-1 ml-1 col-xs-12 col-md-3",
                                 attrs: {
                                   clearable: false,
                                   label: "nombre",
@@ -389,16 +385,14 @@ var render = function() {
                               _c(
                                 "v-select",
                                 {
-                                  staticClass: "col-md-5",
+                                  staticClass:
+                                    "bg-light mt-1 col-xs-12 ml-1 col-md-4",
                                   attrs: {
                                     label: "nombre",
                                     filterable: false,
                                     options: _vm.selects.results
                                   },
-                                  on: {
-                                    search: _vm.onSearch,
-                                    input: _vm.searchQuery
-                                  },
+                                  on: { search: _vm.onSearch },
                                   scopedSlots: _vm._u([
                                     {
                                       key: "option",
@@ -411,7 +405,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                                        " +
+                                                "\n                                                    " +
                                                   _vm._s(option.nombre) +
                                                   "," +
                                                   _vm._s(option.lateral) +
@@ -438,7 +432,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                                        " +
+                                                "\n                                                    " +
                                                   _vm._s(option.nombre) +
                                                   "," +
                                                   _vm._s(option.lateral) +
@@ -466,23 +460,22 @@ var render = function() {
                                 [
                                   _c("template", { slot: "no-options" }, [
                                     _vm._v(
-                                      "\n                                                    Busque su propiedad\n                                                "
+                                      "\n                                                Busque su propiedad\n                                            "
                                     )
                                   ])
                                 ],
                                 2
                               ),
                               _vm._v(" "),
-                              _c("div", { staticClass: "input-group-append" }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-warning",
-                                    attrs: { type: "button", href: _vm.query }
-                                  },
-                                  [_vm._v("Buscar")]
-                                )
-                              ])
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-warning col-md-1 mt-1 mt-1",
+                                  attrs: { type: "button", href: _vm.query }
+                                },
+                                [_vm._v("Ir")]
+                              )
                             ],
                             1
                           )

@@ -1,3 +1,29 @@
+/* vue select */
+   .vs__search::placeholder,
+   .vs__dropdown-toggle,
+   .vs__dropdown-menu {
+    border: none !important;
+    color: #394066 !important;
+  }
+
+   .vs__clear,
+   .vs__open-indicator {
+  }
+  .v-select.vs--single.vs--searchable {
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+  }
+  .col-list-wrap {
+    background: white !important;
+  }
+/*  */
+/* .search-input-item.midd-input{
+  width: 100% !important;
+}
+.quantity-item {
+  width: 10% !important;
+} */
+
 .background-search{
     background: white;
 }

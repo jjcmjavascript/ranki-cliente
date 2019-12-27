@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Crear":"app/Propiedad/Crear","app/Propiedad/Detalle":"app/Propiedad/Detalle","app/Propiedad/Editar":"app/Propiedad/Editar","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave":"app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave","app/login":"app/login","app/recovery/recuperarClave":"app/recovery/recuperarClave","app/recovery/reiniciarClave":"app/recovery/reiniciarClave","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Crear":"app/Propiedad/Crear","app/Propiedad/Detalle":"app/Propiedad/Detalle","app/Propiedad/Editar":"app/Propiedad/Editar","app/Propiedad/Results":"app/Propiedad/Results","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave":"app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave","app/login":"app/login","app/recovery/recuperarClave":"app/recovery/recuperarClave","app/recovery/reiniciarClave":"app/recovery/reiniciarClave","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -82623,8 +82623,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-
  // IMPORTANDO ESTILOS
+
 
 
 
@@ -83480,6 +83480,12 @@ var routes = [{
   name: '/editar_propiedad',
   component: function component() {
     return __webpack_require__.e(/*! import() | app/Propiedad/Editar */ "app/Propiedad/Editar").then(__webpack_require__.bind(null, /*! ../app/Propiedad/Editar */ "./resources/js/app/Propiedad/Editar.vue"));
+  }
+}, {
+  path: '/propiedad/results',
+  name: '/results',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | app/Propiedad/Results */ "app/Propiedad/Results").then(__webpack_require__.bind(null, /*! ../app/Propiedad/Results */ "./resources/js/app/Propiedad/Results.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
