@@ -170,6 +170,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  // api/publicaciones/recientes
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -179,13 +200,36 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       app_url: this.$root.base_url,
-      rows: []
+      rows: [],
+      selects: {
+        subtipo_propiedad: [],
+        tipos_operaciones: [],
+        results: []
+      },
+      filters: {
+        subtipo_propiedad: null,
+        tipos_operaciones: null,
+        localidad: null
+      }
     };
   },
   mounted: function mounted() {
     this.iniciar();
   },
+  computed: {
+    query: function query() {
+      var _this$filters = this.filters,
+          propiedad = _this$filters.subtipo_propiedad,
+          operacion = _this$filters.tipos_operaciones,
+          localidad = _this$filters.localidad;
+      var query = "".concat(this.app_url, "propiedad/results?operacion=").concat(operacion ? operacion.id : '', "&propiedad=").concat(propiedad ? propiedad.id : '', "&localidad=").concat(localidad && localidad.id ? localidad.id : '', "&tipo=").concat(localidad && localidad.tipo ? localidad.tipo : '');
+      return query;
+    }
+  },
   methods: {
+    searchQuery: function searchQuery() {
+      window.location.href = this.query;
+    },
     start: function start() {
       this.$root.cargando();
     },
@@ -197,11 +241,25 @@ __webpack_require__.r(__webpack_exports__);
       this.$root.alertas(tipo, titulo, mensaje);
     },
     iniciar: function iniciar() {
+      this.getPropiedades();
+      this.getFiltros();
+    },
+    getPropiedades: function getPropiedades() {
       var _this = this;
 
       axios.post(this.app_url + 'ultimas_propieades').then(function (res) {
         _this.rows = res.data.propiedades;
       })["catch"](function (err) {});
+    },
+    getFiltros: function getFiltros() {
+      var _this2 = this;
+
+      axios.post(this.app_url + 'filtros').then(function (res) {
+        _this2.selects.subtipo_propiedad = res.data.subtipo_propiedad;
+        _this2.selects.tipos_operaciones = res.data.tipos_operaciones;
+        _this2.filters.subtipo_propiedad = _this2.selects.subtipo_propiedad[0];
+        _this2.filters.tipos_operaciones = _this2.selects.tipos_operaciones[0];
+      });
     },
     badgeColor: function badgeColor(tipo_operacion) {
       switch (tipo_operacion.id) {
@@ -217,6 +275,23 @@ __webpack_require__.r(__webpack_exports__);
           return;
           break;
       }
+    },
+    onSearch: function onSearch(search, loading) {
+      loading(true);
+      this.buscar(loading, search, this);
+    },
+    buscar: function buscar(loading, search, self) {
+      var _this3 = this;
+
+      if (search.length > 2) {
+        axios.post(this.app_url + 'obtener_comuna', {
+          nombre: search
+        }).then(function (res) {
+          _this3.selects.results = res.data;
+        });
+      }
+
+      loading(false);
     }
   }
 });
@@ -246,10 +321,175 @@ var render = function() {
         { staticStyle: { "padding-top": "80px" }, attrs: { id: "wrapper" } },
         [
           _c("div", { staticClass: "content" }, [
-            _vm._m(0),
+            _c(
+              "section",
+              {
+                staticClass: "hero-section",
+                attrs: { "data-scrollax-parent": "true", id: "sec1" }
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "hero-section-wrap fl-wrap" }, [
+                  _c("div", { staticClass: "container" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "main-search-input-wrap" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "input-group" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-xs-12 col-md-12" },
+                            [
+                              _c("v-select", {
+                                staticClass: "bg-light mt-1 col-xs-12 col-md-3",
+                                attrs: {
+                                  clearable: false,
+                                  label: "nombre",
+                                  options: _vm.selects.subtipo_propiedad
+                                },
+                                model: {
+                                  value: _vm.filters.subtipo_propiedad,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.filters,
+                                      "subtipo_propiedad",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "filters.subtipo_propiedad"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-select", {
+                                staticClass:
+                                  "bg-light mt-1 ml-1 col-xs-12 col-md-3",
+                                attrs: {
+                                  clearable: false,
+                                  label: "nombre",
+                                  options: _vm.selects.tipos_operaciones
+                                },
+                                model: {
+                                  value: _vm.filters.tipos_operaciones,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.filters,
+                                      "tipos_operaciones",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "filters.tipos_operaciones"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-select",
+                                {
+                                  staticClass:
+                                    "bg-light mt-1 col-xs-12 ml-1 col-md-4 v-select-clearfix",
+                                  attrs: {
+                                    label: "nombre",
+                                    filterable: false,
+                                    clearable: false,
+                                    options: _vm.selects.results
+                                  },
+                                  on: { search: _vm.onSearch },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "option",
+                                      fn: function(option) {
+                                        return [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass: "selected d-center"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\r\n                                                    " +
+                                                  _vm._s(option.nombre) +
+                                                  ", " +
+                                                  _vm._s(option.lateral) +
+                                                  " "
+                                              ),
+                                              _c(
+                                                "small",
+                                                { staticClass: "float-right" },
+                                                [_vm._v(_vm._s(option.tipo))]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      key: "selected-option",
+                                      fn: function(option) {
+                                        return [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass: "selected d-center"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\r\n                                                    " +
+                                                  _vm._s(option.nombre) +
+                                                  ", " +
+                                                  _vm._s(option.lateral) +
+                                                  " "
+                                              ),
+                                              _c(
+                                                "small",
+                                                { staticClass: "float-right" },
+                                                [_vm._v(_vm._s(option.tipo))]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.filters.localidad,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.filters, "localidad", $$v)
+                                    },
+                                    expression: "filters.localidad"
+                                  }
+                                },
+                                [
+                                  _c("template", { slot: "no-options" }, [
+                                    _vm._v(
+                                      "\r\n                                                Busque su propiedad\r\n                                            "
+                                    )
+                                  ])
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "btn btn-warning col-md-1 mt-1 mt-1",
+                                  attrs: { type: "button", href: _vm.query }
+                                },
+                                [_vm._v("Ir")]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c("section", { staticClass: "grey-blue-bg" }, [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "div",
@@ -295,19 +535,19 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                                " +
+                                              "\r\n                                                " +
                                                 _vm._s(
                                                   _vm.rows[i - 1]
                                                     ._tipo_operacion.nombre
                                                 ) +
-                                                "\n                                            "
+                                                "\r\n                                            "
                                             )
                                           ]
                                         )
                                       ]
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _vm._m(2, true)
+                                  _vm._m(3, true)
                                 ],
                                 2
                               ),
@@ -346,7 +586,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                                        " +
+                                                    "\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1].titulo
@@ -354,7 +594,7 @@ var render = function() {
                                                               .titulo
                                                           : ""
                                                       ) +
-                                                      "\n                                                    "
+                                                      "\r\n                                                    "
                                                   )
                                                 ]
                                               )
@@ -380,7 +620,7 @@ var render = function() {
                                                       "fas fa-map-marker-alt"
                                                   }),
                                                   _vm._v(
-                                                    "\n                                                        " +
+                                                    "\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1]
@@ -389,7 +629,7 @@ var render = function() {
                                                               .numero_calle
                                                           : ""
                                                       ) +
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1].calle
@@ -397,7 +637,7 @@ var render = function() {
                                                               .calle
                                                           : ""
                                                       ) +
-                                                      "\n                                                        /\n                                                        " +
+                                                      "\r\n                                                        /\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1]
@@ -407,7 +647,7 @@ var render = function() {
                                                               ","
                                                           : ""
                                                       ) +
-                                                      "\n                                                        " +
+                                                      "\r\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1]
@@ -416,7 +656,7 @@ var render = function() {
                                                               ._region.nombre
                                                           : ""
                                                       ) +
-                                                      "\n                                                    "
+                                                      "\r\n                                                    "
                                                   )
                                                 ]
                                               )
@@ -455,7 +695,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                                Precio \n                                                "
+                                            "\r\n                                                Precio\r\n                                                "
                                           ),
                                           _c("br"),
                                           _vm._v(" "),
@@ -486,7 +726,7 @@ var render = function() {
                                         2
                                       ),
                                       _vm._v(" "),
-                                      _vm._m(3, true)
+                                      _vm._m(4, true)
                                     ]
                                   )
                                 ],
@@ -500,9 +740,9 @@ var render = function() {
                     0
                   ),
                   _vm._v(" "),
-                  _vm._m(4),
+                  _vm._m(5),
                   _vm._v(" "),
-                  _vm._m(5)
+                  _vm._m(6)
                 ]
               )
             ])
@@ -512,7 +752,7 @@ var render = function() {
       _vm._v(" "),
       _c("login"),
       _vm._v(" "),
-      _vm._m(6)
+      _vm._m(7)
     ],
     1
   )
@@ -522,153 +762,31 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "section",
-      {
-        staticClass: "hero-section",
-        attrs: { "data-scrollax-parent": "true", id: "sec1" }
-      },
-      [
-        _c("div", { staticClass: "hero-parallax" }, [
-          _c("div", {
-            staticClass: "bg",
-            attrs: {
-              "data-bg": "images/portada.jpg",
-              "data-scrollax": "properties: { translateY: '200px' }"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "overlay op7" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "hero-section-wrap fl-wrap" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "home-intro" }, [
-              _c("div", { staticClass: "section-title-separator" }, [
-                _c("span")
-              ]),
-              _vm._v(" "),
-              _c("h2", [_vm._v("JM INMOBILIARIA")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "section-separator" }),
-              _vm._v(" "),
-              _c("h3", [_vm._v("¡Consigue el domilicio que buscas aqui!")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "main-search-input-wrap" }, [
-              _c("div", { staticClass: "main-search-input fl-wrap" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "main-search-input-item location",
-                    attrs: { id: "autocomplete-container" }
-                  },
-                  [
-                    _c("span", { staticClass: "inpt_dec" }, [
-                      _c("i", { staticClass: "fal fa-map-marker" })
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "autocomplete-input",
-                      attrs: {
-                        type: "text",
-                        placeholder: "Hotel , City...",
-                        id: "autocompleteid2",
-                        value: ""
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "fal fa-dot-circle" })
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "main-search-input-item main-date-parent main-search-input-item_small"
-                  },
-                  [
-                    _c("span", { staticClass: "inpt_dec" }, [
-                      _c("i", { staticClass: "fal fa-calendar-check" })
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: {
-                        type: "text",
-                        placeholder: "When",
-                        name: "main-input-search",
-                        value: ""
-                      }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "main-search-input-item" }, [
-                  _c("div", { staticClass: "qty-dropdown fl-wrap" }, [
-                    _c("div", { staticClass: "qty-dropdown-header fl-wrap" }, [
-                      _c("i", { staticClass: "fal fa-users" }),
-                      _vm._v(" Persons")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "qty-dropdown-content fl-wrap" }, [
-                      _c("div", { staticClass: "quantity-item" }, [
-                        _c("label", [
-                          _c("i", { staticClass: "fas fa-male" }),
-                          _vm._v(" Adults")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "quantity" }, [
-                          _c("input", {
-                            attrs: {
-                              type: "number",
-                              min: "1",
-                              max: "3",
-                              step: "1",
-                              value: "1"
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "quantity-item" }, [
-                        _c("label", [
-                          _c("i", { staticClass: "fas fa-child" }),
-                          _vm._v(" Children")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "quantity" }, [
-                          _c("input", {
-                            attrs: {
-                              type: "number",
-                              min: "0",
-                              max: "3",
-                              step: "1",
-                              value: "0"
-                            }
-                          })
-                        ])
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "main-search-button color2-bg",
-                    attrs: { onclick: "window.location.href='listing.html'" }
-                  },
-                  [_vm._v("Search "), _c("i", { staticClass: "fal fa-search" })]
-                )
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "hero-parallax" }, [
+      _c("div", {
+        staticClass: "bg",
+        attrs: {
+          "data-bg": "images/portada.jpg",
+          "data-scrollax": "properties: { translateY: '200px' }"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "overlay op7" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "home-intro" }, [
+      _c("div", { staticClass: "section-title-separator" }, [_c("span")]),
+      _vm._v(" "),
+      _c("h2", [_vm._v("JM INMOBILIARIA")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "section-separator" }),
+      _vm._v(" "),
+      _c("h3", [_vm._v("¡Consigue el domilicio que buscas aqui!")])
+    ])
   },
   function() {
     var _vm = this

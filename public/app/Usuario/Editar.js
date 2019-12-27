@@ -430,7 +430,9 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
-              _vm._v("\n                        Nombre\n                    ")
+              _vm._v(
+                "\r\n                        Nombre\r\n                    "
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
@@ -463,7 +465,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v(
-                "\n                        Apellidos\n                    "
+                "\r\n                        Apellidos\r\n                    "
               )
             ]),
             _vm._v(" "),
@@ -496,7 +498,9 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-xs-12 col-md-12" }, [
             _c("label", [
-              _vm._v("\n                        Correo\n                    ")
+              _vm._v(
+                "\r\n                        Correo\r\n                    "
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
@@ -529,7 +533,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v(
-                "\n                        Telefono Movil\n                    "
+                "\r\n                        Telefono Movil\r\n                    "
               )
             ]),
             _vm._v(" "),
@@ -563,7 +567,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v(
-                "\n                        Telefono Fijo\n                    "
+                "\r\n                        Telefono Fijo\r\n                    "
               )
             ]),
             _vm._v(" "),
@@ -597,7 +601,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-10" }, [
             _c("label", [
               _vm._v(
-                "\n                        Dirección\n                    "
+                "\r\n                        Dirección\r\n                    "
               )
             ]),
             _vm._v(" "),
@@ -634,7 +638,7 @@ var render = function() {
           _c("div", { staticClass: "form-group col-xs-12 col-md-2" }, [
             _c("label", [
               _vm._v(
-                "\n                        Avatar\n                        "
+                "\r\n                        Avatar\r\n                        "
               ),
               _vm.file
                 ? _c("i", {
@@ -659,7 +663,7 @@ var render = function() {
                   }
                 }),
                 _vm._v(
-                  "\n                            Subir imagen\n                        "
+                  "\r\n                            Subir imagen\r\n                        "
                 )
               ])
             ]),
@@ -681,7 +685,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("label", { staticClass: "checktainer" }, [
                     _vm._v(
-                      "\n                            Recibir Promociones/Notificaciones\n                          "
+                      "\r\n                            Recibir Promociones/Notificaciones\r\n                          "
                     ),
                     _c("input", {
                       directives: [
@@ -749,7 +753,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\n                        Guardar cambios\n                    "
+                  "\r\n                        Guardar cambios\r\n                    "
                 )
               ]
             )
@@ -1151,7 +1155,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            Guardar cambios\n                            "
+                        "\r\n                            Guardar cambios\r\n                            "
                       ),
                       _c("i", { staticClass: "fa fa-angle-right" })
                     ]
@@ -1185,7 +1189,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            Desactivar Cuenta\n                        "
+                          "\r\n                            Desactivar Cuenta\r\n                        "
                         )
                       ]
                     )

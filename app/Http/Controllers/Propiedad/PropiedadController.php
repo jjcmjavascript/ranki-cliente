@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Propiedad;
 
 use DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Storage;
 use ApiHelper;
 
@@ -181,7 +181,7 @@ class PropiedadController extends Controller
 
             return response([
                 'success' => $response['success'],
-                'url' => route('usuario.publicaciones') 
+                'url' => route('usuario.publicaciones')
             ],200);
         }
         catch(\Exception $e) {
@@ -211,7 +211,8 @@ class PropiedadController extends Controller
 
     }
 
-    public function desactivar ( Request $request ){
+    public function desactivar ( Request $request )
+    {
 
         $this->validate($request,[
             'id'=>'required|integer|exists:propiedades'
@@ -271,5 +272,20 @@ class PropiedadController extends Controller
 
     }
 
+    public function result( Request $request )
+    {
 
+      try {
+          $response = (new ApiHelper)->publicRequest('api/propiedades/results',$request->all());
+          if(isset($response['error'])) throw new \Exception($response);
+
+          return response($response,200);
+
+      } catch (\Exception $e) {
+          return response([
+              'error' => $e->getMessage()
+          ], 500);
+      }
+
+    }
 }

@@ -12,8 +12,8 @@ class ApiHelper {
 		$this->guzzle = new \GuzzleHttp\Client(
 			/*[
 	            'exceptions' => false,
-	            'cookies' => true, 
-	            'redirect.disable' => true, 
+	            'cookies' => true,
+	            'redirect.disable' => true,
 	            'base_uri' => 'api'
         	]*/
     	);
@@ -87,10 +87,13 @@ class ApiHelper {
 
 				return true;
 			}
+			
 			return false;
 
 		} catch (\Exception $e) {
+
 			return $e->getMessage();
+
 		}
 
 	}
