@@ -94,11 +94,11 @@ class HomeController extends Controller
 
     }
 
-    public function filtros()
+    public function filtros( Request $request )
     {
         try {
 
-            $response = (new ApiHelper)->publicRequest('api/propiedades/filtros');
+            $response = (new ApiHelper)->publicRequest('api/propiedades/filtros', $request->all());
 
             if(isset($response['error'])) throw new \Exception($response);
 

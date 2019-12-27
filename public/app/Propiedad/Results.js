@@ -316,6 +316,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {},
   data: function data() {
@@ -340,46 +344,46 @@ __webpack_require__.r(__webpack_exports__);
       },
       filters: {
         estado: {
-          'label': 'Activo',
+          label: 'Activo',
           value: 1
         },
         orden: {
-          'label': 'Fecha de creación',
+          label: 'Fecha de creación',
           value: 1
         },
         subtipo_propiedad: null,
-        tipos_operaciones: null,
-        resultFor: 'Metropolitana',
-        banio: 0,
-        privado: 0,
-        bodegas: 0,
-        estacionamiento: 0,
+        tipo_operacion: null,
+        resultFor: null,
+        banio: null,
+        privado: null,
+        bodegas: null,
+        estacionamiento: null,
         localidad: null,
         first: true
       },
       selects: {
         results: [],
         estados: [{
-          'label': 'Activo',
+          label: 'Activo',
           value: 1
         }, {
-          'label': 'Inactivo',
+          label: 'Inactivo',
           value: 0
         }],
         orden: [{
-          'label': 'Fecha de favorito',
+          label: 'Fecha de favorito',
           value: 1
         }, {
-          'label': 'Popularidad',
+          label: 'Popularidad',
           value: 2
         }, {
-          'label': 'Mayor Precio',
+          label: 'Mayor Precio',
           value: 3
         }, {
-          'label': 'Menor Precio',
+          label: 'Menor Precio',
           value: 4
         }],
-        subtipo_propiedad: [],
+        subtipos_propiedades: [],
         tipos_operaciones: []
       }
     };
@@ -402,20 +406,49 @@ __webpack_require__.r(__webpack_exports__);
     filtrar: function filtrar() {
       var _this = this;
 
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.start();
+      var params = '?';
       var request = new FormData();
 
       if (!this.filters.first) {
         this.filtrando = true;
-        this.filters.estado && request.append('estado', this.filters.estado.value);
-        this.filters.page && request.append('page', this.filters.page); // this.filters.orden && request.append(this.filters.orden.value);
+        this.filters.page = page;
+        request.append('page', this.filters.page);
 
-        this.filters.subtipo_propiedad && request.append('id_subtipo_propiedad', this.filters.subtipo_propiedad.id);
-        this.filters.tipos_operaciones && request.append('id_tipo_operacion', this.filters.tipos_operaciones.id);
-        this.filters.banio && request.append('banio', this.filters.banio);
-        this.filters.privado && request.append('privado', this.filters.privado);
-        this.filters.bodegas && request.append('bodegas', this.filters.bodegas);
-        this.filters.estacionamiento && request.append('estacionamiento', this.filters.estacionamiento);
+        if (this.filters.estado) {
+          request.append('estado', this.filters.estado.value);
+        }
+
+        if (this.filters.subtipo_propiedad) {
+          params += 'propiedad=' + this.filters.subtipo_propiedad.id + '&';
+          request.append('id_subtipo_propiedad', this.filters.subtipo_propiedad.id);
+        }
+
+        if (this.filters.tipo_operacion) {
+          params += 'operacion=' + this.filters.tipo_operacion.id + '&';
+          request.append('id_tipo_operacion', this.filters.tipo_operacion.id);
+        }
+
+        if (this.filters.banio) {
+          params += 'banio=' + this.filters.banio + '&';
+          request.append('banio', this.filters.banio);
+        }
+
+        if (this.filters.privado) {
+          params += 'privado=' + this.filters.privado + '&';
+          request.append('privado', this.filters.privado);
+        }
+
+        if (this.filters.bodega) {
+          params += 'bodega=' + this.filters.bodega + '&';
+          request.append('bodega', this.filters.bodega);
+        }
+
+        if (this.filters.estacionamiento) {
+          params += 'estacionamiento=' + this.filters.estacionamiento + '&';
+          request.append('estacionamiento', this.filters.estacionamiento);
+        }
 
         if (this.filters.localidad && this.filters.localidad.tipo) {
           switch (this.filters.localidad.tipo) {
@@ -427,14 +460,17 @@ __webpack_require__.r(__webpack_exports__);
               request.append('region_id', this.filters.localidad.id);
               break;
           }
+
+          params += 'localidad=' + this.filters.localidad.id + '&';
+          params += 'tipo=' + this.filters.localidad.tipo + '&';
         }
 
         ;
       } else {
         var url = window.location.search.replace('propiedad', 'id_subtipo_propiedad').replace('operacion', 'id_tipo_operacion');
         url = url.slice(1).split('&');
-        url.forEach(function (ele) {
-          var values = ele.split('=');
+        url.forEach(function (elemento) {
+          var values = elemento.split('=');
 
           if (values[0] && values[1]) {
             request.append(values[0], values[1]);
@@ -456,27 +492,72 @@ __webpack_require__.r(__webpack_exports__);
           request["delete"]('tipo');
         }
 
-        ;
+        params = window.location.search;
       }
 
       axios.post(this.url, request).then(function (res) {
         _this.rows = res.data.propiedades;
       })["finally"](function () {
-        _this.filters.first = null;
-
         _this.stop();
 
-        _this.filtrando = false; // this.$router.replace('?')
+        _this.filters.first = false;
+        _this.filtrando = false;
+        window.history.pushState('', '', params);
       });
     },
     getFiltros: function getFiltros() {
       var _this2 = this;
 
-      axios.post(this.$root.base_url + 'filtros').then(function (res) {
-        _this2.selects.subtipo_propiedad = res.data.subtipo_propiedad;
-        _this2.selects.tipos_operaciones = res.data.tipos_operaciones;
-        _this2.filters.subtipo_propiedad = _this2.selects.subtipo_propiedad[0];
-        _this2.filters.tipos_operaciones = _this2.selects.tipos_operaciones[0];
+      // BUSCANDO LOCALIDAD EN URL
+      var request = new FormData();
+      var url = window.location.search.replace('propiedad', 'id_subtipo_propiedad').replace('operacion', 'id_tipo_operacion');
+      url = url.slice(1).split('&');
+      url.forEach(function (elemento) {
+        var values = elemento.split('=');
+
+        if (values[0] == 'tipo' || values[0] == 'localidad') {
+          request.append(values[0], values[1]);
+        }
+      });
+
+      if (request.get('localidad') && request.get('tipo')) {
+        switch (request.get('tipo')) {
+          case 'Comuna':
+            request.append('comuna_id', request.get('localidad'));
+            break;
+
+          case 'Region':
+            request.append('region_id', request.get('localidad'));
+            break;
+        }
+
+        request["delete"]('localidad');
+        request["delete"]('tipo');
+      }
+
+      axios.post(this.$root.base_url + 'filtros', request).then(function (res) {
+        var url = window.location.search.slice(1).split('&');
+        _this2.filters.localidad = _this2.filters.resultFor = res.data.localidad;
+        _this2.selects.subtipos_propiedades = res.data.subtipo_propiedad;
+        _this2.selects.tipos_operaciones = res.data.tipos_operaciones; // CARGANDO VALORES INICIALES DE FILTROS
+
+        url.forEach(function (elemento) {
+          var values = elemento.split('=');
+
+          switch (values[0]) {
+            case 'propiedad':
+              _this2.filters.subtipo_propiedad = _this2.selects.subtipos_propiedades.find(function (subtipo_propiedad) {
+                return subtipo_propiedad.id == values[1];
+              });
+              break;
+
+            case 'operacion':
+              _this2.filters.tipo_operacion = _this2.selects.tipos_operaciones.find(function (tipo_operacion) {
+                return tipo_operacion.id == values[1];
+              });
+              break;
+          }
+        });
       });
     },
     onSearch: function onSearch(search, loading) {
@@ -537,14 +618,15 @@ var render = function() {
                     staticClass: "mt-1 col-xs-12 col-md-3",
                     attrs: {
                       label: "nombre",
-                      options: _vm.selects.tipos_operaciones
+                      options: _vm.selects.tipos_operaciones,
+                      clearable: false
                     },
                     model: {
-                      value: _vm.filters.tipos_operaciones,
+                      value: _vm.filters.tipo_operacion,
                       callback: function($$v) {
-                        _vm.$set(_vm.filters, "tipos_operaciones", $$v)
+                        _vm.$set(_vm.filters, "tipo_operacion", $$v)
                       },
-                      expression: "filters.tipos_operaciones"
+                      expression: "filters.tipo_operacion"
                     }
                   }),
                   _vm._v(" "),
@@ -552,7 +634,8 @@ var render = function() {
                     staticClass: "ml-1 mt-1 col-xs-12 col-md-3",
                     attrs: {
                       label: "nombre",
-                      options: _vm.selects.subtipo_propiedad
+                      options: _vm.selects.subtipos_propiedades,
+                      clearable: false
                     },
                     model: {
                       value: _vm.filters.subtipo_propiedad,
@@ -566,10 +649,11 @@ var render = function() {
                   _c(
                     "v-select",
                     {
-                      staticClass: "ml-1 mt-1 col-md-5",
+                      staticClass: "ml-1 mt-1 col-md-5 v-select-clearfix",
                       attrs: {
                         label: "nombre",
                         filterable: false,
+                        clearable: false,
                         options: _vm.selects.results
                       },
                       on: { search: _vm.onSearch },
@@ -580,13 +664,13 @@ var render = function() {
                             return [
                               _c("div", { staticClass: "selected d-center" }, [
                                 _vm._v(
-                                  "\n                                    " +
+                                  "\r\n                                    " +
                                     _vm._s(option.nombre) +
-                                    "," +
+                                    ", " +
                                     _vm._s(option.lateral) +
                                     " "
                                 ),
-                                _c("small", { staticClass: "ml-2" }, [
+                                _c("small", { staticClass: "float-right" }, [
                                   _vm._v(_vm._s(option.tipo))
                                 ])
                               ])
@@ -599,13 +683,13 @@ var render = function() {
                             return [
                               _c("div", { staticClass: "selected d-center" }, [
                                 _vm._v(
-                                  "\n                                    " +
+                                  "\r\n                                    " +
                                     _vm._s(option.nombre) +
-                                    "," +
+                                    ", " +
                                     _vm._s(option.lateral) +
                                     " "
                                 ),
-                                _c("small", { staticClass: "ml-2" }, [
+                                _c("small", { staticClass: "float-right" }, [
                                   _vm._v(_vm._s(option.tipo))
                                 ])
                               ])
@@ -624,7 +708,7 @@ var render = function() {
                     [
                       _c("template", { slot: "no-options" }, [
                         _vm._v(
-                          "\n                                Busque su propiedad\n                            "
+                          "\r\n                                Busque su propiedad\r\n                            "
                         )
                       ])
                     ],
@@ -803,7 +887,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "Buscar\n                                        "
+                              "Buscar\r\n                                        "
                             ),
                             _c("i", { staticClass: "far fa-search" })
                           ]
@@ -829,8 +913,18 @@ var render = function() {
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "list-main-wrap-title fl-wrap" }, [
               _c("h2", [
-                _vm._v("Resutaldos para : "),
-                _c("span", [_vm._v(_vm._s(_vm.filters.resultFor) + " ")])
+                _vm._v("Resutaldos para : \r\n                            "),
+                _vm.filters.resultFor
+                  ? _c("span", [
+                      _vm._v(
+                        "\r\n                                " +
+                          _vm._s(_vm.filters.resultFor.nombre) +
+                          ", " +
+                          _vm._s(_vm.filters.resultFor.lateral) +
+                          " \r\n                            "
+                      )
+                    ])
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),
@@ -902,11 +996,11 @@ var render = function() {
                                               },
                                               [
                                                 _vm._v(
-                                                  "\n                                                    " +
+                                                  "\r\n                                                    " +
                                                     _vm._s(
                                                       val.titulo.toUpperCase()
                                                     ) +
-                                                    "\n                                                "
+                                                    "\r\n                                                "
                                                 )
                                               ]
                                             )
@@ -932,32 +1026,32 @@ var render = function() {
                                                     "fas fa-map-marker-alt"
                                                 }),
                                                 _vm._v(
-                                                  "\n                                                    " +
+                                                  "\r\n                                                    " +
                                                     _vm._s(
                                                       val && val.numero_calle
                                                         ? val.numero_calle
                                                         : ""
                                                     ) +
-                                                    "\n                                                    " +
+                                                    "\r\n                                                    " +
                                                     _vm._s(
                                                       val && val.calle
                                                         ? val.calle
                                                         : ""
                                                     ) +
-                                                    "\n                                                    /\n                                                    " +
+                                                    "\r\n                                                    /\r\n                                                    " +
                                                     _vm._s(
                                                       val && val._comuna
                                                         ? val._comuna.nombre +
                                                             ","
                                                         : ""
                                                     ) +
-                                                    "\n                                                    " +
+                                                    "\r\n                                                    " +
                                                     _vm._s(
                                                       val && val._region
                                                         ? val._region.nombre
                                                         : ""
                                                     ) +
-                                                    "\n                                                "
+                                                    "\r\n                                                "
                                                 )
                                               ]
                                             )
@@ -970,32 +1064,32 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("p", [
                                   _vm._v(
-                                    "\n                                        Tipo : " +
+                                    "\r\n                                        Tipo : " +
                                       _vm._s(val._tipo_operacion.nombre) +
                                       " "
                                   ),
                                   _c("br"),
                                   _vm._v(
-                                    "\n                                        Moneda: " +
+                                    "\r\n                                        Moneda: " +
                                       _vm._s(
                                         val._tipo_valor
                                           ? val._tipo_valor.nombre
                                           : ""
                                       ) +
-                                      "\n                                        Monto : " +
+                                      "\r\n                                        Monto : " +
                                       _vm._s(_vm._f("currency")(val.precio)) +
                                       " "
                                   ),
                                   _c("br"),
                                   _vm._v(" "),
                                   _vm._v(
-                                    "\n                                        Propiedad : " +
+                                    "\r\n                                        Propiedad : " +
                                       _vm._s(
                                         val._subtipo_propiedad
                                           ? val._subtipo_propiedad.nombre
                                           : ""
                                       ) +
-                                      "\n                                        "
+                                      "\r\n                                        "
                                   ),
                                   _c(
                                     "table",
@@ -1013,7 +1107,7 @@ var render = function() {
                                               _vm._s(
                                                 val.banio ? val.banio : 0
                                               ) +
-                                              "\n                                                "
+                                              "\r\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -1030,7 +1124,7 @@ var render = function() {
                                                   ? val.estacionamiento
                                                   : 0
                                               ) +
-                                              "\n                                                "
+                                              "\r\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -1045,7 +1139,7 @@ var render = function() {
                                               _vm._s(
                                                 val.bodega ? val.bodega : 0
                                               ) +
-                                              "\n                                                "
+                                              "\r\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -1060,7 +1154,7 @@ var render = function() {
                                               _vm._s(
                                                 val.privado ? val.privado : 0
                                               ) +
-                                              "\n                                                "
+                                              "\r\n                                                "
                                           )
                                         ])
                                       ])
@@ -1080,7 +1174,7 @@ var render = function() {
                                       { staticClass: "geodir-category-price" },
                                       [
                                         _vm._v(
-                                          "\n                                            Precio\n                                            "
+                                          "\r\n                                            Precio\r\n                                            "
                                         ),
                                         _c("br"),
                                         _vm._v(" "),

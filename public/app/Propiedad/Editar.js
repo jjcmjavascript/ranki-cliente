@@ -754,7 +754,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\ninput[type=\"file\"][data-v-0af2e02e] {\n    display: none;\n}\n\n", ""]);
+exports.push([module.i, "\ninput[type=\"file\"][data-v-0af2e02e] {\r\n    display: none;\n}\r\n\r\n", ""]);
 
 // exports
 

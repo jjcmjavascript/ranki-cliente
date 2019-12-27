@@ -28,20 +28,20 @@
             <div class="list-wrap-search fl-wrap lws_mobile" id="lisfw">
                 <div class="container">
                     <div class="row mt-5">
-                        <v-select class="mt-1 col-xs-12 col-md-3" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipos_operaciones" />
-                        <v-select class="ml-1 mt-1 col-xs-12 col-md-3" label="nombre" :options="selects.subtipo_propiedad" v-model="filters.subtipo_propiedad" />
-                        <v-select label="nombre" :filterable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch" class="ml-1 mt-1 col-md-5">
+                        <v-select class="mt-1 col-xs-12 col-md-3" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipo_operacion" :clearable="false"/>
+                        <v-select class="ml-1 mt-1 col-xs-12 col-md-3" label="nombre" :options="selects.subtipos_propiedades" v-model="filters.subtipo_propiedad" :clearable="false"/>
+                        <v-select label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch" class="ml-1 mt-1 col-md-5 v-select-clearfix">
                             <template slot="no-options">
                                 Busque su propiedad
                             </template>
                             <template slot="option" slot-scope="option">
                                 <div class="selected d-center">
-                                    {{ option.nombre }},{{option.lateral}} <small class="ml-2">{{option.tipo}}</small>
+                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
                                 </div>
                             </template>
-                            <template slot="selected-option" slot-scope="option">
+                            <template slot="selected-option" slot-scope="option" class="clearfix">
                                 <div class="selected d-center">
-                                    {{ option.nombre }},{{option.lateral}} <small class="ml-2">{{option.tipo}}</small>
+                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
                                 </div>
                             </template>
                         </v-select>
@@ -169,7 +169,11 @@
                 <div class="container">
                     <!-- list-main-wrap-title-->
                     <div class="list-main-wrap-title fl-wrap">
-                        <h2>Resutaldos para : <span>{{filters.resultFor}} </span></h2>
+                        <h2>Resutaldos para : 
+                            <span v-if="filters.resultFor">
+                                {{filters.resultFor.nombre}}, {{filters.resultFor.lateral}} 
+                            </span>
+                        </h2>
                     </div>
                     <!-- list-main-wrap-title end-->
                     <!-- list-main-wrap-opt-->
@@ -331,55 +335,56 @@ export default {
                 prev_page_url: null,
                 total: 0,
             },
-
             filters: {
                 estado: {
-                    'label': 'Activo',
+                    label: 'Activo',
                     value: 1
                 },
                 orden: {
-                    'label': 'Fecha de creación',
+                    label: 'Fecha de creación',
                     value: 1
                 },
                 subtipo_propiedad: null,
-                tipos_operaciones: null,
-                resultFor: 'Metropolitana',
-                banio: 0,
-                privado: 0,
-                bodegas: 0,
-                estacionamiento: 0,
+                tipo_operacion: null,
+                resultFor: null,
+                banio: null,
+                privado: null,
+                bodegas: null,
+                estacionamiento: null,
                 localidad: null,
                 first: true,
             },
             selects: {
                 results: [],
-                estados: [{
-                        'label': 'Activo',
+                estados: [
+                    {
+                        label: 'Activo',
                         value: 1
                     },
                     {
-                        'label': 'Inactivo',
+                        label: 'Inactivo',
                         value: 0
                     }
                 ],
-                orden: [{
-                        'label': 'Fecha de favorito',
+                orden: [
+                    {
+                        label: 'Fecha de favorito',
                         value: 1
                     },
                     {
-                        'label': 'Popularidad',
+                        label: 'Popularidad',
                         value: 2
                     },
                     {
-                        'label': 'Mayor Precio',
+                        label: 'Mayor Precio',
                         value: 3
                     },
                     {
-                        'label': 'Menor Precio',
+                        label: 'Menor Precio',
                         value: 4
                     },
                 ],
-                subtipo_propiedad: [],
+                subtipos_propiedades: [],
                 tipos_operaciones: [],
             }
         }
@@ -401,22 +406,52 @@ export default {
             this.$root.alertas(tipo, titulo, mensaje);
         },
 
-        filtrar() {
+        filtrar(page=1) {
             this.start();
 
+            let params = '?';
             let request = new FormData;
 
             if (!this.filters.first) {
                 this.filtrando = true;
-                this.filters.estado && request.append('estado', this.filters.estado.value);
-                this.filters.page && request.append('page', this.filters.page);
-                // this.filters.orden && request.append(this.filters.orden.value);
-                this.filters.subtipo_propiedad && request.append('id_subtipo_propiedad', this.filters.subtipo_propiedad.id);
-                this.filters.tipos_operaciones && request.append('id_tipo_operacion', this.filters.tipos_operaciones.id);
-                this.filters.banio && request.append('banio', this.filters.banio);
-                this.filters.privado && request.append('privado', this.filters.privado);
-                this.filters.bodegas && request.append('bodegas', this.filters.bodegas);
-                this.filters.estacionamiento && request.append('estacionamiento', this.filters.estacionamiento);
+
+                this.filters.page = page;
+                request.append('page', this.filters.page);
+
+
+                if(this.filters.estado) {
+                    request.append('estado', this.filters.estado.value);
+                }
+
+                if(this.filters.subtipo_propiedad) {
+                    params += 'propiedad='+this.filters.subtipo_propiedad.id+'&';
+                    request.append('id_subtipo_propiedad', this.filters.subtipo_propiedad.id);
+                } 
+
+                if(this.filters.tipo_operacion) {
+                    params += 'operacion='+this.filters.tipo_operacion.id+'&';
+                    request.append('id_tipo_operacion', this.filters.tipo_operacion.id);
+                } 
+
+                if(this.filters.banio) {
+                    params += 'banio='+this.filters.banio+'&';
+                    request.append('banio', this.filters.banio);
+                } 
+
+                if(this.filters.privado) {
+                    params += 'privado='+this.filters.privado+'&';
+                    request.append('privado', this.filters.privado);
+                } 
+
+                if(this.filters.bodega) {
+                    params += 'bodega='+this.filters.bodega+'&';
+                    request.append('bodega', this.filters.bodega);
+                } 
+
+                if(this.filters.estacionamiento) {
+                    params += 'estacionamiento='+this.filters.estacionamiento+'&';
+                    request.append('estacionamiento', this.filters.estacionamiento);
+                } 
 
                 if (this.filters.localidad && this.filters.localidad.tipo) {
                     switch (this.filters.localidad.tipo) {
@@ -427,17 +462,23 @@ export default {
                             request.append('region_id', this.filters.localidad.id)
                             break;
                     }
+                    params += 'localidad='+this.filters.localidad.id+'&';
+                    params += 'tipo='+this.filters.localidad.tipo+'&';
                 };
             } else {
-                let url = window.location.search.replace('propiedad', 'id_subtipo_propiedad').replace('operacion', 'id_tipo_operacion');
+                let url = window.location.search
+                    .replace('propiedad', 'id_subtipo_propiedad')
+                    .replace('operacion', 'id_tipo_operacion');
+
                 url = url.slice(1).split('&');
 
-                url.forEach(ele => {
-                    let values = ele.split('=');
+                url.forEach(elemento => {
+                    let values = elemento.split('=');
                     if (values[0] && values[1]) {
                         request.append(values[0], values[1]);
                     }
-                })
+                });
+
                 if ( request.get('localidad') && request.get('tipo') ) {
                     switch ( request.get('tipo') ) {
                         case 'Comuna':
@@ -449,29 +490,79 @@ export default {
                     }
                     request.delete('localidad');
                     request.delete('tipo');
-                };
+                }
+
+                params = window.location.search;
             }
 
             axios.post(this.url, request)
-                .then((res) => {
+                .then(res => {
                     this.rows = res.data.propiedades;
                 })
                 .finally(() => {
-                    this.filters.first = null;
                     this.stop();
+                    this.filters.first = false;
                     this.filtrando = false;
-                    // this.$router.replace('?')
+                    window.history.pushState('','', params);
                 })
-
         },
 
         getFiltros() {
-            axios.post(this.$root.base_url + 'filtros')
+            // BUSCANDO LOCALIDAD EN URL
+            let request = new FormData;
+            let url = window.location.search
+                    .replace('propiedad', 'id_subtipo_propiedad')
+                    .replace('operacion', 'id_tipo_operacion');
+
+            url = url.slice(1).split('&');
+
+            url.forEach(elemento => {
+                let values = elemento.split('=');
+                if (values[0] == 'tipo' || values[0] == 'localidad') {
+                    request.append(values[0], values[1]);
+                }
+            });
+
+            if ( request.get('localidad') && request.get('tipo') ) {
+                switch ( request.get('tipo') ) {
+                    case 'Comuna':
+                        request.append('comuna_id', request.get('localidad'))
+                        break;
+                    case 'Region':
+                        request.append('region_id', request.get('localidad'))
+                        break;
+                }
+                request.delete('localidad');
+                request.delete('tipo');
+            }
+
+            axios.post(this.$root.base_url + 'filtros', request)
                 .then(res => {
-                    this.selects.subtipo_propiedad = res.data.subtipo_propiedad;
+                    let url = window.location.search.slice(1).split('&');
+
+                    this.filters.localidad = this.filters.resultFor = res.data.localidad;
+                    this.selects.subtipos_propiedades = res.data.subtipo_propiedad;
                     this.selects.tipos_operaciones = res.data.tipos_operaciones;
-                    this.filters.subtipo_propiedad = this.selects.subtipo_propiedad[0];
-                    this.filters.tipos_operaciones = this.selects.tipos_operaciones[0];
+
+                    // CARGANDO VALORES INICIALES DE FILTROS
+                    url.forEach(elemento => {
+                        let values = elemento.split('=');
+                        switch(values[0]) {
+                            case 'propiedad':
+                                this.filters.subtipo_propiedad = 
+                                    this.selects.subtipos_propiedades.find(subtipo_propiedad => {
+                                        return subtipo_propiedad.id == values[1];
+                                });
+                                break;
+
+                            case 'operacion':
+                                this.filters.tipo_operacion = 
+                                    this.selects.tipos_operaciones.find(tipo_operacion => {
+                                        return tipo_operacion.id == values[1];
+                                });
+                                break;
+                        }
+                    });
                 })
         },
         onSearch(search, loading) {

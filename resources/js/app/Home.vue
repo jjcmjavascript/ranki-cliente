@@ -50,18 +50,18 @@
                                     <div class="col-xs-12 col-md-12">
                                         <v-select class="bg-light mt-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.subtipo_propiedad" v-model="filters.subtipo_propiedad" />
                                         <v-select class="bg-light mt-1 ml-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipos_operaciones" />
-                                        <v-select class="bg-light mt-1 col-xs-12 ml-1 col-md-4" label="nombre" :filterable="false"  v-model="filters.localidad" :options="selects.results" @search="onSearch" >
+                                        <v-select class="bg-light mt-1 col-xs-12 ml-1 col-md-4 v-select-clearfix" label="nombre" :filterable="false" :clearable="false"  v-model="filters.localidad" :options="selects.results" @search="onSearch" >
                                             <template slot="no-options">
                                                 Busque su propiedad
                                             </template>
                                             <template slot="option" slot-scope="option">
                                                 <div class="selected d-center">
-                                                    {{ option.nombre }},{{option.lateral}} <small class="ml-2">{{option.tipo}}</small>
+                                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
                                                 </div>
                                             </template>
                                             <template slot="selected-option" slot-scope="option">
                                                 <div class="selected d-center">
-                                                    {{ option.nombre }},{{option.lateral}} <small class="ml-2">{{option.tipo}}</small>
+                                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
                                                 </div>
                                             </template>
                                         </v-select>
