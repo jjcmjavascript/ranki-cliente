@@ -461,6 +461,15 @@ const app = new Vue({
                 return false;
             });
         },
+        closeLogin(){
+            $('.modal , .reg-overlay').fadeOut(200);
+            $("html, body").removeClass("hid-body");
+        },
+        openLogin(){
+            $('.modal , .reg-overlay').fadeIn(200);
+            $("html, body").addClass("hid-body");
+        }
+
     },
 });
 

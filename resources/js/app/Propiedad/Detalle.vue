@@ -22,7 +22,7 @@
                                     <a class="fc-button custom-scroll-link" href="#"><i class="far fa-heart"></i> <span>Favorito</span></a>
                                 </div>
                             </div>
-                            <!-- fixed-scroll-column end   -->@
+                            <!-- fixed-scroll-column end   -->
                             <div class="list-single-main-media fl-wrap" id="sec1">
                                 <div class="single-slider-wrapper fl-wrap">
                                     <div class="slider-for fl-wrap">
@@ -98,7 +98,7 @@
                             </div>
                             <!-- reviews-score-wrap end -->
                             <div>
-                                <button :disabled="rows.cotizar" class="btn btn-warning btn-lg" style="width: 100%" @click="openContizar($event)">Cotizar <i class="far fa-bookmark"></i></button>
+                                <button :disabled="rows.cotizar" class="btn btn-warning btn-lg" style="width: 100%" @click="isLoged($event)">Cotizar <i class="far fa-bookmark"></i></button>
                             </div>
                         </div>
                         <!--   flat-hero-container end -->
@@ -265,12 +265,19 @@
         <!--  section  end-->
     </div>
     <!-- content end-->
+    <login />
     <div class="limit-box fl-wrap"></div>
 </div>
 </template>
 
 <script>
+
+import Login from '../Login.vue'
+
 export default {
+    components: {
+        login: Login,
+    },
     data() {
         return {
             url: {
@@ -278,12 +285,10 @@ export default {
                 permisos: {},
             },
             rows: {},
-            comentario: null,
         }
     },
     mounted() {
         this.iniciar();
-        // document.querySelector('html').style['overflow-y'] = 'auto';
     },
     methods: {
 
@@ -311,13 +316,17 @@ export default {
                     this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
                 })
         },
-        async isLoged() {
+        isLoged() {
             axios.post(this.$root.base_url + 'isLoged')
                 .then(res => {
-                    this.openContizar();
+                    if(res.data.isLoged){
+                        this.openContizar();
+                    }else{
+                        this.$root.openLogin();
+                    }
                 })
                 .catch(err => {
-
+                    this.alerta('error','Un error ha ocurrido', 'Lo sentimos su correo no pudo ser enviado.');
                 });
         },
         openContizar() {
@@ -330,20 +339,25 @@ export default {
                     }
                 })
                 .then(value => {
-                    if ( value.texto && value.texto.trim().length > 0 ) {
+
+                    if ( value.value && value.value.trim().length > 20 ) {
                         this.start();
 
-                        axios.post(this.url.current, value.texto)
+                        axios.post(this.url.current + '/cotizar' , {'comentario' : value.value, id : this.rows.id } )
                             .then(res => {
-                                
+                                this.alerta('success', 'Exito!', 'Su cotizacion fue enviada.');
                             })
                             .catch(err => {
                                 this.stop();
-                                this.alerta('error','Un error ha ocurrido', 'Lo sentimos su correo no pudo ser enviado.')
+                                this.alerta('error','Un error ha ocurrido', err);
                             })
+
+                    }else if (value.value){
+                        this.alerta('error','Un error ha ocurrido', 'Porfavor ingrese su mensaje (mayor a 20 caracteres).');
                     }
                 });
         },
+
 
 
 

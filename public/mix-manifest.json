@@ -18,5 +18,6 @@
     "/components/panel.js": "/components/panel.js",
     "/vendors~components/DateRangePicker.js": "/vendors~components/DateRangePicker.js",
     "/vendors~components/pagination.js": "/vendors~components/pagination.js",
-    "/vendors~components/vSelect.js": "/vendors~components/vSelect.js"
+    "/vendors~components/vSelect.js": "/vendors~components/vSelect.js",
+    "/app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js": "/app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js"
 }

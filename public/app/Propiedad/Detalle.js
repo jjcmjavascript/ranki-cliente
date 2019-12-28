@@ -9,293 +9,295 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Login_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Login.vue */ "./resources/js/app/Login.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    login: _Login_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       url: {
         current: this.$root.base_url + this.$route.path,
         permisos: {}
       },
-      rows: {},
-      comentario: null
+      rows: {}
     };
   },
   mounted: function mounted() {
-    this.iniciar(); // document.querySelector('html').style['overflow-y'] = 'auto';
+    this.iniciar();
   },
   methods: {
     start: function start() {
@@ -325,20 +327,15 @@ __webpack_require__.r(__webpack_exports__);
     isLoged: function isLoged() {
       var _this2 = this;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function isLoged$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              axios.post(this.$root.base_url + 'isLoged').then(function (res) {
-                _this2.openContizar();
-              })["catch"](function (err) {});
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
+      axios.post(this.$root.base_url + 'isLoged').then(function (res) {
+        if (res.data.isLoged) {
+          _this2.openContizar();
+        } else {
+          _this2.$root.openLogin();
         }
-      }, null, this);
+      })["catch"](function (err) {
+        _this2.alerta('error', 'Un error ha ocurrido', 'Lo sentimos su correo no pudo ser enviado.');
+      });
     },
     openContizar: function openContizar() {
       var _this3 = this;
@@ -351,14 +348,21 @@ __webpack_require__.r(__webpack_exports__);
           return miTextarea.value;
         }
       }).then(function (value) {
-        if (value.texto && value.texto.trim().length > 0) {
+        if (value.value && value.value.trim().length > 20) {
           _this3.start();
 
-          axios.post(_this3.url.current, value.texto).then(function (res) {})["catch"](function (err) {
+          axios.post(_this3.url.current + '/cotizar', {
+            'comentario': value.value,
+            id: _this3.rows.id
+          }).then(function (res) {
+            _this3.alerta('success', 'Exito!', 'Su cotizacion fue enviada.');
+          })["catch"](function (err) {
             _this3.stop();
 
-            _this3.alerta('error', 'Un error ha ocurrido', 'Lo sentimos su correo no pudo ser enviado.');
+            _this3.alerta('error', 'Un error ha ocurrido', err);
           });
+        } else if (value.value) {
+          _this3.alerta('error', 'Un error ha ocurrido', 'Porfavor ingrese su mensaje (mayor a 20 caracteres).');
         }
       });
     }
@@ -382,319 +386,329 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "wrapper" } }, [
-    _c("div", { staticClass: "content" }, [
-      _c(
-        "section",
-        { staticClass: "grey-blue-bg small-padding scroll-nav-container" },
-        [
-          _c("div", { staticClass: "top-dec" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "row" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", { staticClass: "flat-hero-container fl-wrap" }, [
-                  _c(
-                    "div",
-                    { staticClass: "box-widget-item-header fl-wrap " },
-                    [
-                      _c("h3", [
-                        _vm._v(_vm._s(_vm.rows.titulo ? _vm.rows.titulo : ""))
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "list-single-hero-price fl-wrap" }, [
-                    _vm._v("Precio"),
-                    _c("span", [
-                      _vm._v(
-                        "\n                                    " +
-                          _vm._s(
-                            _vm.rows._tipo_valor
-                              ? _vm.rows._tipo_valor.nombre
-                              : ""
-                          ) +
-                          " " +
-                          _vm._s(_vm._f("currency")(_vm.rows.precio))
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "reviews-score-wrap fl-wrap" }, [
-                    _vm._m(2),
+  return _c(
+    "div",
+    { attrs: { id: "wrapper" } },
+    [
+      _c("div", { staticClass: "content" }, [
+        _c(
+          "section",
+          { staticClass: "grey-blue-bg small-padding scroll-nav-container" },
+          [
+            _c("div", { staticClass: "top-dec" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "flat-hero-container fl-wrap" }, [
+                    _c(
+                      "div",
+                      { staticClass: "box-widget-item-header fl-wrap " },
+                      [
+                        _c("h3", [
+                          _vm._v(_vm._s(_vm.rows.titulo ? _vm.rows.titulo : ""))
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "review-score-detail" }, [
-                      _c("div", { staticClass: "review-score-detail-list" }, [
-                        _c("div", { staticClass: "col-xs-12 mb-2" }, [
-                          _c("label", [_vm._v("Propiedad: ")]),
+                    _c(
+                      "div",
+                      { staticClass: "list-single-hero-price fl-wrap" },
+                      [
+                        _vm._v("Precio"),
+                        _c("span", [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(
+                                _vm.rows._tipo_valor
+                                  ? _vm.rows._tipo_valor.nombre
+                                  : ""
+                              ) +
+                              " " +
+                              _vm._s(_vm._f("currency")(_vm.rows.precio))
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "reviews-score-wrap fl-wrap" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "review-score-detail" }, [
+                        _c("div", { staticClass: "review-score-detail-list" }, [
+                          _c("div", { staticClass: "col-xs-12 mb-2" }, [
+                            _c("label", [_vm._v("Propiedad: ")]),
+                            _vm._v(" "),
+                            _c("small", [
+                              _vm._v(
+                                "\n                                                " +
+                                  _vm._s(
+                                    _vm.rows._subtipo_propiedad
+                                      ? _vm.rows._subtipo_propiedad.nombre
+                                      : ""
+                                  ) +
+                                  "\n                                            "
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
-                          _c("small", [
-                            _vm._v(
-                              "\n                                                " +
-                                _vm._s(
-                                  _vm.rows._subtipo_propiedad
-                                    ? _vm.rows._subtipo_propiedad.nombre
-                                    : ""
-                                ) +
-                                "\n                                            "
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-xs-12 mb-2" }, [
-                          _c("label", [_vm._v("Estado: ")]),
+                          _c("div", { staticClass: "col-xs-12 mb-2" }, [
+                            _c("label", [_vm._v("Estado: ")]),
+                            _vm._v(" "),
+                            _c("small", [
+                              _vm._v(
+                                "\n                                                " +
+                                  _vm._s(
+                                    _vm.rows._tipo_propiedad
+                                      ? _vm.rows._tipo_propiedad.nombre
+                                      : ""
+                                  ) +
+                                  "\n                                            "
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
-                          _c("small", [
-                            _vm._v(
-                              "\n                                                " +
-                                _vm._s(
-                                  _vm.rows._tipo_propiedad
-                                    ? _vm.rows._tipo_propiedad.nombre
-                                    : ""
-                                ) +
-                                "\n                                            "
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-xs-12 mb-2" }, [
-                          _c("label", [_vm._v("Tipo: ")]),
+                          _c("div", { staticClass: "col-xs-12 mb-2" }, [
+                            _c("label", [_vm._v("Tipo: ")]),
+                            _vm._v(" "),
+                            _c("small", [
+                              _vm._v(
+                                "\n                                                " +
+                                  _vm._s(
+                                    _vm.rows._tipo_operacion
+                                      ? _vm.rows._tipo_operacion.nombre
+                                      : ""
+                                  ) +
+                                  "\n                                            "
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
-                          _c("small", [
-                            _vm._v(
-                              "\n                                                " +
-                                _vm._s(
-                                  _vm.rows._tipo_operacion
-                                    ? _vm.rows._tipo_operacion.nombre
-                                    : ""
-                                ) +
-                                "\n                                            "
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-xs-12 mb-2" }, [
-                          _c("label", [_vm._v("Periodicidad: ")]),
-                          _vm._v(" "),
-                          _c("small", [
-                            _vm._v(
-                              "\n                                                " +
-                                _vm._s(
-                                  _vm.rows._periodicidad_arriendo
-                                    ? _vm.rows._periodicidad_arriendo.nombre
-                                    : ""
-                                ) +
-                                "\n                                            "
-                            )
+                          _c("div", { staticClass: "col-xs-12 mb-2" }, [
+                            _c("label", [_vm._v("Periodicidad: ")]),
+                            _vm._v(" "),
+                            _c("small", [
+                              _vm._v(
+                                "\n                                                " +
+                                  _vm._s(
+                                    _vm.rows._periodicidad_arriendo
+                                      ? _vm.rows._periodicidad_arriendo.nombre
+                                      : ""
+                                  ) +
+                                  "\n                                            "
+                              )
+                            ])
                           ])
                         ])
                       ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-warning btn-lg",
-                        staticStyle: { width: "100%" },
-                        attrs: { disabled: _vm.rows.cotizar },
-                        on: {
-                          click: function($event) {
-                            return _vm.openContizar($event)
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning btn-lg",
+                          staticStyle: { width: "100%" },
+                          attrs: { disabled: _vm.rows.cotizar },
+                          on: {
+                            click: function($event) {
+                              return _vm.isLoged($event)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v("Cotizar "),
-                        _c("i", { staticClass: "far fa-bookmark" })
-                      ]
-                    )
+                        },
+                        [
+                          _vm._v("Cotizar "),
+                          _c("i", { staticClass: "far fa-bookmark" })
+                        ]
+                      )
+                    ])
                   ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-8" }, [
-                _c("div", { staticClass: "list-single-main-container " }, [
-                  _c(
-                    "div",
-                    { staticClass: "list-single-main-item fl-wrap" },
-                    [
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _vm.rows.descripcion
-                        ? [
-                            _c("p", {
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  _vm.$options.filters.nl2br(
-                                    _vm.rows.descripcion
-                                  )
-                                )
-                              }
-                            })
-                          ]
-                        : _vm._e()
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "list-single-main-item fl-wrap",
-                      attrs: { id: "sec3" }
-                    },
-                    [
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "listing-features fl-wrap" }, [
-                        _c("ul", [
-                          _c("li", [
-                            _c("i", {
-                              staticClass: "fal fa-bath",
-                              attrs: { title: "Baños" }
-                            }),
-                            _vm._v(
-                              " Baños " +
-                                _vm._s(_vm.rows.banio ? _vm.rows.banio : 0)
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("i", {
-                              staticClass: "fal fa-car",
-                              attrs: { title: "Estacionamiento" }
-                            }),
-                            _vm._v(
-                              " Estacionamiento " +
-                                _vm._s(
-                                  _vm.rows.estacionamiento
-                                    ? _vm.rows.estacionamiento
-                                    : 0
-                                )
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("i", {
-                              staticClass: "fal fa-home",
-                              attrs: { title: "Bodega" }
-                            }),
-                            _vm._v(
-                              " Bodega " +
-                                _vm._s(_vm.rows.bodega ? _vm.rows.bodega : 0)
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("li", [
-                            _c("i", {
-                              staticClass: "fal fa-lock",
-                              attrs: { title: "Privado" }
-                            }),
-                            _vm._v(
-                              " Privado " +
-                                _vm._s(_vm.rows.privado ? _vm.rows.privado : 0)
-                            )
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "fw-separator" })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(5)
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", { staticClass: "box-widget-wrap" }, [
-                  _c("div", { staticClass: "box-widget-item fl-wrap" }, [
-                    _c("div", { staticClass: "box-widget" }, [
-                      _c("div", { staticClass: "box-widget-content" }, [
-                        _vm._m(6),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("div", { staticClass: "list-single-main-container " }, [
+                    _c(
+                      "div",
+                      { staticClass: "list-single-main-item fl-wrap" },
+                      [
+                        _vm._m(3),
                         _vm._v(" "),
-                        _c("div", { staticClass: "box-widget-list" }, [
-                          _c(
-                            "ul",
-                            [
-                              _c("li", [
-                                _vm._m(7),
-                                _vm._v(" "),
-                                _c("span", [
-                                  _vm._v(
-                                    "\n                                                        " +
-                                      _vm._s(
-                                        _vm.rows._usuario
-                                          ? _vm.rows._usuario.email
-                                          : "Sin correo"
-                                      ) +
-                                      "\n                                                    "
+                        _vm.rows.descripcion
+                          ? [
+                              _c("p", {
+                                domProps: {
+                                  innerHTML: _vm._s(
+                                    _vm.$options.filters.nl2br(
+                                      _vm.rows.descripcion
+                                    )
                                   )
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _vm.rows.codigo_telefono
-                                ? [
-                                    _c("li", [
-                                      _vm._m(8),
-                                      _vm._v(" "),
-                                      _c("span", [
-                                        _vm._v(
-                                          "(" +
-                                            _vm._s(
-                                              _vm.rows.codigo_telefono
-                                                ? _vm.rows.codigo_telefono
-                                                : ""
-                                            ) +
-                                            ")\n                                                            " +
-                                            _vm._s(
-                                              _vm.rows.telefono
-                                                ? _vm.rows.telefono
-                                                : ""
-                                            ) +
-                                            "\n                                                        "
-                                        )
+                                }
+                              })
+                            ]
+                          : _vm._e()
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "list-single-main-item fl-wrap",
+                        attrs: { id: "sec3" }
+                      },
+                      [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "listing-features fl-wrap" }, [
+                          _c("ul", [
+                            _c("li", [
+                              _c("i", {
+                                staticClass: "fal fa-bath",
+                                attrs: { title: "Baños" }
+                              }),
+                              _vm._v(
+                                " Baños " +
+                                  _vm._s(_vm.rows.banio ? _vm.rows.banio : 0)
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", [
+                              _c("i", {
+                                staticClass: "fal fa-car",
+                                attrs: { title: "Estacionamiento" }
+                              }),
+                              _vm._v(
+                                " Estacionamiento " +
+                                  _vm._s(
+                                    _vm.rows.estacionamiento
+                                      ? _vm.rows.estacionamiento
+                                      : 0
+                                  )
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", [
+                              _c("i", {
+                                staticClass: "fal fa-home",
+                                attrs: { title: "Bodega" }
+                              }),
+                              _vm._v(
+                                " Bodega " +
+                                  _vm._s(_vm.rows.bodega ? _vm.rows.bodega : 0)
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", [
+                              _c("i", {
+                                staticClass: "fal fa-lock",
+                                attrs: { title: "Privado" }
+                              }),
+                              _vm._v(
+                                " Privado " +
+                                  _vm._s(
+                                    _vm.rows.privado ? _vm.rows.privado : 0
+                                  )
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "fw-separator" })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(5)
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "box-widget-wrap" }, [
+                    _c("div", { staticClass: "box-widget-item fl-wrap" }, [
+                      _c("div", { staticClass: "box-widget" }, [
+                        _c("div", { staticClass: "box-widget-content" }, [
+                          _vm._m(6),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "box-widget-list" }, [
+                            _c(
+                              "ul",
+                              [
+                                _c("li", [
+                                  _vm._m(7),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(
+                                      "\n                                                        " +
+                                        _vm._s(
+                                          _vm.rows._usuario
+                                            ? _vm.rows._usuario.email
+                                            : "Sin correo"
+                                        ) +
+                                        "\n                                                    "
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _vm.rows.codigo_telefono
+                                  ? [
+                                      _c("li", [
+                                        _vm._m(8),
+                                        _vm._v(" "),
+                                        _c("span", [
+                                          _vm._v(
+                                            "(" +
+                                              _vm._s(
+                                                _vm.rows.codigo_telefono
+                                                  ? _vm.rows.codigo_telefono
+                                                  : ""
+                                              ) +
+                                              ")\n                                                            " +
+                                              _vm._s(
+                                                _vm.rows.telefono
+                                                  ? _vm.rows.telefono
+                                                  : ""
+                                              ) +
+                                              "\n                                                        "
+                                          )
+                                        ])
                                       ])
-                                    ])
-                                  ]
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.rows.codigo_telefono2
-                                ? [
-                                    _c("li", [
-                                      _vm._m(9),
-                                      _vm._v(" "),
-                                      _c("span", [
-                                        _vm._v(
-                                          "\n                                                            (" +
-                                            _vm._s(
-                                              _vm.rows.codigo_telefono2
-                                                ? _vm.rows.codigo_telefono2
-                                                : ""
-                                            ) +
-                                            ")\n                                                            (" +
-                                            _vm._s(
-                                              _vm.rows.telefono2
-                                                ? _vm.rows.telefono2
-                                                : ""
-                                            ) +
-                                            ")\n                                                        "
-                                        )
+                                    ]
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.rows.codigo_telefono2
+                                  ? [
+                                      _c("li", [
+                                        _vm._m(9),
+                                        _vm._v(" "),
+                                        _c("span", [
+                                          _vm._v(
+                                            "\n                                                            (" +
+                                              _vm._s(
+                                                _vm.rows.codigo_telefono2
+                                                  ? _vm.rows.codigo_telefono2
+                                                  : ""
+                                              ) +
+                                              ")\n                                                            (" +
+                                              _vm._s(
+                                                _vm.rows.telefono2
+                                                  ? _vm.rows.telefono2
+                                                  : ""
+                                              ) +
+                                              ")\n                                                        "
+                                          )
+                                        ])
                                       ])
-                                    ])
-                                  ]
-                                : _vm._e()
-                            ],
-                            2
-                          )
+                                    ]
+                                  : _vm._e()
+                              ],
+                              2
+                            )
+                          ])
                         ])
                       ])
                     ])
@@ -702,13 +716,16 @@ var render = function() {
                 ])
               ])
             ])
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "limit-box fl-wrap" })
-  ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("login"),
+      _vm._v(" "),
+      _c("div", { staticClass: "limit-box fl-wrap" })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -747,7 +764,6 @@ var staticRenderFns = [
           ])
         ]),
         _vm._v(" "),
-        _vm._v("@\n                            "),
         _c(
           "div",
           {
@@ -1094,113 +1110,6 @@ var staticRenderFns = [
 ]
 render._withStripped = true
 
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
 
 
 /***/ }),

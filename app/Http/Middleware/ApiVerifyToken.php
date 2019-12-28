@@ -82,7 +82,7 @@ class ApiVerifyToken
             '/perfil/logout',
             '/auth/google',
             '/auth/facebook',
-            '/propiedad/detalle'
+            '/propiedad/detalle',
             '/propiedad/results'
         ];
 

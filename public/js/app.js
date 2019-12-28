@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Crear":"app/Propiedad/Crear","app/Propiedad/Detalle":"app/Propiedad/Detalle","app/Propiedad/Editar":"app/Propiedad/Editar","app/Propiedad/Results":"app/Propiedad/Results","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave":"app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave","app/login":"app/login","app/recovery/recuperarClave":"app/recovery/recuperarClave","app/recovery/reiniciarClave":"app/recovery/reiniciarClave","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Crear":"app/Propiedad/Crear","app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave":"app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave","app/Propiedad/Detalle":"app/Propiedad/Detalle","app/login":"app/login","app/recovery/recuperarClave":"app/recovery/recuperarClave","app/recovery/reiniciarClave":"app/recovery/reiniciarClave","app/Propiedad/Editar":"app/Propiedad/Editar","app/Propiedad/Results":"app/Propiedad/Results","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -83151,6 +83151,14 @@ var app = new Vue({
           }
         }
       }, null, this);
+    },
+    closeLogin: function closeLogin() {
+      $('.modal , .reg-overlay').fadeOut(200);
+      $("html, body").removeClass("hid-body");
+    },
+    openLogin: function openLogin() {
+      $('.modal , .reg-overlay').fadeIn(200);
+      $("html, body").addClass("hid-body");
     }
   }
 });
@@ -83465,7 +83473,7 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '/',
   component: function component() {
-    return Promise.all(/*! import() | app/login */[__webpack_require__.e("app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/login")]).then(__webpack_require__.bind(null, /*! ../app/Home */ "./resources/js/app/Home.vue"));
+    return Promise.all(/*! import() | app/login */[__webpack_require__.e("app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/login")]).then(__webpack_require__.bind(null, /*! ../app/Home */ "./resources/js/app/Home.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
@@ -83491,7 +83499,7 @@ var routes = [{
   path: '/propiedad/:id_propiedad/detalle',
   name: 'propiedad',
   component: function component() {
-    return __webpack_require__.e(/*! import() | app/Propiedad/Detalle */ "app/Propiedad/Detalle").then(__webpack_require__.bind(null, /*! ../app/Propiedad/Detalle */ "./resources/js/app/Propiedad/Detalle.vue"));
+    return Promise.all(/*! import() | app/Propiedad/Detalle */[__webpack_require__.e("app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/Propiedad/Detalle")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Detalle */ "./resources/js/app/Propiedad/Detalle.vue"));
   }
 }, {
   path: '/propiedad/:id/editar',
@@ -83522,12 +83530,12 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '/password',
   component: function component() {
-    return Promise.all(/*! import() | app/recovery/recuperarClave */[__webpack_require__.e("app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/recovery/recuperarClave")]).then(__webpack_require__.bind(null, /*! ../app/Recovery/RecuperarClave */ "./resources/js/app/Recovery/RecuperarClave.vue"));
+    return Promise.all(/*! import() | app/recovery/recuperarClave */[__webpack_require__.e("app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/recovery/recuperarClave")]).then(__webpack_require__.bind(null, /*! ../app/Recovery/RecuperarClave */ "./resources/js/app/Recovery/RecuperarClave.vue"));
   }
 }, {
   path: '//password/reset',
   component: function component() {
-    return Promise.all(/*! import() | app/recovery/reiniciarClave */[__webpack_require__.e("app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/recovery/reiniciarClave")]).then(__webpack_require__.bind(null, /*! ../app/Recovery/ReiniciarClave */ "./resources/js/app/Recovery/ReiniciarClave.vue"));
+    return Promise.all(/*! import() | app/recovery/reiniciarClave */[__webpack_require__.e("app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/recovery/reiniciarClave")]).then(__webpack_require__.bind(null, /*! ../app/Recovery/ReiniciarClave */ "./resources/js/app/Recovery/ReiniciarClave.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

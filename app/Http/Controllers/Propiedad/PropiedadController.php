@@ -32,11 +32,12 @@ class PropiedadController extends Controller
 
             return response($response, 200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response([
-                'error' => $e->getMessage()
-            ], 500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
         }
     }
 
@@ -54,11 +55,12 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response([
-                'error' => $e->getMessage()
-            ], 500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
         }
     }
 
@@ -115,13 +117,12 @@ class PropiedadController extends Controller
 
             return response(['url' => route('usuario.publicaciones') ],200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            $e = $e->getMessage();
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
 
-            return response([
-                'error' => $e
-            ], 500);
+            return response($error, 500);
         }
     }
 
@@ -179,10 +180,12 @@ class PropiedadController extends Controller
                 'url' => route('usuario.publicaciones')
             ],200);
         }
-        catch(\Exception $e) {
-            return response([
-                'error' => $e->getMessage()
-            ], 500);
+        catch(\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
         }
     }
 
@@ -195,14 +198,14 @@ class PropiedadController extends Controller
             if(isset($response['error'])) throw new \Exception($response);
             return response($response,200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response([
-                'error' => $e->getMessage()
-            ], 500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
 
         }
-
 
     }
 
@@ -222,10 +225,12 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\Exception $e) {
-            return response([
-                'error' => $e->getMessage()
-            ], 500);
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
         }
 
     }
@@ -242,10 +247,12 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\Exception $e) {
-            return response([
-                'error' => $e->getMessage()
-            ], 500);
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
         }
 
     }
@@ -265,10 +272,12 @@ class PropiedadController extends Controller
                 }
             return response($response,200);
 
-        } catch (\Exception $e) {
-            return response([
-                'error' => $e->getLine().''.$e->getMessage()
-            ], 500);
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
         }
 
     }
@@ -282,11 +291,40 @@ class PropiedadController extends Controller
 
           return response($response,200);
 
-      } catch (\Exception $e) {
-          return response([
-              'error' => $e->getMessage()
-          ], 500);
+      } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+          $response = $e->getResponse();
+          $error = json_decode($response->getBody()->getContents(),true);
+
+        return response($error, 500);
+
       }
+
+    }
+
+    public function cotizar ( Request $request )
+    {
+        $this->validate($request,[
+            'id'=>'required|integer|exists:propiedades',
+            'comentario'=>'required|string|min:20|max:2000'
+        ]);
+
+        try {
+
+            if( !Auth::check() ) throw new \Exception('Acción no autorizada');
+            $request->merge(['usuario_id'=> Auth::user()->id]);
+
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/cotizar',$request->all());
+
+            if(isset($response['error'])) throw new \Exception($response);
+            return  response($response,200);
+
+        } catch ( \GuzzleHttp\Exception\BadResponseException $e) {
+
+               $response = $e->getResponse();
+               $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
+        }
 
     }
 }
