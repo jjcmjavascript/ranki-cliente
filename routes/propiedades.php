@@ -8,10 +8,11 @@ Route::post('obtener_comuna', 'HomeController@obtener_comuna');
 Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function(){
     Route::get('{id}/detalle', 'PropiedadController@vue')->name('.ver_detalle');
     Route::post('{id}/detalle', 'PropiedadController@detalle')->name('.ver_detalle');
-    Route::get('results', 'PropiedadController@vue');
-    Route::post('results', 'PropiedadController@result');
+    Route::get('results', 'PropiedadController@vue')->name('.result');
+    Route::post('results', 'PropiedadController@result')->name('.result');
+    Route::post('{id}/detalle/cotizar', 'PropiedadController@cotizar')->name('cotizar');
 });
-
+ // esta es mi prueba de cotizacion papi :D
 // PROPIEDADES
 Route::middleware(['auth','verifyToken'])->namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function() {
     Route::get('crear','PropiedadController@vue')->name('.crear');

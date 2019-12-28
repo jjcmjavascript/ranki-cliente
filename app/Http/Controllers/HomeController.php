@@ -14,17 +14,7 @@ use ApiHelper;
 class HomeController extends Controller
 {
     use AuthenticatesUsers;
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         return view('vue');
@@ -41,11 +31,11 @@ class HomeController extends Controller
             return response()->json( $response
             ,200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
 
-            return response()->json([
-                'error' => $e->getLine().': '.$e->getMessage()
-            ],500);
+            return response($error, 500);
         }
     }
 
@@ -70,9 +60,12 @@ class HomeController extends Controller
 
             return response($response, 200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response(['error' =>$e->getMessage()],500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
         }
 
     }
@@ -87,8 +80,12 @@ class HomeController extends Controller
 
             return response(['exito'=>'Tu contraseña ha sido modificada con exito'],200);
 
-        } catch (\Exception $e) {
-            return response(['error' =>$e->getMessage()],500);
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
 
         }
 
@@ -104,11 +101,12 @@ class HomeController extends Controller
 
             return response()->json($response ,200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response()->json([
-                'error' => $e->getLine().': '.$e->getMessage()
-            ],500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
         }
     }
 
@@ -122,11 +120,18 @@ class HomeController extends Controller
 
             return response()->json($response ,200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response()->json([
-                'error' => $e->getLine().': '.$e->getMessage()
-            ],500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+            
+            return response($error, 500);
         }
     }
+
+    public function isLoged( Request $request )
+    {
+        return response([ 'isLoged' => Auth::check() ],200);
+    }
+
 }

@@ -664,7 +664,7 @@ var render = function() {
                             return [
                               _c("div", { staticClass: "selected d-center" }, [
                                 _vm._v(
-                                  "\r\n                                    " +
+                                  "\n                                    " +
                                     _vm._s(option.nombre) +
                                     ", " +
                                     _vm._s(option.lateral) +
@@ -683,7 +683,7 @@ var render = function() {
                             return [
                               _c("div", { staticClass: "selected d-center" }, [
                                 _vm._v(
-                                  "\r\n                                    " +
+                                  "\n                                    " +
                                     _vm._s(option.nombre) +
                                     ", " +
                                     _vm._s(option.lateral) +
@@ -708,7 +708,7 @@ var render = function() {
                     [
                       _c("template", { slot: "no-options" }, [
                         _vm._v(
-                          "\r\n                                Busque su propiedad\r\n                            "
+                          "\n                                Busque su propiedad\n                            "
                         )
                       ])
                     ],
@@ -887,7 +887,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "Buscar\r\n                                        "
+                              "Buscar\n                                        "
                             ),
                             _c("i", { staticClass: "far fa-search" })
                           ]
@@ -913,15 +913,15 @@ var render = function() {
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "list-main-wrap-title fl-wrap" }, [
               _c("h2", [
-                _vm._v("Resutaldos para : \r\n                            "),
+                _vm._v("Resutaldos para : \n                            "),
                 _vm.filters.resultFor
                   ? _c("span", [
                       _vm._v(
-                        "\r\n                                " +
+                        "\n                                " +
                           _vm._s(_vm.filters.resultFor.nombre) +
                           ", " +
                           _vm._s(_vm.filters.resultFor.lateral) +
-                          " \r\n                            "
+                          " \n                            "
                       )
                     ])
                   : _vm._e()
@@ -996,11 +996,11 @@ var render = function() {
                                               },
                                               [
                                                 _vm._v(
-                                                  "\r\n                                                    " +
+                                                  "\n                                                    " +
                                                     _vm._s(
                                                       val.titulo.toUpperCase()
                                                     ) +
-                                                    "\r\n                                                "
+                                                    "\n                                                "
                                                 )
                                               ]
                                             )
@@ -1026,32 +1026,32 @@ var render = function() {
                                                     "fas fa-map-marker-alt"
                                                 }),
                                                 _vm._v(
-                                                  "\r\n                                                    " +
+                                                  "\n                                                    " +
                                                     _vm._s(
                                                       val && val.numero_calle
                                                         ? val.numero_calle
                                                         : ""
                                                     ) +
-                                                    "\r\n                                                    " +
+                                                    "\n                                                    " +
                                                     _vm._s(
                                                       val && val.calle
                                                         ? val.calle
                                                         : ""
                                                     ) +
-                                                    "\r\n                                                    /\r\n                                                    " +
+                                                    "\n                                                    /\n                                                    " +
                                                     _vm._s(
                                                       val && val._comuna
                                                         ? val._comuna.nombre +
                                                             ","
                                                         : ""
                                                     ) +
-                                                    "\r\n                                                    " +
+                                                    "\n                                                    " +
                                                     _vm._s(
                                                       val && val._region
                                                         ? val._region.nombre
                                                         : ""
                                                     ) +
-                                                    "\r\n                                                "
+                                                    "\n                                                "
                                                 )
                                               ]
                                             )
@@ -1064,32 +1064,32 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("p", [
                                   _vm._v(
-                                    "\r\n                                        Tipo : " +
+                                    "\n                                        Tipo : " +
                                       _vm._s(val._tipo_operacion.nombre) +
                                       " "
                                   ),
                                   _c("br"),
                                   _vm._v(
-                                    "\r\n                                        Moneda: " +
+                                    "\n                                        Moneda: " +
                                       _vm._s(
                                         val._tipo_valor
                                           ? val._tipo_valor.nombre
                                           : ""
                                       ) +
-                                      "\r\n                                        Monto : " +
+                                      "\n                                        Monto : " +
                                       _vm._s(_vm._f("currency")(val.precio)) +
                                       " "
                                   ),
                                   _c("br"),
                                   _vm._v(" "),
                                   _vm._v(
-                                    "\r\n                                        Propiedad : " +
+                                    "\n                                        Propiedad : " +
                                       _vm._s(
                                         val._subtipo_propiedad
                                           ? val._subtipo_propiedad.nombre
                                           : ""
                                       ) +
-                                      "\r\n                                        "
+                                      "\n                                        "
                                   ),
                                   _c(
                                     "table",
@@ -1107,7 +1107,7 @@ var render = function() {
                                               _vm._s(
                                                 val.banio ? val.banio : 0
                                               ) +
-                                              "\r\n                                                "
+                                              "\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -1124,7 +1124,7 @@ var render = function() {
                                                   ? val.estacionamiento
                                                   : 0
                                               ) +
-                                              "\r\n                                                "
+                                              "\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -1139,7 +1139,7 @@ var render = function() {
                                               _vm._s(
                                                 val.bodega ? val.bodega : 0
                                               ) +
-                                              "\r\n                                                "
+                                              "\n                                                "
                                           )
                                         ]),
                                         _vm._v(" "),
@@ -1154,7 +1154,7 @@ var render = function() {
                                               _vm._s(
                                                 val.privado ? val.privado : 0
                                               ) +
-                                              "\r\n                                                "
+                                              "\n                                                "
                                           )
                                         ])
                                       ])
@@ -1174,7 +1174,7 @@ var render = function() {
                                       { staticClass: "geodir-category-price" },
                                       [
                                         _vm._v(
-                                          "\r\n                                            Precio\r\n                                            "
+                                          "\n                                            Precio\n                                            "
                                         ),
                                         _c("br"),
                                         _vm._v(" "),

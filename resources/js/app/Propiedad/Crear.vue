@@ -171,23 +171,23 @@
                 	               			<div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                 		               			<label>Distribución</label>
                 		               			<span v-for="(distribucion, key) in selects.distribucion">
-                			               			<div class="checkbox checkbox-css">
-                										<input type="checkbox" :id="'cssCheckbox0'+key" @click="colocarAtributo(distribucion.id)">
-                										<label class="no_bold" :for="'cssCheckbox0'+key">
-                											{{ distribucion.nombre }}
-                										</label>
-                									</div>
+                                                    <label style="color:transparent;"> &nbsp; &nbsp;</label>
+                                                        <label class="checktainer">
+                                                             {{distribucion.nombre}}
+                                                          <input type="checkbox" v-model="data.amoblada" :id="'cssCheckbox0'+key" @click="colocarAtributo(distribucion.id)">
+                                                          <span class="checkmark"></span>
+                                                        </label>
                 		               			</span>
                 		               		</div>
                 		               		<div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                 		               			<label>Servicios</label>
                 		               			<span v-for="(servicio, key) in selects.servicios">
-                			               			<div class="checkbox checkbox-css">
-                										<input type="checkbox" :id="'cssCheckbox1'+key" @click="colocarAtributo(servicio.id)">
-                										<label class="no_bold" :for="'cssCheckbox1'+key">
-                											{{ servicio.nombre }}
-                										</label>
-                									</div>
+                                                    <label style="color:transparent;"> &nbsp; &nbsp;</label>
+                                                    <label class="checktainer">
+                                                        {{ servicio.nombre }}
+                                                      <input type="checkbox" :id="'cssCheckbox1'+key" @click="colocarAtributo(servicio.id)">
+                                                      <span class="checkmark"></span>
+                                                    </label>
                 		               			</span>
                 		               		</div>
                 		               		<div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">

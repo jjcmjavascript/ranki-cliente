@@ -16,6 +16,7 @@ use App\Models\Comun\Imagen;
 use Carbon\Carbon;
 use App\Extendidos\URL;
 
+
 class UsuarioController extends Controller
 {
     public function vue()
@@ -33,11 +34,12 @@ class UsuarioController extends Controller
 
             return response()->json($response, 200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response()->json([
-                'error' => $e->getLine().': '.$e->getMessage()
-            ], 500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+            return response($error, 500);
+
         }
 
     }
@@ -80,10 +82,12 @@ class UsuarioController extends Controller
 
             return response([ 'usuario' => $response ],200);
         }
-        catch (\Exception $e) {
-            return response([
-                'error' => $e->getLine().':'.$e->getMessage()
-            ], 500);
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+            return response($error, 500);
+
         }
 
     }
@@ -107,8 +111,12 @@ class UsuarioController extends Controller
 
             return response([ 'usuario' => $response ], 200);
         }
-        catch(\Exception $e){
-            return response([ 'error'=> $e->getMessage() ], 500);
+        catch(\GuzzleHttp\Exception\BadResponseException $e){
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+            return response($error, 500);
+
         }
     }
 
@@ -146,12 +154,13 @@ class UsuarioController extends Controller
 
             return response(['url' => url()->previous() ],200);
 
-        }catch(\Exception $e){
+        }catch(\GuzzleHttp\Exception\BadResponseException $e){
 
             DB::rollback();
 
-            return response([ 'error' => $e->getMessage() ],500);
-
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+            return response($error, 500);
         }
 
     }
@@ -181,8 +190,12 @@ class UsuarioController extends Controller
 
             throw new \Exception('Cotraseña o correo incorrecto.');
         }
-        catch(\Exception $e) {
-            return response([ 'error'=> $e->getMessage() ],500);
+        catch(\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+            return response($error, 500);
+
         }
     }
 
@@ -209,11 +222,12 @@ class UsuarioController extends Controller
                 'rows' => $response
             ], 200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response()->json([
-                'error' => $e->getLine().': '.$e->getMessage()
-            ], 500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+            return response($error, 500);
+
         }
     }
 
@@ -230,11 +244,11 @@ class UsuarioController extends Controller
                 'rows' => $response
             ],200);
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response()->json([
-                'error' => $e->getLine().': '.$e->getMessage()
-            ],500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+            return response($error, 500);
         }
     }
 
@@ -251,11 +265,13 @@ class UsuarioController extends Controller
             return response()->json([
                 'exit' => route('inicio')
             ],200);
-        }catch (\Exception $e) {
+        }catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response()->json([
-                'error' => $e->getLine().': '.$e->getMessage()
-            ],500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
+
         }
 
     }
@@ -319,11 +335,13 @@ class UsuarioController extends Controller
 
             return $this->generarExcel($datos, $cabeza , 'mis_favoritos_'.date('d-m-ys'));
 
-        } catch (\Exception $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
-            return response()->json([
-                'error' => $e->getLine().': '.$e->getMessage()
-            ],500);
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
+
         }
     }
 }
