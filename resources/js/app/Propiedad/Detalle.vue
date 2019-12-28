@@ -98,7 +98,7 @@
                             </div>
                             <!-- reviews-score-wrap end -->
                             <div>
-                                <button :disabled="rows.cotizar"  class="btn btn-warning btn-lg" style="width: 100%" @click="openContizar($event)">Cotizar <i class="far fa-bookmark"></i></button>
+                                <button :disabled="rows.cotizar" class="btn btn-warning btn-lg" style="width: 100%" @click="openContizar($event)">Cotizar <i class="far fa-bookmark"></i></button>
                             </div>
                         </div>
                         <!--   flat-hero-container end -->
@@ -286,26 +286,7 @@ export default {
         // document.querySelector('html').style['overflow-y'] = 'auto';
     },
     methods: {
-        async openContizar(e) {
-            let isLoged  = await this.$root.isLoged();
-            
-            if(isLoged){
-                this.$swal({
-                    title: 'Cotizar esta propiedad',
-                    html: "<textarea class='form-control' rows='2' id='miTextarea' > </textarea>",
-                    showConfirmButton: true,
-                    preConfirm() {
-                        return miTextarea.value;
-                    }
-                })
-                .then(value => {
-                    if (value.texto && value.texto.trim().length > 0 ){
-                        axios.post()
-                    }
-                })
-            }
-            console.log(isLoged);
-        },
+
         start() {
             this.$root.cargando();
         },
@@ -330,6 +311,40 @@ export default {
                     this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
                 })
         },
+        async isLoged() {
+            axios.post(this.$root.base_url + 'isLoged')
+                .then(res => {
+                    this.openContizar();
+                })
+                .catch(err => {
+
+                });
+        },
+        openContizar() {
+            this.$swal({
+                    title: 'Cotizar esta propiedad',
+                    html: "<textarea class='form-control' rows='2' id='miTextarea' > </textarea>",
+                    showConfirmButton: true,
+                    preConfirm() {
+                        return miTextarea.value;
+                    }
+                })
+                .then(value => {
+                    if ( value.texto && value.texto.trim().length > 0 ) {
+                        this.start();
+
+                        axios.post(this.url.current, value.texto)
+                            .then(res => {
+                                
+                            })
+                            .catch(err => {
+                                this.stop();
+                                this.alerta('error','Un error ha ocurrido', 'Lo sentimos su correo no pudo ser enviado.')
+                            })
+                    }
+                });
+        },
+
 
 
     },

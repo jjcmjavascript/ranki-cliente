@@ -298,42 +298,6 @@ __webpack_require__.r(__webpack_exports__);
     this.iniciar(); // document.querySelector('html').style['overflow-y'] = 'auto';
   },
   methods: {
-    openContizar: function openContizar(e) {
-      var isLoged;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function openContizar$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.$root.isLoged());
-
-            case 2:
-              isLoged = _context.sent;
-
-              if (isLoged) {
-                this.$swal({
-                  title: 'Cotizar esta propiedad',
-                  html: "<textarea class='form-control' rows='2' id='miTextarea' > </textarea>",
-                  showConfirmButton: true,
-                  preConfirm: function preConfirm() {
-                    return miTextarea.value;
-                  }
-                }).then(function (value) {
-                  if (value.texto && value.texto.trim().length > 0) {
-                    axios.post();
-                  }
-                });
-              }
-
-              console.log(isLoged);
-
-            case 5:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, null, this);
-    },
     start: function start() {
       this.$root.cargando();
     },
@@ -356,6 +320,46 @@ __webpack_require__.r(__webpack_exports__);
         _this.stop();
 
         _this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
+      });
+    },
+    isLoged: function isLoged() {
+      var _this2 = this;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function isLoged$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              axios.post(this.$root.base_url + 'isLoged').then(function (res) {
+                _this2.openContizar();
+              })["catch"](function (err) {});
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, this);
+    },
+    openContizar: function openContizar() {
+      var _this3 = this;
+
+      this.$swal({
+        title: 'Cotizar esta propiedad',
+        html: "<textarea class='form-control' rows='2' id='miTextarea' > </textarea>",
+        showConfirmButton: true,
+        preConfirm: function preConfirm() {
+          return miTextarea.value;
+        }
+      }).then(function (value) {
+        if (value.texto && value.texto.trim().length > 0) {
+          _this3.start();
+
+          axios.post(_this3.url.current, value.texto).then(function (res) {})["catch"](function (err) {
+            _this3.stop();
+
+            _this3.alerta('error', 'Un error ha ocurrido', 'Lo sentimos su correo no pudo ser enviado.');
+          });
+        }
       });
     }
   }

@@ -280,8 +280,6 @@ class PropiedadController extends Controller
           $response = (new ApiHelper)->publicRequest('api/propiedades/results',$request->all());
           if(isset($response['error'])) throw new \Exception($response);
 
-          dd($response);
-
           return response($response,200);
 
       } catch (\Exception $e) {

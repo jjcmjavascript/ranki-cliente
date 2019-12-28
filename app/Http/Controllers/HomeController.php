@@ -89,7 +89,7 @@ class HomeController extends Controller
         try {
 
             $response = (new ApiHelper)->publicRequest('api/propiedades/filtros', $request->all());
-            dd($response);
+
             if(isset($response['error'])) throw new \Exception($response);
 
             return response()->json($response ,200);
