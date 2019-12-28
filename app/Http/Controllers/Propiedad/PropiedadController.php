@@ -22,11 +22,6 @@ class PropiedadController extends Controller
         return view('vue');
     }
 
-    public function index ()
-    {
-
-    }
-
     public function crear()
     {
         try {
@@ -211,7 +206,8 @@ class PropiedadController extends Controller
 
     }
 
-    public function desactivar ( Request $request ){
+    public function desactivar ( Request $request )
+    {
 
         $this->validate($request,[
             'id'=>'required|integer|exists:propiedades'
@@ -260,22 +256,39 @@ class PropiedadController extends Controller
         try {
             $response = (new ApiHelper)->publicRequest('api/propiedades/mostrar',['id'=>$id_propieda]);
             if(isset($response['error'])) throw new \Exception($response);
-
-                if($response['_usuario']['id'] == !Auth::user()->id){
+                if( isset(Auth::user()->id) ){
+                  if($response['_usuario']['id'] == !Auth::user()->id){
                     $response['cotizar'] = true;
-                }else{
+                  }else{
                     $response['cotizar'] = false;
-                };
-
+                  };
+                }
             return response($response,200);
 
         } catch (\Exception $e) {
             return response([
-                'error' => $e->getMessage()
+                'error' => $e->getLine().''.$e->getMessage()
             ], 500);
         }
 
     }
 
+    public function result( Request $request )
+    {
 
+      try {
+          $response = (new ApiHelper)->publicRequest('api/propiedades/results',$request->all());
+          if(isset($response['error'])) throw new \Exception($response);
+
+          dd($response);
+
+          return response($response,200);
+
+      } catch (\Exception $e) {
+          return response([
+              'error' => $e->getMessage()
+          ], 500);
+      }
+
+    }
 }

@@ -9,6 +9,9 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
 //
 //
 //
@@ -287,14 +290,50 @@ __webpack_require__.r(__webpack_exports__);
         current: this.$root.base_url + this.$route.path,
         permisos: {}
       },
-      rows: {}
+      rows: {},
+      comentario: null
     };
   },
   mounted: function mounted() {
-    this.iniciar();
-    document.querySelector('html').style['overflow-y'] = 'auto';
+    this.iniciar(); // document.querySelector('html').style['overflow-y'] = 'auto';
   },
   methods: {
+    openContizar: function openContizar(e) {
+      var isLoged;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function openContizar$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.$root.isLoged());
+
+            case 2:
+              isLoged = _context.sent;
+
+              if (isLoged) {
+                this.$swal({
+                  title: 'Cotizar esta propiedad',
+                  html: "<textarea class='form-control' rows='2' id='miTextarea' > </textarea>",
+                  showConfirmButton: true,
+                  preConfirm: function preConfirm() {
+                    return miTextarea.value;
+                  }
+                }).then(function (value) {
+                  if (value.texto && value.texto.trim().length > 0) {
+                    axios.post();
+                  }
+                });
+              }
+
+              console.log(isLoged);
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, null, this);
+    },
     start: function start() {
       this.$root.cargando();
     },
@@ -369,7 +408,7 @@ var render = function() {
                     _vm._v("Precio"),
                     _c("span", [
                       _vm._v(
-                        "\n                                " +
+                        "\n                                    " +
                           _vm._s(
                             _vm.rows._tipo_valor
                               ? _vm.rows._tipo_valor.nombre
@@ -455,13 +494,15 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", [
                     _c(
-                      "a",
+                      "button",
                       {
                         staticClass: "btn btn-warning btn-lg",
                         staticStyle: { width: "100%" },
-                        attrs: {
-                          disabled: _vm.rows.cotizar,
-                          href: "booking-single.html"
+                        attrs: { disabled: _vm.rows.cotizar },
+                        on: {
+                          click: function($event) {
+                            return _vm.openContizar($event)
+                          }
                         }
                       },
                       [
@@ -609,7 +650,7 @@ var render = function() {
                                                 ? _vm.rows.codigo_telefono
                                                 : ""
                                             ) +
-                                            ")\n                                                                " +
+                                            ")\n                                                            " +
                                             _vm._s(
                                               _vm.rows.telefono
                                                 ? _vm.rows.telefono
@@ -702,6 +743,7 @@ var staticRenderFns = [
           ])
         ]),
         _vm._v(" "),
+        _vm._v("@\n                            "),
         _c(
           "div",
           {

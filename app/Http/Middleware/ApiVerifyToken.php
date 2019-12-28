@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use ApiHelper;
 use Carbon\Carbon;
 
@@ -52,11 +52,20 @@ class ApiVerifyToken
 
     private function getNewToken()
     {
+      try {
         $response = (new ApiHelper)->sendCredentialsRequest('refresh');
-        if($response){
-            return true;
-        }
+
+        if(gettype($response) == 'string'  && strpos('error',$response )) {return false;}
+        if(isset($response['error'])) {return false; }
+
+        return $response;
+
+      } catch (\Exception $e) {
+
         return false;
+
+      }
+
     }
 
     private function exceptionRoutes( $request )
@@ -74,6 +83,7 @@ class ApiVerifyToken
             '/auth/google',
             '/auth/facebook',
             '/propiedad/detalle'
+            '/propiedad/results'
         ];
 
         return in_array($ruta , $exceptions );

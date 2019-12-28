@@ -12,8 +12,9 @@ window.Vue = require('vue');
 import Loading from 'vue-loading-overlay';
 import VueRouter from 'vue-router';
 import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+
 // IMPORTANDO ESTILOS
+import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import 'vue-select/dist/vue-select.css';
 
@@ -248,7 +249,7 @@ const app = new Vue({
                 })
                 mensaje = temp+'</ul>';
             }
-            mensaje = mensaje.indexOf('undefine') > 0? '' : mensaje;
+            mensaje = !mensaje || mensaje.indexOf('undefine') > 0 ? '' : mensaje;
             this.$swal.fire({
                 showCloseButton: button ? true : false ,
                 title : titulo,
@@ -389,7 +390,7 @@ const app = new Vue({
            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
                 evt.preventDefault();
            }
-             
+
            return true;
         },
         /**
@@ -449,6 +450,16 @@ const app = new Vue({
                 valid: dv_r == dv,
                 digit: dv_r
             };
+        },
+
+        isLoged: async function (){
+            axios.post(this.base_url + 'isLoged')
+            .then( res => {
+                return true;
+            })
+            .catch(err => {
+                return false;
+            });
         },
     },
 });

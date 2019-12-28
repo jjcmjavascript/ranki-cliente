@@ -16,6 +16,11 @@ const routes = [
         name: '/editar_propiedad',
         component : ()=> import(/* webpackChunkName: 'app/Propiedad/Editar'*/'../app/Propiedad/Editar'),
     },
+    {
+        path: '/propiedad/results',
+        name: '/results',
+        component : ()=> import(/* webpackChunkName: 'app/Propiedad/Results'*/'../app/Propiedad/Results'),
+    },
 
 ]
 

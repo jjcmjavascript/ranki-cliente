@@ -46,7 +46,7 @@
                                 </div>
                             </form>
                             <div class="lost_password">
-                                <a href="#">Olvido su contraseña?</a>
+                                <a href="/password">Olvido su contraseña?</a>
                             </div>
                         </div>
 
@@ -82,18 +82,7 @@
                                         </template>
                                         <input type="text" :class="{danger : alertaRegistrar && alertaEmailDos }" placeholder="Correo" v-model="userDos.correo" />
                                     </div>
-                                    <!-- <div>
-                                    <template v-if="alertaRegistrar && alertaTelefono">
-                                      <label>*Telefono invalido o vacio</label>
-                                    </template>
-                                    <input
-                                      type="text"
-                                      class="numeros"
-                                      :class="{danger : alertaRegistrar && alertaTelefono }"
-                                      placeholder="Teléfono"
-                                      v-model="userDos.telefono"
-                                    />
-                                  </div>-->
+
                                     <div>
                                         <template v-if="alertaRegistrar && alertaPassDos">
                                             <label>*Contraseña invalido o vacio</label>
