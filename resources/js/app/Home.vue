@@ -19,7 +19,7 @@
                             <h3>¡Consigue el domilicio que buscas aqui!</h3>
                         </div>
                         <div class="main-search-input-wrap">
-                            <div class="main-search-input fl-wrap">
+                            <!-- <div class="main-search-input fl-wrap">
                                 <div class="main-search-input-item location" id="autocomplete-container">
                                     <span class="inpt_dec"><i class="fal fa-map-marker"></i></span>
                                     <input type="text" placeholder="Hotel , City..." class="autocomplete-input" id="autocompleteid2" value="" />
@@ -32,22 +32,42 @@
                                     <div class="qty-dropdown fl-wrap">
                                         <div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Persons</div>
                                         <div class="qty-dropdown-content fl-wrap">
-                                            <div class="quantity-item">
-                                                <label><i class="fas fa-male"></i> Adults</label>
-                                                <div class="quantity">
-                                                    <input type="number" min="1" max="3" step="1" value="1">
+
+                                                <div class="quantity-item"  v-for="subtipo in selects.subtipo_propiedad">
+                                                    <label><i class="fas fa-male"></i> {{subtipo.nombre}}</label>
+                                                    <div class="quantity">
+                                                        <input type="text"  :value="subtipo.nombre">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="quantity-item">
-                                                <label><i class="fas fa-child"></i> Children</label>
-                                                <div class="quantity">
-                                                    <input type="number" min="0" max="3" step="1" value="0">
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                                 <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="fal fa-search"></i></button>
+                            </div> -->
+                            <div class="row">
+                                <div class="input-group">
+                                    <div class="col-xs-12 col-md-12">
+                                        <v-select class="bg-light mt-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.subtipo_propiedad" v-model="filters.subtipo_propiedad" />
+                                        <v-select class="bg-light mt-1 ml-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipos_operaciones" />
+                                        <v-select class="bg-light mt-1 col-xs-12 ml-1 col-md-4 v-select-clearfix" label="nombre" :filterable="false" :clearable="false"  v-model="filters.localidad" :options="selects.results" @search="onSearch" >
+                                            <template slot="no-options">
+                                                Busque su propiedad
+                                            </template>
+                                            <template slot="option" slot-scope="option">
+                                                <div class="selected d-center">
+                                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
+                                                </div>
+                                            </template>
+                                            <template slot="selected-option" slot-scope="option">
+                                                <div class="selected d-center">
+                                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
+                                                </div>
+                                            </template>
+                                        </v-select>
+                                        <a class="btn btn-warning col-md-1 mt-1 mt-1" type="button" :href="query">Ir</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,7 +127,8 @@
                                                         /
                                                         {{rows[i-1] && rows[i-1]._comuna ? rows[i-1]._comuna.nombre+',' : ''}}
                                                         {{rows[i-1] && rows[i-1]._region ? rows[i-1]._region.nombre : ''}}
-                                                    </a></div>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                         <template v-if="rows[i-1] && rows[i-1].descripcion">
@@ -122,7 +143,7 @@
                                                 </template>
                                             </div-->
                                             <div class="geodir-category-price">
-                                                Precio 
+                                                Precio
                                                 <br>
                                                 <template v-if="rows[i-1] && rows[i-1].precio">
                                                     <span>{{rows[i-1]._tipo_valor.nombre}}</span>
@@ -169,12 +190,39 @@ export default {
         return {
             app_url: this.$root.base_url,
             rows: [],
+            selects: {
+                subtipo_propiedad: [],
+                tipos_operaciones: [],
+                results: []
+            },
+            filters: {
+                subtipo_propiedad: null,
+                tipos_operaciones: null,
+                localidad:null,
+            }
         }
     },
     mounted() {
         this.iniciar();
     },
+    computed: {
+        query() {
+            let {
+                subtipo_propiedad: propiedad,
+                tipos_operaciones: operacion,
+                localidad
+            } = this.filters;
+
+            let query =
+                `${this.app_url}propiedad/results?operacion=${operacion ? operacion.id: ''}&propiedad=${propiedad ? propiedad.id : ''}&localidad=${localidad && localidad.id ? localidad.id : ''}&tipo=${localidad && localidad.tipo ? localidad.tipo : ''}`;
+
+            return query;
+        }
+    },
     methods: {
+        searchQuery() {
+            window.location.href = this.query;
+        },
         start() {
             this.$root.cargando();
         },
@@ -185,12 +233,25 @@ export default {
             this.$root.alertas(tipo, titulo, mensaje);
         },
         iniciar() {
+            this.getPropiedades();
+            this.getFiltros();
+        },
+        getPropiedades() {
             axios.post(this.app_url + 'ultimas_propieades')
                 .then(res => {
                     this.rows = res.data.propiedades;
                 })
                 .catch(err => {
 
+                })
+        },
+        getFiltros() {
+            axios.post(this.app_url + 'filtros')
+                .then(res => {
+                    this.selects.subtipo_propiedad = res.data.subtipo_propiedad;
+                    this.selects.tipos_operaciones = res.data.tipos_operaciones;
+                    this.filters.subtipo_propiedad = this.selects.subtipo_propiedad[0];
+                    this.filters.tipos_operaciones = this.selects.tipos_operaciones[0];
                 })
         },
         badgeColor(tipo_operacion) {
@@ -205,6 +266,21 @@ export default {
                     return
                     break;
             }
+        },
+        onSearch(search, loading) {
+            loading(true);
+            this.buscar(loading, search, this);
+        },
+        buscar(loading, search, self) {
+            if (search.length > 2) {
+                axios.post(this.app_url + 'obtener_comuna', {
+                        nombre: search
+                    })
+                    .then(res => {
+                        this.selects.results = res.data;
+                    })
+            }
+            loading(false);
         },
 
     }
