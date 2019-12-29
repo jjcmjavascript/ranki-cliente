@@ -1,6 +1,8 @@
 <?php
 
 Route::get('/','HomeController@index')->name('inicio');
+Route::post('/isLoged','HomeController@isLoged')->name('inicio.isLoged');
+
 
 // Password reset routes...
 Route::get('password','HomeController@reset_password')->middleware('only_guest')->name('reset_password');

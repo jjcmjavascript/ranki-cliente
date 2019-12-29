@@ -406,7 +406,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\r\n                                                    " +
+                                                "\n                                                    " +
                                                   _vm._s(option.nombre) +
                                                   ", " +
                                                   _vm._s(option.lateral) +
@@ -433,7 +433,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\r\n                                                    " +
+                                                "\n                                                    " +
                                                   _vm._s(option.nombre) +
                                                   ", " +
                                                   _vm._s(option.lateral) +
@@ -461,7 +461,7 @@ var render = function() {
                                 [
                                   _c("template", { slot: "no-options" }, [
                                     _vm._v(
-                                      "\r\n                                                Busque su propiedad\r\n                                            "
+                                      "\n                                                Busque su propiedad\n                                            "
                                     )
                                   ])
                                 ],
@@ -535,12 +535,12 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\r\n                                                " +
+                                              "\n                                                " +
                                                 _vm._s(
                                                   _vm.rows[i - 1]
                                                     ._tipo_operacion.nombre
                                                 ) +
-                                                "\r\n                                            "
+                                                "\n                                            "
                                             )
                                           ]
                                         )
@@ -586,7 +586,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\r\n                                                        " +
+                                                    "\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1].titulo
@@ -594,7 +594,7 @@ var render = function() {
                                                               .titulo
                                                           : ""
                                                       ) +
-                                                      "\r\n                                                    "
+                                                      "\n                                                    "
                                                   )
                                                 ]
                                               )
@@ -620,7 +620,7 @@ var render = function() {
                                                       "fas fa-map-marker-alt"
                                                   }),
                                                   _vm._v(
-                                                    "\r\n                                                        " +
+                                                    "\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1]
@@ -629,7 +629,7 @@ var render = function() {
                                                               .numero_calle
                                                           : ""
                                                       ) +
-                                                      "\r\n                                                        " +
+                                                      "\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1].calle
@@ -637,7 +637,7 @@ var render = function() {
                                                               .calle
                                                           : ""
                                                       ) +
-                                                      "\r\n                                                        /\r\n                                                        " +
+                                                      "\n                                                        /\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1]
@@ -647,7 +647,7 @@ var render = function() {
                                                               ","
                                                           : ""
                                                       ) +
-                                                      "\r\n                                                        " +
+                                                      "\n                                                        " +
                                                       _vm._s(
                                                         _vm.rows[i - 1] &&
                                                           _vm.rows[i - 1]
@@ -656,7 +656,7 @@ var render = function() {
                                                               ._region.nombre
                                                           : ""
                                                       ) +
-                                                      "\r\n                                                    "
+                                                      "\n                                                    "
                                                   )
                                                 ]
                                               )
@@ -695,7 +695,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\r\n                                                Precio\r\n                                                "
+                                            "\n                                                Precio\n                                                "
                                           ),
                                           _c("br"),
                                           _vm._v(" "),

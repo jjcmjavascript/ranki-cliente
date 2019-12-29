@@ -451,6 +451,25 @@ const app = new Vue({
                 digit: dv_r
             };
         },
+
+        isLoged: async function (){
+            axios.post(this.base_url + 'isLoged')
+            .then( res => {
+                return true;
+            })
+            .catch(err => {
+                return false;
+            });
+        },
+        closeLogin(){
+            $('.modal , .reg-overlay').fadeOut(200);
+            $("html, body").removeClass("hid-body");
+        },
+        openLogin(){
+            $('.modal , .reg-overlay').fadeIn(200);
+            $("html, body").addClass("hid-body");
+        }
+
     },
 });
 
