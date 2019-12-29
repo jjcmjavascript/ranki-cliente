@@ -36,12 +36,14 @@
 
     @yield('script')
     <!-- ================== END PAGE LEVEL JS ================== -->
+    
+    <!-- Scripts -->
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script-->
     <script type="text/javascript" src="{{asset('recursos/js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('recursos/js/plugins.js')}}"></script>
     <script type="text/javascript" src="{{asset('recursos/js/scripts.js')}}"></script>
     <script type="text/javascript" src="{{asset('recursos/js/custom.js')}}"></script>
     <script type="text/javascript" src="{{asset('recursos/js/bootstrap.min.js')}}"></script>
-
 
 </body>
 </html>

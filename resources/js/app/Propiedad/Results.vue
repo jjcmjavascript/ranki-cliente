@@ -16,6 +16,103 @@
         </div> -->
 
         <!-- Map end -->
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-6 pr-0" >
+                <maps @buscarPropiedad="buscarPropiedad" :type="this.maps.type" :center="this.maps.center" :zoom="this.maps.zoom" :locations="this.maps.locations"></maps>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 pl-0">
+                <div class="listing-item-container init-grid-items fl-wrap" v-if="selected">
+                    <!-- listing-item  -->
+                    <div class="listing-item" style="width: 100%">
+                        <article class="geodir-category-listing fl-wrap">
+                            <div class="geodir-category-img">
+                                <a href="listing-single.html"><img :src="$root.base_url + 'images/casa.jpg'" alt=""></a>
+                                <!-- <div class="listing-avatar">
+                                  <a href="author-single.html"><img src="images/avatar/1.jpg" alt="">
+                                  </a>
+                                     <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
+                                </div> -->
+                                <div class="sale-window">Sale 20%</div>
+                                <div class="geodir-category-opt">
+                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
+                                    <div class="rate-class-name">
+                                        <div class="score"><strong>Very Good</strong>27 Reviews </div>
+                                        <span>5.0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="geodir-category-content fl-wrap">
+                                <div class="geodir-category-content-title fl-wrap">
+                                    <div class="geodir-category-content-title-item">
+                                        <h3 class="title-sin_map">
+                                            <a href="listing-single.html">
+                                                {{selected.titulo.toUpperCase()}}
+                                            </a>
+                                        </h3>
+                                        <div class="geodir-category-location fl-wrap">
+                                            <a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i>
+                                                {{selected && selected.numero_calle ? selected.numero_calle : ''}}
+                                                {{selected && selected.calle ? selected.calle : ''}}
+                                                /
+                                                {{selected && selected._comuna ? selected._comuna.nombre+',' : ''}}
+                                                {{selected && selected._region ? selected._region.nombre : ''}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>
+                                    Tipo : {{ selected._tipo_operacion.nombre }} <br>
+                                    Moneda: {{selected._tipo_valor ? selected._tipo_valor.nombre : ''}}
+                                    Monto : {{selected.precio | currency}} <br>
+                                    <!-- Estado : {{selected.estado == 1 ? 'ACTIVA' : 'INACTIVA'}} <br> -->
+                                    Propiedad : {{selected._subtipo_propiedad ? selected._subtipo_propiedad.nombre : ''}}
+                                    <table class="table table-responsive">
+                                        <tr>
+                                            <td>
+                                                <i style="color:#3AACED;" class="fal fa-bath" title="Baños"></i> {{selected.banio ? selected.banio : 0}}
+                                            </td>
+                                            <td>
+                                                <i style="color:#3AACED;" class="fal fa-car" title="Estacionamiento"></i> {{selected.estacionamiento ? selected.estacionamiento : 0}}
+                                            </td>
+                                            <td>
+                                                <i style="color:#3AACED;" class="fal fa-home" title="Bodega"></i> {{selected.bodega ? selected.bodega : 0}}
+                                            </td>
+                                            <td>
+                                                <i style="color:#3AACED;" class="fal fa-lock" title="Privado"></i> {{selected.privado ? selected.privado : 0}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </p>
+
+
+                                <!-- <ul class="facilities-list fl-wrap">
+                                      <li><i class="fal fa-wifi"></i><span>Free WiFi</span></li>
+                                      <li><i class="fal fa-parking"></i><span>Parking</span></li>
+                                      <li><i class="fal fa-smoking-ban"></i><span>Non-smoking Rooms</span></li>
+                                      <li><i class="fal fa-utensils"></i><span> Restaurant</span></li>
+                                  </ul> -->
+                                <div class="geodir-category-footer fl-wrap">
+                                    <div class="geodir-category-price">
+                                        Precio
+                                        <br>
+                                        <template v-if="selected && selected.precio">
+                                            <span>{{selected._tipo_valor.nombre}}</span>
+                                            <span>{{selected.precio | currency}}</span>
+                                        </template>
+                                    </div>
+                                    <div class="geodir-opt-list">
+                                        <a target="_blank" :href="`${$root.base_url}propiedad/${selected.id}/detalle`" class="geodir-js-booking"><i class="fal fa-eye"></i>
+                                            <span class="geodir-opt-tooltip">Detalle</span>
+                                        </a>
+                                        <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Save</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--col-list-wrap -->
         <div class="col-list-wrap left-list">
             <div class="mobile-list-controls fl-wrap mt-5">
@@ -310,13 +407,11 @@
 </template>
 
 <script>
-export default {
-    created() {
+import Maps from '../../components/Maps';
 
-    },
+export default {
     data() {
         return {
-
             url: this.$root.base_url + this.$route.path,
             usuario: {
                 nombre: null,
@@ -386,8 +481,18 @@ export default {
                 ],
                 subtipos_propiedades: [],
                 tipos_operaciones: [],
-            }
+            },
+            maps: {
+                type: '',
+                center: [-33.4569397, -70.6482697],
+                zoom: 13,
+                locations: []
+            },
+            selected: null,
         }
+    },
+    components: {
+        Maps
     },
     mounted() {
         this.filtrar();
@@ -496,15 +601,32 @@ export default {
             }
 
             axios.post(this.url, request)
-                .then(res => {
-                    this.rows = res.data.propiedades;
-                })
-                .finally(() => {
-                    this.stop();
-                    this.filters.first = false;
-                    this.filtrando = false;
-                    window.history.pushState('','', params);
-                })
+            .then(res => {
+                this.rows = res.data.propiedades;
+
+                this.maps.locations = [];
+
+                this.rows.data.forEach((row, key) => {
+                    // Verificando si publicación tiene coordenadas
+                    if(row.latitud && row.longitud) {
+                        this.maps.locations.push({
+                            id: row.id,
+                            latlng: L.latLng(row.latitud, row.longitud),
+                            text: row.titulo,
+                            marker: {
+                                background: '#6880FF'
+                            }
+                        });
+                    }
+                });
+            })
+            .finally(() => {
+                this.stop();
+                this.maps.type = 'streets-v8';
+                this.filters.first = false;
+                this.filtrando = false;
+                window.history.pushState('','', params);
+            })
         },
 
         getFiltros() {
@@ -580,6 +702,24 @@ export default {
             }
             loading(false);
         },
+        buscarPropiedad(key) {
+            let location = this.maps.locations[key];
+
+            this.maps.center = [location.latlng.lat, location.latlng.lng];
+            this.maps.zoom = 15;
+
+            let url = this.$root.base_url+'/propiedad/'+location.id+'/detalle';
+            axios.post(url)
+            .then(response => {
+                this.selected = response.data;
+            })
+            .catch(error => {
+                this.alerta('error','Lo sentimos un error ha ocurrido.',error);
+            })
+            .finally({
+
+            });
+        }
 
     }
 }
