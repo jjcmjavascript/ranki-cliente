@@ -2,17 +2,26 @@
     <div>
         <div class="card mt-4">
             <v-map ref="map" id='map' :zoom="zoom" :maxZoom="maxZoom" :center="center">
-                <v-tilelayer ref="tile" :url="tileProvider.url"
-                :attribution="tileProvider.attribution"></v-tilelayer>
-                <v-marker-cluster ref="markerCluster" :options="clusterOptions">
-                    <v-marker ref="item" v-for="(l, key) in locations" :key="l.id"
-                    :lat-lng="l.latlng" @click="seleccionarElemento(key)"
-                    :icon="iconMarker(l)">
-                        <v-tooltip :content="l.text"></v-tooltip>
-                        <!--v-popup :content="l.text"
-                        :options="{ autoClose: false, closeOnClick: false }"></v-popup-->
+
+                <v-tilelayer ref="tile" :url="tileProvider.url" :attribution="tileProvider.attribution"></v-tilelayer>
+
+                <template v-if="markers == 'simple'">
+                    <v-marker ref="item" :lat-lng="[-33.4569397, -70.6482697]" :draggable="true">
                     </v-marker>
-                </v-marker-cluster>
+                </template>
+
+                <template v-else>
+                     <v-marker-cluster ref="markerCluster" :options="clusterOptions">
+                        <v-marker ref="item" v-for="(l, key) in locations" :key="l.id"
+                        :lat-lng="l.latlng" @click="seleccionarElemento(key)"
+                        :icon="iconMarker(l)" :draggable="true">
+                            <v-tooltip ref="tooltip" :content="l.text"></v-tooltip>
+                            <!--v-popup :content="l.text"
+                            :options="{ autoClose: false, closeOnClick: false }"></v-popup-->
+                        </v-marker>
+                    </v-marker-cluster>
+                </template>
+
             </v-map>
         </div>
     </div>
@@ -30,6 +39,10 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 export default {
     props: {
+        markers: {
+            type: String,
+            default: '',
+        },
         type: {
             type: String,
             default: '',
@@ -50,6 +63,7 @@ export default {
     data() {
         return {
             map: null,
+            marker: null,
             clusterOptions: {},
             maxZoom: 18,
             tileProvider: {
@@ -84,6 +98,10 @@ export default {
             //console.log(e);
         });
 
+        this.map.on('dragend', function (e) {
+            //console.log(e);
+        });
+
         this.$nextTick(function () {
             this.clusterOptions = {
                 disableClusteringAtZoom: 11,
@@ -91,6 +109,14 @@ export default {
                     return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
                 }*/
             };
+
+            if(this.markers == 'simple') {
+                this.$refs.item.mapObject.on('dragend', (e) => {
+                    if(e.target && e.target._latlng) {
+                        this.$emit('sendLatlng', e.target._latlng);
+                    }
+                });
+            }
         });
     },
     methods: {
