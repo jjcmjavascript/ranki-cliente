@@ -350,7 +350,13 @@
 				               		</div>
 				               	</div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <maps @sendLatlng="getLatlng" markers="simple" :type="this.maps.type"></maps>
+                                </div>
+                            </div>
                             <hr>
+
                             <div class="float-right">
                                 <button class="btn btn-success btn-lg"  :disable="enviando" @click="guardar">Publicar propiedad</button>
                             </div>
@@ -365,6 +371,8 @@
 </template>
 
 <script>
+	import Maps from '../../components/Maps';
+
 	export default {
 		data() {
 			return {
@@ -441,11 +449,19 @@
 					otros: [],
 				},
 				enviando : false,
+				maps: {
+                    type: '',
+                    center: [-33.4569397, -70.6482697],
+                    zoom: 13,
+                },
 			}
 		},
 		created() {
         	this.iniciar();
         	this.iniciarCampoConteoGenerico();
+        },
+        components: {
+            Maps
         },
         computed: {
         	inhabilitarGuardar: function() {
@@ -529,6 +545,7 @@
 					this.error = this.$root.arrayResponse(error);
 				})
 				.finally(() => {
+                    this.maps.type = 'streets-v8';
 					this.stop();
 					this.obtenerAtributos();
 				})
@@ -714,6 +731,10 @@
 					this.data.atributos.push(id);
 				}
 			},
+			getLatlng(latlng) {
+                this.data.latitud = latlng['lat'];
+                this.data.longitud = latlng['lng'];
+            },
 		}
 	}
 </script>
