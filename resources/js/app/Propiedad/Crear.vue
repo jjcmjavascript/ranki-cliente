@@ -300,6 +300,12 @@
                 						</div>
                                		</div>
                                	</div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12">
+                                        <maps @sendLatlng="getLatlng" markers="simple" :type="this.maps.type"></maps>
+                                    </div>
+                                </div>
                                 <hr>
                             <div class="float-right">
                                 <button class="btn btn-success btn-lg"  :disable="enviando" @click="guardar">Publicar propiedad</button>
@@ -316,6 +322,8 @@
 </template>
 
 <script>
+    import Maps from '../../components/Maps';
+
 	export default {
 		data() {
             return {
@@ -387,14 +395,22 @@
 					otros: [],
 				},
                 enviando : false,
+                maps: {
+                    type: '',
+                    center: [-33.4569397, -70.6482697],
+                    zoom: 13,
+                },
 			}
 		},
+        components: {
+            Maps
+        },
 		created() {
         	this.iniciar();
         	this.iniciarCampoConteoGenerico();
             document.querySelector('html').style['overflow-y'] = 'auto';
         },
-        computed: {
+        mounted() {
 
         },
 		methods: {
@@ -488,6 +504,9 @@
                     this.stop();
                     this.alerta('error','Lo sentimos un error ha ocurrido.',error);
 				})
+                .finally(() => {
+                    this.maps.type = 'streets-v8';
+                });
 			},
             reordenarRegion() {
                 if(this.selects.regiones.length > 0){
@@ -655,13 +674,44 @@
 					this.data.atributos.push(id);
 				}
 			},
+            getLatlng(latlng) {
+                this.data.latitud = latlng['lat'];
+                this.data.longitud = latlng['lng'];
+            },
 		}
 	}
 </script>
 
 <style scoped>
-input[type="file"] {
-    display: none;
-}
+    input[type="file"] {
+        display: none;
+    }
+
+
+    #map {
+        height: 50vh;
+        ---width: 900px;
+        margin: 0;
+    }
+    #card-card-image-size {
+        height: 300px;
+        ---width: 700px;
+        margin: 0;
+    }
+    .image-icon img {
+        height: 38px !important;
+        width: 38px !important;
+        border-radius: 50%;
+        border: solid;
+        border-color: #32CD32;
+    }
+    .dot {
+        height: 25px;
+        width: 25px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        background: #6880FF;
+    }
 
 </style>
