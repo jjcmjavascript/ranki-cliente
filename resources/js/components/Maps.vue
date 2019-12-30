@@ -5,11 +5,11 @@
                 <v-tilelayer ref="tile" :url="tileProvider.url"
                 :attribution="tileProvider.attribution"></v-tilelayer>
                 <v-marker-cluster ref="markerCluster" :options="clusterOptions">
-                    <v-marker ref="item" v-for="(l, key) in locations" :key="l.id" 
-                    :lat-lng="l.latlng" @click="seleccionarElemento(key)" 
+                    <v-marker ref="item" v-for="(l, key) in locations" :key="l.id"
+                    :lat-lng="l.latlng" @click="seleccionarElemento(key)"
                     :icon="iconMarker(l)">
                         <v-tooltip :content="l.text"></v-tooltip>
-                        <!--v-popup :content="l.text" 
+                        <!--v-popup :content="l.text"
                         :options="{ autoClose: false, closeOnClick: false }"></v-popup-->
                     </v-marker>
                 </v-marker-cluster>
@@ -33,7 +33,7 @@ export default {
         type: {
             type: String,
             default: '',
-        },  
+        },
         center: {
             type: Array,
             default: () => [-33.4569397, -70.6482697] // Region 13 - Santiago de Chile
@@ -101,7 +101,7 @@ export default {
                     className: 'dot',
                     iconSize: [12, 12]
                 });
-            } 
+            }
             else {
                 return L.divIcon({
                     html: `<img style="width: 100%;" src="/images/${item.image}.jpg"/>`,
