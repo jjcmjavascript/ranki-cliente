@@ -219,7 +219,7 @@
                                 <div class="box-widget">
                                     <div class="box-widget-content">
                                         <div class="box-widget-item-header">
-                                            <h3> Contact Information</h3>
+                                            <h3> Información de Contacto</h3>
                                         </div>
                                         <div class="box-widget-list">
                                             <ul>
@@ -254,6 +254,11 @@
                             </div>
 
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <maps markers="simple" :zoom="maps.zoom" :locations="maps.locations" :center="maps.center" :type="this.maps.type"></maps>
+                            </div>
+                        </div>
                         <!--box-widget-wrap end -->
                     </div>
                     <!--   sidebar end  -->
@@ -272,11 +277,13 @@
 
 <script>
 
-import Login from '../Login.vue'
+import Login from '../Login.vue';
+import Maps from '../../components/Maps';
 
 export default {
     components: {
         login: Login,
+        Maps
     },
     data() {
         return {
@@ -285,6 +292,12 @@ export default {
                 permisos: {},
             },
             rows: {},
+            maps: {
+                type: '',
+                center: [-33.4569397, -70.6482697],
+                zoom: 17,
+                locations: [-33.4569397, -70.6482697],
+            },
         }
     },
     mounted() {
@@ -308,12 +321,17 @@ export default {
 
             axios.post(this.url.current)
                 .then(response => {
-                    this.stop();
                     this.rows = response.data;
+                    if(this.rows.latitud && this.rows.longitud) {
+                        this.maps.center = this.maps.locations = [this.rows.latitud, this.rows.longitud];   
+                    }
                 })
                 .catch(error => {
-                    this.stop();
                     this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
+                })
+                .finally(() => {
+                    this.stop();
+                    this.maps.type = 'streets-v8';
                 })
         },
         isLoged() {

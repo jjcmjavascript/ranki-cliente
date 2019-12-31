@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div class="card mt-4">
+        <div class="card">
             <v-map ref="map" id='map' :zoom="zoom" :maxZoom="maxZoom" :center="center">
 
                 <v-tilelayer ref="tile" :url="tileProvider.url" :attribution="tileProvider.attribution"></v-tilelayer>
 
-                <template v-if="markers == 'simple' && locations">
-                    <v-marker ref="item" :lat-lng="locations" :icon="iconMarker([])" :draggable="true">
+                <template v-if="markers == 'simple'">
+                    <v-marker ref="item" :lat-lng="locations" :icon="iconMarker([])" :draggable="draggable">
                     </v-marker>
                 </template>
 
@@ -39,6 +39,10 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 export default {
     props: {
+        draggable: {
+            type: Boolean,
+            default: false
+        },
         markers: {
             type: String,
             default: '',
