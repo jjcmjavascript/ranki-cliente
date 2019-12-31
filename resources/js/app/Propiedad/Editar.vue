@@ -30,7 +30,7 @@
 											<template v-else>-</template>
 										</span>
 
-										
+
 										<!--v-select label="nombre" :options="selects.tipos_propiedades" v-model="data._tipo_propiedad"></v-select-->
 				               		</div>
 				               	</div>
@@ -107,7 +107,7 @@
 											<label class="btn btn-outline-primary text-uppercase c-pointer">
 											    <input type="file" @change="cargarImagen($event)"/>
 											   	Agregar imagen
-											</label>					
+											</label>
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -349,12 +349,13 @@
 										</div>
 				               		</div>
 				               	</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                    <maps @sendLatlng="getLatlng" markers="simple" :type="this.maps.type"></maps>
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12">
+                                        <maps  markers="simple" :type="this.maps.type" :locations="locations" ></maps>
+                                    </div>
                                 </div>
                             </div>
+
                             <hr>
 
                             <div class="float-right">
@@ -376,6 +377,7 @@
 	export default {
 		data() {
 			return {
+                locations : [-33.4569397, -70.6482697],
 				error: [],
 				success: [],
 				section: {
@@ -391,7 +393,7 @@
 					subtipo_propiedad: null,
 					region: null,
 					comuna: null,
-					calle: null, 
+					calle: null,
 					numero_calle: null,
 					numero_domicilio: null,
 					numero_piso: null,
@@ -450,7 +452,7 @@
 				},
 				enviando : false,
 				maps: {
-                    type: '',
+                    type: 'streets-v8',
                     center: [-33.4569397, -70.6482697],
                     zoom: 13,
                 },
@@ -533,6 +535,10 @@
 					this.selects.cocina = response.data.cocina;
 					this.selects.otros = response.data.otros;
 
+                    if(this.data.latitud && this.data.longitud ){
+                        this.locations = [this.data.latitud, this.data.longitud];
+                    }
+
 					// INICIALIZAR IMAGENES
 					Vue.set(this.data, 'imagenes', []);
 					this.data._imagenes.forEach((imagen, key) => {
@@ -606,7 +612,7 @@
 					this.data.tipo_piso.forEach(tipo_piso => {
 						request.append('tipo_piso[]', tipo_piso);
 					});
-				} 
+				}
 
 				if(this.data.atributos.length > 0) {
 					this.data.atributos.forEach(atributo => {
@@ -731,10 +737,6 @@
 					this.data.atributos.push(id);
 				}
 			},
-			getLatlng(latlng) {
-                this.data.latitud = latlng['lat'];
-                this.data.longitud = latlng['lng'];
-            },
 		}
 	}
 </script>

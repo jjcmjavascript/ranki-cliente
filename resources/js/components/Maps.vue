@@ -12,8 +12,8 @@
 
                 <template v-else>
                      <v-marker-cluster ref="markerCluster" :options="clusterOptions">
-                        <v-marker ref="item" v-for="(l, key) in locations" :key="l.id" 
-                        :lat-lng="l.latlng" @click="seleccionarElemento(key)" 
+                        <v-marker ref="item" v-for="(l, key) in locations" :key="l.id"
+                        :lat-lng="l.latlng" @click="seleccionarElemento(key)"
                         :icon="iconMarker(l)">
                             <v-tooltip ref="tooltip" :content="l.text"></v-tooltip>
                             <!--v-popup :content="l.text"
@@ -49,7 +49,7 @@ export default {
         },
         type: {
             type: String,
-            default: '',
+            default: 'streets-v8',
         },
         center: {
             type: Array,
@@ -61,7 +61,6 @@ export default {
         },
         locations: {
             type: Array,
-            default: () => []
         },
     },
     data() {
@@ -131,6 +130,9 @@ export default {
         .catch(error => {
             this.$parent.alerta('error', 'Ha ocurrido un problema', error);
         });
+        // seteo por defecto del mapa
+        this.tileProvider.url =  `https://api.mapbox.com/styles/v1/mapbox/${this.type}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`;
+    
     },
     methods: {
         iconMarker(item){
@@ -149,7 +151,7 @@ export default {
                        /* iconSize: [25, 35]*/
                     });
                 }
-            } 
+            }
             else {
                 return L.divIcon({
                     html: `<img style="width: 100%;" src="/images/${item.image}.jpg"/>`,

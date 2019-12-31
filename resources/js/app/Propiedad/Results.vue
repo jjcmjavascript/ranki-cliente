@@ -75,7 +75,7 @@
                                     <div class="geodir-category-content-title-item">
                                         <h3 class="title-sin_map">
                                             <a href="listing-single.html">
-                                                {{selected.titulo.toUpperCase()}}
+                                                {{selected && selected.titulo.toUpperCase()}}
                                             </a>
                                         </h3>
                                         <div class="geodir-category-location fl-wrap">
@@ -90,10 +90,10 @@
                                     </div>
                                 </div>
                                 <p>
-                                    Tipo : {{ selected._tipo_operacion.nombre }} <br>
-                                    Moneda: {{selected._tipo_valor ? selected._tipo_valor.nombre : ''}}
-                                    Monto : {{selected.precio | currency}} <br>
-                                    Propiedad : {{selected._subtipo_propiedad ? selected._subtipo_propiedad.nombre : ''}}<br>
+                                    Tipo : {{ selected && selected._tipo_operacion.nombre }} <br>
+                                    Moneda: {{selected && selected._tipo_valor ? selected._tipo_valor.nombre : ''}}
+                                    Monto : {{selected && selected.precio | currency}} <br>
+                                    Propiedad : {{selected && selected._subtipo_propiedad ? selected._subtipo_propiedad.nombre : ''}}<br>
                                     <a target="_blank" :href="$root.base_url+'propiedad/'+selected.id+'/detalle'" class="float-right" title="Ir a la propiedad"> <i class="fal fa-eye "></i> </a>
                                 </p>
                             </div>
@@ -151,7 +151,7 @@
                                     Monto : {{val.precio | currency}} <br>
                                     <!-- Estado : {{val.estado == 1 ? 'ACTIVA' : 'INACTIVA'}} <br> -->
                                     Propiedad : {{val._subtipo_propiedad ? val._subtipo_propiedad.nombre : ''}}
-                                    <a target="_blank" :href="$root.base_url+'propiedad/'+selected.id+'/detalle'" class="float-right" title="Ir a la propiedad">
+                                    <a target="_blank" :href="$root.base_url+'propiedad/'+val.id+'/detalle'" class="float-right" title="Ir a la propiedad">
                                         <i class="fal fa-eye  color-primary"></i>
                                     </a>
                                     <a target="_blank" @click="goto(val)" class="float-right mr-2" title="Ir a la propiedad">
@@ -390,7 +390,7 @@ export default {
 
                 this.rows = res.data.propiedades;
                 this.filters.localidad = this.filters.resultFor = res.data.localidad;
-
+                this.selected = this.rows.data[0];
                 this.maps.locations = [];
 
                 this.rows.data.forEach((row, key) => {
@@ -415,7 +415,10 @@ export default {
                     map_params = 'santiago%2C%20metropolitana';
                 }
 
-                // Buscando centro de localización
+                return map_params;
+
+            })
+            .then((map_params)=>{
                 axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${map_params}.json?types=place&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`)
                 .then(response => {
                     if(response.data && response.data.features && response.data.features[0]) {
@@ -425,10 +428,12 @@ export default {
                 })
                 .catch(error => {
                     console.log(error);
-                });
+                })
+                .finally(()=>{
+                    this.stop();
+                })
             })
             .finally(() => {
-                this.stop();
                 this.maps.type = 'streets-v8';
                 this.filters.first = false;
                 this.filtrando = false;
