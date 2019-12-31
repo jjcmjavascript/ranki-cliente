@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/app/Propiedad/Crear.js": "/app/Propiedad/Crear.js",
+    "/app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js": "/app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js",
     "/app/Propiedad/Detalle.js": "/app/Propiedad/Detalle.js",
     "/app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js": "/app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js",
     "/app/Propiedad/Editar.js": "/app/Propiedad/Editar.js",
@@ -15,9 +16,14 @@
     "/components/Alertas.js": "/components/Alertas.js",
     "/components/DateRangePicker.js": "/components/DateRangePicker.js",
     "/components/modal.js": "/components/modal.js",
+    "/components/pagination.js": "/components/pagination.js",
     "/components/panel.js": "/components/panel.js",
-    "/vendors~app/Propiedad/Results.js": "/vendors~app/Propiedad/Results.js",
+    "/vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js": "/vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js",
     "/vendors~components/DateRangePicker.js": "/vendors~components/DateRangePicker.js",
     "/vendors~components/pagination.js": "/vendors~components/pagination.js",
-    "/vendors~components/vSelect.js": "/vendors~components/vSelect.js"
+    "/vendors~components/vSelect.js": "/vendors~components/vSelect.js",
+    "/app/Propiedad/Editar~app/Propiedad/Results.js": "/app/Propiedad/Editar~app/Propiedad/Results.js",
+    "/vendors~app/Propiedad/Editar~app/Propiedad/Results.js": "/vendors~app/Propiedad/Editar~app/Propiedad/Results.js",
+    "/app/Propiedad/Crear~app/Propiedad/Results.js": "/app/Propiedad/Crear~app/Propiedad/Results.js",
+    "/vendors~app/Propiedad/Crear~app/Propiedad/Results.js": "/vendors~app/Propiedad/Crear~app/Propiedad/Results.js"
 }
