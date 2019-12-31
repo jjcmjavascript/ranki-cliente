@@ -10,6 +10,7 @@ window.Vue = require('vue');
 
 // IMPORTANDO DEPENDENCIAS
 import Loading from 'vue-loading-overlay';
+import LoadScript from 'vue-plugin-load-script';
 import VueRouter from 'vue-router';
 import VueSweetalert2 from 'vue-sweetalert2';
 
@@ -22,23 +23,9 @@ require('./config/components');
 require('./config/filters');
 require('./config/sweetalert2');
 
-// SET GLOBAL DEL LOADER
-window.loading = function(self, ...args) {
-    return self.$loading.show({
-        loader: 'spinner',
-        opacity: 0.4,
-        backgroundColor: '#4C4C4C',
-        zIndex: 9999,
-      ...args[0]
-    });
-};
-window.loaded = function(self) {
-    self.loading.hide();
-};
-
-
 // SET DEPENDENCIAS
 Vue.use(Loading);
+Vue.use(LoadScript);
 Vue.use(VueRouter);
 Vue.use(VueSweetalert2);
 

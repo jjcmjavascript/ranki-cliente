@@ -516,6 +516,7 @@ export default {
 
             let params = '?';
             let request = new FormData;
+            request.append('withLocation', 1);
 
             if (!this.filters.first) {
                 this.filtrando = true;
@@ -602,7 +603,10 @@ export default {
 
             axios.post(this.url, request)
             .then(res => {
+                let map_params;
+
                 this.rows = res.data.propiedades;
+                this.filters.localidad = this.filters.resultFor = res.data.localidad;
 
                 this.maps.locations = [];
 
@@ -619,6 +623,26 @@ export default {
                         });
                     }
                 });
+
+                if(this.filters.localidad) {
+                    let localidad = this.filters.localidad;
+                    map_params = localidad.nombre+'%2C%20'+localidad.lateral;
+                }
+                else {
+                    map_params = 'santiago%2C%20metropolitana';
+                }
+
+                // Buscando centro de localización
+                axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${map_params}.json?types=place&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`)
+                .then(response => {
+                    if(response.data && response.data.features && response.data.features[0]) {
+                        let center = response.data.features[0].center;
+                        this.maps.center = [center[1], center[0]];
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
             })
             .finally(() => {
                 this.stop();
@@ -626,7 +650,7 @@ export default {
                 this.filters.first = false;
                 this.filtrando = false;
                 window.history.pushState('','', params);
-            })
+            });
         },
 
         getFiltros() {
@@ -662,7 +686,6 @@ export default {
                 .then(res => {
                     let url = window.location.search.slice(1).split('&');
 
-                    this.filters.localidad = this.filters.resultFor = res.data.localidad;
                     this.selects.subtipos_propiedades = res.data.subtipo_propiedad;
                     this.selects.tipos_operaciones = res.data.tipos_operaciones;
 

@@ -303,7 +303,7 @@
 
                                 <div class="row">
                                     <div class="col-lg-12 col-sm-12">
-                                        <maps @sendLatlng="getLatlng" markers="simple" :type="this.maps.type"></maps>
+                                        <maps @sendLatlng="getLatlng" markers="simple" :zoom="maps.zoom" :center="maps.center" :type="this.maps.type"></maps>
                                     </div>
                                 </div>
                                 <hr>
@@ -398,7 +398,7 @@
                 maps: {
                     type: '',
                     center: [-33.4569397, -70.6482697],
-                    zoom: 13,
+                    zoom: 17,
                 },
 			}
 		},
@@ -478,8 +478,7 @@
 				axios.post(this.url.current)
 				.then(response => {
                     this.stop();
-                    //this.alerta("success", "Exito", "Tu clave fue modificada!");
-
+                    
 					this.selects.regiones = response.data.regiones;
 					this.selects.tipos_propiedades = response.data.tipos_propiedades;
 					this.selects.subtipos_propiedades = response.data.subtipos_propiedades;

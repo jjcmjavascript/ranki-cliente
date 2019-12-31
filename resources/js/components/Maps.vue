@@ -6,7 +6,7 @@
                 <v-tilelayer ref="tile" :url="tileProvider.url" :attribution="tileProvider.attribution"></v-tilelayer>
 
                 <template v-if="markers == 'simple'">
-                    <v-marker ref="item" :lat-lng="[-33.4569397, -70.6482697]" :draggable="true">
+                    <v-marker ref="item" :lat-lng="[-33.4569397, -70.6482697]" :icon="iconMarker([])" :draggable="true">
                     </v-marker>
                 </template>
 
@@ -14,7 +14,7 @@
                      <v-marker-cluster ref="markerCluster" :options="clusterOptions">
                         <v-marker ref="item" v-for="(l, key) in locations" :key="l.id" 
                         :lat-lng="l.latlng" @click="seleccionarElemento(key)" 
-                        :icon="iconMarker(l)" :draggable="true">
+                        :icon="iconMarker(l)">
                             <v-tooltip ref="tooltip" :content="l.text"></v-tooltip>
                             <!--v-popup :content="l.text" 
                             :options="{ autoClose: false, closeOnClick: false }"></v-popup-->
@@ -118,15 +118,33 @@ export default {
                 });
             }
         });
+
+        this.$loadScript('https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js')
+        .then(() => {
+            let geocoder = new L.Control.Geocoder();
+                geocoder.addTo(this.map);
+        })
+        .catch(error => {
+            this.$parent.alerta('error', 'Ha ocurrido un problema', error);
+        });
     },
     methods: {
         iconMarker(item){
             if (_.isEmpty(item.image)) {
-                return L.divIcon({
-                    html: `<span style="width: 100%;" style="background: ${item.marker.background}">`,
-                    className: 'dot',
-                    iconSize: [12, 12]
-                });
+                if(item.marker && item.marker.background) {
+                    return L.divIcon({
+                        html: `<span style="width: 100%;" style="background: ${item.marker.background}">`,
+                        className: 'dot',
+                        iconSize: [12, 12]
+                    });
+                }
+                else {
+                    return new L.Icon.Default({
+                        shadowSize: [0,0],
+                        iconSize:    [20, 36],
+                       /* iconSize: [25, 35]*/
+                    });
+                }
             } 
             else {
                 return L.divIcon({

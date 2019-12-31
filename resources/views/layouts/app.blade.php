@@ -18,6 +18,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/style.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/color.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/custom.css')}}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 
 </head>
 
