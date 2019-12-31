@@ -537,6 +537,7 @@
 
                     if(this.data.latitud && this.data.longitud ){
                         this.locations = [this.data.latitud, this.data.longitud];
+                        this.maps.center = [this.data.latitud, this.data.longitud];
                     }
 
 					// INICIALIZAR IMAGENES

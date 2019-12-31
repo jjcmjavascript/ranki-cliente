@@ -6,8 +6,10 @@
                 <v-tilelayer ref="tile" :url="tileProvider.url" :attribution="tileProvider.attribution"></v-tilelayer>
 
                 <template v-if="markers == 'simple'">
-                    <v-marker ref="item" :lat-lng="locations" :icon="iconMarker([])" :draggable="draggable">
-                    </v-marker>
+                    <template v-if="locations">
+                        <v-marker ref="item" :lat-lng="locations" :icon="iconMarker([])" :draggable="draggable">
+                        </v-marker>    
+                    </template>
                 </template>
 
                 <template v-else>
@@ -59,9 +61,7 @@ export default {
             type: Number,
             default: 13
         },
-        locations: {
-            type: Array,
-        },
+        locations: Array,
     },
     data() {
         return {
