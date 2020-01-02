@@ -181,7 +181,7 @@
 </template>
 <script>
 import Login from './Login.vue'
-// api/publicaciones/recientes
+
 export default {
     components: {
         login: Login,

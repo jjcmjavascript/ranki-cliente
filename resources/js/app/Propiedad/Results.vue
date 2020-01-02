@@ -14,27 +14,44 @@
                 <h4> <span style="color:#F9B90F;text-shadow:0px 0px 1px rgba(0,0,0,0.5)">Buscar</span> <span style="color:#3AACED; text-shadow:0px 0px 1px rgba(0,0,0,0.5);">Propiedad</span></h4>
                 <hr>
                 <!-- lista de selects  -->
-                <v-select class="mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipo_operacion" :clearable="false" />
-                <v-select class="ml-1 mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.subtipos_propiedades" v-model="filters.subtipo_propiedad" :clearable="false" />
-                <v-select label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch" class="ml-1 mt-1  col-xs-12 col-md-3 v-select-clearfix">
-                    <template slot="no-options">
-                        Busque su propiedad
-                    </template>
-                    <template slot="option" slot-scope="option">
-                        <div class="selected d-center">
-                            {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
-                        </div>
-                    </template>
-                    <template slot="selected-option" slot-scope="option" class="clearfix">
-                        <div class="selected d-center">
-                            {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
-                        </div>
-                    </template>
-                </v-select>
+                <div class="row">
 
+                    <div class="col-xs-12 col-md-2 pr-0">
+                        <v-select label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipo_operacion" :clearable="false" />
+                    </div>
+                    <div class="col-xs-12 col-md-2 pl-1 pr-0">
+                        <v-select label="nombre" :options="selects.subtipos_propiedades" v-model="filters.subtipo_propiedad" :clearable="false" />
+                    </div>
+                    <div class="col-xs-12 col-md-3 pl-1 pr-0">
+                        <v-select label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch" class="v-select-clearfix">
+                        <template slot="no-options">
+                            Busque su propiedad
+                        </template>
+                        <template slot="option" slot-scope="option">
+                            <div class="selected d-center">
+                                {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
+                            </div>
+                        </template>
+                        <template slot="selected-option" slot-scope="option" class="clearfix">
+                            <div class="selected d-center">
+                                {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
+                            </div>
+                        </template>
+                    </v-select>
+                    </div>
+                    <div class="col-xs-12 col-md-2 pl-1 pr-0">
+                        <v-select label="nombre" :options="selects.tipos_propiedades" v-model="filters.tipos_propiedades" :clearable="false" />
+                    </div>
+                    <div class="col-xs-12 col-md-2 pl-1 pr-0">
+                        <v-select label="nombre" :options="selects.tipos_valores" v-model="filters.tipos_valores" :clearable="false" />
+                    </div>
+                    <!--div class="col-md-1">
+                        <a class="btn btn-info" @click="showHide()" style="color:white; position:none !important; bottom:0px !important">
+                            <i class="far fa-plus" style="color:white"></i>
+                        </a>
+                    </div-->
+                </div>
 
-                <v-select class="ml-1 mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.tipos_propiedades" v-model="filters.tipos_propiedades" :clearable="false" />
-                <v-select class="ml-1 mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.tipos_valores" v-model="filters.tipos_valores" :clearable="false" />
 
                 <a href="#" class="btn btn-warning col-xs-12 col-md-1 mt-1 ml-1" style="color:white;" @click="limpiarFiltros()">
                     <i class="far fa-trash"></i> Limpiar
@@ -59,7 +76,7 @@
         </div>
 
         <div class="row" style="height:70vh;">
-            <div class="col-xs-12 col-md-8" style="height:100%">
+            <div class="col-xs-12 col-md-8 mt-4" style="height:100%">
                 <maps style="height:100%" @buscarPropiedad="buscarPropiedad" :type="this.maps.type" :center="this.maps.center" :zoom="this.maps.zoom" :locations="this.maps.locations"></maps>
             </div>
             <div class="col-md-4">
