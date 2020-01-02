@@ -5,7 +5,7 @@
 
                 <v-tilelayer ref="tile" :url="tileProvider.url" :attribution="tileProvider.attribution"></v-tilelayer>
 
-                <template v-if="markers == 'simple'">
+                <template class="mt-4" v-if="markers == 'simple'">
                     <template v-if="locations">
                         <v-marker ref="item" :lat-lng="locations" :icon="iconMarker([])" :draggable="draggable">
                         </v-marker>    
@@ -71,14 +71,14 @@ export default {
             maxZoom: 18,
             tileProvider: {
                 name: 'Maps',
-                url: '',
+                url: `https://api.mapbox.com/styles/v1/mapbox/streets-v8/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`,
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             },
         }
     },
     watch: {
         type() {
-            this.tileProvider.url = `https://api.mapbox.com/styles/v1/mapbox/${this.type}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`
+            
         }
     },
     components: {
@@ -130,9 +130,6 @@ export default {
         .catch(error => {
             this.$parent.alerta('error', 'Ha ocurrido un problema', error);
         });
-        // seteo por defecto del mapa
-        this.tileProvider.url =  `https://api.mapbox.com/styles/v1/mapbox/${this.type}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`;
-    
     },
     methods: {
         iconMarker(item){
@@ -163,6 +160,9 @@ export default {
         seleccionarElemento(key) {
             this.$emit('buscarPropiedad', key);
         },
+        setTipoMapa(type) {
+            this.tileProvider.url = `https://api.mapbox.com/styles/v1/mapbox/${type}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`
+        }
     },
 }
 

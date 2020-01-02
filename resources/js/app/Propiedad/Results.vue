@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <div class="row mt-5">
-            <div class="col-xs-12">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
                 <div class="mobile-list-controls fl-wrap mt-5">
                     <div class="container">
                         <div class="mlc show-hidden-column-map schm text-center"><i class="fal fa-map-marked-alt"></i> Show Map</div>
@@ -16,7 +16,7 @@
                 <!-- lista de selects  -->
                 <v-select class="mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipo_operacion" :clearable="false" />
                 <v-select class="ml-1 mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.subtipos_propiedades" v-model="filters.subtipo_propiedad" :clearable="false" />
-                <v-select label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch" class="ml-1 mt-1 col-md-3 v-select-clearfix">
+                <v-select label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch" class="ml-1 mt-1  col-xs-12 col-md-3 v-select-clearfix">
                     <template slot="no-options">
                         Busque su propiedad
                     </template>
@@ -386,7 +386,10 @@ export default {
 
             axios.post(this.url, request)
             .then(res => {
-                let map_params;
+                let search = {
+                    type: '',
+                    params: ''
+                };
 
                 this.rows = res.data.propiedades;
                 this.filters.localidad = this.filters.resultFor = res.data.localidad;
@@ -408,18 +411,34 @@ export default {
                 });
 
                 if(this.filters.localidad) {
+
                     let localidad = this.filters.localidad;
-                    map_params = localidad.nombre+'%2C%20'+localidad.lateral;
+                    search.params = localidad.nombre+'%2C%20'+localidad.lateral;
+
+
+                    if(request.get('region_id')) {
+                        search.type = 'region';
+                    }
+                    else {
+                        search.type = 'place'
+                    }
+                   
                 }
                 else {
-                    map_params = 'santiago%2C%20metropolitana';
+                    search.params = 'santiago%2C%20metropolitana';
+                    search.type = 'region'
                 }
 
-                return map_params;
+                search.params += '%2C%20Chile';
+
+                return {
+                    'params': search.params,
+                    'type'  : search.type
+                }
 
             })
-            .then((map_params)=>{
-                axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${map_params}.json?types=place&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`)
+            .then(search => {
+                axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${search['params']}.json?types=${search['type']}&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`)
                 .then(response => {
                     if(response.data && response.data.features && response.data.features[0]) {
                         let center = response.data.features[0].center;
