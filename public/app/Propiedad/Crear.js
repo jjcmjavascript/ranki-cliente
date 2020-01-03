@@ -699,26 +699,32 @@ __webpack_require__.r(__webpack_exports__);
     createQuery: function createQuery() {
       var _this6 = this;
 
-      var map_params = '';
-      var query = '';
+      var search = {
+        type: '',
+        params: ''
+      };
 
       if (this.data.region) {
-        map_params += "".concat(this.data.region.nombre.replace(/ /g, '%20'), "%2C");
+        search.params += "".concat(this.data.region.nombre.replace(/ /g, '%20'), "%2C");
+        search.type = 'region';
       }
 
       if (this.data.comuna) {
-        map_params += "".concat(this.data.comuna.nombre.replace(/ /g, '%20'), "%2C");
+        search.params += "".concat(this.data.comuna.nombre.replace(/ /g, '%20'), "%2C");
+        search.type = 'place';
       }
 
       if (this.data.calle) {
-        map_params += "".concat(this.data.calle.replace(/ /g, '%20'), "%2C");
+        search.params += "".concat(this.data.calle.replace(/ /g, '%20'), "%2C");
+        search.type = 'address';
       }
 
       if (this.data.numero_calle) {
-        map_params += "".concat(this.data.numero_calle, "%2C");
+        search.params += "".concat(this.data.numero_calle, "%2C");
       }
 
-      axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(map_params, ".json?types=place&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw")).then(function (response) {
+      search.params += '%2C%20Chile';
+      axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(search.params, ".json?types=").concat(search.type, "&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw")).then(function (response) {
         if (response.data && response.data.features && response.data.features[0]) {
           var center = response.data.features[0].center;
           _this6.maps.center = [center[1], center[0]];

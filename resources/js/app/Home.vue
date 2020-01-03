@@ -152,7 +152,23 @@
                                             </div>
                                             <div class="geodir-opt-list">
                                                 <a href="#" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">Ubicar en el mapa</span></a>
-                                                <a href="#" class="geodir-js-favorite"><i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Marcar favorito</span></a>
+                                                <template v-if="rows[i-1] && rows[i-1].favorito">
+                                                    <a href="#" class="geodir-js-favorite" @click.prevent="marcarFavorito(i-1)" :class="{ 'text-danger' : (rows[i-1]._favorito && rows[i-1]._favorito.length > 0)}">
+                                                        <i class="fal fa-heart"></i><span class="geodir-opt-tooltip">
+                                                            <template v-if="rows[i-1]._favorito && rows[i-1]._favorito.length > 0">
+                                                                Eliminar favorito
+                                                            </template>
+                                                            <template v-else>
+                                                                Marcar favorito
+                                                            </template>
+                                                        </span>
+                                                    </a>
+                                                </template>
+                                                <template v-else>
+                                                    <a href="#" class="geodir-js-favorite" @click="$event.preventDefault()" >
+                                                        <i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Marcar favorito</span>
+                                                    </a>
+                                                </template>
                                             </div>
                                         </div>
                                     </div>
@@ -282,6 +298,20 @@ export default {
             }
             loading(false);
         },
+        marcarFavorito(i){
+            let index = this.rows[i];
+            this.start();
+
+            axios.post(this.$root.base_url + 'propiedad/marcar', {'id' : index.id} )
+                .then(res => {
+                    this.iniciar()
+                    this.stop();
+                })
+                .catch(err => {
+                    this.stop();
+                    this.alerta('error', 'Un error ha ocurrido.', err);
+                })
+        }
 
     }
 }

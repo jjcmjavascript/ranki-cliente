@@ -327,4 +327,30 @@ class PropiedadController extends Controller
         }
 
     }
+
+    public function favorito_marcar ( Request $request ){
+
+        $this->validate($request ,  [
+            'id' => 'required | integer | exists:propiedades,id'
+        ]);
+
+        try {
+            if(!Auth::check()) throw new \Exception("Accion no autorizada");
+
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/favorito/marcar',['id'=>$request->id, 'usuario_id'=>Auth::user()->id]);
+
+            if(isset($response['error'])) throw new \Exception($response);
+
+            return response($response,200);
+
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
+        }
+
+    }
+
 }

@@ -10,7 +10,9 @@ Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(fun
     Route::post('{id}/detalle', 'PropiedadController@detalle')->name('.ver_detalle');
     Route::get('results', 'PropiedadController@vue')->name('.result');
     Route::post('results', 'PropiedadController@result')->name('.result');
-    Route::post('{id}/detalle/cotizar', 'PropiedadController@cotizar')->name('cotizar');
+    Route::post('{id}/detalle/cotizar', 'PropiedadController@cotizar')->name('.cotizar');
+    Route::post('marcar', 'PropiedadController@favorito_marcar')->name('.favorito_marcar');
+
 });
  // esta es mi prueba de cotizacion papi :D
 // PROPIEDADES

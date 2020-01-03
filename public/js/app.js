@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave":"app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave","app/Propiedad/Detalle":"app/Propiedad/Detalle","app/login":"app/login","app/recovery/recuperarClave":"app/recovery/recuperarClave","app/recovery/reiniciarClave":"app/recovery/reiniciarClave","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results":"vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results","app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results":"app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results","app/Propiedad/Crear":"app/Propiedad/Crear","app/Propiedad/Editar":"app/Propiedad/Editar","app/Propiedad/Results":"app/Propiedad/Results","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","components/pagination":"components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave":"app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave","app/login":"app/login","app/recovery/recuperarClave":"app/recovery/recuperarClave","app/recovery/reiniciarClave":"app/recovery/reiniciarClave","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results":"vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results","app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results":"app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results","app/Propiedad/Crear":"app/Propiedad/Crear","app/Propiedad/Editar":"app/Propiedad/Editar","app/Propiedad/Results":"app/Propiedad/Results","app/Propiedad/Detalle":"app/Propiedad/Detalle","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","components/pagination":"components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -83534,25 +83534,25 @@ var routes = [{
   path: '/propiedad/crear',
   name: '/crear_propiedad',
   component: function component() {
-    return Promise.all(/*! import() | app/Propiedad/Crear */[__webpack_require__.e("vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Crear")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Crear */ "./resources/js/app/Propiedad/Crear.vue"));
+    return Promise.all(/*! import() | app/Propiedad/Crear */[__webpack_require__.e("vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Crear")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Crear */ "./resources/js/app/Propiedad/Crear.vue"));
   }
 }, {
   path: '/propiedad/:id_propiedad/detalle',
   name: 'propiedad',
   component: function component() {
-    return Promise.all(/*! import() | app/Propiedad/Detalle */[__webpack_require__.e("app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/Propiedad/Detalle")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Detalle */ "./resources/js/app/Propiedad/Detalle.vue"));
+    return Promise.all(/*! import() | app/Propiedad/Detalle */[__webpack_require__.e("vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Detalle")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Detalle */ "./resources/js/app/Propiedad/Detalle.vue"));
   }
 }, {
   path: '/propiedad/:id/editar',
   name: '/editar_propiedad',
   component: function component() {
-    return Promise.all(/*! import() | app/Propiedad/Editar */[__webpack_require__.e("vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Editar")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Editar */ "./resources/js/app/Propiedad/Editar.vue"));
+    return Promise.all(/*! import() | app/Propiedad/Editar */[__webpack_require__.e("vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Editar")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Editar */ "./resources/js/app/Propiedad/Editar.vue"));
   }
 }, {
   path: '/propiedad/results',
   name: '/results',
   component: function component() {
-    return Promise.all(/*! import() | app/Propiedad/Results */[__webpack_require__.e("vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Results")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Results */ "./resources/js/app/Propiedad/Results.vue"));
+    return Promise.all(/*! import() | app/Propiedad/Results */[__webpack_require__.e("vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Results")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Results */ "./resources/js/app/Propiedad/Results.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

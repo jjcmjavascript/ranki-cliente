@@ -5,7 +5,9 @@
     border: none !important;
     color: #394066 !important;
   }
-
+  .hearRed{
+    color : red;
+  }
    .vs__clear,
    .vs__open-indicator {
   }
@@ -25,7 +27,7 @@
     overflow: auto;
   }
   .v-select-clearfix .vs__selected div small {
-    vertical-align:middle; 
+    vertical-align:middle;
     line-height: 18px;
   }
 /*  */

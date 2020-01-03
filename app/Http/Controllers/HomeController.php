@@ -24,7 +24,14 @@ class HomeController extends Controller
     {
         try {
 
-            $response = (new ApiHelper)->publicRequest('api/propiedades/recientes');
+            if( Auth::check() ){
+
+                $response = (new ApiHelper)->publicRequest('api/propiedades/recientes', ['usuario_id'=> Auth::user()->id ]);
+
+            }else{
+
+                $response = (new ApiHelper)->publicRequest('api/propiedades/recientes');
+            }
 
             if(isset($response['error'])) throw new \Exception($response);
 
@@ -124,7 +131,7 @@ class HomeController extends Controller
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
-            
+
             return response($error, 500);
         }
     }

@@ -555,6 +555,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         if (_this3.data.latitud && _this3.data.longitud) {
           _this3.locations = [_this3.data.latitud, _this3.data.longitud];
+          _this3.maps.center = [_this3.data.latitud, _this3.data.longitud];
         } // INICIALIZAR IMAGENES
 
 

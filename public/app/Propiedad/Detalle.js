@@ -10,6 +10,12 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Login_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Login.vue */ "./resources/js/app/Login.vue");
+/* harmony import */ var _components_Maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Maps */ "./resources/js/components/Maps.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -283,9 +289,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    login: _Login_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    login: _Login_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Maps: _components_Maps__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -293,7 +301,13 @@ __webpack_require__.r(__webpack_exports__);
         current: this.$root.base_url + this.$route.path,
         permisos: {}
       },
-      rows: {}
+      rows: {},
+      maps: {
+        type: '',
+        center: [-33.4569397, -70.6482697],
+        zoom: 17,
+        locations: [-33.4569397, -70.6482697]
+      }
     };
   },
   mounted: function mounted() {
@@ -315,13 +329,17 @@ __webpack_require__.r(__webpack_exports__);
 
       this.start();
       axios.post(this.url.current).then(function (response) {
-        _this.stop();
-
         _this.rows = response.data;
+
+        if (_this.rows.latitud && _this.rows.longitud) {
+          _this.maps.center = _this.maps.locations = [_this.rows.latitud, _this.rows.longitud];
+        }
       })["catch"](function (error) {
+        _this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
+      })["finally"](function () {
         _this.stop();
 
-        _this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
+        _this.maps.type = 'streets-v8';
       });
     },
     isLoged: function isLoged() {
@@ -712,6 +730,25 @@ var render = function() {
                         ])
                       ])
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-lg-12 col-sm-12" },
+                      [
+                        _c("maps", {
+                          attrs: {
+                            markers: "simple",
+                            zoom: _vm.maps.zoom,
+                            locations: _vm.maps.locations,
+                            center: _vm.maps.center,
+                            type: this.maps.type
+                          }
+                        })
+                      ],
+                      1
+                    )
                   ])
                 ])
               ])
@@ -1077,7 +1114,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-widget-item-header" }, [
-      _c("h3", [_vm._v(" Contact Information")])
+      _c("h3", [_vm._v(" Información de Contacto")])
     ])
   },
   function() {

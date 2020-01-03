@@ -185,6 +185,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -391,7 +408,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios.post(this.url, request).then(function (res) {
-        var map_params;
+        var search = {
+          type: '',
+          params: ''
+        };
         _this.rows = res.data.propiedades;
         _this.filters.localidad = _this.filters.resultFor = res.data.localidad;
         _this.selected = _this.rows.data[0];
@@ -413,14 +433,25 @@ __webpack_require__.r(__webpack_exports__);
 
         if (_this.filters.localidad) {
           var localidad = _this.filters.localidad;
-          map_params = localidad.nombre + '%2C%20' + localidad.lateral;
+          search.params = localidad.nombre + '%2C%20' + localidad.lateral;
+
+          if (request.get('region_id')) {
+            search.type = 'region';
+          } else {
+            search.type = 'place';
+          }
         } else {
-          map_params = 'santiago%2C%20metropolitana';
+          search.params = 'santiago%2C%20metropolitana';
+          search.type = 'region';
         }
 
-        return map_params;
-      }).then(function (map_params) {
-        axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(map_params, ".json?types=place&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw")).then(function (response) {
+        search.params += '%2C%20Chile';
+        return {
+          'params': search.params,
+          'type': search.type
+        };
+      }).then(function (search) {
+        axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(search['params'], ".json?types=").concat(search['type'], "&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw")).then(function (response) {
           if (response.data && response.data.features && response.data.features[0]) {
             var center = response.data.features[0].center;
             _this.maps.center = [center[1], center[0]];
@@ -608,287 +639,315 @@ var render = function() {
   return _c("div", { attrs: { id: "wrapper" } }, [
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "row mt-5" }, [
-        _c(
-          "div",
-          { staticClass: "col-xs-12" },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("v-select", {
-              staticClass: "mt-1 col-xs-12 col-md-2",
-              attrs: {
-                label: "nombre",
-                options: _vm.selects.tipos_operaciones,
-                clearable: false
-              },
-              model: {
-                value: _vm.filters.tipo_operacion,
-                callback: function($$v) {
-                  _vm.$set(_vm.filters, "tipo_operacion", $$v)
-                },
-                expression: "filters.tipo_operacion"
-              }
-            }),
-            _vm._v(" "),
-            _c("v-select", {
-              staticClass: "ml-1 mt-1 col-xs-12 col-md-2",
-              attrs: {
-                label: "nombre",
-                options: _vm.selects.subtipos_propiedades,
-                clearable: false
-              },
-              model: {
-                value: _vm.filters.subtipo_propiedad,
-                callback: function($$v) {
-                  _vm.$set(_vm.filters, "subtipo_propiedad", $$v)
-                },
-                expression: "filters.subtipo_propiedad"
-              }
-            }),
-            _vm._v(" "),
+        _c("div", { staticClass: "col-lg-12 col-sm-12 col-xs-12" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
             _c(
-              "v-select",
-              {
-                staticClass: "ml-1 mt-1 col-md-3 v-select-clearfix",
-                attrs: {
-                  label: "nombre",
-                  filterable: false,
-                  clearable: false,
-                  options: _vm.selects.results
-                },
-                on: { search: _vm.onSearch },
-                scopedSlots: _vm._u([
-                  {
-                    key: "option",
-                    fn: function(option) {
-                      return [
-                        _c("div", { staticClass: "selected d-center" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(option.nombre) +
-                              ", " +
-                              _vm._s(option.lateral) +
-                              " "
-                          ),
-                          _c("small", { staticClass: "float-right" }, [
-                            _vm._v(_vm._s(option.tipo))
-                          ])
-                        ])
-                      ]
-                    }
+              "div",
+              { staticClass: "col-xs-12 col-md-2 pr-0" },
+              [
+                _c("v-select", {
+                  attrs: {
+                    label: "nombre",
+                    options: _vm.selects.tipos_operaciones,
+                    clearable: false
                   },
-                  {
-                    key: "selected-option",
-                    fn: function(option) {
-                      return [
-                        _c("div", { staticClass: "selected d-center" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(option.nombre) +
-                              ", " +
-                              _vm._s(option.lateral) +
-                              " "
-                          ),
-                          _c("small", { staticClass: "float-right" }, [
-                            _vm._v(_vm._s(option.tipo))
-                          ])
-                        ])
-                      ]
-                    }
+                  model: {
+                    value: _vm.filters.tipo_operacion,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "tipo_operacion", $$v)
+                    },
+                    expression: "filters.tipo_operacion"
                   }
-                ]),
-                model: {
-                  value: _vm.filters.localidad,
-                  callback: function($$v) {
-                    _vm.$set(_vm.filters, "localidad", $$v)
-                  },
-                  expression: "filters.localidad"
-                }
-              },
-              [
-                _c("template", { slot: "no-options" }, [
-                  _vm._v(
-                    "\n                        Busque su propiedad\n                    "
-                  )
-                ])
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("v-select", {
-              staticClass: "ml-1 mt-1 col-xs-12 col-md-2",
-              attrs: {
-                label: "nombre",
-                options: _vm.selects.tipos_propiedades,
-                clearable: false
-              },
-              model: {
-                value: _vm.filters.tipos_propiedades,
-                callback: function($$v) {
-                  _vm.$set(_vm.filters, "tipos_propiedades", $$v)
-                },
-                expression: "filters.tipos_propiedades"
-              }
-            }),
-            _vm._v(" "),
-            _c("v-select", {
-              staticClass: "ml-1 mt-1 col-xs-12 col-md-2",
-              attrs: {
-                label: "nombre",
-                options: _vm.selects.tipos_valores,
-                clearable: false
-              },
-              model: {
-                value: _vm.filters.tipos_valores,
-                callback: function($$v) {
-                  _vm.$set(_vm.filters, "tipos_valores", $$v)
-                },
-                expression: "filters.tipos_valores"
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-warning col-xs-12 col-md-1 mt-1 ml-1",
-                staticStyle: { color: "white" },
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    return _vm.limpiarFiltros()
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "far fa-trash" }),
-                _vm._v(" Limpiar\n                ")
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-info col-xs-12 col-md-1 mt-1 ml-1",
-                staticStyle: {
-                  color: "white",
-                  position: "none !important",
-                  bottom: "0px !important"
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.showHide()
-                  }
-                }
-              },
-              [
-                _vm._v("Filtros\n                    "),
-                _c("i", {
-                  staticClass: "far fa-plus",
-                  staticStyle: { color: "white" }
                 })
-              ]
+              ],
+              1
             ),
             _vm._v(" "),
             _c(
-              "a",
-              {
-                staticClass: "col-xs-12 col-md-1 mt-1 ml-1 btn btn-success",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    return _vm.filtrar()
+              "div",
+              { staticClass: "col-xs-12 col-md-2 pl-1 pr-0" },
+              [
+                _c("v-select", {
+                  attrs: {
+                    label: "nombre",
+                    options: _vm.selects.subtipos_propiedades,
+                    clearable: false
+                  },
+                  model: {
+                    value: _vm.filters.subtipo_propiedad,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "subtipo_propiedad", $$v)
+                    },
+                    expression: "filters.subtipo_propiedad"
                   }
-                }
-              },
-              [_c("i", { staticClass: "far fa-search" })]
+                })
+              ],
+              1
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "hidden-listing-filter fl-wrap" }, [
-              _c(
-                "div",
-                { staticClass: "row" },
-                [
-                  _c("v-select", {
-                    staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
+            _c(
+              "div",
+              { staticClass: "col-xs-12 col-md-3 pl-1 pr-0" },
+              [
+                _c(
+                  "v-select",
+                  {
+                    staticClass: "v-select-clearfix",
                     attrs: {
-                      options: _vm.numeros,
+                      label: "nombre",
+                      filterable: false,
                       clearable: false,
-                      placeholder: "Baños"
+                      options: _vm.selects.results
                     },
-                    model: {
-                      value: _vm.filters.banio,
-                      callback: function($$v) {
-                        _vm.$set(_vm.filters, "banio", $$v)
+                    on: { search: _vm.onSearch },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "option",
+                        fn: function(option) {
+                          return [
+                            _c("div", { staticClass: "selected d-center" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(option.nombre) +
+                                  ", " +
+                                  _vm._s(option.lateral) +
+                                  " "
+                              ),
+                              _c("small", { staticClass: "float-right" }, [
+                                _vm._v(_vm._s(option.tipo))
+                              ])
+                            ])
+                          ]
+                        }
                       },
-                      expression: "filters.banio"
+                      {
+                        key: "selected-option",
+                        fn: function(option) {
+                          return [
+                            _c("div", { staticClass: "selected d-center" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(option.nombre) +
+                                  ", " +
+                                  _vm._s(option.lateral) +
+                                  " "
+                              ),
+                              _c("small", { staticClass: "float-right" }, [
+                                _vm._v(_vm._s(option.tipo))
+                              ])
+                            ])
+                          ]
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.filters.localidad,
+                      callback: function($$v) {
+                        _vm.$set(_vm.filters, "localidad", $$v)
+                      },
+                      expression: "filters.localidad"
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("v-select", {
-                    staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
-                    attrs: {
-                      options: _vm.numeros,
-                      clearable: false,
-                      placeholder: "Privado"
+                  },
+                  [
+                    _c("template", { slot: "no-options" }, [
+                      _vm._v(
+                        "\n                            Busque su propiedad\n                        "
+                      )
+                    ])
+                  ],
+                  2
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-xs-12 col-md-2 pl-1 pr-0" },
+              [
+                _c("v-select", {
+                  attrs: {
+                    label: "nombre",
+                    options: _vm.selects.tipos_propiedades,
+                    clearable: false
+                  },
+                  model: {
+                    value: _vm.filters.tipos_propiedades,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "tipos_propiedades", $$v)
                     },
-                    model: {
-                      value: _vm.filters.privado,
-                      callback: function($$v) {
-                        _vm.$set(_vm.filters, "privado", $$v)
-                      },
-                      expression: "filters.privado"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("v-select", {
-                    staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
-                    attrs: {
-                      options: _vm.numeros,
-                      clearable: false,
-                      placeholder: "Bodegas"
+                    expression: "filters.tipos_propiedades"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-xs-12 col-md-2 pl-1 pr-0" },
+              [
+                _c("v-select", {
+                  attrs: {
+                    label: "nombre",
+                    options: _vm.selects.tipos_valores,
+                    clearable: false
+                  },
+                  model: {
+                    value: _vm.filters.tipos_valores,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "tipos_valores", $$v)
                     },
-                    model: {
-                      value: _vm.filters.bodegas,
-                      callback: function($$v) {
-                        _vm.$set(_vm.filters, "bodegas", $$v)
-                      },
-                      expression: "filters.bodegas"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("v-select", {
-                    staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
-                    attrs: {
-                      options: _vm.numeros,
-                      clearable: false,
-                      placeholder: "Estacionamiento"
+                    expression: "filters.tipos_valores"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-warning col-xs-12 col-md-1 mt-1 ml-1",
+              staticStyle: { color: "white" },
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  return _vm.limpiarFiltros()
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "far fa-trash" }),
+              _vm._v(" Limpiar\n                ")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-info col-xs-12 col-md-1 mt-1 ml-1",
+              staticStyle: {
+                color: "white",
+                position: "none !important",
+                bottom: "0px !important"
+              },
+              on: {
+                click: function($event) {
+                  return _vm.showHide()
+                }
+              }
+            },
+            [
+              _vm._v("Filtros\n                    "),
+              _c("i", {
+                staticClass: "far fa-plus",
+                staticStyle: { color: "white" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "col-xs-12 col-md-1 mt-1 ml-1 btn btn-success",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  return _vm.filtrar()
+                }
+              }
+            },
+            [_c("i", { staticClass: "far fa-search" })]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "hidden-listing-filter fl-wrap" }, [
+            _c(
+              "div",
+              { staticClass: "row" },
+              [
+                _c("v-select", {
+                  staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
+                  attrs: {
+                    options: _vm.numeros,
+                    clearable: false,
+                    placeholder: "Baños"
+                  },
+                  model: {
+                    value: _vm.filters.banio,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "banio", $$v)
                     },
-                    model: {
-                      value: _vm.filters.estacionamiento,
-                      callback: function($$v) {
-                        _vm.$set(_vm.filters, "estacionamiento", $$v)
-                      },
-                      expression: "filters.estacionamiento"
-                    }
-                  })
-                ],
-                1
-              )
-            ])
-          ],
-          1
-        )
+                    expression: "filters.banio"
+                  }
+                }),
+                _vm._v(" "),
+                _c("v-select", {
+                  staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
+                  attrs: {
+                    options: _vm.numeros,
+                    clearable: false,
+                    placeholder: "Privado"
+                  },
+                  model: {
+                    value: _vm.filters.privado,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "privado", $$v)
+                    },
+                    expression: "filters.privado"
+                  }
+                }),
+                _vm._v(" "),
+                _c("v-select", {
+                  staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
+                  attrs: {
+                    options: _vm.numeros,
+                    clearable: false,
+                    placeholder: "Bodegas"
+                  },
+                  model: {
+                    value: _vm.filters.bodegas,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "bodegas", $$v)
+                    },
+                    expression: "filters.bodegas"
+                  }
+                }),
+                _vm._v(" "),
+                _c("v-select", {
+                  staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
+                  attrs: {
+                    options: _vm.numeros,
+                    clearable: false,
+                    placeholder: "Estacionamiento"
+                  },
+                  model: {
+                    value: _vm.filters.estacionamiento,
+                    callback: function($$v) {
+                      _vm.$set(_vm.filters, "estacionamiento", $$v)
+                    },
+                    expression: "filters.estacionamiento"
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row", staticStyle: { height: "70vh" } }, [
         _c(
           "div",
           {
-            staticClass: "col-xs-12 col-md-8",
+            staticClass: "col-xs-12 col-md-8 mt-4",
             staticStyle: { height: "100%" }
           },
           [

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["app/Propiedad/Detalle~app/recovery/recuperarClave~app/recovery/reiniciarClave"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/Login.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************!*\
