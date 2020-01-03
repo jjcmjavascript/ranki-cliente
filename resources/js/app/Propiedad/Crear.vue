@@ -676,6 +676,7 @@ export default {
             }
         },
         getLatlng(latlng) {
+            console.log(latlng);
             this.data.latitud = latlng['lat'];
             this.data.longitud = latlng['lng'];
         },
@@ -710,6 +711,8 @@ export default {
                     let center = response.data.features[0].center;
                     this.maps.center = [center[1], center[0]];
                     this.locations = [ center[1], center[0] ];
+                    this.data.latitud = center[1];
+                    this.data.longitud = center[0];
                 }else {
                     this.locations = [-33.4569397, -70.6482697];
                     this.maps.center = [-33.4569397, -70.6482697];

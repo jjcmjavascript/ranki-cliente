@@ -1,9 +1,14 @@
+/********** GENERAL ***********/
+section {
+  padding: 20px 0;
+}
+
 /* vue select */
    .vs__search::placeholder,
    .vs__dropdown-toggle,
    .vs__dropdown-menu {
     border: none !important;
-    color: #394066 !important;
+    color: #C1C1C1 !important;
   }
 
    .vs__clear,
@@ -18,7 +23,7 @@
   }
 
   .v-select-clearfix .vs__selected {
-    width: 90%;
+    width: 92%;
   }
   .v-select-clearfix .vs__selected div {
     width: 100%;
@@ -28,6 +33,18 @@
     vertical-align:middle; 
     line-height: 18px;
   }
+
+/********** COL ********/
+
+@media (min-width: 1200px) {
+  .col-lg-1-5 {
+    flex: 0 0 12.6666666667%;
+    width: 12.6666666667%;
+    float: left;
+  }
+}
+
+
 /*  */
 /* .search-input-item.midd-input{
   width: 100% !important;
