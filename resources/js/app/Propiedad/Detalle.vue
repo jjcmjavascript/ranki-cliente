@@ -1,5 +1,40 @@
 <template >
 <div id="wrapper">
+    <div class="modal">
+        <div class="puntuar"></div>
+        <div class="main-register-holder">
+            <div class="main-register fl-wrap">
+                <div class="close-reg color-bg"><i class="fal fa-times"></i></div>
+                <ul class="tabs-menu">
+                    <li class="current"><a href="#tab-1"><i class="fal fa-sign-in-alt"></i> Registrar </a></li>
+                    <li><a href="#tab-2"><i class="fal fa-user-plus"></i> Iniciar</a></li>
+                </ul>
+                <!--tabs -->
+                <div id="tabs-container">
+                    <div class="tab">
+                        <!--tab -->
+                        <div id="tab-1" class="tab-content">
+                            <h3>
+                                INICIA
+                                <span>
+                                    en
+                                    <strong>Metro Cuadrado</strong>
+                                </span>
+                            </h3>
+                            <div class="custom-form">
+                                <!-- form uno -->
+                                </form>
+                                <div class="lost_password">
+                                    <a href="/password">Olvido su contraseña?</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- content-->
     <div class="content">
         <!--  section  -->
@@ -10,19 +45,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="list-single-main-container ">
-                            <!-- fixed-scroll-column  -->
-                            <div class="fixed-scroll-column">
-                                <div class="fixed-scroll-column-item fl-wrap">
-                                    <div class="showshare sfcs fc-button">
-                                        <i class="far fa-share-alt"></i><span>Compartir </span>
-                                    </div>
-                                    <div class="share-holder fixed-scroll-column-share-container">
-                                        <div class="share-container  isShare"></div>
-                                    </div>
-                                    <a class="fc-button custom-scroll-link" href="#"><i class="far fa-heart"></i> <span>Favorito</span></a>
-                                </div>
-                            </div>
-                            <!-- fixed-scroll-column end   -->
+
                             <div class="list-single-main-media fl-wrap" id="sec1">
                                 <div class="single-slider-wrapper fl-wrap">
                                     <div class="slider-for fl-wrap">
@@ -61,10 +84,64 @@
                                 <div class="rate-class-name-wrap fl-wrap">
                                     <div class="rate-class-name">
                                         <span>4.5</span>
-                                        <div class="score"><strong>Muy Bueno</strong>2 Reviews </div>
+                                        <div class="score"><strong>Muy Bueno</strong> {{ rows && rows._likes_count }} Me gusta </div>
                                     </div>
                                 </div>
+
                                 <div class="review-score-detail">
+                                    <div class="col-xs-2">
+                                        <template v-if="rows && rows.favorito">
+                                            <a href="#" @click.prevent="marcarFavorito()" :class="{ 'text-danger' : (rows._favorito && rows._favorito.length > 0)}">
+                                                <template v-if="rows._favorito && rows._favorito.length > 0">
+                                                    <i class="fa fa-heart fa-2x" title="Eliminar Favorito"></i>
+                                                </template>
+                                                <template v-else>
+                                                    <i class="fal fa-heart fa-2x" title="Agregar favorito"></i>
+                                                </template>
+                                            </a>
+                                        </template>
+                                        <template v-else>
+                                            <a href="#">
+                                                <i class="fal fa-heart fa-2x" title="Favorito"></i>
+                                            </a>
+                                        </template>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <template v-if="rows && rows.likeable">
+                                            <a href="#" @click.prevent="marcarLike()" class="text-info">
+                                                <template v-if="rows._likes && rows._likes.length > 0">
+                                                    <i class="fa fa-thumbs-up fa-2x" title="No me gusta"></i>
+                                                </template>
+                                                <template v-else>
+                                                    <i class="fa fa-thumbs-o-up fa-2x" title="Me gusta"></i>
+                                                </template>
+                                            </a>
+                                        </template>
+                                        <template v-else>
+                                            <a href="#" class="text-primary">
+                                                <i class="fa fa-thumbs-o-up fa-2x" title="Me gusta"></i>
+                                            </a>
+                                        </template>
+                                    </div>
+                                    <div class="col-xs-2 col-md-2">
+                                        <template v-if="rows && rows.likeable">
+                                            <a href="#" @click.prevent="openPuntuar()" class="text-warning">
+                                                <template v-if="rows._puntuaciones && rows._puntuaciones.length > 0">
+                                                    <i class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                                </template>
+                                                <template v-else>
+                                                    <i class="fa fa-star-o-o fa-2x" aria-hidden="true"></i>
+                                                </template>
+                                            </a>
+                                        </template>
+                                        <template v-else>
+                                            <a href="#" class="text-warning">
+                                                <i class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                            </a>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="review-score-detail mt-2">
                                     <!-- review-score-detail-list-->
                                     <div class="review-score-detail-list">
                                         <div class="col-xs-12 mb-2">
@@ -98,7 +175,7 @@
                             </div>
                             <!-- reviews-score-wrap end -->
                             <div>
-                                <button :disabled="rows.cotizar" class="btn btn-warning btn-lg" style="width: 100%" @click="isLoged($event)">Cotizar <i class="far fa-bookmark"></i></button>
+                                <button :disabled="!rows.cotizar" class="btn btn-warning btn-lg" style="width: 100%" @click="isLoged($event)">Cotizar <i class="far fa-bookmark"></i></button>
                             </div>
                         </div>
                         <!--   flat-hero-container end -->
@@ -142,69 +219,24 @@
 
                             <div class="list-single-main-item fl-wrap" id="sec6">
                                 <div class="list-single-main-item-title fl-wrap">
-                                    <h3>Add Review</h3>
+                                    <h3>Puntuar Vivienda</h3>
                                 </div>
-                                <!-- Add Review Box -->
-                                <div id="add-review" class="add-review-box">
-                                    <!-- Review Comment -->
-                                    <form id="add-comment" class="add-comment  custom-form" name="rangeCalc">
-                                        <fieldset>
-                                            <div class="review-score-form fl-wrap">
-                                                <div class="review-range-container">
-                                                    <!-- review-range-item-->
-                                                    <div class="review-range-item">
-                                                        <div class="range-slider-title">Cleanliness</div>
-                                                        <div class="range-slider-wrap ">
-                                                            <input type="text" class="rate-range" data-min="0" data-max="5" name="rgcl" data-step="1" value="4">
-                                                        </div>
-                                                    </div>
-                                                    <!-- review-range-item end -->
-                                                    <!-- review-range-item-->
-                                                    <div class="review-range-item">
-                                                        <div class="range-slider-title">Comfort</div>
-                                                        <div class="range-slider-wrap ">
-                                                            <input type="text" class="rate-range" data-min="0" data-max="5" name="rgcl" data-step="1" value="1">
-                                                        </div>
-                                                    </div>
-                                                    <!-- review-range-item end -->
-                                                    <!-- review-range-item-->
-                                                    <div class="review-range-item">
-                                                        <div class="range-slider-title">Staf</div>
-                                                        <div class="range-slider-wrap ">
-                                                            <input type="text" class="rate-range" data-min="0" data-max="5" name="rgcl" data-step="1" value="5">
-                                                        </div>
-                                                    </div>
-                                                    <!-- review-range-item end -->
-                                                    <!-- review-range-item-->
-                                                    <div class="review-range-item">
-                                                        <div class="range-slider-title">Facilities</div>
-                                                        <div class="range-slider-wrap">
-                                                            <input type="text" class="rate-range" data-min="0" data-max="5" name="rgcl" data-step="1" value="3">
-                                                        </div>
-                                                    </div>
-                                                    <!-- review-range-item end -->
-                                                </div>
-                                                <div class="review-total">
-                                                    <span><input type="text" name="rg_total" value="" data-form="AVG({rgcl})" value="0"></span>
-                                                    <strong>Your Score</strong>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label><i class="fal fa-user"></i></label>
-                                                    <input type="text" placeholder="Your Name *" value="" />
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label><i class="fal fa-envelope"></i> </label>
-                                                    <input type="text" placeholder="Email Address*" value="" />
-                                                </div>
-                                            </div>
-                                            <textarea cols="40" rows="3" placeholder="Your Review:"></textarea>
-                                        </fieldset>
-                                        <button class="btn  big-btn flat-btn float-btn color2-bg" style="margin-top:30px">Submit Review <i class="fal fa-paper-plane"></i></button>
-                                    </form>
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label>Comodidad</label>
+                                    <StarRating v-model="rows.avg_comodidad" :show-rating="false" :read-only="true" />
                                 </div>
-                                <!-- Add Review Box / End -->
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label>Estado</label>
+                                    <StarRating v-model="rows.avg_estado" :show-rating="false" :read-only="true" />
+                                </div>
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label>Servicios</label>
+                                    <StarRating v-model="rows.avg_servicio" :show-rating="false" :read-only="true" />
+                                </div>
+                                <div class="form-group col-xs-12 col-md-6">
+                                    <label>Facilidad</label>
+                                    <StarRating v-model="rows.avg_facilidad" :show-rating="false" :read-only="true" />
+                                </div>
                             </div>
                             <!-- list-single-main-item end -->
                         </div>
@@ -264,6 +296,8 @@
                     <!--   sidebar end  -->
                 </div>
                 <!--   row end  -->
+
+
             </div>
             <!--   container  end  -->
         </section>
@@ -272,18 +306,21 @@
     <!-- content end-->
     <login />
     <div class="limit-box fl-wrap"></div>
+
+
 </div>
 </template>
 
 <script>
-
 import Login from '../Login.vue';
 import Maps from '../../components/Maps';
+import StarRating from 'vue-star-rating'
 
 export default {
     components: {
         login: Login,
-        Maps
+        Maps,
+        StarRating
     },
     data() {
         return {
@@ -291,7 +328,18 @@ export default {
                 current: this.$root.base_url + this.$route.path,
                 permisos: {},
             },
-            rows: {},
+            puntuaciones: {
+                comodidad: 0,
+                estado: 0,
+                servicio: 0,
+                facilidad: 0,
+            },
+            rows: {
+                avg_comodidad: 0,
+                avg_estado: 0,
+                avg_servicio: 0,
+                avg_facilidad: 0,
+            },
             maps: {
                 type: '',
                 center: [-33.4569397, -70.6482697],
@@ -322,8 +370,8 @@ export default {
             axios.post(this.url.current)
                 .then(response => {
                     this.rows = response.data;
-                    if(this.rows.latitud && this.rows.longitud) {
-                        this.maps.center = this.maps.locations = [this.rows.latitud, this.rows.longitud];   
+                    if (this.rows.latitud && this.rows.longitud) {
+                        this.maps.center = this.maps.locations = [this.rows.latitud, this.rows.longitud];
                     }
                 })
                 .catch(error => {
@@ -337,14 +385,14 @@ export default {
         isLoged() {
             axios.post(this.$root.base_url + 'isLoged')
                 .then(res => {
-                    if(res.data.isLoged){
+                    if (res.data.isLoged) {
                         this.openContizar();
-                    }else{
+                    } else {
                         this.$root.openLogin();
                     }
                 })
                 .catch(err => {
-                    this.alerta('error','Un error ha ocurrido', 'Lo sentimos su correo no pudo ser enviado.');
+                    this.alerta('error', 'Un error ha ocurrido', 'Lo sentimos su correo no pudo ser enviado.');
                 });
         },
         openContizar() {
@@ -358,25 +406,62 @@ export default {
                 })
                 .then(value => {
 
-                    if ( value.value && value.value.trim().length > 20 ) {
+                    if (value.value && value.value.trim().length > 20) {
                         this.start();
 
-                        axios.post(this.url.current + '/cotizar' , {'comentario' : value.value, id : this.rows.id } )
+                        axios.post(this.url.current + '/cotizar', {
+                                'comentario': value.value,
+                                id: this.rows.id
+                            })
                             .then(res => {
                                 this.alerta('success', 'Exito!', 'Su cotizacion fue enviada.');
                             })
                             .catch(err => {
                                 this.stop();
-                                this.alerta('error','Un error ha ocurrido', err);
+                                this.alerta('error', 'Un error ha ocurrido', err);
                             })
 
-                    }else if (value.value){
-                        this.alerta('error','Un error ha ocurrido', 'Porfavor ingrese su mensaje (mayor a 20 caracteres).');
+                    } else if (value.value) {
+                        this.alerta('error', 'Un error ha ocurrido', 'Porfavor ingrese su mensaje (mayor a 20 caracteres).');
                     }
                 });
         },
+        marcarFavorito() {
+            let index = this.rows;
+            this.start();
 
+            axios.post(this.$root.base_url + 'propiedad/marcar', {
+                    'id': index.id
+                })
+                .then(res => {
+                    this.rows = res.data.propiedad;
+                    this.stop();
+                })
+                .catch(err => {
+                    this.stop();
+                    this.alerta('error', 'Un error ha ocurrido.', err);
+                })
+        },
+        marcarLike() {
+            let index = this.rows;
+            this.start();
 
+            axios.post(this.$root.base_url + 'propiedad/like', {
+                    'id': index.id
+                })
+                .then(res => {
+                    this.stop();
+                    this.rows._likes = res.data.propiedad._likes;
+                    this.rows._likes_count = res.data.propiedad._likes_count;
+                })
+                .catch(err => {
+                    this.stop();
+                    this.alerta('error', 'Un error ha ocurrido.', err);
+                })
+        },
+        openPuntuar() {
+
+        },
 
 
     },

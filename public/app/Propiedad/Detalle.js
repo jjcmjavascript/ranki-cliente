@@ -11,6 +11,8 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Login_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Login.vue */ "./resources/js/app/Login.vue");
 /* harmony import */ var _components_Maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Maps */ "./resources/js/components/Maps.vue");
+/* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-star-rating */ "./node_modules/vue-star-rating/dist/star-rating.min.js");
+/* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_star_rating__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -288,12 +290,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     login: _Login_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Maps: _components_Maps__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Maps: _components_Maps__WEBPACK_IMPORTED_MODULE_1__["default"],
+    StarRating: vue_star_rating__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   data: function data() {
     return {
@@ -301,7 +341,18 @@ __webpack_require__.r(__webpack_exports__);
         current: this.$root.base_url + this.$route.path,
         permisos: {}
       },
-      rows: {},
+      puntuaciones: {
+        comodidad: 0,
+        estado: 0,
+        servicio: 0,
+        facilidad: 0
+      },
+      rows: {
+        avg_comodidad: 0,
+        avg_estado: 0,
+        avg_servicio: 0,
+        avg_facilidad: 0
+      },
       maps: {
         type: '',
         center: [-33.4569397, -70.6482697],
@@ -383,7 +434,43 @@ __webpack_require__.r(__webpack_exports__);
           _this3.alerta('error', 'Un error ha ocurrido', 'Porfavor ingrese su mensaje (mayor a 20 caracteres).');
         }
       });
-    }
+    },
+    marcarFavorito: function marcarFavorito() {
+      var _this4 = this;
+
+      var index = this.rows;
+      this.start();
+      axios.post(this.$root.base_url + 'propiedad/marcar', {
+        'id': index.id
+      }).then(function (res) {
+        _this4.rows = res.data.propiedad;
+
+        _this4.stop();
+      })["catch"](function (err) {
+        _this4.stop();
+
+        _this4.alerta('error', 'Un error ha ocurrido.', err);
+      });
+    },
+    marcarLike: function marcarLike() {
+      var _this5 = this;
+
+      var index = this.rows;
+      this.start();
+      axios.post(this.$root.base_url + 'propiedad/like', {
+        'id': index.id
+      }).then(function (res) {
+        _this5.stop();
+
+        _this5.rows._likes = res.data.propiedad._likes;
+        _this5.rows._likes_count = res.data.propiedad._likes_count;
+      })["catch"](function (err) {
+        _this5.stop();
+
+        _this5.alerta('error', 'Un error ha ocurrido.', err);
+      });
+    },
+    openPuntuar: function openPuntuar() {}
   }
 });
 
@@ -408,6 +495,8 @@ var render = function() {
     "div",
     { attrs: { id: "wrapper" } },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "content" }, [
         _c(
           "section",
@@ -417,7 +506,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "container" }, [
               _c("div", { staticClass: "row" }, [
-                _vm._m(0),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-4" }, [
                   _c("div", { staticClass: "flat-hero-container fl-wrap" }, [
@@ -429,7 +518,7 @@ var render = function() {
                           _vm._v(_vm._s(_vm.rows.titulo ? _vm.rows.titulo : ""))
                         ]),
                         _vm._v(" "),
-                        _vm._m(1)
+                        _vm._m(2)
                       ]
                     ),
                     _vm._v(" "),
@@ -454,9 +543,165 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "reviews-score-wrap fl-wrap" }, [
-                      _vm._m(2),
+                      _c(
+                        "div",
+                        { staticClass: "rate-class-name-wrap fl-wrap" },
+                        [
+                          _c("div", { staticClass: "rate-class-name" }, [
+                            _c("span", [_vm._v("4.5")]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "score" }, [
+                              _c("strong", [_vm._v("Muy Bueno")]),
+                              _vm._v(
+                                " " +
+                                  _vm._s(_vm.rows && _vm.rows._likes_count) +
+                                  " Me gusta "
+                              )
+                            ])
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("div", { staticClass: "review-score-detail" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-xs-2" },
+                          [
+                            _vm.rows && _vm.rows.favorito
+                              ? [
+                                  _c(
+                                    "a",
+                                    {
+                                      class: {
+                                        "text-danger":
+                                          _vm.rows._favorito &&
+                                          _vm.rows._favorito.length > 0
+                                      },
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.marcarFavorito()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm.rows._favorito &&
+                                      _vm.rows._favorito.length > 0
+                                        ? [
+                                            _c("i", {
+                                              staticClass: "fa fa-heart fa-2x",
+                                              attrs: {
+                                                title: "Eliminar Favorito"
+                                              }
+                                            })
+                                          ]
+                                        : [
+                                            _c("i", {
+                                              staticClass: "fal fa-heart fa-2x",
+                                              attrs: {
+                                                title: "Agregar favorito"
+                                              }
+                                            })
+                                          ]
+                                    ],
+                                    2
+                                  )
+                                ]
+                              : [_vm._m(3)]
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-xs-2" },
+                          [
+                            _vm.rows && _vm.rows.likeable
+                              ? [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "text-info",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.marcarLike()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm.rows._likes &&
+                                      _vm.rows._likes.length > 0
+                                        ? [
+                                            _c("i", {
+                                              staticClass:
+                                                "fa fa-thumbs-up fa-2x",
+                                              attrs: { title: "No me gusta" }
+                                            })
+                                          ]
+                                        : [
+                                            _c("i", {
+                                              staticClass:
+                                                "fa fa-thumbs-o-up fa-2x",
+                                              attrs: { title: "Me gusta" }
+                                            })
+                                          ]
+                                    ],
+                                    2
+                                  )
+                                ]
+                              : [_vm._m(4)]
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-xs-2 col-md-2" },
+                          [
+                            _vm.rows && _vm.rows.likeable
+                              ? [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "text-warning",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.openPuntuar()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm.rows._puntuaciones &&
+                                      _vm.rows._puntuaciones.length > 0
+                                        ? [
+                                            _c("i", {
+                                              staticClass: "fa fa-star fa-2x",
+                                              attrs: { "aria-hidden": "true" }
+                                            })
+                                          ]
+                                        : [
+                                            _c("i", {
+                                              staticClass:
+                                                "fa fa-star-o-o fa-2x",
+                                              attrs: { "aria-hidden": "true" }
+                                            })
+                                          ]
+                                    ],
+                                    2
+                                  )
+                                ]
+                              : [_vm._m(5)]
+                          ],
+                          2
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "review-score-detail mt-2" }, [
                         _c("div", { staticClass: "review-score-detail-list" }, [
                           _c("div", { staticClass: "col-xs-12 mb-2" }, [
                             _c("label", [_vm._v("Propiedad: ")]),
@@ -531,7 +776,7 @@ var render = function() {
                         {
                           staticClass: "btn btn-warning btn-lg",
                           staticStyle: { width: "100%" },
-                          attrs: { disabled: _vm.rows.cotizar },
+                          attrs: { disabled: !_vm.rows.cotizar },
                           on: {
                             click: function($event) {
                               return _vm.isLoged($event)
@@ -555,7 +800,7 @@ var render = function() {
                       "div",
                       { staticClass: "list-single-main-item fl-wrap" },
                       [
-                        _vm._m(3),
+                        _vm._m(6),
                         _vm._v(" "),
                         _vm.rows.descripcion
                           ? [
@@ -581,7 +826,7 @@ var render = function() {
                         attrs: { id: "sec3" }
                       },
                       [
-                        _vm._m(4),
+                        _vm._m(7),
                         _vm._v(" "),
                         _c("div", { staticClass: "listing-features fl-wrap" }, [
                           _c("ul", [
@@ -641,7 +886,108 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(5)
+                    _c(
+                      "div",
+                      {
+                        staticClass: "list-single-main-item fl-wrap",
+                        attrs: { id: "sec6" }
+                      },
+                      [
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-xs-12 col-md-6" },
+                          [
+                            _c("label", [_vm._v("Comodidad")]),
+                            _vm._v(" "),
+                            _c("StarRating", {
+                              attrs: {
+                                "show-rating": false,
+                                "read-only": true
+                              },
+                              model: {
+                                value: _vm.rows.avg_comodidad,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.rows, "avg_comodidad", $$v)
+                                },
+                                expression: "rows.avg_comodidad"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-xs-12 col-md-6" },
+                          [
+                            _c("label", [_vm._v("Estado")]),
+                            _vm._v(" "),
+                            _c("StarRating", {
+                              attrs: {
+                                "show-rating": false,
+                                "read-only": true
+                              },
+                              model: {
+                                value: _vm.rows.avg_estado,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.rows, "avg_estado", $$v)
+                                },
+                                expression: "rows.avg_estado"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-xs-12 col-md-6" },
+                          [
+                            _c("label", [_vm._v("Servicios")]),
+                            _vm._v(" "),
+                            _c("StarRating", {
+                              attrs: {
+                                "show-rating": false,
+                                "read-only": true
+                              },
+                              model: {
+                                value: _vm.rows.avg_servicio,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.rows, "avg_servicio", $$v)
+                                },
+                                expression: "rows.avg_servicio"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-xs-12 col-md-6" },
+                          [
+                            _c("label", [_vm._v("Facilidad")]),
+                            _vm._v(" "),
+                            _c("StarRating", {
+                              attrs: {
+                                "show-rating": false,
+                                "read-only": true
+                              },
+                              model: {
+                                value: _vm.rows.avg_facilidad,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.rows, "avg_facilidad", $$v)
+                                },
+                                expression: "rows.avg_facilidad"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]
+                    )
                   ])
                 ]),
                 _vm._v(" "),
@@ -650,14 +996,14 @@ var render = function() {
                     _c("div", { staticClass: "box-widget-item fl-wrap" }, [
                       _c("div", { staticClass: "box-widget" }, [
                         _c("div", { staticClass: "box-widget-content" }, [
-                          _vm._m(6),
+                          _vm._m(9),
                           _vm._v(" "),
                           _c("div", { staticClass: "box-widget-list" }, [
                             _c(
                               "ul",
                               [
                                 _c("li", [
-                                  _vm._m(7),
+                                  _vm._m(10),
                                   _vm._v(" "),
                                   _c("span", [
                                     _vm._v(
@@ -675,7 +1021,7 @@ var render = function() {
                                 _vm.rows.codigo_telefono
                                   ? [
                                       _c("li", [
-                                        _vm._m(8),
+                                        _vm._m(11),
                                         _vm._v(" "),
                                         _c("span", [
                                           _vm._v(
@@ -701,7 +1047,7 @@ var render = function() {
                                 _vm.rows.codigo_telefono2
                                   ? [
                                       _c("li", [
-                                        _vm._m(9),
+                                        _vm._m(12),
                                         _vm._v(" "),
                                         _c("span", [
                                           _vm._v(
@@ -769,38 +1115,70 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-8" }, [
-      _c("div", { staticClass: "list-single-main-container " }, [
-        _c("div", { staticClass: "fixed-scroll-column" }, [
-          _c("div", { staticClass: "fixed-scroll-column-item fl-wrap" }, [
-            _c("div", { staticClass: "showshare sfcs fc-button" }, [
-              _c("i", { staticClass: "far fa-share-alt" }),
-              _c("span", [_vm._v("Compartir ")])
+    return _c("div", { staticClass: "modal" }, [
+      _c("div", { staticClass: "puntuar" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "main-register-holder" }, [
+        _c("div", { staticClass: "main-register fl-wrap" }, [
+          _c("div", { staticClass: "close-reg color-bg" }, [
+            _c("i", { staticClass: "fal fa-times" })
+          ]),
+          _vm._v(" "),
+          _c("ul", { staticClass: "tabs-menu" }, [
+            _c("li", { staticClass: "current" }, [
+              _c("a", { attrs: { href: "#tab-1" } }, [
+                _c("i", { staticClass: "fal fa-sign-in-alt" }),
+                _vm._v(" Registrar ")
+              ])
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "share-holder fixed-scroll-column-share-container"
-              },
-              [_c("div", { staticClass: "share-container  isShare" })]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "fc-button custom-scroll-link",
-                attrs: { href: "#" }
-              },
-              [
-                _c("i", { staticClass: "far fa-heart" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("Favorito")])
-              ]
-            )
+            _c("li", [
+              _c("a", { attrs: { href: "#tab-2" } }, [
+                _c("i", { staticClass: "fal fa-user-plus" }),
+                _vm._v(" Iniciar")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "tabs-container" } }, [
+            _c("div", { staticClass: "tab" }, [
+              _c(
+                "div",
+                { staticClass: "tab-content", attrs: { id: "tab-1" } },
+                [
+                  _c("h3", [
+                    _vm._v(
+                      "\n                                INICIA\n                                "
+                    ),
+                    _c("span", [
+                      _vm._v(
+                        "\n                                    en\n                                    "
+                      ),
+                      _c("strong", [_vm._v("Metro Cuadrado")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "custom-form" }, [
+                    _c("div", { staticClass: "lost_password" }, [
+                      _c("a", { attrs: { href: "/password" } }, [
+                        _vm._v("Olvido su contraseña?")
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
           ])
-        ]),
-        _vm._v(" "),
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "list-single-main-container " }, [
         _c(
           "div",
           {
@@ -903,15 +1281,33 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "rate-class-name-wrap fl-wrap" }, [
-      _c("div", { staticClass: "rate-class-name" }, [
-        _c("span", [_vm._v("4.5")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "score" }, [
-          _c("strong", [_vm._v("Muy Bueno")]),
-          _vm._v("2 Reviews ")
-        ])
-      ])
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", {
+        staticClass: "fal fa-heart fa-2x",
+        attrs: { title: "Favorito" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "text-primary", attrs: { href: "#" } }, [
+      _c("i", {
+        staticClass: "fa fa-thumbs-o-up fa-2x",
+        attrs: { title: "Me gusta" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "text-warning", attrs: { href: "#" } }, [
+      _c("i", {
+        staticClass: "fa fa-star-o fa-2x",
+        attrs: { "aria-hidden": "true" }
+      })
     ])
   },
   function() {
@@ -934,180 +1330,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "list-single-main-item fl-wrap", attrs: { id: "sec6" } },
-      [
-        _c("div", { staticClass: "list-single-main-item-title fl-wrap" }, [
-          _c("h3", [_vm._v("Add Review")])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "add-review-box", attrs: { id: "add-review" } },
-          [
-            _c(
-              "form",
-              {
-                staticClass: "add-comment  custom-form",
-                attrs: { id: "add-comment", name: "rangeCalc" }
-              },
-              [
-                _c("fieldset", [
-                  _c("div", { staticClass: "review-score-form fl-wrap" }, [
-                    _c("div", { staticClass: "review-range-container" }, [
-                      _c("div", { staticClass: "review-range-item" }, [
-                        _c("div", { staticClass: "range-slider-title" }, [
-                          _vm._v("Cleanliness")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "range-slider-wrap " }, [
-                          _c("input", {
-                            staticClass: "rate-range",
-                            attrs: {
-                              type: "text",
-                              "data-min": "0",
-                              "data-max": "5",
-                              name: "rgcl",
-                              "data-step": "1",
-                              value: "4"
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "review-range-item" }, [
-                        _c("div", { staticClass: "range-slider-title" }, [
-                          _vm._v("Comfort")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "range-slider-wrap " }, [
-                          _c("input", {
-                            staticClass: "rate-range",
-                            attrs: {
-                              type: "text",
-                              "data-min": "0",
-                              "data-max": "5",
-                              name: "rgcl",
-                              "data-step": "1",
-                              value: "1"
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "review-range-item" }, [
-                        _c("div", { staticClass: "range-slider-title" }, [
-                          _vm._v("Staf")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "range-slider-wrap " }, [
-                          _c("input", {
-                            staticClass: "rate-range",
-                            attrs: {
-                              type: "text",
-                              "data-min": "0",
-                              "data-max": "5",
-                              name: "rgcl",
-                              "data-step": "1",
-                              value: "5"
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "review-range-item" }, [
-                        _c("div", { staticClass: "range-slider-title" }, [
-                          _vm._v("Facilities")
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "range-slider-wrap" }, [
-                          _c("input", {
-                            staticClass: "rate-range",
-                            attrs: {
-                              type: "text",
-                              "data-min": "0",
-                              "data-max": "5",
-                              name: "rgcl",
-                              "data-step": "1",
-                              value: "3"
-                            }
-                          })
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "review-total" }, [
-                      _c("span", [
-                        _c("input", {
-                          attrs: {
-                            type: "text",
-                            name: "rg_total",
-                            value: "",
-                            "data-form": "AVG({rgcl})",
-                            value: "0"
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("strong", [_vm._v("Your Score")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("label", [_c("i", { staticClass: "fal fa-user" })]),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: {
-                          type: "text",
-                          placeholder: "Your Name *",
-                          value: ""
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("label", [
-                        _c("i", { staticClass: "fal fa-envelope" })
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: {
-                          type: "text",
-                          placeholder: "Email Address*",
-                          value: ""
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    attrs: {
-                      cols: "40",
-                      rows: "3",
-                      placeholder: "Your Review:"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn  big-btn flat-btn float-btn color2-bg",
-                    staticStyle: { "margin-top": "30px" }
-                  },
-                  [
-                    _vm._v("Submit Review "),
-                    _c("i", { staticClass: "fal fa-paper-plane" })
-                  ]
-                )
-              ]
-            )
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "list-single-main-item-title fl-wrap" }, [
+      _c("h3", [_vm._v("Puntuar Vivienda")])
+    ])
   },
   function() {
     var _vm = this

@@ -261,15 +261,27 @@ class PropiedadController extends Controller
     {
 
         try {
-            $response = (new ApiHelper)->publicRequest('api/propiedades/mostrar',['id'=>$id_propieda]);
+            if(!$id_propieda) throw new \Exception('La propiedad indicada no existe.');
+
+            $datos = ['id' => $id_propieda];
+
+            if( Auth::check() ){
+                $datos['usuario_id'] = Auth::user()->id;
+            }
+
+            $response = (new ApiHelper)->publicRequest('api/propiedades/mostrar', $datos);
+
             if(isset($response['error'])) throw new \Exception($response);
-                if( isset(Auth::user()->id) ){
-                  if($response['_usuario']['id'] == !Auth::user()->id){
+                if( Auth::check() ){
+                  if($response['_usuario']['id'] != Auth::user()->id){
                     $response['cotizar'] = true;
                   }else{
                     $response['cotizar'] = false;
                   };
-                }
+              }else{
+                  $response['cotizar'] = true;
+              }
+
             return response($response,200);
 
         } catch (\GuzzleHttp\Exception\BadResponseException $e) {
@@ -286,7 +298,14 @@ class PropiedadController extends Controller
     {
 
       try {
-          $response = (new ApiHelper)->publicRequest('api/propiedades/results',$request->all());
+
+          $datos = $request->all();
+
+          if( Auth::check() ){
+              $datos['usuario_id'] = Auth::user()->id;
+          }
+
+          $response = (new ApiHelper)->publicRequest('api/propiedades/results', $datos);
           if(isset($response['error'])) throw new \Exception($response);
 
           return response($response,200);
@@ -352,5 +371,31 @@ class PropiedadController extends Controller
         }
 
     }
+
+    public function like ( Request $request ){
+
+        $this->validate($request ,  [
+            'id' => 'required | integer | exists:propiedades,id'
+        ]);
+
+        try {
+            if(!Auth::check()) throw new \Exception("Accion no autorizada");
+
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/like',['id'=>$request->id, 'usuario_id'=>Auth::user()->id]);
+
+            if(isset($response['error'])) throw new \Exception($response);
+
+            return response($response,200);
+
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
+        }
+
+    }
+
 
 }

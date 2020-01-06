@@ -207,6 +207,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -723,7 +742,7 @@ var render = function() {
                                       _c(
                                         "div",
                                         {
-                                          staticClass: "geodir-category-price"
+                                          staticClass: "geodir-category-price "
                                         },
                                         [
                                           _vm._v(
@@ -764,6 +783,59 @@ var render = function() {
                                         [
                                           _vm._m(4, true),
                                           _vm._v(" "),
+                                          _vm.rows[i - 1]
+                                            ? [
+                                                _c(
+                                                  "a",
+                                                  {
+                                                    staticClass:
+                                                      "single-map-item",
+                                                    attrs: {
+                                                      target: "_blank",
+                                                      href:
+                                                        _vm.$root.base_url +
+                                                        "propiedad/" +
+                                                        _vm.rows[i - 1].id +
+                                                        "/detalle"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass: "fal fa-eye "
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "geodir-opt-tooltip"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                            Ver detalle\n                                                        "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            : [
+                                                _vm._m(5, true),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "geodir-opt-tooltip"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                        Ver detalle\n                                                    "
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                          _vm._v(" "),
                                           _vm.rows[i - 1] &&
                                           _vm.rows[i - 1].favorito
                                             ? [
@@ -790,70 +862,52 @@ var render = function() {
                                                     }
                                                   },
                                                   [
-                                                    _c("i", {
-                                                      staticClass:
-                                                        "fal fa-heart"
-                                                    }),
-                                                    _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "geodir-opt-tooltip"
-                                                      },
-                                                      [
-                                                        _vm.rows[i - 1]
-                                                          ._favorito &&
-                                                        _vm.rows[i - 1]
-                                                          ._favorito.length > 0
-                                                          ? [
+                                                    _vm.rows[i - 1]._favorito &&
+                                                    _vm.rows[i - 1]._favorito
+                                                      .length > 0
+                                                      ? [
+                                                          _c("i", {
+                                                            staticClass:
+                                                              "fa fa-heart"
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "geodir-opt-tooltip"
+                                                            },
+                                                            [
                                                               _vm._v(
                                                                 "\n                                                                Eliminar favorito\n                                                            "
                                                               )
                                                             ]
-                                                          : [
+                                                          )
+                                                        ]
+                                                      : [
+                                                          _c("i", {
+                                                            staticClass:
+                                                              "fal fa-heart"
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "geodir-opt-tooltip"
+                                                            },
+                                                            [
                                                               _vm._v(
                                                                 "\n                                                                Marcar favorito\n                                                            "
                                                               )
                                                             ]
-                                                      ],
-                                                      2
-                                                    )
-                                                  ]
+                                                          )
+                                                        ]
+                                                  ],
+                                                  2
                                                 )
                                               ]
-                                            : [
-                                                _c(
-                                                  "a",
-                                                  {
-                                                    staticClass:
-                                                      "geodir-js-favorite",
-                                                    attrs: { href: "#" },
-                                                    on: {
-                                                      click: function($event) {
-                                                        return $event.preventDefault()
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass:
-                                                        "fal fa-heart"
-                                                    }),
-                                                    _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "geodir-opt-tooltip"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "Marcar favorito"
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
+                                            : [_vm._m(6, true)]
                                         ],
                                         2
                                       )
@@ -870,9 +924,9 @@ var render = function() {
                     0
                   ),
                   _vm._v(" "),
-                  _vm._m(5),
+                  _vm._m(7),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _vm._m(8)
                 ]
               )
             ])
@@ -882,7 +936,7 @@ var render = function() {
       _vm._v(" "),
       _c("login"),
       _vm._v(" "),
-      _vm._m(7)
+      _vm._m(9)
     ],
     1
   )
@@ -976,6 +1030,34 @@ var staticRenderFns = [
         _c("i", { staticClass: "fal fa-map-marker-alt" }),
         _c("span", { staticClass: "geodir-opt-tooltip" }, [
           _vm._v("Ubicar en el mapa")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "single-map-item",
+        attrs: { href: "#", title: "Ir a la propiedad" }
+      },
+      [_c("i", { staticClass: "fal fa-eye " })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "geodir-js-favorite", attrs: { href: "#" } },
+      [
+        _c("i", { staticClass: "fal fa-heart" }),
+        _c("span", { staticClass: "geodir-opt-tooltip" }, [
+          _vm._v("Marcar favorito")
         ])
       ]
     )
@@ -1122,15 +1204,14 @@ function normalizeComponent (
 /*!***********************************!*\
   !*** ./resources/js/app/Home.vue ***!
   \***********************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Home_vue_vue_type_template_id_6c5f482b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Home.vue?vue&type=template&id=6c5f482b& */ "./resources/js/app/Home.vue?vue&type=template&id=6c5f482b&");
 /* harmony import */ var _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home.vue?vue&type=script&lang=js& */ "./resources/js/app/Home.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1160,7 +1241,7 @@ component.options.__file = "resources/js/app/Home.vue"
 /*!************************************************************!*\
   !*** ./resources/js/app/Home.vue?vue&type=script&lang=js& ***!
   \************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -13,6 +13,7 @@ import Loading from 'vue-loading-overlay';
 import LoadScript from 'vue-plugin-load-script';
 import VueRouter from 'vue-router';
 import VueSweetalert2 from 'vue-sweetalert2';
+import "font-awesome/scss/font-awesome.scss";
 
 // IMPORTANDO ESTILOS
 import 'sweetalert2/dist/sweetalert2.min.css';

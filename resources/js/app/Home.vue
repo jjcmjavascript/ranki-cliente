@@ -50,7 +50,7 @@
                                     <div class="col-xs-12 col-md-12">
                                         <v-select class="bg-light mt-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.subtipo_propiedad" v-model="filters.subtipo_propiedad" />
                                         <v-select class="bg-light mt-1 ml-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipos_operaciones" />
-                                        <v-select class="bg-light mt-1 col-xs-12 ml-1 col-md-4 v-select-clearfix" label="nombre" :filterable="false" :clearable="false"  v-model="filters.localidad" :options="selects.results" @search="onSearch" >
+                                        <v-select class="bg-light mt-1 col-xs-12 ml-1 col-md-4 v-select-clearfix" label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch">
                                             <template slot="no-options">
                                                 Busque su propiedad
                                             </template>
@@ -142,7 +142,7 @@
                                                     <span>{{rows[i-1].precio}}</span>
                                                 </template>
                                             </div-->
-                                            <div class="geodir-category-price">
+                                            <div class="geodir-category-price ">
                                                 Precio
                                                 <br>
                                                 <template v-if="rows[i-1] && rows[i-1].precio">
@@ -152,20 +152,39 @@
                                             </div>
                                             <div class="geodir-opt-list">
                                                 <a href="#" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">Ubicar en el mapa</span></a>
-                                                <template v-if="rows[i-1] && rows[i-1].favorito">
-                                                    <a href="#" class="geodir-js-favorite" @click.prevent="marcarFavorito(i-1)" :class="{ 'text-danger' : (rows[i-1]._favorito && rows[i-1]._favorito.length > 0)}">
-                                                        <i class="fal fa-heart"></i><span class="geodir-opt-tooltip">
-                                                            <template v-if="rows[i-1]._favorito && rows[i-1]._favorito.length > 0">
-                                                                Eliminar favorito
-                                                            </template>
-                                                            <template v-else>
-                                                                Marcar favorito
-                                                            </template>
+                                                <template v-if="rows[i-1]">
+                                                    <a target="_blank" :href="$root.base_url+'propiedad/'+rows[i-1].id+'/detalle'" class="single-map-item">
+                                                        <i class="fal fa-eye "></i>
+                                                        <span class="geodir-opt-tooltip">
+                                                            Ver detalle
                                                         </span>
                                                     </a>
                                                 </template>
                                                 <template v-else>
-                                                    <a href="#" class="geodir-js-favorite" @click="$event.preventDefault()" >
+                                                    <a href="#" class="single-map-item" title="Ir a la propiedad">
+                                                        <i class="fal fa-eye "></i> </a>
+                                                    <span class="geodir-opt-tooltip">
+                                                        Ver detalle
+                                                    </span>
+                                                </template>
+                                                <template v-if="rows[i-1] && rows[i-1].favorito">
+                                                    <a href="#" class="geodir-js-favorite" @click.prevent="marcarFavorito(i-1)" :class="{ 'text-danger' : (rows[i-1]._favorito && rows[i-1]._favorito.length > 0)}">
+                                                        <template v-if="rows[i-1]._favorito && rows[i-1]._favorito.length > 0">
+                                                            <i class="fa fa-heart"></i>
+                                                            <span class="geodir-opt-tooltip">
+                                                                Eliminar favorito
+                                                            </span>
+                                                        </template>
+                                                        <template v-else>
+                                                            <i class="fal fa-heart"></i>
+                                                            <span class="geodir-opt-tooltip">
+                                                                Marcar favorito
+                                                            </span>
+                                                        </template>
+                                                    </a>
+                                                </template>
+                                                <template v-else>
+                                                    <a href="#" class="geodir-js-favorite">
                                                         <i class="fal fa-heart"></i><span class="geodir-opt-tooltip">Marcar favorito</span>
                                                     </a>
                                                 </template>
@@ -214,7 +233,7 @@ export default {
             filters: {
                 subtipo_propiedad: null,
                 tipos_operaciones: null,
-                localidad:null,
+                localidad: null,
             }
         }
     },
@@ -298,11 +317,13 @@ export default {
             }
             loading(false);
         },
-        marcarFavorito(i){
+        marcarFavorito(i) {
             let index = this.rows[i];
             this.start();
 
-            axios.post(this.$root.base_url + 'propiedad/marcar', {'id' : index.id} )
+            axios.post(this.$root.base_url + 'propiedad/marcar', {
+                    'id': index.id
+                })
                 .then(res => {
                     this.iniciar()
                     this.stop();

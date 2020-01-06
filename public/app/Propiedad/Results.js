@@ -10,6 +10,23 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Maps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Maps */ "./resources/js/components/Maps.vue");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -566,6 +583,34 @@ __webpack_require__.r(__webpack_exports__);
       this.filters.privado = null;
       this.filters.bodegas = null;
       this.filters.estacionamiento = null;
+    },
+    marcarFavorito: function marcarFavorito(posicion) {
+      var _this5 = this;
+
+      var index;
+
+      if (_typeof(posicion) == 'object') {
+        index = posicion.id;
+      } else {
+        index = this.rows[posicion].id;
+      }
+
+      this.start();
+      axios.post(this.$root.base_url + 'propiedad/marcar', {
+        'id': index
+      }).then(function (res) {
+        if (_typeof(posicion) == 'object') {
+          _this5.selected = res.data.propiedad;
+        } else {
+          _this5.rows.data[posicion] = res.data.propiedad;
+        }
+
+        _this5.stop();
+      })["catch"](function (err) {
+        _this5.stop();
+
+        _this5.alerta('error', 'Un error ha ocurrido.', err);
+      });
     }
   }
 });
@@ -584,7 +629,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#wrapper {\n    background:\n        white !important;\n}\n#map {\n    height: 68vh !important;\n}\n.fal.fa-eye,\n.fal.fa-map-marked-alt {\n    color: #3AACED;\n}\n.show-more-filters.act-hiddenpanel.btn.btn-info.col-xs-12.col-md-2.mt-1.ml-1 {\n    position: relative !important;\n}\n.show-more-filters.active-hidden-opt-btn {\n    background-color: #6cb2eb !important;\n    border-color: #6cb2eb !important;\n}\n", ""]);
+exports.push([module.i, "\n#wrapper {\n    background:\n        white !important;\n}\n#map {\n    height: 68vh !important;\n}\n.fal.fa-eye,\n.fal.fa-heart,\n.fal.fa-map-marked-alt {\n    color: #3AACED;\n}\n.fal.fa-eye{\n    margin-left: 3px;\n}\n.show-more-filters.act-hiddenpanel.btn.btn-info.col-xs-12.col-md-2.mt-1.ml-1 {\n    position: relative !important;\n}\n.show-more-filters.active-hidden-opt-btn {\n    background-color: #6cb2eb !important;\n    border-color: #6cb2eb !important;\n}\n", ""]);
 
 // exports
 
@@ -713,7 +758,7 @@ var render = function() {
                           return [
                             _c("div", { staticClass: "selected d-center" }, [
                               _vm._v(
-                                "\n                                " +
+                                "\n                                    " +
                                   _vm._s(option.nombre) +
                                   ", " +
                                   _vm._s(option.lateral) +
@@ -732,7 +777,7 @@ var render = function() {
                           return [
                             _c("div", { staticClass: "selected d-center" }, [
                               _vm._v(
-                                "\n                                " +
+                                "\n                                    " +
                                   _vm._s(option.nombre) +
                                   ", " +
                                   _vm._s(option.lateral) +
@@ -757,7 +802,7 @@ var render = function() {
                   [
                     _c("template", { slot: "no-options" }, [
                       _vm._v(
-                        "\n                            Busque su propiedad\n                        "
+                        "\n                                Busque su propiedad\n                            "
                       )
                     ])
                   ],
@@ -1113,60 +1158,113 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
-                              _c("p", [
-                                _vm._v(
-                                  "\n                                    Tipo : " +
-                                    _vm._s(
-                                      _vm.selected &&
-                                        _vm.selected._tipo_operacion.nombre
-                                    ) +
-                                    " "
-                                ),
-                                _c("br"),
-                                _vm._v(
-                                  "\n                                    Moneda: " +
-                                    _vm._s(
-                                      _vm.selected && _vm.selected._tipo_valor
-                                        ? _vm.selected._tipo_valor.nombre
-                                        : ""
-                                    ) +
-                                    "\n                                    Monto : " +
-                                    _vm._s(
-                                      _vm._f("currency")(
-                                        _vm.selected && _vm.selected.precio
+                              _c(
+                                "p",
+                                [
+                                  _vm._v(
+                                    "\n                                    Tipo : " +
+                                      _vm._s(
+                                        _vm.selected &&
+                                          _vm.selected._tipo_operacion.nombre
+                                      ) +
+                                      " "
+                                  ),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                                    Moneda: " +
+                                      _vm._s(
+                                        _vm.selected && _vm.selected._tipo_valor
+                                          ? _vm.selected._tipo_valor.nombre
+                                          : ""
+                                      ) +
+                                      "\n                                    Monto : " +
+                                      _vm._s(
+                                        _vm._f("currency")(
+                                          _vm.selected && _vm.selected.precio
+                                        )
+                                      ) +
+                                      " "
+                                  ),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                                    Propiedad : " +
+                                      _vm._s(
+                                        _vm.selected &&
+                                          _vm.selected._subtipo_propiedad
+                                          ? _vm.selected._subtipo_propiedad
+                                              .nombre
+                                          : ""
                                       )
-                                    ) +
-                                    " "
-                                ),
-                                _c("br"),
-                                _vm._v(
-                                  "\n                                    Propiedad : " +
-                                    _vm._s(
-                                      _vm.selected &&
-                                        _vm.selected._subtipo_propiedad
-                                        ? _vm.selected._subtipo_propiedad.nombre
-                                        : ""
-                                    )
-                                ),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "float-right",
-                                    attrs: {
-                                      target: "_blank",
-                                      href:
-                                        _vm.$root.base_url +
-                                        "propiedad/" +
-                                        _vm.selected.id +
-                                        "/detalle",
-                                      title: "Ir a la propiedad"
-                                    }
-                                  },
-                                  [_c("i", { staticClass: "fal fa-eye " })]
-                                )
-                              ])
+                                  ),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "float-right",
+                                      attrs: {
+                                        target: "_blank",
+                                        href:
+                                          _vm.$root.base_url +
+                                          "propiedad/" +
+                                          _vm.selected.id +
+                                          "/detalle",
+                                        title: "Ir a la propiedad"
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fa fa-eye " })]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.selected && _vm.selected.favorito
+                                    ? [
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass: "float-right",
+                                            class: {
+                                              "text-danger":
+                                                _vm.selected._favorito &&
+                                                _vm.selected._favorito.length >
+                                                  0
+                                            },
+                                            attrs: { href: "#" },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.marcarFavorito(
+                                                  _vm.selected
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _vm.selected._favorito &&
+                                            _vm.selected._favorito.length > 0
+                                              ? [
+                                                  _c("i", {
+                                                    staticClass: "fa fa-heart ",
+                                                    attrs: {
+                                                      title: "Eliminar Favorito"
+                                                    }
+                                                  })
+                                                ]
+                                              : [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fal fa-heart ",
+                                                    attrs: {
+                                                      title: "Agregar favorito"
+                                                    }
+                                                  })
+                                                ]
+                                          ],
+                                          2
+                                        )
+                                      ]
+                                    : [_vm._m(2)]
+                                ],
+                                2
+                              )
                             ]
                           )
                         ]
@@ -1297,10 +1395,6 @@ var render = function() {
                                                 attrs: { href: "#" }
                                               },
                                               [
-                                                _c("i", {
-                                                  staticClass:
-                                                    "fas fa-map-marker-alt"
-                                                }),
                                                 _vm._v(
                                                   "\n                                                " +
                                                     _vm._s(
@@ -1482,6 +1576,14 @@ var staticRenderFns = [
         },
         [_vm._v("Propiedad")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "float-right", attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fal fa-heart", attrs: { title: "favorito" } })
     ])
   }
 ]
