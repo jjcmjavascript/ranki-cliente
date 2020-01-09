@@ -75,6 +75,101 @@
 
             </section>
             <!-- section end -->
+            <!--section -->
+            <section id="sec2">
+                <div class="container">
+                    <div class="section-title">
+                        <div class="section-title-separator"><span></span></div>
+                        <h2>Propiedades populares</h2>
+                        <span class="section-separator"></span>
+                        <p>Explora algunos de los sectores recomendados para conseguir la propiedad que buscas</p>
+                    </div>
+                 </div>
+                    <!-- portfolio start -->
+                    <div class="gallery-items fl-wrap mr-bot spad home-grid">
+                        <!-- gallery-item-->
+                        <div class="gallery-item">
+                            <div class="grid-item-holder">
+                                <div class="listing-item-grid">
+                                    <div class="listing-counter"><span>79 </span> Propiedades</div>
+                                    <img :src="app_url+'images/portada.jpg'" alt="">
+                                    <div class="listing-item-cat">
+                                        <h3><a href="listing.html">San Joaquín</a></h3>
+                                        <div class="weather-grid"   data-grcity="Rome"></div>
+                                        <div class="clearfix"></div>
+                                        <p>Constant care and attention to the patients makes good record</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- gallery-item end-->
+                        <!-- gallery-item-->
+                        <div class="gallery-item gallery-item-second">
+                            <div class="grid-item-holder">
+                                <div class="listing-item-grid">
+                                    <img :src="app_url+'images/portada2.jpg'" alt="">
+                                    <div class="listing-counter"><span>43 </span> Propiedades</div>
+                                    <div class="listing-item-cat">
+                                        <h3><a href="listing.html">La Florida</a></h3>
+                                        <div class="weather-grid"   data-grcity="La florida"></div>
+                                        <div class="clearfix"></div>
+                                        <p>Constant care and attention to the patients makes good record</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- gallery-item end-->
+                        <!-- gallery-item-->
+                        <div class="gallery-item">
+                            <div class="grid-item-holder">
+                                <div class="listing-item-grid">
+                                    <div class="listing-counter"><span>23 </span> Propiedades</div>
+                                    <img :src="app_url+'images/portada.jpg'" alt="">
+                                    <div class="listing-item-cat">
+                                        <h3><a href="listing.html">Macul</a></h3>
+                                        <div class="weather-grid" data-grcity="Macul"></div>
+                                        <div class="clearfix"></div>
+                                        <p>Constant care and attention to the patients makes good record</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- gallery-item end-->
+                        <!-- gallery-item-->
+                        <div class="gallery-item">
+                            <div class="grid-item-holder">
+                                <div class="listing-item-grid">
+                                    <div class="listing-counter"><span>57</span> Propiedades</div>
+                                    <img :src="app_url+'images/portada.jpg'" alt="">
+                                    <div class="listing-item-cat">
+                                        <h3><a href="listing.html">Las condes</a></h3>
+                                        <div class="weather-grid"   data-grcity="Las condes"></div>
+                                        <div class="clearfix"></div>
+                                        <p>Constant care and attention to the patients makes good record</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- gallery-item end-->
+                        <!-- gallery-item-->
+                        <div class="gallery-item">
+                            <div class="grid-item-holder">
+                                <div class="listing-item-grid">
+                                    <div class="listing-counter"><span>122</span> Propiedades</div>
+                                    <img :src="app_url+'images/portada.jpg'"   alt="">
+                                    <div class="listing-item-cat">
+                                        <h3><a href="listing.html">Ñuñoa</a></h3>
+                                        <div class="weather-grid"   data-grcity="Ñuñoa"></div>
+                                        <div class="clearfix"></div>
+                                        <p>Constant care and attention to the patients makes good record</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- gallery-item end-->
+                    </div>
+            </section>
+            <!-- section end -->
             <!-- section-->
             <section class="grey-blue-bg">
 
@@ -82,9 +177,9 @@
                 <div class="container">
                     <div class="section-title">
                         <div class="section-title-separator"><span></span></div>
-                        <h2>Recently Added Hotels</h2>
+                        <h2>Propiedades recientes</h2>
                         <span class="section-separator"></span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
+                        <p>Mira las últimas propiedades que han sido cargadas</p>
                     </div>
                 </div>
                 <!-- container end-->

@@ -22,7 +22,7 @@
                     <div class="col-xs-12 col-md-2 pl-1 pr-0">
                         <v-select label="nombre" :options="selects.subtipos_propiedades" v-model="filters.subtipo_propiedad" :clearable="false" />
                     </div>
-                    <div class="col-xs-12 col-md-3 pl-1 pr-0">
+                    <div class="col-xs-12 col-md-4 pl-1 pr-0">
                         <v-select label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch" class="v-select-clearfix">
                             <template slot="no-options">
                                 Busque su propiedad
@@ -39,36 +39,36 @@
                             </template>
                         </v-select>
                     </div>
-                    <div class="col-xs-12 col-md-2 pl-1 pr-0">
-                        <v-select label="nombre" :options="selects.tipos_propiedades" v-model="filters.tipos_propiedades" :clearable="false" />
+                    <div class="col-xs-12 col-lg-2 pl-1 pr-0">
+                        <v-select label="nombre" :options="selects.tipos_propiedades" placeholder="Tipo propiedad" v-model="filters.tipos_propiedades" :clearable="false" />
                     </div>
-                    <div class="col-xs-12 col-md-2 pl-1 pr-0">
-                        <v-select label="nombre" :options="selects.tipos_valores" v-model="filters.tipos_valores" :clearable="false" />
+                    <div class="col-xs-12 col-lg-2 pl-1 pr-4">
+                        <v-select label="nombre" :options="selects.tipos_valores" placeholder="Moneda" v-model="filters.tipos_valores" :clearable="false" />
                     </div>
-                    <!--div class="col-md-1">
-                        <a class="btn btn-info" @click="showHide()" style="color:white; position:none !important; bottom:0px !important">
-                            <i class="far fa-plus" style="color:white"></i>
-                        </a>
-                    </div-->
                 </div>
 
-
-                <a href="#" class="btn btn-warning col-xs-12 col-md-1 mt-1 ml-1" style="color:white;" @click="limpiarFiltros()">
-                    <i class="far fa-trash"></i> Limpiar
-                </a>
-                <a class="btn btn-info col-xs-12 col-md-1 mt-1 ml-1" @click="showHide()" style="color:white; position:none !important; bottom:0px !important">Filtros
-                    <i class="far fa-plus" style="color:white"></i>
-                </a>
-                <a href="#" class="col-xs-12 col-md-1 mt-1 ml-1 btn btn-success" @click="filtrar()">
-                    <i class="far fa-search"></i>
-                </a>
+                <div class="row justify-content-end">
+                    <div class="mt-2 mr-2">
+                        <div class="col-sm-12 col-lg-12">
+                             <a class="btn btn-info" @click="showHide()" style="color:white; position:none !important; bottom:0px !important">
+                                <i class="far fa-plus" style="color:white"></i> Filtros
+                            </a>
+                            <a href="#" class="btn btn-warning" style="color:white;" @click="limpiarFiltros()">
+                                <i class="far fa-trash"></i> Limpiar
+                            </a>
+                            <a href="#" class="btn btn-success" @click="filtrar()">
+                                <i class="far fa-search"></i> Buscar
+                            </a>
+                        </div>                   
+                    </div>
+                </div>
 
                 <div class="hidden-listing-filter fl-wrap">
                     <div class="row">
-                        <v-select :options="numeros" v-model="filters.banio" :clearable="false" placeholder="Baños" class="ml-1 mt-1 col-md-2 v-select-clearfix" />
-                        <v-select :options="numeros" v-model="filters.privado" :clearable="false" placeholder="Privado" class="ml-1 mt-1 col-md-2 v-select-clearfix" />
-                        <v-select :options="numeros" v-model="filters.bodegas" :clearable="false" placeholder="Bodegas" class="ml-1 mt-1 col-md-2 v-select-clearfix" />
-                        <v-select :options="numeros" v-model="filters.estacionamiento" :clearable="false" placeholder="Estacionamiento" class="ml-1 mt-1 col-md-2 v-select-clearfix" />
+                        <v-select :options="numeros" v-model="filters.banio" placeholder="Baños" class="ml-1 mt-1 col-md-2" />
+                        <v-select :options="numeros" v-model="filters.privado" placeholder="Privado" class="ml-1 mt-1 col-md-2" />
+                        <v-select :options="numeros" v-model="filters.bodegas" placeholder="Bodegas" class="ml-1 mt-1 col-md-2" />
+                        <v-select :options="numeros" v-model="filters.estacionamiento" :clearable="false" placeholder="Estacionamiento" class="ml-1 mt-1 col-md-2" />
                     </div>
                 </div>
 
@@ -142,7 +142,7 @@
         <div class="container">
             <!-- list-main-wrap-title-->
             <div class="list-main-wrap-title fl-wrap">
-                <h2>Resutaldos para :
+                <h2>Resultados para :
                     <span v-if="filters.resultFor">
                         {{filters.resultFor.nombre}}, {{filters.resultFor.lateral}}
                     </span>
