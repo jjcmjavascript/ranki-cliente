@@ -44,10 +44,10 @@ class UsuarioController extends Controller
 
     }
 
-    public function guardar( Request $request )
+    public function actualizar( Request $request )
     {
         $this->validate($request, [
-            'id' =>'required|exists:usuarios,id',
+            'id' =>'required|integer',
             'nombre'  => 'nullable|string|max:30',
             'apellidos'=> 'nullable|string|max:100',
             'direccion'  => 'nullable|string',
@@ -58,7 +58,7 @@ class UsuarioController extends Controller
 
         try {
 
-            $ruta = 'api/usuarios/guardar';
+            $ruta = 'api/usuarios/actualizar';
             // Cargando avatar
             $multipart = [];
             if($request->avatar){
@@ -95,9 +95,9 @@ class UsuarioController extends Controller
     public function editar_clave ( Request $request )
     {
         $this->validate($request, [
-            'id' =>'required|exists:usuarios,id',
-            'actual' => 'string|required',
-            'password' => 'string|confirmed|min:8',
+            'id' =>'required|integer',
+            'actual' => 'required|string',
+            'password' => 'required|string|confirmed|min:8',
         ]);
 
         try {

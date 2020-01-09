@@ -371,7 +371,7 @@ export default {
                 this.file && request.append('avatar', this.file);
 
                 axios
-                    .post(this.url + '/guardar', request)
+                    .post(this.url + '/actualizar', request)
                     .then(res => {
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");
                         this.usuario = res.data.usuario;
