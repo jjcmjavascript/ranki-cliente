@@ -15,10 +15,10 @@
                     <!--tab -->
                     <div id="tab-1" class="tab-content">
                         <h3>
-                            INICIA
+                            INICIA EN
                             <span>
-                                en
-                                <strong>Metro Cuadrado</strong>
+                                EN
+                                <strong>RANKI</strong>
                             </span>
                         </h3>
                         <div class="custom-form">

@@ -71,8 +71,8 @@ class PropiedadController extends Controller
 
         $this->validate($request, [
             'titulo' => 'required|string',
-            'id_tipo_propiedad' => 'required',
-            'id_subtipo_propiedad' => 'required',
+            'id_tipo_propiedad' => 'required|integer',
+            'id_subtipo_propiedad' => 'required|integer',
             'region_id' => 'required|integer',
             'comuna_id' => 'required|integer',
             'calle' => 'required|string',
@@ -347,16 +347,19 @@ class PropiedadController extends Controller
 
     }
 
-    public function favorito_marcar ( Request $request ){
-
+    public function favorito_marcar ( Request $request )
+    {
         $this->validate($request ,  [
-            'id' => 'required | integer '
+            'id' => 'required|integer'
         ]);
 
         try {
             if(!Auth::check()) throw new \Exception("Accion no autorizada");
 
-            $response = (new ApiHelper)->sendApiRequest('api/propiedades/favorito/marcar',['id'=>$request->id, 'usuario_id'=>Auth::user()->id]);
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/favorito/marcar', [
+                'id' => $request->id,
+                'usuario_id' => Auth::user()->id
+            ]);
 
             if(isset($response['error'])) throw new \Exception($response);
 
@@ -372,16 +375,19 @@ class PropiedadController extends Controller
 
     }
 
-    public function like ( Request $request ){
-
+    public function like ( Request $request )
+    {
         $this->validate($request ,  [
-            'id' => 'required | integer'
+            'id' => 'required|integer'
         ]);
 
         try {
             if(!Auth::check()) throw new \Exception("Accion no autorizada");
 
-            $response = (new ApiHelper)->sendApiRequest('api/propiedades/like',['id'=>$request->id, 'usuario_id'=>Auth::user()->id]);
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/like', [
+                'id' => $request->id,
+                'usuario_id' => Auth::user()->id
+            ]);
 
             if(isset($response['error'])) throw new \Exception($response);
 
@@ -396,6 +402,4 @@ class PropiedadController extends Controller
         }
 
     }
-
-
 }

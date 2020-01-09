@@ -11,8 +11,9 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Login_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Login.vue */ "./resources/js/app/Login.vue");
 /* harmony import */ var _components_Maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/Maps */ "./resources/js/components/Maps.vue");
-/* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-star-rating */ "./node_modules/vue-star-rating/dist/star-rating.min.js");
-/* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_star_rating__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Modal */ "./resources/js/components/Modal.vue");
+/* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-star-rating */ "./node_modules/vue-star-rating/dist/star-rating.min.js");
+/* harmony import */ var vue_star_rating__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_star_rating__WEBPACK_IMPORTED_MODULE_3__);
 //
 //
 //
@@ -298,34 +299,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -333,7 +307,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     login: _Login_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     Maps: _components_Maps__WEBPACK_IMPORTED_MODULE_1__["default"],
-    StarRating: vue_star_rating__WEBPACK_IMPORTED_MODULE_2___default.a
+    StarRating: vue_star_rating__WEBPACK_IMPORTED_MODULE_3___default.a,
+    modal: _components_Modal__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -470,7 +445,13 @@ __webpack_require__.r(__webpack_exports__);
         _this5.alerta('error', 'Un error ha ocurrido.', err);
       });
     },
-    openPuntuar: function openPuntuar() {}
+    openPuntuar: function openPuntuar() {
+      this.$swal({
+        title: 'Agregar Puntuacion',
+        showConfirmButton: true // html : `<StarRating v-model="rows.avg_comodidad" :show-rating="false" :read-only="true" /></StarRating>`
+
+      });
+    }
   }
 });
 
@@ -495,7 +476,18 @@ var render = function() {
     "div",
     { attrs: { id: "wrapper" } },
     [
-      _vm._m(0),
+      _c(
+        "modal",
+        { attrs: { id: "miModal" } },
+        [
+          _c("template", { slot: "header" }, [_vm._v(" asd|")]),
+          _vm._v(" "),
+          _c("template", { slot: "main" }, [_vm._v(" asdasd")]),
+          _vm._v(" "),
+          _c("template", { slot: "footer" }, [_vm._v(" asd")])
+        ],
+        2
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "content" }, [
         _c(
@@ -506,7 +498,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "container" }, [
               _c("div", { staticClass: "row" }, [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-4" }, [
                   _c("div", { staticClass: "flat-hero-container fl-wrap" }, [
@@ -518,7 +510,7 @@ var render = function() {
                           _vm._v(_vm._s(_vm.rows.titulo ? _vm.rows.titulo : ""))
                         ]),
                         _vm._v(" "),
-                        _vm._m(2)
+                        _vm._m(1)
                       ]
                     ),
                     _vm._v(" "),
@@ -608,7 +600,7 @@ var render = function() {
                                     2
                                   )
                                 ]
-                              : [_vm._m(3)]
+                              : [_vm._m(2)]
                           ],
                           2
                         ),
@@ -652,7 +644,7 @@ var render = function() {
                                     2
                                   )
                                 ]
-                              : [_vm._m(4)]
+                              : [_vm._m(3)]
                           ],
                           2
                         ),
@@ -661,41 +653,40 @@ var render = function() {
                           "div",
                           { staticClass: "col-xs-2 col-md-2" },
                           [
-                            _vm.rows && _vm.rows.likeable
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "text-warning",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.openPuntuar()
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm.rows._puntuaciones &&
-                                      _vm.rows._puntuaciones.length > 0
-                                        ? [
-                                            _c("i", {
-                                              staticClass: "fa fa-star fa-2x",
-                                              attrs: { "aria-hidden": "true" }
-                                            })
-                                          ]
-                                        : [
-                                            _c("i", {
-                                              staticClass:
-                                                "fa fa-star-o-o fa-2x",
-                                              attrs: { "aria-hidden": "true" }
-                                            })
-                                          ]
-                                    ],
-                                    2
-                                  )
-                                ]
-                              : [_vm._m(5)]
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-warning",
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.openPuntuar()
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm.rows._puntuaciones &&
+                                  _vm.rows._puntuaciones.length > 0
+                                    ? [
+                                        _c("i", {
+                                          staticClass: "fa fa-star fa-2x",
+                                          attrs: { "aria-hidden": "true" }
+                                        })
+                                      ]
+                                    : [
+                                        _c("i", {
+                                          staticClass: "fa fa-star-o fa-2x",
+                                          attrs: { "aria-hidden": "true" }
+                                        })
+                                      ]
+                                ],
+                                2
+                              )
+                            ],
+                            _vm._v(" "),
+                            [_vm._m(4)]
                           ],
                           2
                         )
@@ -800,7 +791,7 @@ var render = function() {
                       "div",
                       { staticClass: "list-single-main-item fl-wrap" },
                       [
-                        _vm._m(6),
+                        _vm._m(5),
                         _vm._v(" "),
                         _vm.rows.descripcion
                           ? [
@@ -826,7 +817,7 @@ var render = function() {
                         attrs: { id: "sec3" }
                       },
                       [
-                        _vm._m(7),
+                        _vm._m(6),
                         _vm._v(" "),
                         _c("div", { staticClass: "listing-features fl-wrap" }, [
                           _c("ul", [
@@ -893,7 +884,7 @@ var render = function() {
                         attrs: { id: "sec6" }
                       },
                       [
-                        _vm._m(8),
+                        _vm._m(7),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -996,14 +987,14 @@ var render = function() {
                     _c("div", { staticClass: "box-widget-item fl-wrap" }, [
                       _c("div", { staticClass: "box-widget" }, [
                         _c("div", { staticClass: "box-widget-content" }, [
-                          _vm._m(9),
+                          _vm._m(8),
                           _vm._v(" "),
                           _c("div", { staticClass: "box-widget-list" }, [
                             _c(
                               "ul",
                               [
                                 _c("li", [
-                                  _vm._m(10),
+                                  _vm._m(9),
                                   _vm._v(" "),
                                   _c("span", [
                                     _vm._v(
@@ -1021,7 +1012,7 @@ var render = function() {
                                 _vm.rows.codigo_telefono
                                   ? [
                                       _c("li", [
-                                        _vm._m(11),
+                                        _vm._m(10),
                                         _vm._v(" "),
                                         _c("span", [
                                           _vm._v(
@@ -1047,7 +1038,7 @@ var render = function() {
                                 _vm.rows.codigo_telefono2
                                   ? [
                                       _c("li", [
-                                        _vm._m(12),
+                                        _vm._m(11),
                                         _vm._v(" "),
                                         _c("span", [
                                           _vm._v(
@@ -1111,68 +1102,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal" }, [
-      _c("div", { staticClass: "puntuar" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "main-register-holder" }, [
-        _c("div", { staticClass: "main-register fl-wrap" }, [
-          _c("div", { staticClass: "close-reg color-bg" }, [
-            _c("i", { staticClass: "fal fa-times" })
-          ]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "tabs-menu" }, [
-            _c("li", { staticClass: "current" }, [
-              _c("a", { attrs: { href: "#tab-1" } }, [
-                _c("i", { staticClass: "fal fa-sign-in-alt" }),
-                _vm._v(" Registrar ")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#tab-2" } }, [
-                _c("i", { staticClass: "fal fa-user-plus" }),
-                _vm._v(" Iniciar")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { attrs: { id: "tabs-container" } }, [
-            _c("div", { staticClass: "tab" }, [
-              _c(
-                "div",
-                { staticClass: "tab-content", attrs: { id: "tab-1" } },
-                [
-                  _c("h3", [
-                    _vm._v(
-                      "\n                                INICIA\n                                "
-                    ),
-                    _c("span", [
-                      _vm._v(
-                        "\n                                    en\n                                    "
-                      ),
-                      _c("strong", [_vm._v("Metro Cuadrado")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "custom-form" }, [
-                    _c("div", { staticClass: "lost_password" }, [
-                      _c("a", { attrs: { href: "/password" } }, [
-                        _vm._v("Olvido su contraseña?")
-                      ])
-                    ])
-                  ])
-                ]
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

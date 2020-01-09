@@ -17,7 +17,6 @@ class Usuario extends Authenticatable
      */
 
     protected $table = 'clt_usuarios';
-
     protected $primaryKey = 'id';
     protected $fillable = [
         'id','nombre', 'apellidos', 'email', 'rut', 'direccion',
