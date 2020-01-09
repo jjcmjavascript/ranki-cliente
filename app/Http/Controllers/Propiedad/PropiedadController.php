@@ -44,7 +44,7 @@ class PropiedadController extends Controller
     public function editar( Request $request )
     {
         $this->validate($request, [
-            'id' => 'required|integer|exists:propiedades,id'
+            'id' => 'required|integer'
         ]);
 
         try {
@@ -71,10 +71,10 @@ class PropiedadController extends Controller
 
         $this->validate($request, [
             'titulo' => 'required|string',
-            'id_tipo_propiedad' => 'required|integer|exists:subtipos,id',
-            'id_subtipo_propiedad' => 'required|integer|exists:subtipos,id',
-            'region_id' => 'required|integer|exists:regiones,id',
-            'comuna_id' => 'required|integer|exists:comunas,id',
+            'id_tipo_propiedad' => 'required',
+            'id_subtipo_propiedad' => 'required',
+            'region_id' => 'required|integer',
+            'comuna_id' => 'required|integer',
             'calle' => 'required|string',
             'numero_calle' => 'required|integer',
             'numero_departamento' => 'nullable|integer',
@@ -93,10 +93,10 @@ class PropiedadController extends Controller
             'telefono2' => 'nullable|integer|digits:8',
             'codigo_telefono2' => 'required_with:telefono2|integer',
             'id_orientacion' => 'nullable|integer',
-            'id_tipo_operacion' => 'required|integer|exists:subtipos,id',
-            'id_tipo_valor' => 'required|integer|exists:subtipos,id',
+            'id_tipo_operacion' => 'required|integer',
+            'id_tipo_valor' => 'required|integer',
             'precio' => 'required|numeric',
-            'id_periodicidad_arriendo' => 'required|integer|exists:subtipos,id',
+            'id_periodicidad_arriendo' => 'required|integer',
             'latitud' => 'nullable|numeric',
             'longitud' => 'nullable|numeric',
             'amoblada' => 'required|boolean',
@@ -129,12 +129,12 @@ class PropiedadController extends Controller
     public function actualizar ( Request $request )
     {
         $this->validate($request, [
-            'id' => 'required|integer|exists:propiedades,id',
+            'id' => 'required|integer',
             'titulo' => 'required|string',
-            'id_tipo_propiedad' => 'required|integer|exists:subtipos,id',
-            'id_subtipo_propiedad' => 'required|integer|exists:subtipos,id',
-            'region_id' => 'required|integer|exists:regiones,id',
-            'comuna_id' => 'required|integer|exists:comunas,id',
+            'id_tipo_propiedad' => 'required|integer',
+            'id_subtipo_propiedad' => 'required|integer',
+            'region_id' => 'required|integer',
+            'comuna_id' => 'required|integer',
             'calle' => 'required|string',
             'numero_calle' => 'required|integer',
             'numero_domicilio' => 'nullable|integer',
@@ -153,12 +153,12 @@ class PropiedadController extends Controller
             'telefono2' => 'nullable|integer|digits:8',
             'codigo_telefono2' => 'required_with:telefono2|integer',
             'id_orientacion' => 'nullable|integer',
-            'id_tipo_operacion' => 'required|integer|exists:subtipos,id',
-            'id_tipo_valor' => 'required|integer|exists:subtipos,id',
+            'id_tipo_operacion' => 'required|integer',
+            'id_tipo_valor' => 'required|integer',
             'precio' => 'required|numeric',
-            'id_periodicidad_arriendo' => 'required|integer|exists:subtipos,id',
-            //'usuario_id' => 'required|integer|exists:usuarios,id',
+            'id_periodicidad_arriendo' => 'required|integer',
             'latitud' => 'nullable|numeric',
+            //'usuario_id' => 'required|integer|exists:usuarios,id',
             'longitud' => 'nullable|numeric',
             'amoblada' => 'required|boolean',
             'portada_imagen_key' => 'required|integer',
@@ -213,7 +213,7 @@ class PropiedadController extends Controller
     {
 
         $this->validate($request,[
-            'id'=>'required|integer|exists:propiedades'
+            'id'=>'required|integer'
         ]);
 
         try {
@@ -238,7 +238,7 @@ class PropiedadController extends Controller
     public function reactivar ( Request $request)
     {
         $this->validate($request,[
-            'id'=>'required|integer|exists:propiedades'
+            'id'=>'required|integer'
         ]);
 
         try {
@@ -323,7 +323,7 @@ class PropiedadController extends Controller
     public function cotizar ( Request $request )
     {
         $this->validate($request,[
-            'id'=>'required|integer|exists:propiedades',
+            'id'=>'required|integer',
             'comentario'=>'required|string|min:20|max:2000'
         ]);
 
@@ -350,7 +350,7 @@ class PropiedadController extends Controller
     public function favorito_marcar ( Request $request ){
 
         $this->validate($request ,  [
-            'id' => 'required | integer | exists:propiedades,id'
+            'id' => 'required | integer '
         ]);
 
         try {
@@ -375,7 +375,7 @@ class PropiedadController extends Controller
     public function like ( Request $request ){
 
         $this->validate($request ,  [
-            'id' => 'required | integer | exists:propiedades,id'
+            'id' => 'required | integer'
         ]);
 
         try {
