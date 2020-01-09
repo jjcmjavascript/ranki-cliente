@@ -1,40 +1,12 @@
 <template >
 <div id="wrapper">
-    <div class="modal">
-        <div class="puntuar"></div>
-        <div class="main-register-holder">
-            <div class="main-register fl-wrap">
-                <div class="close-reg color-bg"><i class="fal fa-times"></i></div>
-                <ul class="tabs-menu">
-                    <li class="current"><a href="#tab-1"><i class="fal fa-sign-in-alt"></i> Registrar </a></li>
-                    <li><a href="#tab-2"><i class="fal fa-user-plus"></i> Iniciar</a></li>
-                </ul>
-                <!--tabs -->
-                <div id="tabs-container">
-                    <div class="tab">
-                        <!--tab -->
-                        <div id="tab-1" class="tab-content">
-                            <h3>
-                                INICIA
-                                <span>
-                                    en
-                                    <strong>Metro Cuadrado</strong>
-                                </span>
-                            </h3>
-                            <div class="custom-form">
-                                <!-- form uno -->
-                                </form>
-                                <div class="lost_password">
-                                    <a href="/password">Olvido su contraseña?</a>
-                                </div>
-                            </div>
-                        </div>
+<modal id="miModal">
+    <template slot="header"> asd|</template>
+    <template slot="main"> asdasd</template>
+    <template slot="footer"> asd</template>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</modal>
+
     <!-- content-->
     <div class="content">
         <!--  section  -->
@@ -124,17 +96,17 @@
                                         </template>
                                     </div>
                                     <div class="col-xs-2 col-md-2">
-                                        <template v-if="rows && rows.likeable">
+                                        <template >
                                             <a href="#" @click.prevent="openPuntuar()" class="text-warning">
                                                 <template v-if="rows._puntuaciones && rows._puntuaciones.length > 0">
                                                     <i class="fa fa-star fa-2x" aria-hidden="true"></i>
                                                 </template>
                                                 <template v-else>
-                                                    <i class="fa fa-star-o-o fa-2x" aria-hidden="true"></i>
+                                                    <i class="fa fa-star-o fa-2x" aria-hidden="true"></i>
                                                 </template>
                                             </a>
                                         </template>
-                                        <template v-else>
+                                        <template >
                                             <a href="#" class="text-warning">
                                                 <i class="fa fa-star-o fa-2x" aria-hidden="true"></i>
                                             </a>
@@ -314,13 +286,15 @@
 <script>
 import Login from '../Login.vue';
 import Maps from '../../components/Maps';
+import modal from '../../components/Modal';
 import StarRating from 'vue-star-rating'
 
 export default {
     components: {
         login: Login,
         Maps,
-        StarRating
+        StarRating,
+        modal
     },
     data() {
         return {
@@ -460,7 +434,11 @@ export default {
                 })
         },
         openPuntuar() {
-
+            this.$swal({
+                title : 'Agregar Puntuacion',
+                showConfirmButton: true
+                // html : `<StarRating v-model="rows.avg_comodidad" :show-rating="false" :read-only="true" /></StarRating>`
+            })
         },
 
 

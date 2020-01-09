@@ -22,5 +22,9 @@
     "/vendors~app/Propiedad/Detalle.js": "/vendors~app/Propiedad/Detalle.js",
     "/vendors~components/DateRangePicker.js": "/vendors~components/DateRangePicker.js",
     "/vendors~components/pagination.js": "/vendors~components/pagination.js",
-    "/vendors~components/vSelect.js": "/vendors~components/vSelect.js"
+    "/vendors~components/vSelect.js": "/vendors~components/vSelect.js",
+    "/app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js": "/app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js",
+    "/app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js": "/app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js",
+    "/vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js": "/vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js",
+    "/app/Propiedad/Detalle~components/modal.js": "/app/Propiedad/Detalle~components/modal.js"
 }

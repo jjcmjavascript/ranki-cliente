@@ -693,6 +693,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getLatlng: function getLatlng(latlng) {
+      console.log(latlng);
       this.data.latitud = latlng['lat'];
       this.data.longitud = latlng['lng'];
     },
@@ -729,6 +730,8 @@ __webpack_require__.r(__webpack_exports__);
           var center = response.data.features[0].center;
           _this6.maps.center = [center[1], center[0]];
           _this6.locations = [center[1], center[0]];
+          _this6.data.latitud = center[1];
+          _this6.data.longitud = center[0];
         } else {
           _this6.locations = [-33.4569397, -70.6482697];
           _this6.maps.center = [-33.4569397, -70.6482697];

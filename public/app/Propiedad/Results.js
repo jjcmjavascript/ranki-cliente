@@ -738,7 +738,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-xs-12 col-md-3 pl-1 pr-0" },
+              { staticClass: "col-xs-12 col-md-4 pl-1 pr-0" },
               [
                 _c(
                   "v-select",
@@ -814,12 +814,13 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-xs-12 col-md-2 pl-1 pr-0" },
+              { staticClass: "col-xs-12 col-lg-2 pl-1 pr-0" },
               [
                 _c("v-select", {
                   attrs: {
                     label: "nombre",
                     options: _vm.selects.tipos_propiedades,
+                    placeholder: "Tipo propiedad",
                     clearable: false
                   },
                   model: {
@@ -836,12 +837,13 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-xs-12 col-md-2 pl-1 pr-0" },
+              { staticClass: "col-xs-12 col-lg-2 pl-1 pr-4" },
               [
                 _c("v-select", {
                   attrs: {
                     label: "nombre",
                     options: _vm.selects.tipos_valores,
+                    placeholder: "Moneda",
                     clearable: false
                   },
                   model: {
@@ -857,61 +859,70 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-warning col-xs-12 col-md-1 mt-1 ml-1",
-              staticStyle: { color: "white" },
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  return _vm.limpiarFiltros()
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "far fa-trash" }),
-              _vm._v(" Limpiar\n                ")
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-info col-xs-12 col-md-1 mt-1 ml-1",
-              staticStyle: {
-                color: "white",
-                position: "none !important",
-                bottom: "0px !important"
-              },
-              on: {
-                click: function($event) {
-                  return _vm.showHide()
-                }
-              }
-            },
-            [
-              _vm._v("Filtros\n                    "),
-              _c("i", {
-                staticClass: "far fa-plus",
-                staticStyle: { color: "white" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "col-xs-12 col-md-1 mt-1 ml-1 btn btn-success",
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  return _vm.filtrar()
-                }
-              }
-            },
-            [_c("i", { staticClass: "far fa-search" })]
-          ),
+          _c("div", { staticClass: "row justify-content-end" }, [
+            _c("div", { staticClass: "mt-2 mr-2" }, [
+              _c("div", { staticClass: "col-sm-12 col-lg-12" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-info",
+                    staticStyle: {
+                      color: "white",
+                      position: "none !important",
+                      bottom: "0px !important"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.showHide()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "far fa-plus",
+                      staticStyle: { color: "white" }
+                    }),
+                    _vm._v(" Filtros\n                            ")
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-warning",
+                    staticStyle: { color: "white" },
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.limpiarFiltros()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-trash" }),
+                    _vm._v(" Limpiar\n                            ")
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.filtrar()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-search" }),
+                    _vm._v(" Buscar\n                            ")
+                  ]
+                )
+              ])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "hidden-listing-filter fl-wrap" }, [
             _c(
@@ -919,12 +930,8 @@ var render = function() {
               { staticClass: "row" },
               [
                 _c("v-select", {
-                  staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
-                  attrs: {
-                    options: _vm.numeros,
-                    clearable: false,
-                    placeholder: "Baños"
-                  },
+                  staticClass: "ml-1 mt-1 col-md-2",
+                  attrs: { options: _vm.numeros, placeholder: "Baños" },
                   model: {
                     value: _vm.filters.banio,
                     callback: function($$v) {
@@ -935,12 +942,8 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("v-select", {
-                  staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
-                  attrs: {
-                    options: _vm.numeros,
-                    clearable: false,
-                    placeholder: "Privado"
-                  },
+                  staticClass: "ml-1 mt-1 col-md-2",
+                  attrs: { options: _vm.numeros, placeholder: "Privado" },
                   model: {
                     value: _vm.filters.privado,
                     callback: function($$v) {
@@ -951,12 +954,8 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("v-select", {
-                  staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
-                  attrs: {
-                    options: _vm.numeros,
-                    clearable: false,
-                    placeholder: "Bodegas"
-                  },
+                  staticClass: "ml-1 mt-1 col-md-2",
+                  attrs: { options: _vm.numeros, placeholder: "Bodegas" },
                   model: {
                     value: _vm.filters.bodegas,
                     callback: function($$v) {
@@ -967,7 +966,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("v-select", {
-                  staticClass: "ml-1 mt-1 col-md-2 v-select-clearfix",
+                  staticClass: "ml-1 mt-1 col-md-2",
                   attrs: {
                     options: _vm.numeros,
                     clearable: false,
@@ -1282,7 +1281,7 @@ var render = function() {
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "list-main-wrap-title fl-wrap" }, [
           _c("h2", [
-            _vm._v("Resutaldos para :\n                    "),
+            _vm._v("Resultados para :\n                    "),
             _vm.filters.resultFor
               ? _c("span", [
                   _vm._v(

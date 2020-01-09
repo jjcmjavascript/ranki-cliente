@@ -343,7 +343,7 @@ __webpack_require__.r(__webpack_exports__);
         this.usuario.telefono_movil && request.append("telefono_movil", this.usuario.telefono_movil);
         this.usuario.email && request.append("email", this.usuario.email);
         this.file && request.append('avatar', this.file);
-        axios.post(this.url + '/guardar', request).then(function (res) {
+        axios.post(this.url + '/actualizar', request).then(function (res) {
           _this3.alerta("success", "Exito", "Tus datos fueron modificados!");
 
           _this3.usuario = res.data.usuario;

@@ -157,8 +157,8 @@ class PropiedadController extends Controller
             'id_tipo_valor' => 'required|integer',
             'precio' => 'required|numeric',
             'id_periodicidad_arriendo' => 'required|integer',
-            //'usuario_id' => 'required|integer|exists:usuarios,id',
             'latitud' => 'nullable|numeric',
+            //'usuario_id' => 'required|integer|exists:usuarios,id',
             'longitud' => 'nullable|numeric',
             'amoblada' => 'required|boolean',
             'portada_imagen_key' => 'required|integer',
@@ -357,7 +357,7 @@ class PropiedadController extends Controller
             if(!Auth::check()) throw new \Exception("Accion no autorizada");
 
             $response = (new ApiHelper)->sendApiRequest('api/propiedades/favorito/marcar', [
-                'id' => $request->id, 
+                'id' => $request->id,
                 'usuario_id' => Auth::user()->id
             ]);
 
@@ -385,7 +385,7 @@ class PropiedadController extends Controller
             if(!Auth::check()) throw new \Exception("Accion no autorizada");
 
             $response = (new ApiHelper)->sendApiRequest('api/propiedades/like', [
-                'id' => $request->id, 
+                'id' => $request->id,
                 'usuario_id' => Auth::user()->id
             ]);
 

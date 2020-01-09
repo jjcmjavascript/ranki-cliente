@@ -226,6 +226,101 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -539,8 +634,107 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("section", { staticClass: "grey-blue-bg" }, [
+            _c("section", { attrs: { id: "sec2" } }, [
               _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "gallery-items fl-wrap mr-bot spad home-grid" },
+                [
+                  _c("div", { staticClass: "gallery-item" }, [
+                    _c("div", { staticClass: "grid-item-holder" }, [
+                      _c("div", { staticClass: "listing-item-grid" }, [
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _c("img", {
+                          attrs: {
+                            src: _vm.app_url + "images/portada.jpg",
+                            alt: ""
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(4)
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "gallery-item gallery-item-second" },
+                    [
+                      _c("div", { staticClass: "grid-item-holder" }, [
+                        _c("div", { staticClass: "listing-item-grid" }, [
+                          _c("img", {
+                            attrs: {
+                              src: _vm.app_url + "images/portada2.jpg",
+                              alt: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _vm._m(6)
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "gallery-item" }, [
+                    _c("div", { staticClass: "grid-item-holder" }, [
+                      _c("div", { staticClass: "listing-item-grid" }, [
+                        _vm._m(7),
+                        _vm._v(" "),
+                        _c("img", {
+                          attrs: {
+                            src: _vm.app_url + "images/portada.jpg",
+                            alt: ""
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(8)
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "gallery-item" }, [
+                    _c("div", { staticClass: "grid-item-holder" }, [
+                      _c("div", { staticClass: "listing-item-grid" }, [
+                        _vm._m(9),
+                        _vm._v(" "),
+                        _c("img", {
+                          attrs: {
+                            src: _vm.app_url + "images/portada.jpg",
+                            alt: ""
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(10)
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "gallery-item" }, [
+                    _c("div", { staticClass: "grid-item-holder" }, [
+                      _c("div", { staticClass: "listing-item-grid" }, [
+                        _vm._m(11),
+                        _vm._v(" "),
+                        _c("img", {
+                          attrs: {
+                            src: _vm.app_url + "images/portada.jpg",
+                            alt: ""
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(12)
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("section", { staticClass: "grey-blue-bg" }, [
+              _vm._m(13),
               _vm._v(" "),
               _c(
                 "div",
@@ -598,7 +792,7 @@ var render = function() {
                                       ]
                                     : _vm._e(),
                                   _vm._v(" "),
-                                  _vm._m(3, true)
+                                  _vm._m(14, true)
                                 ],
                                 2
                               ),
@@ -781,7 +975,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "geodir-opt-list" },
                                         [
-                                          _vm._m(4, true),
+                                          _vm._m(15, true),
                                           _vm._v(" "),
                                           _vm.rows[i - 1]
                                             ? [
@@ -820,7 +1014,7 @@ var render = function() {
                                                 )
                                               ]
                                             : [
-                                                _vm._m(5, true),
+                                                _vm._m(16, true),
                                                 _vm._v(" "),
                                                 _c(
                                                   "span",
@@ -907,7 +1101,7 @@ var render = function() {
                                                   2
                                                 )
                                               ]
-                                            : [_vm._m(6, true)]
+                                            : [_vm._m(17, true)]
                                         ],
                                         2
                                       )
@@ -924,9 +1118,9 @@ var render = function() {
                     0
                   ),
                   _vm._v(" "),
-                  _vm._m(7),
+                  _vm._m(18),
                   _vm._v(" "),
-                  _vm._m(8)
+                  _vm._m(19)
                 ]
               )
             ])
@@ -936,7 +1130,7 @@ var render = function() {
       _vm._v(" "),
       _c("login"),
       _vm._v(" "),
-      _vm._m(9)
+      _vm._m(20)
     ],
     1
   )
@@ -980,15 +1174,181 @@ var staticRenderFns = [
       _c("div", { staticClass: "section-title" }, [
         _c("div", { staticClass: "section-title-separator" }, [_c("span")]),
         _vm._v(" "),
-        _c("h2", [_vm._v("Recently Added Hotels")]),
+        _c("h2", [_vm._v("Propiedades populares")]),
         _vm._v(" "),
         _c("span", { staticClass: "section-separator" }),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar."
+            "Explora algunos de los sectores recomendados para conseguir la propiedad que buscas"
           )
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-counter" }, [
+      _c("span", [_vm._v("79 ")]),
+      _vm._v(" Propiedades")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-item-cat" }, [
+      _c("h3", [
+        _c("a", { attrs: { href: "listing.html" } }, [_vm._v("San Joaquín")])
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "weather-grid",
+        attrs: { "data-grcity": "Rome" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix" }),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Constant care and attention to the patients makes good record")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-counter" }, [
+      _c("span", [_vm._v("43 ")]),
+      _vm._v(" Propiedades")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-item-cat" }, [
+      _c("h3", [
+        _c("a", { attrs: { href: "listing.html" } }, [_vm._v("La Florida")])
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "weather-grid",
+        attrs: { "data-grcity": "La florida" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix" }),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Constant care and attention to the patients makes good record")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-counter" }, [
+      _c("span", [_vm._v("23 ")]),
+      _vm._v(" Propiedades")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-item-cat" }, [
+      _c("h3", [
+        _c("a", { attrs: { href: "listing.html" } }, [_vm._v("Macul")])
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "weather-grid",
+        attrs: { "data-grcity": "Macul" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix" }),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Constant care and attention to the patients makes good record")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-counter" }, [
+      _c("span", [_vm._v("57")]),
+      _vm._v(" Propiedades")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-item-cat" }, [
+      _c("h3", [
+        _c("a", { attrs: { href: "listing.html" } }, [_vm._v("Las condes")])
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "weather-grid",
+        attrs: { "data-grcity": "Las condes" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix" }),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Constant care and attention to the patients makes good record")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-counter" }, [
+      _c("span", [_vm._v("122")]),
+      _vm._v(" Propiedades")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "listing-item-cat" }, [
+      _c("h3", [
+        _c("a", { attrs: { href: "listing.html" } }, [_vm._v("Ñuñoa")])
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "weather-grid",
+        attrs: { "data-grcity": "Ñuñoa" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix" }),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Constant care and attention to the patients makes good record")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "section-title" }, [
+        _c("div", { staticClass: "section-title-separator" }, [_c("span")]),
+        _vm._v(" "),
+        _c("h2", [_vm._v("Propiedades recientes")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "section-separator" }),
+        _vm._v(" "),
+        _c("p", [_vm._v("Mira las últimas propiedades que han sido cargadas")])
       ])
     ])
   },
