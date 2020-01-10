@@ -1,12 +1,41 @@
 <template >
 <div id="wrapper">
-<modal id="miModal">
-    <template slot="header"> asd|</template>
-    <template slot="main"> asdasd</template>
-    <template slot="footer"> asd</template>
+    <modal id="miModal" ref="miModaRef">
+        <template slot="header">
+            Puntuar esta propiedad
+        </template>
+        <template slot="main">
+            <div class="list-single-main-item-title fl-wrap">
+                <!-- <h3>Puntuar Vivienda</h3> -->
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Comodidad</label>
+                <StarRating v-model="puntuar.comodidad" :show-rating="false"  />
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Estado</label>
+                <StarRating v-model="puntuar.estado" :show-rating="false"  />
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Servicios</label>
+                <StarRating v-model="puntuar.servicio" :show-rating="false"  />
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label>Facilidad</label>
+                <StarRating v-model="puntuar.facilidad" :show-rating="false"  />
+            </div>
+            <div class="form-group col-xs-12">
+                <label>Facilidad</label>
+                <textarea class="form-control" rows="2" v-model="puntuar.comentario" placeholder="El comentario debe contener al menos 20 caracteres"></textarea>
+            </div>
 
-</modal>
-
+        </template>
+        <template slot="footer">
+            <button type="button" class="btn btn-success" :disabled="disabledPuntuacion" @click="addPuntuacion()">
+                Calificar
+            </button>
+        </template>
+    </modal>
     <!-- content-->
     <div class="content">
         <!--  section  -->
@@ -96,17 +125,19 @@
                                         </template>
                                     </div>
                                     <div class="col-xs-2 col-md-2">
-                                        <template >
-                                            <a href="#" @click.prevent="openPuntuar()" class="text-warning">
-                                                <template v-if="rows._puntuaciones && rows._puntuaciones.length > 0">
+                                        <template v-if="rows.puntuable">
+                                            <template v-if="rows._puntuaciones && rows._puntuaciones.length > 0">
+                                                <a href="#" class="text-warning" >
                                                     <i class="fa fa-star fa-2x" aria-hidden="true"></i>
-                                                </template>
-                                                <template v-else>
+                                                </a>
+                                            </template>
+                                            <template v-else>
+                                                <a href="#" @click="puntuar.id = rows.id;$refs.miModaRef.show()" class="text-warning">
                                                     <i class="fa fa-star-o fa-2x" aria-hidden="true"></i>
-                                                </template>
-                                            </a>
+                                                </a>
+                                            </template>
                                         </template>
-                                        <template >
+                                        <template v-else>
                                             <a href="#" class="text-warning">
                                                 <i class="fa fa-star-o fa-2x" aria-hidden="true"></i>
                                             </a>
@@ -247,8 +278,6 @@
                                                             ({{rows.codigo_telefono2 ? rows.codigo_telefono2 : ''}})
                                                             ({{rows.telefono2 ? rows.telefono2 : ''}})
                                                         </span>
-
-
                                                     </li>
                                                 </template>
                                             </ul>
@@ -268,8 +297,6 @@
                     <!--   sidebar end  -->
                 </div>
                 <!--   row end  -->
-
-
             </div>
             <!--   container  end  -->
         </section>
@@ -296,6 +323,15 @@ export default {
         StarRating,
         modal
     },
+    computed : {
+        disabledPuntuacion () {
+            return !this.puntuar.comodidad ||
+            !this.puntuar.estado ||
+            !this.puntuar.servicio ||
+            !this.puntuar.facilidad ||
+            !this.puntuar.comentario || (this.puntuar.comentario && this.puntuar.comentario.length < 20);
+        }
+    },
     data() {
         return {
             url: {
@@ -320,13 +356,42 @@ export default {
                 zoom: 17,
                 locations: [-33.4569397, -70.6482697],
             },
+            puntuar : {
+                comodidad :null,
+                estado :null,
+                servicio :null,
+                facilidad :null,
+                comentario  : null,
+            },
         }
     },
     mounted() {
         this.iniciar();
     },
     methods: {
-
+        addPuntuacion(){
+            this.start();
+            axios.post(this.$root.base_url + 'propiedad/puntuar', {
+                    'id': this.puntuar.id,
+                    'comodidad' : this.puntuar.comodidad,
+                    'estado' : this.puntuar.estado,
+                    'servicio' : this.puntuar.servicio,
+                    'facilidad' : this.puntuar.facilidad,
+                    'comentario' : this.puntuar.comentario,
+                })
+                .then(res => {
+                    this.$refs.miModaRef.close();
+                    this.rows._puntuaciones = res.data.propiedad._puntuaciones;
+                    this.alerta('success', 'Exito', res.data.success);
+                })
+                .catch(err => {
+                    this.stop();
+                    this.alerta('error', 'Un error ha ocurrido.', err);
+                })
+        },
+        closeModal(){
+            this.$refs.miModaRef.close()
+        },
         start() {
             this.$root.cargando();
         },
@@ -433,14 +498,6 @@ export default {
                     this.alerta('error', 'Un error ha ocurrido.', err);
                 })
         },
-        openPuntuar() {
-            this.$swal({
-                title : 'Agregar Puntuacion',
-                showConfirmButton: true
-                // html : `<StarRating v-model="rows.avg_comodidad" :show-rating="false" :read-only="true" /></StarRating>`
-            })
-        },
-
 
     },
 

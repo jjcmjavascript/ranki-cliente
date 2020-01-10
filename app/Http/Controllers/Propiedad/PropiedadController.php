@@ -402,4 +402,37 @@ class PropiedadController extends Controller
         }
 
     }
+
+    public function puntuar ( Request $request )
+    {
+        $this->validate($request ,  [
+            'id' => 'required|integer',
+            'comodidad' => 'required|numeric|max:5',
+            'estado' => 'required|numeric|max:5',
+            'servicio' => 'required|numeric|max:5',
+            'facilidad' => 'required|numeric|max:5',
+            'comentario' => 'string|max:2000|min:20',
+        ]);
+
+        try {
+            if(!Auth::check()) throw new \Exception("Accion no autorizada");
+
+            $datos = $request->all();
+            $datos = array_merge(['usuario_id' => Auth::user()->id ],$datos);
+
+            $response = (new ApiHelper)->sendApiRequest('api/propiedades/puntuar', $datos );
+
+            if(isset($response['error'])) throw new \Exception($response);
+
+            return response($response,200);
+
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
+        }
+
+    }
 }

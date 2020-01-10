@@ -5,6 +5,7 @@
     "/app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results.js": "/app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results.js",
     "/app/Propiedad/Detalle.js": "/app/Propiedad/Detalle.js",
     "/app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js": "/app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js",
+    "/app/Propiedad/Detalle~components/modal.js": "/app/Propiedad/Detalle~components/modal.js",
     "/app/Propiedad/Editar.js": "/app/Propiedad/Editar.js",
     "/app/Propiedad/Results.js": "/app/Propiedad/Results.js",
     "/app/Usuario/Editar.js": "/app/Usuario/Editar.js",
@@ -25,6 +26,5 @@
     "/vendors~components/vSelect.js": "/vendors~components/vSelect.js",
     "/app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js": "/app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js",
     "/app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js": "/app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave.js",
-    "/vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js": "/vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js",
-    "/app/Propiedad/Detalle~components/modal.js": "/app/Propiedad/Detalle~components/modal.js"
+    "/vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js": "/vendors~app/Propiedad/Crear~app/Propiedad/Editar~app/Propiedad/Results.js"
 }

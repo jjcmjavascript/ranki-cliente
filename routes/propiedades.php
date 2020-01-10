@@ -13,6 +13,8 @@ Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(fun
     Route::post('{id}/detalle/cotizar', 'PropiedadController@cotizar')->name('.cotizar');
     Route::post('marcar', 'PropiedadController@favorito_marcar')->name('.favorito_marcar');
     Route::post('like', 'PropiedadController@like')->name('.like');
+    Route::post('puntuar', 'PropiedadController@puntuar')->name('.puntuar');
+
 });
  // esta es mi prueba de cotizacion papi :D
 // PROPIEDADES
