@@ -119,7 +119,7 @@ return [
 
     'drivers' => [
         'database' => [
-            'table'      => 'audits',
+            'table'      => 'com_audits',
             'connection' => null,
         ],
     ],

@@ -12,9 +12,7 @@ const baseRoutes =  [
     ...usuario,
     ...sistema,
     ...propiedad,
-    ...reiniciar,
-
-
+    ...reiniciar
 ];
 
 export default baseRoutes;

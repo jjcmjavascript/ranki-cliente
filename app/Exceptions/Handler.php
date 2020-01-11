@@ -39,7 +39,8 @@ class Handler extends ExceptionHandler
     {
         if (Auth::user()) {
             Error::create([
-                'usuario_id' => Auth::user()->id,
+                'user_id' => Auth::user()->id,
+                'user_type' => 'App/Models/PortalPrivado/Usuario',
                 'code' => $exception->getCode(),
                 'file' => $exception->getFile(),
                 'line' => $exception->getLine(),

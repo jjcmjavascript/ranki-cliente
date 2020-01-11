@@ -1,3 +1,4 @@
+
 /********** GENERAL ***********/
 section {
   padding: 20px 0;
@@ -10,7 +11,9 @@ section {
     border: none !important;
     color: #C1C1C1 !important;
   }
-
+  .hearRed{
+    color : red;
+  }
    .vs__clear,
    .vs__open-indicator {
   }
@@ -30,7 +33,7 @@ section {
     overflow: auto;
   }
   .v-select-clearfix .vs__selected div small {
-    vertical-align:middle; 
+    vertical-align:middle;
     line-height: 18px;
   }
 
@@ -644,3 +647,5 @@ a {
     visibility: visible !important;
   }
 }
+
+/* Modal perzonalizaod */

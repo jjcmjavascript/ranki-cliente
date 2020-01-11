@@ -26,19 +26,23 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "font-awesome": "^4.7.0",
         "fuse.js": "^3.4.6",
         "laravel-vue-pagination": "^2.3.1",
         "leaflet": "^1.6.0",
         "moment": "^2.24.0",
         "moment-timezone": "^0.5.27",
+        "path": "^0.12.7",
         "sweetalert2": "^9.3.1",
         "vue-d2b": "^2.0.4",
         "vue-loading-overlay": "^3.2.0",
-        "vue-moment": "^4.0.0",
+        "vue-moment": "^4.1.0",
         "vue-select": "^3.2.0",
+        "vue-star-rating": "^1.6.1",
         "vue-sweetalert2": "^2.1.5",
         "vue2-leaflet": "^2.4.1",
         "vue2-leaflet-markercluster": "^3.1.0",
-        "vuejs-datepicker": "^1.6.2"
+        "vuejs-datepicker": "^1.6.2",
+        "webpack": "^4.41.5"
     }
 }
