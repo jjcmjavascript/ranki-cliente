@@ -11,6 +11,24 @@
             </div>
             <!-- profile-edit-container-->
             <div class="row">
+                <div class="form-group col-xs-12" v-if="usuario.provider && !usuario.rut">
+                    <label>
+                        Rut
+                            <br><small class="text-danger"> Debe registrar un rut para poder pulicar propiedades</small>
+                            <template v-if="!validRut">
+                                <br><small class="text-danger">Rut invalido </small>
+                            </template>
+                    </label>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-key text-yellow"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" v-model="nuevo_rut" placeholder="Rut del usuario">
+                    </div>
+                </div>
+
                 <div class="form-group col-xs-12 col-md-6">
                     <label>
                         Nombre
@@ -218,16 +236,21 @@ export default {
             },
             showPassword: [false, false, false],
             file: null,
+            nuevo_rut : null,
         };
     },
     computed: {
+        validRut(){
+            return this.$root.modulo11(this.nuevo_rut).valid
+        },
         send() {
-            this.usuario.nombre ||
+                this.usuario.nombre ||
                 this.usuario.apellidos ||
                 this.usuario.direccion ||
                 this.usuario.telefono_fijo ||
                 this.usuario.telefono_movil ||
-                this.usuario.email;
+                this.usuario.email
+                ;
         },
         all() {
             return (
@@ -369,6 +392,7 @@ export default {
                     request.append("telefono_movil", this.usuario.telefono_movil);
                 this.usuario.email && request.append("email", this.usuario.email);
                 this.file && request.append('avatar', this.file);
+                this.nuevo_rut && request.append("rut", this.nuevo_rut);
 
                 axios
                     .post(this.url + '/actualizar', request)

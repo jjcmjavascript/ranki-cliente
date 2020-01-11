@@ -43,7 +43,7 @@ class UsuarioController extends Controller
         }
 
     }
-
+    // Editar el iusuario
     public function actualizar( Request $request )
     {
         $this->validate($request, [
@@ -54,6 +54,7 @@ class UsuarioController extends Controller
             'telefono_fijo'  => 'nullable|numeric',
             'telefono_movil'  => 'nullable|numeric',
             'avatar' => 'nullable|image|max:2048',
+            'nuevo_rut' => 'nullable|unique:clt_usuarios,rut'
         ]);
 
         try {
@@ -80,7 +81,7 @@ class UsuarioController extends Controller
 
             if(isset($response['error'])) throw new \Exception($response);
 
-            return response([ 'usuario' => $response ],200);
+            return response($response,200);
         }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
@@ -131,6 +132,7 @@ class UsuarioController extends Controller
             'email' => 'required|email:rfc,dns',
             // 'perfil_id' => 'required|exists:perfiles,id',
             'password' => 'required|confirmed|min:8',
+
         ]);
 
         $cliente = Usuario::where('email', $request->email)
