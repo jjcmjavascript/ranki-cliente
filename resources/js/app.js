@@ -8,12 +8,19 @@ window.Vue = require('vue');
 //=============CONFIGURACIÓN PERSONALIZADA DE VUE=============
 //============================================================
 
+// DETERMINANDO MODO PRODUCCION
+let basePath = '/';
+
+if (process.env.NODE_ENV == 'production') {
+    basePath = '/portal';   
+}
+
 // IMPORTANDO DEPENDENCIAS
 import Loading from 'vue-loading-overlay';
 import LoadScript from 'vue-plugin-load-script';
 import VueRouter from 'vue-router';
 import VueSweetalert2 from 'vue-sweetalert2';
-import "font-awesome/scss/font-awesome.scss";
+//import "font-awesome/scss/font-awesome.scss";
 
 // IMPORTANDO ESTILOS
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -33,6 +40,7 @@ Vue.use(VueSweetalert2);
 // SET ROUTER
 import routes from './config/routes';
 const router = new VueRouter({
+    base: basePath,
     mode: 'history',
     routes, // short for routes: routes
 })

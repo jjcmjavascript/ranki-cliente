@@ -1,5 +1,5 @@
 <!-- header-->
-<header class="main-header">
+<header class="main-header"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- header-top-->
     <div class="header-top fl-wrap">
         <div class="container">

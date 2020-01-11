@@ -142,11 +142,17 @@ export default {
                     });
                 }
                 else {
-                    return new L.Icon.Default({
+                    return L.divIcon({
+                        html: `<img style="width: 95%;" src="${this.$root.base_url}/public/images/vendor/leaflet/dist/marker-icon.png"/>`,
+                        className: 'marker-icon',
+                        iconSize: [20, 36]
+                    })
+                    /*return new L.Icon.Default({
                         shadowSize: [0,0],
                         iconSize:    [20, 36],
-                       /* iconSize: [25, 35]*/
-                    });
+                        iconUrl: '/portal/public/images/vendor/leaflet/dist/marker-icon.png'
+                       iconSize: [25, 35]
+                    });*/
                 }
             }
             else {
@@ -193,5 +199,9 @@ export default {
         border-radius: 50%;
         display: inline-block;
         background: #6880FF;
+    }
+    .marker-icon {
+        border: 0;
+        background: none;
     }
 </style>
