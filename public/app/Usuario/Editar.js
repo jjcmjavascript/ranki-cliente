@@ -207,6 +207,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -227,10 +245,14 @@ __webpack_require__.r(__webpack_exports__);
         notificacion: null
       },
       showPassword: [false, false, false],
-      file: null
+      file: null,
+      nuevo_rut: null
     };
   },
   computed: {
+    validRut: function validRut() {
+      return this.$root.modulo11(this.nuevo_rut).valid;
+    },
     send: function send() {
       this.usuario.nombre || this.usuario.apellidos || this.usuario.direccion || this.usuario.telefono_fijo || this.usuario.telefono_movil || this.usuario.email;
     },
@@ -343,6 +365,7 @@ __webpack_require__.r(__webpack_exports__);
         this.usuario.telefono_movil && request.append("telefono_movil", this.usuario.telefono_movil);
         this.usuario.email && request.append("email", this.usuario.email);
         this.file && request.append('avatar', this.file);
+        this.nuevo_rut && request.append("rut", this.nuevo_rut);
         axios.post(this.url + '/actualizar', request).then(function (res) {
           _this3.alerta("success", "Exito", "Tus datos fueron modificados!");
 
@@ -428,13 +451,68 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
+          _vm.usuario.provider && !_vm.usuario.rut
+            ? _c("div", { staticClass: "form-group col-xs-12" }, [
+                _c(
+                  "label",
+                  [
+                    _vm._v(
+                      "\n                        Rut\n                            "
+                    ),
+                    _c("br"),
+                    _c("small", { staticClass: "text-danger" }, [
+                      _vm._v(
+                        " Debe registrar un rut para poder pulicar propiedades"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    !_vm.validRut
+                      ? [
+                          _c("br"),
+                          _c("small", { staticClass: "text-danger" }, [
+                            _vm._v("Rut invalido ")
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group mb-1" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.nuevo_rut,
+                        expression: "nuevo_rut"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Rut del usuario" },
+                    domProps: { value: _vm.nuevo_rut },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.nuevo_rut = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("div", { staticClass: "form-group col-xs-12 col-md-6" }, [
             _c("label", [
               _vm._v("\n                        Nombre\n                    ")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -468,7 +546,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -500,7 +578,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
-              _vm._m(3),
+              _vm._m(4),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -534,7 +612,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
-              _vm._m(4),
+              _vm._m(5),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -568,7 +646,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
-              _vm._m(5),
+              _vm._m(6),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -602,7 +680,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-1" }, [
-              _vm._m(6),
+              _vm._m(7),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -760,7 +838,7 @@ var render = function() {
         _vm._v(" "),
         !_vm.usuario.provider_id
           ? _c("div", { staticClass: "profile-edit-container" }, [
-              _vm._m(7),
+              _vm._m(8),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "form-group col-sm-12 col-lg-12" }, [
@@ -1163,7 +1241,7 @@ var render = function() {
         _vm._v(" "),
         !_vm.usuario.provider_id
           ? _c("div", { staticClass: "profile-edit-container" }, [
-              _vm._m(8),
+              _vm._m(9),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c(
@@ -1205,6 +1283,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-widget-item-header" }, [
       _c("h3", [_vm._v("Perfil")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "fa fa-key text-yellow" })
+      ])
     ])
   },
   function() {

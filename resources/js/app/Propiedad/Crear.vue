@@ -308,7 +308,12 @@
                                 </div>
                                 <hr>
                             <div class="float-right">
-                                <button class="btn btn-success btn-lg"  :disable="enviando" @click="guardar">Publicar propiedad</button>
+                                <template v-if="!usuario.rut">
+                                    <button title="Debe registrar rut, para publicar" class="btn btn-success btn-lg"  disable="disabled" >Publicar propiedad</button>
+                                </template>
+                                <template v-else>
+                                    <button class="btn btn-success btn-lg"  :disable="enviando" @click="guardar">Publicar propiedad</button>
+                                </template>
                             </div>
                             </div>
                         </div>
@@ -401,6 +406,10 @@ export default {
                 center: [-33.4569397, -70.6482697],
                 zoom: 17,
             },
+            usuario : {
+                loged : false,
+                rut : null
+            },
         }
     },
     components: {
@@ -412,7 +421,7 @@ export default {
         document.querySelector('html').style['overflow-y'] = 'auto';
     },
     mounted() {
-
+        this.isLoged();
     },
     methods: {
         start() {
@@ -720,7 +729,14 @@ export default {
             })
 
         },
-
+        isLoged() {
+            axios.post(this.$root.base_url + 'isLoged')
+                .then(res => {
+                    if (res.data.isLoged) {
+                        this.usuario = res.data;
+                    }
+                })
+        },
     }
 }
 </script>

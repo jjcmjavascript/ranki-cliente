@@ -138,7 +138,15 @@ class HomeController extends Controller
 
     public function isLoged( Request $request )
     {
-        return response([ 'isLoged' => Auth::check() ],200);
+        if( Auth::check() ){
+
+            return response([
+                'isLoged' => Auth::check(),
+                'rut' => Auth::user()->rut 
+            ],200);
+        }
+
+        return response ([ 'isLoged' => false ],200);
     }
 
 }

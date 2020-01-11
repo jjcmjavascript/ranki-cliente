@@ -333,6 +333,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -410,6 +415,10 @@ __webpack_require__.r(__webpack_exports__);
         type: '',
         center: [-33.4569397, -70.6482697],
         zoom: 17
+      },
+      usuario: {
+        loged: false,
+        rut: null
       }
     };
   },
@@ -421,7 +430,9 @@ __webpack_require__.r(__webpack_exports__);
     this.iniciarCampoConteoGenerico();
     document.querySelector('html').style['overflow-y'] = 'auto';
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.isLoged();
+  },
   methods: {
     start: function start() {
       this.$root.cargando();
@@ -735,6 +746,15 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           _this6.locations = [-33.4569397, -70.6482697];
           _this6.maps.center = [-33.4569397, -70.6482697];
+        }
+      });
+    },
+    isLoged: function isLoged() {
+      var _this7 = this;
+
+      axios.post(this.$root.base_url + 'isLoged').then(function (res) {
+        if (res.data.isLoged) {
+          _this7.usuario = res.data;
         }
       });
     }
@@ -2239,17 +2259,38 @@ var render = function() {
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
-                  _c("div", { staticClass: "float-right" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success btn-lg",
-                        attrs: { disable: _vm.enviando },
-                        on: { click: _vm.guardar }
-                      },
-                      [_vm._v("Publicar propiedad")]
-                    )
-                  ])
+                  _c(
+                    "div",
+                    { staticClass: "float-right" },
+                    [
+                      !_vm.usuario.rut
+                        ? [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-lg",
+                                attrs: {
+                                  title: "Debe registrar rut, para publicar",
+                                  disable: "disabled"
+                                }
+                              },
+                              [_vm._v("Publicar propiedad")]
+                            )
+                          ]
+                        : [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-lg",
+                                attrs: { disable: _vm.enviando },
+                                on: { click: _vm.guardar }
+                              },
+                              [_vm._v("Publicar propiedad")]
+                            )
+                          ]
+                    ],
+                    2
+                  )
                 ])
               ])
             ])
