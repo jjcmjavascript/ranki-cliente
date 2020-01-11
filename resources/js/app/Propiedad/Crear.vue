@@ -594,7 +594,7 @@ export default {
 
             axios.post(this.url.current + '/guardar', request)
                 .then(response => {
-                    // this.alerta("success", "Exito", 'Lo estamos redirigiendo');
+                    this.alerta("success", "Exito", 'Lo estamos redirigiendo');
                     window.location = response.data.url;
                 })
                 .catch(error => {

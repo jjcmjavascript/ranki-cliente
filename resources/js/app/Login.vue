@@ -211,7 +211,7 @@ export default {
     methods: {
         iniciarRedes(provider){
             this.$root.cargando();
-            axios.post('/auth', {provider})
+            axios.post(this.$root.base_url+'/auth', {provider})
             .then(res=>{
                 this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
                 window.location.href = res.data.url;
@@ -235,7 +235,7 @@ export default {
 
                     this.$root.cargando();
                     axios
-                        .post("/iniciar", request)
+                        .post(this.$root.base_url+"/iniciar", request)
                         .then(res => {
                             this.$swal.disableLoading();
                             this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");
@@ -270,7 +270,7 @@ export default {
                     this.$root.cargando();
 
                     axios
-                        .post("/crear", request)
+                        .post(this.$root.base_url+"/crear", request)
                         .then(res => {
                             this.$swal.disableLoading();
                             this.mostrarAlerta("success", "Exito", "Lo estamos redirigiendo");

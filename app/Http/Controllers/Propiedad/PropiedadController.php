@@ -66,9 +66,6 @@ class PropiedadController extends Controller
 
     public function guardar( Request $request)
     {
-
-        $request->merge(['amoblada' => filter_var($request->amoblada, FILTER_VALIDATE_BOOLEAN)]);
-
         $this->validate($request, [
             'titulo' => 'required|string',
             'id_tipo_propiedad' => 'required|integer',
