@@ -399,6 +399,7 @@ export default {
                     .then(res => {
                         this.alerta("success", "Exito", "Tus datos fueron modificados!");
                         this.usuario = res.data.usuario;
+                        this.nuevo_rut = null;
                         document.querySelector("#imagen_header").src = this.urlImagen;
                         document.querySelector("#imagen_lateral").src = this.urlImagen;
 

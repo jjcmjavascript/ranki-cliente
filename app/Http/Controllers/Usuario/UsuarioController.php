@@ -54,7 +54,7 @@ class UsuarioController extends Controller
             'telefono_fijo'  => 'nullable|numeric',
             'telefono_movil'  => 'nullable|numeric',
             'avatar' => 'nullable|image|max:2048',
-            'nuevo_rut' => 'nullable|unique:clt_usuarios,rut'
+            'nuevo_rut' => 'nullable|string'
         ]);
 
         try {
