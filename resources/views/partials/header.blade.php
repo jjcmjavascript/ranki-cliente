@@ -1,5 +1,5 @@
 <!-- header-->
-<header class="main-header">
+<header class="main-header"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- header-top-->
     <div class="header-top fl-wrap">
         <div class="container">
@@ -42,7 +42,7 @@
                       <li class="iniciar_sm_li">
                         <a disabled="disabled">
                           <div class="">
-                            BIENVENIDO : {{strtoupper(Auth::user()->nombre)}}
+                            BIENVENIDO : {{strtoupper(Auth::user()->nombre )}}
                             <hr>
                           </div>
                         </a>
@@ -60,7 +60,13 @@
                                 <li><a href="{{route('usuario.perfil')}}"> Editar Perfil</a></li>
                                 <li><a href="{{route('usuario.favoritos')}}"> Favoritos</a></li>
                                 <li><a href="{{route('usuario.publicaciones')}}"> Mis Publicaciones</a></li>
-                                <li><a href="{{route('propiedad.crear')}}"> Publicar</a></li>
+                                @auth
+                                    @if(isset(Auth::user()->rut))
+                                    <li><a href="{{route('propiedad.crear')}}"> Publicar</a></li>
+                                    @else
+                                    <li><a href="#" title="Registre rut para publicar"> Publicar</a></li>
+                                    @endif
+                                @endauth
                                 <li><a href="#"> Contratar plan</a></li>
                             </ul>
                         </li>
@@ -92,14 +98,24 @@
                 <li><a href="{{route('usuario.perfil')}}"> Editar Perfil</a></li>
                 <li><a href="{{route('usuario.favoritos')}}"> Favoritos</a></li>
                 <li><a href="{{route('usuario.publicaciones')}}"> Mis Publicaciones</a></li>
-                <li><a href="{{route('propiedad.crear')}}"> Publicar</a></li>
+                @if(isset(Auth::user()->rut))
+                    <li>
+                        <a href="{{route('propiedad.crear')}}"> Publicar</a>
+                    </li>
+                @endif
                 <li><a href="#"> Contratar plan</a></li>
                 <li><a href="{{route('usuario.salir')}}">Salir</a></li>
               </ul>
               <div>
-              <a class="add_propiedad btn-info" href="{{route('propiedad.crear')}}">
-                  Publicar  <i class="fa fa-plus"></i>
-              </a>
+                  @if(isset(Auth::user()->rut))
+                  <a class="add_propiedad btn-info" href="{{route('propiedad.crear')}}">
+                      Publicar  <i class="fa fa-plus"></i>
+                  </a>
+                  @else
+                  <a class="add_propiedad btn-info" href="#" title="Registre rut para publicar">
+                      Publicar  <i class="fa fa-plus"></i>
+                  </a>
+                  @endif
             @endauth
         </div>
 
