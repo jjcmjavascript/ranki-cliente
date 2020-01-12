@@ -59,16 +59,32 @@
                             <a href="#" class="btn btn-success" @click="filtrar()">
                                 <i class="far fa-search"></i> Buscar
                             </a>
-                        </div>                   
+                        </div>
                     </div>
                 </div>
 
                 <div class="hidden-listing-filter fl-wrap">
                     <div class="row">
-                        <v-select :options="numeros" v-model="filters.banio" placeholder="Baños" class="ml-1 mt-1 col-md-2" />
-                        <v-select :options="numeros" v-model="filters.privado" placeholder="Privado" class="ml-1 mt-1 col-md-2" />
-                        <v-select :options="numeros" v-model="filters.bodegas" placeholder="Bodegas" class="ml-1 mt-1 col-md-2" />
-                        <v-select :options="numeros" v-model="filters.estacionamiento" :clearable="false" placeholder="Estacionamiento" class="ml-1 mt-1 col-md-2" />
+                        <div class="form-group col-xs-12 col-md-3 mt-1">
+                            <label> Rango de Precio: {{filters.costo[0]}} - {{filters.costo[1]}} {{filters.tipos_valores ? filters.tipos_valores.nombre : ''}} </label>
+                            <vue-slider  v-model="filters.costo" :interval="50000" :min="0" :max="10000000"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-2 mt-1">
+                            <label> Baños</label>
+                            <vue-slider  v-model="filters.banio"  :min="0" :max="9"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-2 mt-1">
+                            <label> Privado</label>
+                            <vue-slider  v-model="filters.privado"  :min="0" :max="9"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-2 mt-1">
+                            <label> Bodegas</label>
+                            <vue-slider  v-model="filters.bodegas"  :min="0" :max="9"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-2 mt-1">
+                            <label> Estacionamiento</label>
+                            <vue-slider  v-model="filters.estacionamiento"  :min="0" :max="9"/>
+                        </div>
                     </div>
                 </div>
 
@@ -207,11 +223,14 @@
 
 <script>
 import Maps from '../../components/Maps';
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/antd.css'
 
 export default {
 
     data() {
         return {
+
             url: this.$root.base_url + this.$route.path,
             usuario: {
                 nombre: null,
@@ -232,6 +251,7 @@ export default {
                 total: 0,
             },
             filters: {
+                costo : [0,0],
                 estado: {
                     label: 'Activo',
                     value: 1
@@ -296,6 +316,7 @@ export default {
     },
     components: {
         Maps,
+        VueSlider
     },
     mounted() {
         this.filtrar();
@@ -357,9 +378,9 @@ export default {
                     request.append('privado', this.filters.privado);
                 }
 
-                if (this.filters.bodega) {
-                    params += 'bodega=' + this.filters.bodega + '&';
-                    request.append('bodega', this.filters.bodega);
+                if (this.filters.bodegas) {
+                    params += 'bodegas=' + this.filters.bodegas + '&';
+                    request.append('bodegas', this.filters.bodegas);
                 }
 
                 if (this.filters.estacionamiento) {
@@ -373,6 +394,13 @@ export default {
                 if (this.filters.tipos_valores) {
                     params += 'id_tipo_valor=' + this.filters.tipos_valores.id + '&';
                     request.append('id_tipo_valor', this.filters.tipos_valores.id);
+                }
+                // si el segundo valor tiene algo diferente de 0
+                if (this.filters.costo[1]) {
+                    params += 'costo_desde=' + this.filters.costo[0] + '&';
+                    params += 'costo_hasta=' + this.filters.costo[1] + '&';
+                    request.append('costo_desde',this.filters.costo[0]);
+                    request.append('costo_hasta',this.filters.costo[1]);
                 }
 
                 if (this.filters.localidad && this.filters.localidad.tipo) {
@@ -600,6 +628,8 @@ export default {
             this.filters.privado = null;
             this.filters.bodegas = null;
             this.filters.estacionamiento = null;
+            this.filters.costo = [0,0];
+
         },
 
         marcarFavorito(posicion) {
@@ -659,5 +689,9 @@ export default {
 .show-more-filters.active-hidden-opt-btn {
     background-color: #6cb2eb !important;
     border-color: #6cb2eb !important;
+}
+.slider {
+  /* overwrite slider styles */
+  width: 200px;
 }
 </style>

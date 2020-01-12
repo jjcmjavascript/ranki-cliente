@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave":"app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave","app/login":"app/login","app/recovery/recuperarClave":"app/recovery/recuperarClave","app/recovery/reiniciarClave":"app/recovery/reiniciarClave","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","components/Alertas":"components/Alertas","components/modal":"components/modal","components/panel":"components/panel","vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results":"vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results","app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results":"app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results","app/Propiedad/Crear":"app/Propiedad/Crear","app/Propiedad/Editar":"app/Propiedad/Editar","app/Propiedad/Results":"app/Propiedad/Results","vendors~app/Propiedad/Detalle":"vendors~app/Propiedad/Detalle","app/Propiedad/Detalle":"app/Propiedad/Detalle","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/pagination":"vendors~components/pagination","components/pagination":"components/pagination","vendors~components/vSelect":"vendors~components/vSelect"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave":"app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave","app/recovery/recuperarClave":"app/recovery/recuperarClave","app/recovery/reiniciarClave":"app/recovery/reiniciarClave","app/Usuario/Editar":"app/Usuario/Editar","app/Usuario/Favoritos":"app/Usuario/Favoritos","app/Usuario/Publicaciones":"app/Usuario/Publicaciones","components/Alertas":"components/Alertas","components/modal":"components/modal","components/pagination":"components/pagination","components/panel":"components/panel","vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results":"vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results","app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results":"app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results","app/Propiedad/Crear":"app/Propiedad/Crear","app/Propiedad/Editar":"app/Propiedad/Editar","vendors~app/Propiedad/Detalle":"vendors~app/Propiedad/Detalle","app/Propiedad/Detalle":"app/Propiedad/Detalle","vendors~app/Propiedad/Results~app/login":"vendors~app/Propiedad/Results~app/login","app/Propiedad/Results":"app/Propiedad/Results","app/login":"app/login","vendors~components/DateRangePicker":"vendors~components/DateRangePicker","components/DateRangePicker":"components/DateRangePicker","vendors~components/vSelect":"vendors~components/vSelect","vendors~components/vue-pagination":"vendors~components/vue-pagination"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -83423,7 +83423,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('modal', function () {
   return __webpack_require__.e(/*! import() | components/modal */ "components/modal").then(__webpack_require__.bind(null, /*! ../components/Modal */ "./resources/js/components/Modal.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', function () {
-  return Promise.all(/*! import() | components/pagination */[__webpack_require__.e("vendors~components/pagination"), __webpack_require__.e("components/pagination")]).then(__webpack_require__.bind(null, /*! ../components/Pagination */ "./resources/js/components/Pagination.vue"));
+  return __webpack_require__.e(/*! import() | components/pagination */ "components/pagination").then(__webpack_require__.bind(null, /*! ../components/Pagination */ "./resources/js/components/Pagination.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('panel', function () {
   return __webpack_require__.e(/*! import() | components/panel */ "components/panel").then(__webpack_require__.bind(null, /*! ../components/Panel */ "./resources/js/components/Panel.vue"));
@@ -83432,7 +83432,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('v-select', function () {
   return __webpack_require__.e(/*! import() | components/vSelect */ "vendors~components/vSelect").then(__webpack_require__.t.bind(null, /*! vue-select */ "./node_modules/vue-select/dist/vue-select.js", 7));
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', function () {
-  return Promise.all(/*! import() | components/pagination */[__webpack_require__.e("vendors~components/pagination"), __webpack_require__.e("components/pagination")]).then(__webpack_require__.t.bind(null, /*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js", 7));
+  return __webpack_require__.e(/*! import() | components/vue-pagination */ "vendors~components/vue-pagination").then(__webpack_require__.t.bind(null, /*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js", 7));
 }); //import PrettyCheckbox from 'pretty-checkbox-vue';
 //Vue.use(PrettyCheckbox);
 
@@ -83660,7 +83660,7 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '/',
   component: function component() {
-    return Promise.all(/*! import() | app/login */[__webpack_require__.e("app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/login")]).then(__webpack_require__.bind(null, /*! ../app/Home */ "./resources/js/app/Home.vue"));
+    return Promise.all(/*! import() | app/login */[__webpack_require__.e("vendors~app/Propiedad/Results~app/login"), __webpack_require__.e("app/Propiedad/Detalle~app/login~app/recovery/recuperarClave~app/recovery/reiniciarClave"), __webpack_require__.e("app/login")]).then(__webpack_require__.bind(null, /*! ../app/Home */ "./resources/js/app/Home.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
@@ -83698,7 +83698,7 @@ var routes = [{
   path: '/propiedad/results',
   name: '/results',
   component: function component() {
-    return Promise.all(/*! import() | app/Propiedad/Results */[__webpack_require__.e("vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Results")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Results */ "./resources/js/app/Propiedad/Results.vue"));
+    return Promise.all(/*! import() | app/Propiedad/Results */[__webpack_require__.e("vendors~app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("vendors~app/Propiedad/Results~app/login"), __webpack_require__.e("app/Propiedad/Crear~app/Propiedad/Detalle~app/Propiedad/Editar~app/Propiedad/Results"), __webpack_require__.e("app/Propiedad/Results")]).then(__webpack_require__.bind(null, /*! ../app/Propiedad/Results */ "./resources/js/app/Propiedad/Results.vue"));
   }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

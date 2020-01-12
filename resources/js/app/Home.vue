@@ -19,53 +19,56 @@
                             <h3>¡Consigue el domilicio que buscas aqui!</h3>
                         </div>
                         <div class="main-search-input-wrap">
-                            <!-- <div class="main-search-input fl-wrap">
-                                <div class="main-search-input-item location" id="autocomplete-container">
-                                    <span class="inpt_dec"><i class="fal fa-map-marker"></i></span>
-                                    <input type="text" placeholder="Hotel , City..." class="autocomplete-input" id="autocompleteid2" value="" />
-                                    <a href="#"><i class="fal fa-dot-circle"></i></a>
-                                </div>
-                                <div class="main-search-input-item main-date-parent main-search-input-item_small">
-                                    <span class="inpt_dec"><i class="fal fa-calendar-check"></i></span> <input type="text" placeholder="When" name="main-input-search" value="" />
-                                </div>
-                                <div class="main-search-input-item">
-                                    <div class="qty-dropdown fl-wrap">
-                                        <div class="qty-dropdown-header fl-wrap"><i class="fal fa-users"></i> Persons</div>
-                                        <div class="qty-dropdown-content fl-wrap">
-
-                                                <div class="quantity-item"  v-for="subtipo in selects.subtipo_propiedad">
-                                                    <label><i class="fas fa-male"></i> {{subtipo.nombre}}</label>
-                                                    <div class="quantity">
-                                                        <input type="text"  :value="subtipo.nombre">
-                                                    </div>
-                                                </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="fal fa-search"></i></button>
-                            </div> -->
                             <div class="row">
-                                <div class="input-group">
-                                    <div class="col-xs-12 col-md-12">
-                                        <v-select class="bg-light mt-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.subtipo_propiedad" v-model="filters.subtipo_propiedad" />
-                                        <v-select class="bg-light mt-1 ml-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipos_operaciones" />
-                                        <v-select class="bg-light mt-1 col-xs-12 ml-1 col-md-4 v-select-clearfix" label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch">
-                                            <template slot="no-options">
-                                                Busque su propiedad
-                                            </template>
-                                            <template slot="option" slot-scope="option">
-                                                <div class="selected d-center">
-                                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
-                                                </div>
-                                            </template>
-                                            <template slot="selected-option" slot-scope="option">
-                                                <div class="selected d-center">
-                                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
-                                                </div>
-                                            </template>
-                                        </v-select>
-                                        <a class="btn btn-warning col-md-1 mt-1 mt-1" type="button" :href="query">Ir</a>
+                                <div class="col-xs-12 col-md-12">
+                                    <v-select class="bg-light mt-1 col-xs-12 col-md-2" :clearable="false" label="nombre" :options="selects.subtipo_propiedad" v-model="filters.subtipo_propiedad" />
+                                    <v-select class="bg-light mt-1 ml-1 col-xs-12 col-md-3" :clearable="false" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipos_operaciones" />
+                                    <v-select class="bg-light mt-1 col-xs-12 ml-1 col-md-4 v-select-clearfix" label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch">
+                                        <template slot="no-options">
+                                            Busque su propiedad
+                                        </template>
+                                        <template slot="option" slot-scope="option">
+                                            <div class="selected d-center">
+                                                {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
+                                            </div>
+                                        </template>
+                                        <template slot="selected-option" slot-scope="option">
+                                            <div class="selected d-center">
+                                                {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
+                                            </div>
+                                        </template>
+                                    </v-select>
+                                    <a class="btn btn-warning col-md-1 mt-1 mt-1" type="button" :href="query">Ir</a>
+                                    <button href="" class="btn btn-warning col-md-1 mt-1 mt-1  ml-1" @click="showHide()">
+                                        <i class="fa fa-tasks" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="hidden-listing-filter fl-wrap">
+                                <div class="row list-background text-center">
+                                    <div class="form-group col-xs-12 col-md-3 mt-1">
+                                        <label> Rango de Precio: {{filters.costo[0]}} - {{filters.costo[1]}} {{filters.tipos_valores ? filters.tipos_valores.nombre : ''}} </label>
+                                        <vue-slider v-model="filters.costo" :interval="50000" :min="0" :max="10000000" />
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-2 mt-1">
+                                        <label> Baños</label>
+                                        <vue-slider v-model="filters.banio" :min="0" :max="9" />
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-2 mt-1">
+                                        <label> Privado</label>
+                                        <vue-slider v-model="filters.privado" :min="0" :max="9" />
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-2 mt-1">
+                                        <label> Bodegas</label>
+                                        <vue-slider v-model="filters.bodegas" :min="0" :max="9" />
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-2 mt-1">
+                                        <label> Estacionamiento</label>
+                                        <vue-slider v-model="filters.estacionamiento" :min="0" :max="9" />
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-4 pl-1 pr-4">
+                                        <label> Tipo de moneda</label>
+                                        <v-select class="bg-light" label="nombre" :options="selects.tipos_valores" placeholder="Moneda" v-model="filters.tipos_valores" :clearable="false" />
                                     </div>
                                 </div>
                             </div>
@@ -84,90 +87,90 @@
                         <span class="section-separator"></span>
                         <p>Explora algunos de los sectores recomendados para conseguir la propiedad que buscas</p>
                     </div>
-                 </div>
-                    <!-- portfolio start -->
-                    <div class="gallery-items fl-wrap mr-bot spad home-grid">
-                        <!-- gallery-item-->
-                        <div class="gallery-item">
-                            <div class="grid-item-holder">
-                                <div class="listing-item-grid">
-                                    <div class="listing-counter"><span>79 </span> Propiedades</div>
-                                    <img :src="app_url+'images/portada.jpg'" alt="">
-                                    <div class="listing-item-cat">
-                                        <h3><a href="listing.html">San Joaquín</a></h3>
-                                        <div class="weather-grid"   data-grcity="Rome"></div>
-                                        <div class="clearfix"></div>
-                                        <p>Constant care and attention to the patients makes good record</p>
-                                    </div>
+                </div>
+                <!-- portfolio start -->
+                <div class="gallery-items fl-wrap mr-bot spad home-grid">
+                    <!-- gallery-item-->
+                    <div class="gallery-item">
+                        <div class="grid-item-holder">
+                            <div class="listing-item-grid">
+                                <div class="listing-counter"><span>79 </span> Propiedades</div>
+                                <img :src="app_url+'images/portada.jpg'" alt="">
+                                <div class="listing-item-cat">
+                                    <h3><a href="listing.html">San Joaquín</a></h3>
+                                    <div class="weather-grid" data-grcity="Rome"></div>
+                                    <div class="clearfix"></div>
+                                    <p>Constant care and attention to the patients makes good record</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- gallery-item end-->
-                        <!-- gallery-item-->
-                        <div class="gallery-item gallery-item-second">
-                            <div class="grid-item-holder">
-                                <div class="listing-item-grid">
-                                    <img :src="app_url+'images/portada2.jpg'" alt="">
-                                    <div class="listing-counter"><span>43 </span> Propiedades</div>
-                                    <div class="listing-item-cat">
-                                        <h3><a href="listing.html">La Florida</a></h3>
-                                        <div class="weather-grid"   data-grcity="La florida"></div>
-                                        <div class="clearfix"></div>
-                                        <p>Constant care and attention to the patients makes good record</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- gallery-item end-->
-                        <!-- gallery-item-->
-                        <div class="gallery-item">
-                            <div class="grid-item-holder">
-                                <div class="listing-item-grid">
-                                    <div class="listing-counter"><span>23 </span> Propiedades</div>
-                                    <img :src="app_url+'images/portada.jpg'" alt="">
-                                    <div class="listing-item-cat">
-                                        <h3><a href="listing.html">Macul</a></h3>
-                                        <div class="weather-grid" data-grcity="Macul"></div>
-                                        <div class="clearfix"></div>
-                                        <p>Constant care and attention to the patients makes good record</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- gallery-item end-->
-                        <!-- gallery-item-->
-                        <div class="gallery-item">
-                            <div class="grid-item-holder">
-                                <div class="listing-item-grid">
-                                    <div class="listing-counter"><span>57</span> Propiedades</div>
-                                    <img :src="app_url+'images/portada.jpg'" alt="">
-                                    <div class="listing-item-cat">
-                                        <h3><a href="listing.html">Las condes</a></h3>
-                                        <div class="weather-grid"   data-grcity="Las condes"></div>
-                                        <div class="clearfix"></div>
-                                        <p>Constant care and attention to the patients makes good record</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- gallery-item end-->
-                        <!-- gallery-item-->
-                        <div class="gallery-item">
-                            <div class="grid-item-holder">
-                                <div class="listing-item-grid">
-                                    <div class="listing-counter"><span>122</span> Propiedades</div>
-                                    <img :src="app_url+'images/portada.jpg'"   alt="">
-                                    <div class="listing-item-cat">
-                                        <h3><a href="listing.html">Ñuñoa</a></h3>
-                                        <div class="weather-grid"   data-grcity="Ñuñoa"></div>
-                                        <div class="clearfix"></div>
-                                        <p>Constant care and attention to the patients makes good record</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- gallery-item end-->
                     </div>
+                    <!-- gallery-item end-->
+                    <!-- gallery-item-->
+                    <div class="gallery-item gallery-item-second">
+                        <div class="grid-item-holder">
+                            <div class="listing-item-grid">
+                                <img :src="app_url+'images/portada2.jpg'" alt="">
+                                <div class="listing-counter"><span>43 </span> Propiedades</div>
+                                <div class="listing-item-cat">
+                                    <h3><a href="listing.html">La Florida</a></h3>
+                                    <div class="weather-grid" data-grcity="La florida"></div>
+                                    <div class="clearfix"></div>
+                                    <p>Constant care and attention to the patients makes good record</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- gallery-item end-->
+                    <!-- gallery-item-->
+                    <div class="gallery-item">
+                        <div class="grid-item-holder">
+                            <div class="listing-item-grid">
+                                <div class="listing-counter"><span>23 </span> Propiedades</div>
+                                <img :src="app_url+'images/portada.jpg'" alt="">
+                                <div class="listing-item-cat">
+                                    <h3><a href="listing.html">Macul</a></h3>
+                                    <div class="weather-grid" data-grcity="Macul"></div>
+                                    <div class="clearfix"></div>
+                                    <p>Constant care and attention to the patients makes good record</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- gallery-item end-->
+                    <!-- gallery-item-->
+                    <div class="gallery-item">
+                        <div class="grid-item-holder">
+                            <div class="listing-item-grid">
+                                <div class="listing-counter"><span>57</span> Propiedades</div>
+                                <img :src="app_url+'images/portada.jpg'" alt="">
+                                <div class="listing-item-cat">
+                                    <h3><a href="listing.html">Las condes</a></h3>
+                                    <div class="weather-grid" data-grcity="Las condes"></div>
+                                    <div class="clearfix"></div>
+                                    <p>Constant care and attention to the patients makes good record</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- gallery-item end-->
+                    <!-- gallery-item-->
+                    <div class="gallery-item">
+                        <div class="grid-item-holder">
+                            <div class="listing-item-grid">
+                                <div class="listing-counter"><span>122</span> Propiedades</div>
+                                <img :src="app_url+'images/portada.jpg'" alt="">
+                                <div class="listing-item-cat">
+                                    <h3><a href="listing.html">Ñuñoa</a></h3>
+                                    <div class="weather-grid" data-grcity="Ñuñoa"></div>
+                                    <div class="clearfix"></div>
+                                    <p>Constant care and attention to the patients makes good record</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- gallery-item end-->
+                </div>
             </section>
             <!-- section end -->
             <!-- section-->
@@ -311,10 +314,13 @@
 </template>
 <script>
 import Login from './Login.vue'
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/antd.css'
 
 export default {
     components: {
         login: Login,
+        VueSlider,
     },
     data() {
         return {
@@ -323,33 +329,89 @@ export default {
             selects: {
                 subtipo_propiedad: [],
                 tipos_operaciones: [],
-                results: []
+                results: [],
+                tipos_valores : [],
             },
+            numeros: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+
             filters: {
                 subtipo_propiedad: null,
                 tipos_operaciones: null,
                 localidad: null,
-            }
+                costo: [0, 0],
+                subtipo_propiedad: null,
+                tipo_operacion: null,
+                banio: null,
+                privado: null,
+                bodegas: null,
+                estacionamiento: null,
+                localidad: null,
+                tipos_propiedades: null,
+                tipos_valores: null,
+            },
         }
     },
     mounted() {
         this.iniciar();
     },
     computed: {
+
         query() {
             let {
                 subtipo_propiedad: propiedad,
                 tipos_operaciones: operacion,
-                localidad
+                localidad,
+                costo,
+                banio,
+                privado,
+                bodegas,
+                estacionamiento
             } = this.filters;
 
-            let query =
-                `${this.app_url}propiedad/results?operacion=${operacion ? operacion.id: ''}&propiedad=${propiedad ? propiedad.id : ''}&localidad=${localidad && localidad.id ? localidad.id : ''}&tipo=${localidad && localidad.tipo ? localidad.tipo : ''}`;
+            // let query =
+            //     `${this.app_url}propiedad/results?operacion=${operacion ? operacion.id: ''}&propiedad=${propiedad ? propiedad.id : ''}&localidad=${localidad && localidad.id ? localidad.id : ''}&tipo=${localidad && localidad.tipo ? localidad.tipo : ''}`;
+            let query = this.app_url + 'propiedad/results?';
 
+            for (let [key, val] of  Object.entries(this.filters) ){
+                if(Array.isArray(val)){
+
+                    if(val[1]){
+                        query += '&costo_desde=' + val[0];
+                        query += '&costo_hasta=' + val[1];
+                    }
+
+                }else if ( val ){
+                    switch (key) {
+                        case 'subtipo_propiedad':
+                            query += '&propiedad=' + val.id;
+                        break;
+                        case 'tipos_operaciones':
+                            query += '&operacion=' + val.id;
+                        break;
+                        case 'localidad':
+                            query += '&localidad=' + val.id;
+                            query += '&tipo=' + val.tipo;
+                        break;
+                        case 'tipos_valores':
+                            query += '&id_tipo_valor=' + val.id;
+                        break;
+                        default:
+                            if(val.id){
+                                query += `&${key}=${val.id}`;
+                            }else{
+                                query += `&${key}=${val}`;
+                            }
+                        break;
+                    }
+                }
+            }
             return query;
         }
     },
     methods: {
+        showHide(){
+            $(".hidden-listing-filter").slideToggle(400);
+        },
         searchQuery() {
             window.location.href = this.query;
         },
@@ -382,6 +444,8 @@ export default {
                     this.selects.tipos_operaciones = res.data.tipos_operaciones;
                     this.filters.subtipo_propiedad = this.selects.subtipo_propiedad[0];
                     this.filters.tipos_operaciones = this.selects.tipos_operaciones[0];
+                    this.selects.tipos_valores = res.data.tipos_valores;
+
                 })
         },
         badgeColor(tipo_operacion) {
@@ -432,3 +496,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+    .list-background {
+        background: rgba(2555,255,255,0.5) !important;
+        border-radius: 0.25em !important;
+    }
+
+</style>

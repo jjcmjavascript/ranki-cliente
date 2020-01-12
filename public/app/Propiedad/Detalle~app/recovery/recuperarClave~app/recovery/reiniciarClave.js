@@ -843,13 +843,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", [
       _vm._v(
-        "\n                            INICIA\n                            "
+        "\n                            INICIA EN\n                            "
       ),
       _c("span", [
         _vm._v(
-          "\n                                en\n                                "
+          "\n                                EN\n                                "
         ),
-        _c("strong", [_vm._v("Metro Cuadrado")])
+        _c("strong", [_vm._v("RANKI")])
       ])
     ])
   },

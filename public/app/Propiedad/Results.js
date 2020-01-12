@@ -10,6 +10,10 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Maps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Maps */ "./resources/js/components/Maps.vue");
+/* harmony import */ var vue_slider_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-slider-component */ "./node_modules/vue-slider-component/dist/vue-slider-component.umd.min.js");
+/* harmony import */ var vue_slider_component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_slider_component__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_slider_component_theme_antd_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-slider-component/theme/antd.css */ "./node_modules/vue-slider-component/theme/antd.css");
+/* harmony import */ var vue_slider_component_theme_antd_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_slider_component_theme_antd_css__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 //
@@ -219,6 +223,24 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -243,6 +265,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         total: 0
       },
       filters: {
+        costo: [0, 0],
         estado: {
           label: 'Activo',
           value: 1
@@ -300,7 +323,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     };
   },
   components: {
-    Maps: _components_Maps__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Maps: _components_Maps__WEBPACK_IMPORTED_MODULE_0__["default"],
+    VueSlider: vue_slider_component__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   mounted: function mounted() {
     this.filtrar();
@@ -359,9 +383,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           request.append('privado', this.filters.privado);
         }
 
-        if (this.filters.bodega) {
-          params += 'bodega=' + this.filters.bodega + '&';
-          request.append('bodega', this.filters.bodega);
+        if (this.filters.bodegas) {
+          params += 'bodegas=' + this.filters.bodegas + '&';
+          request.append('bodegas', this.filters.bodegas);
         }
 
         if (this.filters.estacionamiento) {
@@ -377,6 +401,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         if (this.filters.tipos_valores) {
           params += 'id_tipo_valor=' + this.filters.tipos_valores.id + '&';
           request.append('id_tipo_valor', this.filters.tipos_valores.id);
+        } // si el segundo valor tiene algo diferente de 0
+
+
+        if (this.filters.costo[1]) {
+          params += 'costo_desde=' + this.filters.costo[0] + '&';
+          params += 'costo_hasta=' + this.filters.costo[1] + '&';
+          request.append('costo_desde', this.filters.costo[0]);
+          request.append('costo_hasta', this.filters.costo[1]);
         }
 
         if (this.filters.localidad && this.filters.localidad.tipo) {
@@ -583,6 +615,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       this.filters.privado = null;
       this.filters.bodegas = null;
       this.filters.estacionamiento = null;
+      this.filters.costo = [0, 0];
     },
     marcarFavorito: function marcarFavorito(posicion) {
       var _this5 = this;
@@ -629,7 +662,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#wrapper {\n    background:\n        white !important;\n}\n#map {\n    height: 68vh !important;\n}\n.fal.fa-eye,\n.fal.fa-heart,\n.fal.fa-map-marked-alt {\n    color: #3AACED;\n}\n.fal.fa-eye{\n    margin-left: 3px;\n}\n.show-more-filters.act-hiddenpanel.btn.btn-info.col-xs-12.col-md-2.mt-1.ml-1 {\n    position: relative !important;\n}\n.show-more-filters.active-hidden-opt-btn {\n    background-color: #6cb2eb !important;\n    border-color: #6cb2eb !important;\n}\n", ""]);
+exports.push([module.i, "\n#wrapper {\n    background:\n        white !important;\n}\n#map {\n    height: 68vh !important;\n}\n.fal.fa-eye,\n.fal.fa-heart,\n.fal.fa-map-marked-alt {\n    color: #3AACED;\n}\n.fal.fa-eye{\n    margin-left: 3px;\n}\n.show-more-filters.act-hiddenpanel.btn.btn-info.col-xs-12.col-md-2.mt-1.ml-1 {\n    position: relative !important;\n}\n.show-more-filters.active-hidden-opt-btn {\n    background-color: #6cb2eb !important;\n    border-color: #6cb2eb !important;\n}\n.slider {\n  /* overwrite slider styles */\n  width: 200px;\n}\n", ""]);
 
 // exports
 
@@ -925,64 +958,121 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "hidden-listing-filter fl-wrap" }, [
-            _c(
-              "div",
-              { staticClass: "row" },
-              [
-                _c("v-select", {
-                  staticClass: "ml-1 mt-1 col-md-2",
-                  attrs: { options: _vm.numeros, placeholder: "Baños" },
-                  model: {
-                    value: _vm.filters.banio,
-                    callback: function($$v) {
-                      _vm.$set(_vm.filters, "banio", $$v)
-                    },
-                    expression: "filters.banio"
-                  }
-                }),
-                _vm._v(" "),
-                _c("v-select", {
-                  staticClass: "ml-1 mt-1 col-md-2",
-                  attrs: { options: _vm.numeros, placeholder: "Privado" },
-                  model: {
-                    value: _vm.filters.privado,
-                    callback: function($$v) {
-                      _vm.$set(_vm.filters, "privado", $$v)
-                    },
-                    expression: "filters.privado"
-                  }
-                }),
-                _vm._v(" "),
-                _c("v-select", {
-                  staticClass: "ml-1 mt-1 col-md-2",
-                  attrs: { options: _vm.numeros, placeholder: "Bodegas" },
-                  model: {
-                    value: _vm.filters.bodegas,
-                    callback: function($$v) {
-                      _vm.$set(_vm.filters, "bodegas", $$v)
-                    },
-                    expression: "filters.bodegas"
-                  }
-                }),
-                _vm._v(" "),
-                _c("v-select", {
-                  staticClass: "ml-1 mt-1 col-md-2",
-                  attrs: {
-                    options: _vm.numeros,
-                    clearable: false,
-                    placeholder: "Estacionamiento"
-                  },
-                  model: {
-                    value: _vm.filters.estacionamiento,
-                    callback: function($$v) {
-                      _vm.$set(_vm.filters, "estacionamiento", $$v)
-                    },
-                    expression: "filters.estacionamiento"
-                  }
-                })
-              ],
-              1
-            )
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "form-group col-xs-12 col-md-3 mt-1" },
+                [
+                  _c("label", [
+                    _vm._v(
+                      " Rango de Precio: " +
+                        _vm._s(_vm.filters.costo[0]) +
+                        " - " +
+                        _vm._s(_vm.filters.costo[1]) +
+                        " " +
+                        _vm._s(
+                          _vm.filters.tipos_valores
+                            ? _vm.filters.tipos_valores.nombre
+                            : ""
+                        ) +
+                        " "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("vue-slider", {
+                    attrs: { interval: 50000, min: 0, max: 10000000 },
+                    model: {
+                      value: _vm.filters.costo,
+                      callback: function($$v) {
+                        _vm.$set(_vm.filters, "costo", $$v)
+                      },
+                      expression: "filters.costo"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group col-xs-12 col-md-2 mt-1" },
+                [
+                  _c("label", [_vm._v(" Baños")]),
+                  _vm._v(" "),
+                  _c("vue-slider", {
+                    attrs: { min: 0, max: 9 },
+                    model: {
+                      value: _vm.filters.banio,
+                      callback: function($$v) {
+                        _vm.$set(_vm.filters, "banio", $$v)
+                      },
+                      expression: "filters.banio"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group col-xs-12 col-md-2 mt-1" },
+                [
+                  _c("label", [_vm._v(" Privado")]),
+                  _vm._v(" "),
+                  _c("vue-slider", {
+                    attrs: { min: 0, max: 9 },
+                    model: {
+                      value: _vm.filters.privado,
+                      callback: function($$v) {
+                        _vm.$set(_vm.filters, "privado", $$v)
+                      },
+                      expression: "filters.privado"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group col-xs-12 col-md-2 mt-1" },
+                [
+                  _c("label", [_vm._v(" Bodegas")]),
+                  _vm._v(" "),
+                  _c("vue-slider", {
+                    attrs: { min: 0, max: 9 },
+                    model: {
+                      value: _vm.filters.bodegas,
+                      callback: function($$v) {
+                        _vm.$set(_vm.filters, "bodegas", $$v)
+                      },
+                      expression: "filters.bodegas"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group col-xs-12 col-md-2 mt-1" },
+                [
+                  _c("label", [_vm._v(" Estacionamiento")]),
+                  _vm._v(" "),
+                  _c("vue-slider", {
+                    attrs: { min: 0, max: 9 },
+                    model: {
+                      value: _vm.filters.estacionamiento,
+                      callback: function($$v) {
+                        _vm.$set(_vm.filters, "estacionamiento", $$v)
+                      },
+                      expression: "filters.estacionamiento"
+                    }
+                  })
+                ],
+                1
+              )
+            ])
           ])
         ])
       ]),
