@@ -32,12 +32,16 @@ class PropiedadController extends Controller
 
             return response($response, 200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
     }
 
@@ -55,12 +59,16 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
     }
 
@@ -114,12 +122,16 @@ class PropiedadController extends Controller
 
             return response(['url' => route('usuario.publicaciones') ],200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
     }
 
@@ -184,6 +196,9 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
+        catch (\Exception $e) {
+            return response($e, 500);
+        }
     }
 
     public function comunas ( Request $request )
@@ -222,12 +237,16 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }
@@ -244,12 +263,16 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }
@@ -281,12 +304,16 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }
@@ -294,26 +321,30 @@ class PropiedadController extends Controller
     public function result( Request $request )
     {
 
-      try {
+        try {
 
-          $datos = $request->all();
+            $datos = $request->all();
 
-          if( Auth::check() ){
-              $datos['usuario_id'] = Auth::user()->id;
-          }
+            if( Auth::check() ){
+                $datos['usuario_id'] = Auth::user()->id;
+            }
 
-          $response = (new ApiHelper)->publicRequest('api/propiedades/results', $datos);
-          if(isset($response['error'])) throw new \Exception($response);
+            $response = (new ApiHelper)->publicRequest('api/propiedades/results', $datos);
+            if(isset($response['error'])) throw new \Exception($response);
 
-          return response($response,200);
+            return response($response,200);
 
-      } catch (\GuzzleHttp\Exception\BadResponseException $e) {
-          $response = $e->getResponse();
-          $error = json_decode($response->getBody()->getContents(),true);
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
 
-        return response($error, 500);
+            return response($error, 500);
 
-      }
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
+        }
 
     }
 
@@ -334,12 +365,16 @@ class PropiedadController extends Controller
             if(isset($response['error'])) throw new \Exception($response);
             return  response($response,200);
 
-        } catch ( \GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch ( \GuzzleHttp\Exception\BadResponseException $e) {
 
                $response = $e->getResponse();
                $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }
@@ -362,12 +397,16 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }
@@ -390,12 +429,16 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }
@@ -423,12 +466,16 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }

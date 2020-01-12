@@ -34,12 +34,16 @@ class UsuarioController extends Controller
 
             return response()->json($response, 200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
             return response($error, 500);
 
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }
@@ -71,7 +75,7 @@ class UsuarioController extends Controller
                         'contents'  => fopen($request->avatar->getPathname(), 'r')
                     ],
                 ];
-                $multipart = $this->formatMultipartRequest($multipart, $request->except('avatar'));
+                $multipart = $this->formatDataMultipartRequest($multipart, $request->except('avatar'));
                 $response = (new ApiHelper)->sendApiRequest($ruta, null, $multipart);
             }else {
                 $response = (new ApiHelper)->sendApiRequest($ruta,$request->except('avatar'));
@@ -89,6 +93,9 @@ class UsuarioController extends Controller
             $error = json_decode($response->getBody()->getContents(),true);
             return response($error, 500);
 
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }
@@ -118,6 +125,9 @@ class UsuarioController extends Controller
             $error = json_decode($response->getBody()->getContents(),true);
             return response($error, 500);
 
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
     }
 
@@ -156,13 +166,18 @@ class UsuarioController extends Controller
 
             return response(['url' => url()->previous() ],200);
 
-        }catch(\GuzzleHttp\Exception\BadResponseException $e){
+        }
+        catch(\GuzzleHttp\Exception\BadResponseException $e){
 
             DB::rollback();
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
             return response($error, 500);
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            return response($e, 500);
         }
 
     }
@@ -199,6 +214,9 @@ class UsuarioController extends Controller
             return response($error, 500);
 
         }
+        catch (\Exception $e) {
+            return response($e, 500);
+        }
     }
 
     public function logout()
@@ -231,6 +249,9 @@ class UsuarioController extends Controller
             return response($error, 500);
 
         }
+        catch (\Exception $e) {
+            return response($e, 500);
+        }
     }
 
     public function mis_propiedades ( Request $request )
@@ -246,11 +267,16 @@ class UsuarioController extends Controller
                 'rows' => $response
             ],200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
             return response($error, 500);
+
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
     }
 
@@ -274,6 +300,9 @@ class UsuarioController extends Controller
 
             return response($error, 500);
 
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
 
     }
@@ -337,13 +366,17 @@ class UsuarioController extends Controller
 
             return $this->generarExcel($datos, $cabeza , 'mis_favoritos_'.date('d-m-ys'));
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        } 
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
 
+        }
+        catch (\Exception $e) {
+            return response($e, 500);
         }
     }
 }
