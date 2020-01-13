@@ -1,16 +1,15 @@
 <template>
-    <div class="modal-main hide-modal-c" :id="id">
-        <div class="dialog-modal-c">
-                <div class="header-modal-c">
-                    <slot name="header"> </slot>
-                </div>
-                <div class="body-modal-c">
-                    <slot name="main">
-                    </slot>
-                </div>
-                <div class="footer-modal-c">
-                    <slot name="footer"> </slot>
-                </div>
+<div class="modal-main hide-modal-c" :id="id">
+    <div class="dialog-modal-c">
+        <div class="header-modal-c">
+            <slot name="header"> </slot>
+        </div>
+        <div class="body-modal-c">
+            <slot name="main">
+            </slot>
+        </div>
+        <div class="footer-modal-c">
+            <slot name="footer"> </slot>
         </div>
     </div>
 </div>
@@ -43,9 +42,11 @@ export default {
 .show-modal-c {
     display: flex;
 }
-.hide-modal-c{
+
+.hide-modal-c {
     display: none;
 }
+
 .modal-main {
     position: fixed;
     width: 100%;
@@ -55,6 +56,7 @@ export default {
     justify-content: center;
     align-items: center;
 }
+
 .dialog-modal-c {
     width: 50%;
     height: auto;
@@ -62,18 +64,21 @@ export default {
     padding: 1.25em;
     border: none;
     border-radius: .3125em;
-    background:#fff;
+    background: #fff;
 }
+
 .header-modal-c {
     text-align: center;
     font-weight: bold;
-    color:#595959;
+    color: #595959;
     font-size: 1.875em;
     font-weight: 600;
 }
+
 .body-modal-c {
     padding: 5px;
 }
+
 .footer-modal-c {
     min-height: 80px;
     text-align: center;

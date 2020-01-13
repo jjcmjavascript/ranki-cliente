@@ -41,7 +41,7 @@ class ApiVerifyToken
            // verificiacion del time
            $token_life = (int) session('api')->expires_in ; //expires in en segundos convertidos a minutos
            $diff = Carbon::parse( session('api')->created_at )->diffInSeconds( Carbon::now() );
-
+           
            if( $diff  > $token_life ){
                return $this->getNewToken();
            }
@@ -57,7 +57,6 @@ class ApiVerifyToken
 
         if(gettype($response) == 'string'  && strpos('error',$response )) {return false;}
         if(isset($response['error'])) {return false; }
-
         return $response;
 
       } catch (\Exception $e) {
