@@ -20,7 +20,7 @@ class HomeController extends Controller
         return view('vue');
     }
 
-    public function ultimas_propieades ()
+    public function ultimas_propiedades ()
     {
         try {
 

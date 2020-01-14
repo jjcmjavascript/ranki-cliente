@@ -429,7 +429,7 @@ export default {
             this.getFiltros();
         },
         getPropiedades() {
-            axios.post(this.app_url + 'ultimas_propieades')
+            axios.post(this.app_url + 'ultimas_propiedades')
                 .then(res => {
                     this.rows = res.data.propiedades;
                 })

@@ -1,6 +1,6 @@
 <?php
 // Home ultimas propiedades
-Route::post('/ultimas_propieades','HomeController@ultimas_propieades')->name('inicio.ultimas_propieades');
+Route::post('ultimas_propiedades','HomeController@ultimas_propiedades')->name('inicio.ultimas_propieades');
 Route::post('filtros', 'HomeController@filtros');
 Route::post('obtener_comuna', 'HomeController@obtener_comuna');
 
