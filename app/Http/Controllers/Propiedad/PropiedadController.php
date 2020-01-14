@@ -40,9 +40,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
     }
 
     public function editar( Request $request )
@@ -67,9 +65,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
     }
 
     public function guardar( Request $request)
@@ -130,9 +126,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
     }
 
     public function actualizar ( Request $request )
@@ -170,12 +164,12 @@ class PropiedadController extends Controller
             //'usuario_id' => 'required|integer|exists:usuarios,id',
             'longitud' => 'nullable|numeric',
             'amoblada' => 'required|boolean',
-            'portada_imagen_key' => 'required|integer',
-            'portada_imagen_type' => 'required|string',
+            // 'portada_imagen_key' => 'required|integer',
+            // 'portada_imagen_type' => 'required|string',
             'imagenes.*' => 'file|mimes:jpg,png,jpeg,ico,svg|max:2048',
             'imagenes_new.*' => 'file|mimes:jpg,png,jpeg,ico,svg|max:2048',
         ]);
-        
+
 
         try {
             $multipart = $this->formatFileMultipartRequest([], $request->only('imagenes'), 'imagenes');
@@ -197,9 +191,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response(['error'=>$e->getMessage()], 500);
-        }
+
     }
 
     public function comunas ( Request $request )
@@ -246,9 +238,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
 
     }
 
@@ -272,10 +262,6 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
-
     }
 
     public function detalle($id_propieda)
@@ -302,10 +288,6 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
-
     }
 
     public function comentarios_propiedad(Request $request)
@@ -334,9 +316,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
     }
 
 
@@ -363,9 +343,6 @@ class PropiedadController extends Controller
 
             return response($error, 500);
 
-        }
-        catch (\Exception $e) {
-            return response($e, 500);
         }
 
     }
@@ -395,10 +372,6 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
-
     }
 
     public function favorito_marcar ( Request $request )
@@ -427,10 +400,6 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
-
     }
 
     public function like ( Request $request )
@@ -459,9 +428,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
 
     }
 
@@ -496,9 +463,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
 
     }
 }
