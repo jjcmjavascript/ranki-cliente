@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Perfiles extends Model
 {
-
     protected $table = 'clt_perfiles';
     protected $fillable = ['nombre', 'activo'];
 
