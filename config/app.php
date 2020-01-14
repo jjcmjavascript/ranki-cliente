@@ -180,7 +180,6 @@ return [
          * Package Service Providers...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Custom Providers...
