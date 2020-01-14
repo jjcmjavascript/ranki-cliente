@@ -24,7 +24,9 @@ section {
   .col-list-wrap {
     background: white !important;
   }
-
+  .vs__selected{
+      padding: none !important;
+  }
   .v-select-clearfix .vs__selected {
     width: 92%;
   }
