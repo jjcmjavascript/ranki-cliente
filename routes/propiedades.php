@@ -8,6 +8,8 @@ Route::post('obtener_comuna', 'HomeController@obtener_comuna');
 Route::namespace('Propiedad')->prefix('propiedad')->name('propiedad')->group(function(){
     Route::get('{id}/detalle', 'PropiedadController@vue')->name('.ver_detalle');
     Route::post('{id}/detalle', 'PropiedadController@detalle')->name('.ver_detalle');
+    Route::post('{id}/detalle/comentarios_propiedad', 'PropiedadController@comentarios_propiedad')->name('.comentarios_propiedad');
+
     Route::get('results', 'PropiedadController@vue')->name('.result');
     Route::post('results', 'PropiedadController@result')->name('.result');
     Route::post('{id}/detalle/cotizar', 'PropiedadController@cotizar')->name('.cotizar');

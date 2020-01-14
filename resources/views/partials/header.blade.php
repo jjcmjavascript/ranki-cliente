@@ -1,4 +1,3 @@
-<!-- header-->
 <header class="main-header"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- header-top-->
     <div class="header-top fl-wrap">
@@ -64,7 +63,7 @@
                                     @if(isset(Auth::user()->rut))
                                     <li><a href="{{route('propiedad.crear')}}"> Publicar</a></li>
                                     @else
-                                    <li><a href="#" title="Registre rut para publicar"> Publicar</a></li>
+                                    <li><a id="openModal2" title="Registre rut para publicar"> Publicar</a></li>
                                     @endif
                                 @endauth
                                 <li><a href="#"> Contratar plan</a></li>
@@ -112,7 +111,7 @@
                       Publicar  <i class="fa fa-plus"></i>
                   </a>
                   @else
-                  <a class="add_propiedad btn-info" href="#" title="Registre rut para publicar">
+                  <a class="add_propiedad btn-info" id="openModal" title="Registre rut para publicar">
                       Publicar  <i class="fa fa-plus"></i>
                   </a>
                   @endif
@@ -177,6 +176,6 @@
         </div>
         <!-- <div class="close-header-search"><i class="fal fa-angle-double-up"></i></div> -->
     </div>
-
 </header>
-<!--  header end -->
+
+@include('partials.Modal')

@@ -32,7 +32,7 @@ class PropiedadController extends Controller
 
             return response($response, 200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
@@ -40,9 +40,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
     }
 
     public function editar( Request $request )
@@ -59,7 +57,7 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
@@ -67,9 +65,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
     }
 
     public function guardar( Request $request)
@@ -122,7 +118,7 @@ class PropiedadController extends Controller
 
             return response(['url' => route('usuario.publicaciones') ],200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
@@ -130,9 +126,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
     }
 
     public function actualizar ( Request $request )
@@ -170,11 +164,12 @@ class PropiedadController extends Controller
             //'usuario_id' => 'required|integer|exists:usuarios,id',
             'longitud' => 'nullable|numeric',
             'amoblada' => 'required|boolean',
-            'portada_imagen_key' => 'required|integer',
-            'portada_imagen_type' => 'required|string',
+            // 'portada_imagen_key' => 'required|integer',
+            // 'portada_imagen_type' => 'required|string',
             'imagenes.*' => 'file|mimes:jpg,png,jpeg,ico,svg|max:2048',
             'imagenes_new.*' => 'file|mimes:jpg,png,jpeg,ico,svg|max:2048',
         ]);
+
 
         try {
             $multipart = $this->formatFileMultipartRequest([], $request->only('imagenes'), 'imagenes');
@@ -196,9 +191,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
     }
 
     public function comunas ( Request $request )
@@ -237,7 +230,7 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
@@ -245,9 +238,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
 
     }
 
@@ -263,7 +254,7 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
@@ -271,10 +262,6 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
-
     }
 
     public function detalle($id_propieda)
@@ -291,20 +278,9 @@ class PropiedadController extends Controller
 
             $response = (new ApiHelper)->publicRequest('api/propiedades/mostrar', $datos);
 
-            if(isset($response['error'])) throw new \Exception($response);
-                if( Auth::check() ){
-                  if($response['_usuario']['id'] != Auth::user()->id){
-                    $response['cotizar'] = true;
-                  }else{
-                    $response['cotizar'] = false;
-                  };
-              }else{
-                  $response['cotizar'] = true;
-              }
-
             return response($response,200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
@@ -312,11 +288,37 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
+    }
+
+    public function comentarios_propiedad(Request $request)
+    {
+        $this->validate($request,[
+            'id' => 'required|integer'
+        ]);
+
+        try {
+
+            $datos = ['id' => $request->id];
+
+            if( Auth::check() ){
+                $datos['usuario_id'] = Auth::user()->id;
+            }
+
+            $response = (new ApiHelper)->publicRequest('api/propiedades/comentarios_propiedad', $datos);
+
+            return response($response,200);
+
+        }
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
+
+            $response = $e->getResponse();
+            $error = json_decode($response->getBody()->getContents(),true);
+
+            return response($error, 500);
         }
 
     }
+
 
     public function result( Request $request )
     {
@@ -334,16 +336,13 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
 
             return response($error, 500);
 
-        }
-        catch (\Exception $e) {
-            return response($e, 500);
         }
 
     }
@@ -365,7 +364,7 @@ class PropiedadController extends Controller
             if(isset($response['error'])) throw new \Exception($response);
             return  response($response,200);
 
-        } 
+        }
         catch ( \GuzzleHttp\Exception\BadResponseException $e) {
 
                $response = $e->getResponse();
@@ -373,10 +372,6 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
-
     }
 
     public function favorito_marcar ( Request $request )
@@ -397,7 +392,7 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
@@ -405,10 +400,6 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
-
     }
 
     public function like ( Request $request )
@@ -429,7 +420,7 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
@@ -437,9 +428,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
 
     }
 
@@ -466,7 +455,7 @@ class PropiedadController extends Controller
 
             return response($response,200);
 
-        } 
+        }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
@@ -474,9 +463,7 @@ class PropiedadController extends Controller
 
             return response($error, 500);
         }
-        catch (\Exception $e) {
-            return response($e, 500);
-        }
+
 
     }
 }

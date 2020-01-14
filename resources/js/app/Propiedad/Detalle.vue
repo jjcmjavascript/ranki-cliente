@@ -10,19 +10,19 @@
             </div>
             <div class="form-group col-xs-12 col-md-6">
                 <label>Comodidad</label>
-                <StarRating v-model="puntuar.comodidad" :show-rating="false"  />
+                <StarRating v-model="puntuar.comodidad" :show-rating="false" />
             </div>
             <div class="form-group col-xs-12 col-md-6">
                 <label>Estado</label>
-                <StarRating v-model="puntuar.estado" :show-rating="false"  />
+                <StarRating v-model="puntuar.estado" :show-rating="false" />
             </div>
             <div class="form-group col-xs-12 col-md-6">
                 <label>Servicios</label>
-                <StarRating v-model="puntuar.servicio" :show-rating="false"  />
+                <StarRating v-model="puntuar.servicio" :show-rating="false" />
             </div>
             <div class="form-group col-xs-12 col-md-6">
                 <label>Facilidad</label>
-                <StarRating v-model="puntuar.facilidad" :show-rating="false"  />
+                <StarRating v-model="puntuar.facilidad" :show-rating="false" />
             </div>
             <div class="form-group col-xs-12">
                 <label>Facilidad</label>
@@ -127,7 +127,7 @@
                                     <div class="col-xs-2 col-md-2">
                                         <template v-if="rows.puntuable">
                                             <template v-if="rows._puntuaciones && rows._puntuaciones.length > 0">
-                                                <a href="#" class="text-warning" >
+                                                <a href="#" class="text-warning">
                                                     <i class="fa fa-star fa-2x" aria-hidden="true"></i>
                                                 </a>
                                             </template>
@@ -219,10 +219,10 @@
                                 </div>
                                 <span class="fw-separator"></span>
                             </div>
-
+                            <!-- Puntuar -->
                             <div class="list-single-main-item fl-wrap" id="sec6">
                                 <div class="list-single-main-item-title fl-wrap">
-                                    <h3>Puntuar Vivienda</h3>
+                                    <h3>Puntuacion de la Propiedad</h3>
                                 </div>
                                 <div class="form-group col-xs-12 col-md-6">
                                     <label>Comodidad</label>
@@ -239,6 +239,53 @@
                                 <div class="form-group col-xs-12 col-md-6">
                                     <label>Facilidad</label>
                                     <StarRating v-model="rows.avg_facilidad" :show-rating="false" :read-only="true" />
+                                </div>
+                            </div>
+                            <!-- Comentarios -->
+                            <!-- list-single-main-item -->
+                            <div class="list-single-main-item fl-wrap" id="sec5">
+                                <div class="list-single-main-item-title fl-wrap">
+                                    <h3>Lista de comentarios</h3>
+                                </div>
+                                <div class="reviews-comments-wrap col-xs-12">
+                                    <!-- reviews-comments-item -->
+                                    <template v-if="comentarios.data.data && comentarios.data.data.length > 0">
+                                        <template v-for="(val, i) in comentarios.data.data">
+                                            <div class="reviews-comments-item">
+                                                <div class="review-comments-avatar">
+                                                    <img src="https://www.klrealty.com.au/wp-content/uploads/2018/11/user-image-.png" alt="">
+                                                </div>
+                                                <div class="reviews-comments-item-text">
+                                                    <h4><a href="#"> {{val._usuario ? val._usuario.nombre : ''}}</a></h4>
+                                                    <div class="review-score-user">
+                                                        <small class="mt-1">
+                                                            comodidad : {{val.comodidad}} &nbsp;
+                                                            estado : {{val.estado}} &nbsp;
+                                                            facilidad : {{val.facilidad}} &nbsp;
+                                                            servicio : {{val.servicio}}
+                                                        </small>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <p v-html="$options.filters.nl2br(val._comentario[0].comentario)"></p>
+                                                        <div class="reviews-comments-item-date">
+                                                            <span> <i class="far fa-calendar-check"></i>{{val._comentario[0].created_at | dateTime}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </template>
+                                    </template>
+                                    <template v-else>
+                                        <template v-if="comentarios.cargando">
+                                            Cargando comentarios... <i class="fa fa-spinner fa-spin fa-2x" ></i>
+                                        </template>
+                                        <template v-else>
+                                            <h3>
+                                                No hay comentarios, se el primero en comentar!
+                                            </h3>
+                                        </template>
+                                    </template>
+
+
                                 </div>
                             </div>
                             <!-- list-single-main-item end -->
@@ -323,13 +370,13 @@ export default {
         StarRating,
         modal
     },
-    computed : {
-        disabledPuntuacion () {
+    computed: {
+        disabledPuntuacion() {
             return !this.puntuar.comodidad ||
-            !this.puntuar.estado ||
-            !this.puntuar.servicio ||
-            !this.puntuar.facilidad ||
-            !this.puntuar.comentario || (this.puntuar.comentario && this.puntuar.comentario.length < 20);
+                !this.puntuar.estado ||
+                !this.puntuar.servicio ||
+                !this.puntuar.facilidad ||
+                !this.puntuar.comentario || (this.puntuar.comentario && this.puntuar.comentario.length < 20);
         }
     },
     data() {
@@ -356,12 +403,16 @@ export default {
                 zoom: 17,
                 locations: [-33.4569397, -70.6482697],
             },
-            puntuar : {
-                comodidad :null,
-                estado :null,
-                servicio :null,
-                facilidad :null,
-                comentario  : null,
+            puntuar: {
+                comodidad: null,
+                estado: null,
+                servicio: null,
+                facilidad: null,
+                comentario: null,
+            },
+            comentarios: {
+                data: {},
+                cargando: false
             },
         }
     },
@@ -369,27 +420,32 @@ export default {
         this.iniciar();
     },
     methods: {
-        addPuntuacion(){
+        addPuntuacion() {
             this.start();
             axios.post(this.$root.base_url + 'propiedad/puntuar', {
                     'id': this.puntuar.id,
-                    'comodidad' : this.puntuar.comodidad,
-                    'estado' : this.puntuar.estado,
-                    'servicio' : this.puntuar.servicio,
-                    'facilidad' : this.puntuar.facilidad,
-                    'comentario' : this.puntuar.comentario,
+                    'comodidad': this.puntuar.comodidad,
+                    'estado': this.puntuar.estado,
+                    'servicio': this.puntuar.servicio,
+                    'facilidad': this.puntuar.facilidad,
+                    'comentario': this.puntuar.comentario,
                 })
                 .then(res => {
                     this.$refs.miModaRef.close();
                     this.rows._puntuaciones = res.data.propiedad._puntuaciones;
+                    this.rows.avg_comodidad = res.data.propiedad.avg_comodidad;
+                    this.rows.avg_estado = res.data.propiedad.avg_estado;
+                    this.rows.avg_servicio = res.data.propiedad.avg_servicio;
+                    this.rows.avg_facilidad = res.data.propiedad.avg_facilidad;
                     this.alerta('success', 'Exito', res.data.success);
+                    this.getComentarios(this.comentarios.data.current_page);
                 })
                 .catch(err => {
                     this.stop();
                     this.alerta('error', 'Un error ha ocurrido.', err);
                 })
         },
-        closeModal(){
+        closeModal() {
             this.$refs.miModaRef.close()
         },
         start() {
@@ -412,6 +468,7 @@ export default {
                     if (this.rows.latitud && this.rows.longitud) {
                         this.maps.center = this.maps.locations = [this.rows.latitud, this.rows.longitud];
                     }
+                    this.getComentarios();
                 })
                 .catch(error => {
                     this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
@@ -421,6 +478,25 @@ export default {
                     this.maps.type = 'streets-v8';
                 })
         },
+        getComentarios(page = 1) {
+            let request = new FormData;
+            request.append('page', page);
+            request.append('id', this.rows.id);
+
+            this.comentarios.cargando = true;
+
+            axios.post(this.url.current + '/comentarios_propiedad', request)
+                .then(response => {
+                    this.comentarios.data = response.data.comentarios;
+                })
+                .catch(error => {
+                    this.alerta('error', 'Lo sentimos un error ha ocurrido.', error);
+                })
+                .finally(() => {
+                    this.comentarios.cargando = true;
+                })
+        },
+
         isLoged() {
             axios.post(this.$root.base_url + 'isLoged')
                 .then(res => {
