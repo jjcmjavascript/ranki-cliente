@@ -23,7 +23,7 @@ class SocialAuthController extends Controller
     public function handleProviderCallback($provider)
     {
         // Obtenemos los datos del usuario
-        $social_user = Socialite::driver($provider)->user();
+        $social_user = Socialite::driver($provider)->stateless()->user();
         // Comprobamos si el usuario ya existe
         if ($user = Usuario::where('email', $social_user->email)->first()) {
             return $this->authAndRedirect($user); // Login y redirección
