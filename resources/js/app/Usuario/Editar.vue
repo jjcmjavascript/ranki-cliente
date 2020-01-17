@@ -11,7 +11,7 @@
             </div>
             <!-- profile-edit-container-->
             <div class="row">
-                <div class="form-group col-xs-12" v-if="usuario.provider && !usuario.rut">
+                <div class="form-group col-xs-12" v-if="!usuario.provider && !usuario.rut">
                     <label>
                         Rut
                             <br><small class="text-danger"> Debe registrar un rut para poder pulicar propiedades</small>
@@ -359,13 +359,18 @@ export default {
                     .finally(() => {});
             }
         },
-
+        actualizarLateral(values){
+            document.getElementById("totalPublicaciones").innerText = this.usuario._propiedades_count;
+            document.getElementById("totalFavoritos").innerText = this.usuario._puntuaciones_count;
+            document.getElementById("totalResena").innerText =this.usuario._favoritos_count;
+        },
         iniciar() {
             this.start();
             axios
                 .post(this.url, this.usuario)
                 .then(res => {
                     this.usuario = res.data.usuario;
+                    this.actualizarLateral();
                 })
                 .catch(err => {})
                 .finally(() => {
