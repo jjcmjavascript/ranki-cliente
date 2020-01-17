@@ -1,5 +1,7 @@
 <template >
 <div id="wrapper">
+    <i class="fa fa-whatsapp fa-4x text-success" aria-hidden="true"></i>
+
     <modal id="miModal" ref="miModaRef">
         <template slot="header">
             Puntuar esta propiedad
@@ -10,19 +12,19 @@
             </div>
             <div class="form-group col-xs-12 col-md-6">
                 <label>Comodidad</label>
-                <StarRating v-model="puntuar.comodidad" :show-rating="false" />
+                <StarRating :star-size="30" v-model="puntuar.comodidad" :show-rating="false" />
             </div>
             <div class="form-group col-xs-12 col-md-6">
                 <label>Estado</label>
-                <StarRating v-model="puntuar.estado" :show-rating="false" />
+                <StarRating :star-size="30" v-model="puntuar.estado" :show-rating="false" />
             </div>
             <div class="form-group col-xs-12 col-md-6">
                 <label>Servicios</label>
-                <StarRating v-model="puntuar.servicio" :show-rating="false" />
+                <StarRating :star-size="30" v-model="puntuar.servicio" :show-rating="false" />
             </div>
             <div class="form-group col-xs-12 col-md-6">
                 <label>Facilidad</label>
-                <StarRating v-model="puntuar.facilidad" :show-rating="false" />
+                <StarRating :star-size="30" v-model="puntuar.facilidad" :show-rating="false" />
             </div>
             <div class="form-group col-xs-12">
                 <label>Facilidad</label>
@@ -31,7 +33,7 @@
 
         </template>
         <template slot="footer">
-            <button type="button" class="btn btn-success" :disabled="disabledPuntuacion" @click="addPuntuacion()">
+            <button type="button" class="btn btn-success float-right ml-2" :disabled="disabledPuntuacion" @click="addPuntuacion()">
                 Calificar
             </button>
         </template>
@@ -63,7 +65,6 @@
                                         <div class="slick-slide-item"><img src="https://s1.latercera.com/wp-content/uploads/2019/06/portada-1.jpg" alt=""></div>
                                         <div class="slick-slide-item"><img src="https://www.welivesecurity.com/wp-content/uploads/2019/04/ciberataques-edificios-inteligentes.jpg" alt=""></div>
                                         <div class="slick-slide-item"><img src="https://www.solerpalau.com/es-es/blog/wp-content/uploads/2018/01/shutterstock_359459864-1.jpg" alt=""></div>
-
                                     </div>
                                 </div>
                             </div>
@@ -84,8 +85,8 @@
                             <div class="reviews-score-wrap fl-wrap">
                                 <div class="rate-class-name-wrap fl-wrap">
                                     <div class="rate-class-name">
-                                        <span>4.5</span>
-                                        <div class="score"><strong>Muy Bueno</strong> {{ rows && rows._likes_count }} Me gusta </div>
+                                        <span>{{avgPuntuaciones}}</span>
+                                        <div class="score"><strong>{{avgComentario}}</strong> {{ rows && rows._likes_count }} Me gusta </div>
                                     </div>
                                 </div>
 
@@ -266,17 +267,17 @@
                                                         </small>
                                                     </div>
                                                     <div class="clearfix"></div>
-                                                    <p v-html="$options.filters.nl2br(val._comentario[0].comentario)"></p>
-                                                        <div class="reviews-comments-item-date">
-                                                            <span> <i class="far fa-calendar-check"></i>{{val._comentario[0].created_at | dateTime}}</span>
-                                                        </div>
+                                                    <p v-html="$options.filters.nl2br(val._comentario.comentario)"></p>
+                                                    <div class="reviews-comments-item-date">
+                                                        <span> <i class="far fa-calendar-check"></i>{{val._comentario.created_at | dateTime}}</span>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </template>
                                     </template>
                                     <template v-else>
                                         <template v-if="comentarios.cargando">
-                                            Cargando comentarios... <i class="fa fa-spinner fa-spin fa-2x" ></i>
+                                            Cargando comentarios... <i class="fa fa-spinner fa-spin fa-2x"></i>
                                         </template>
                                         <template v-else>
                                             <h3>
@@ -310,7 +311,7 @@
                                                         {{rows._usuario ? rows._usuario.email : 'Sin correo'}}
                                                     </span>
                                                 </li>
-                                                <template v-if="rows.codigo_telefono">
+                                                <template v-if="rows.codigo_telefono && rows.telefono">
                                                     <li>
                                                         <span> <i class="fal fa-phone"></i> Numero :</span>
                                                         <span>({{rows.codigo_telefono ? rows.codigo_telefono : ''}})
@@ -318,7 +319,7 @@
                                                         </span>
                                                     </li>
                                                 </template>
-                                                <template v-if="rows.codigo_telefono2">
+                                                <template v-if="rows.codigo_telefono2 && rows.telefono2">
                                                     <li>
                                                         <span> <i class="fal fa-browser"></i> Otros Numero :</span>
                                                         <span>
@@ -371,6 +372,29 @@ export default {
         modal
     },
     computed: {
+        avgPuntuaciones(){
+                if(this.rows.avg_comodidad || this.rows.avg_estado || this.rows.avg_servicio || this.rows.avg_facilidad){
+                    return (this.rows.avg_comodidad + this.rows.avg_estado + this.rows.avg_servicio + this.rows.avg_facilidad) /4;
+                }
+                return 0;
+        },
+        avgComentario(){
+            if(this.avgPuntuaciones ==5){
+                return 'Excelente';
+            }
+            if(this.avgPuntuaciones >=4){
+                return 'Muy bueno';
+            }
+            if(this.avgPuntuaciones >=3){
+                return 'Bueno';
+            }
+            if(this.avgPuntuaciones >=2){
+                return 'Regular';
+            }
+            if(this.avgPuntuaciones >=1 || this.avgPuntuaciones == 0){
+                return 'Malo';
+            }
+        },
         disabledPuntuacion() {
             return !this.puntuar.comodidad ||
                 !this.puntuar.estado ||
@@ -511,35 +535,46 @@ export default {
                 });
         },
         openContizar() {
-            this.$swal({
-                    title: 'Cotizar esta propiedad',
-                    html: "<textarea class='form-control' rows='2' id='miTextarea' > </textarea>",
-                    showConfirmButton: true,
-                    preConfirm() {
-                        return miTextarea.value;
-                    }
+            axios.post(this.url.current + '/cotizar', {
+                    id: this.rows.id
                 })
-                .then(value => {
+                .then(res => {
+                    this.alerta('success', 'Exito!', 'Gracias por tu interés en esta propiedad <br> el propietario lo contactara pronto.');
+                })
+                .catch(err => {
+                    this.stop();
+                    this.alerta('error', 'Un error ha ocurrido', err);
+                })
 
-                    if (value.value && value.value.trim().length > 20) {
-                        this.start();
-
-                        axios.post(this.url.current + '/cotizar', {
-                                'comentario': value.value,
-                                id: this.rows.id
-                            })
-                            .then(res => {
-                                this.alerta('success', 'Exito!', 'Su cotizacion fue enviada.');
-                            })
-                            .catch(err => {
-                                this.stop();
-                                this.alerta('error', 'Un error ha ocurrido', err);
-                            })
-
-                    } else if (value.value) {
-                        this.alerta('error', 'Un error ha ocurrido', 'Porfavor ingrese su mensaje (mayor a 20 caracteres).');
-                    }
-                });
+            // this.$swal({
+            //         title: 'Cotizar esta propiedad',
+            //         html: "<textarea class='form-control' rows='2' id='miTextarea' > </textarea>",
+            //         showConfirmButton: true,
+            //         preConfirm() {
+            //             return miTextarea.value;
+            //         }
+            //     })
+            //     .then(value => {
+            //
+            //         if (value.value && value.value.trim().length > 20) {
+            //             this.start();
+            //
+            //             axios.post(this.url.current + '/cotizar', {
+            //                     'comentario': value.value,
+            //                     id: this.rows.id
+            //                 })
+            //             .then(res => {
+            //                 this.alerta('success', 'Exito!', 'Su cotizacion fue enviada.');
+            //             })
+            //             .catch(err => {
+            //                 this.stop();
+            //                 this.alerta('error', 'Un error ha ocurrido', err);
+            //             })
+            //
+            //         } else if (value.value) {
+            //             this.alerta('error', 'Un error ha ocurrido', 'Porfavor ingrese su mensaje (mayor a 20 caracteres).');
+            //         }
+            //     });
         },
         marcarFavorito() {
             let index = this.rows;
@@ -579,3 +614,25 @@ export default {
 
 }
 </script>
+
+<style>
+.whatsapp-icon{
+
+    /* width: 65px;
+    height:65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    box-shadow: 0px 0px 1px black; */
+}
+
+.fa.fa-whatsapp.fa-4x {
+    position: fixed;
+    top: 40vh;
+    left: 3vw;
+    z-index: 9999;
+    cursor: pointer;
+}
+</style>
