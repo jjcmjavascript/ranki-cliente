@@ -308,7 +308,12 @@
                                 </div>
                                 <hr>
                             <div class="float-right">
-                                <button class="btn btn-success btn-lg"  :disable="enviando" @click="guardar">Publicar propiedad</button>
+                                <template v-if="!usuario.rut">
+                                    <button title="Debe registrar rut, para publicar" class="btn btn-success btn-lg"  disable="disabled" >Publicar propiedad</button>
+                                </template>
+                                <template v-else>
+                                    <button class="btn btn-success btn-lg"  :disable="enviando" @click="guardar">Publicar propiedad</button>
+                                </template>
                             </div>
                             </div>
                         </div>
@@ -401,6 +406,10 @@ export default {
                 center: [-33.4569397, -70.6482697],
                 zoom: 17,
             },
+            usuario : {
+                loged : false,
+                rut : null
+            },
         }
     },
     components: {
@@ -412,7 +421,7 @@ export default {
         document.querySelector('html').style['overflow-y'] = 'auto';
     },
     mounted() {
-
+        this.isLoged();
     },
     methods: {
         start() {
@@ -585,7 +594,7 @@ export default {
 
             axios.post(this.url.current + '/guardar', request)
                 .then(response => {
-                    // this.alerta("success", "Exito", 'Lo estamos redirigiendo');
+                    this.alerta("success", "Exito", 'Lo estamos redirigiendo');
                     window.location = response.data.url;
                 })
                 .catch(error => {
@@ -676,34 +685,43 @@ export default {
             }
         },
         getLatlng(latlng) {
+            console.log(latlng);
             this.data.latitud = latlng['lat'];
             this.data.longitud = latlng['lng'];
         },
         createQuery(){
 
-            let map_params = '';
-
-            let query = '';
+            let search = {
+                type: '',
+                params: ''
+            };
 
             if(this.data.region){
-                map_params += `${this.data.region.nombre.replace(/ /g,'%20')}%2C`;
+                search.params += `${this.data.region.nombre.replace(/ /g,'%20')}%2C`;
+                search.type = 'region';
             }
             if(this.data.comuna){
-                map_params += `${this.data.comuna.nombre.replace(/ /g,'%20')}%2C`;
+                search.params += `${this.data.comuna.nombre.replace(/ /g,'%20')}%2C`;
+                search.type = 'place';
             }
             if(this.data.calle){
-                map_params += `${this.data.calle.replace(/ /g,'%20')}%2C`;
+                search.params += `${this.data.calle.replace(/ /g,'%20')}%2C`;
+                search.type = 'address';
             }
             if(this.data.numero_calle){
-                map_params += `${this.data.numero_calle}%2C`;
+                search.params += `${this.data.numero_calle}%2C`;
             }
 
-            axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${map_params}.json?types=place&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`)
+            search.params += '%2C%20Chile';
+
+            axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${search.params}.json?types=${search.type}&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`)
             .then(response => {
                 if(response.data && response.data.features && response.data.features[0]) {
                     let center = response.data.features[0].center;
                     this.maps.center = [center[1], center[0]];
                     this.locations = [ center[1], center[0] ];
+                    this.data.latitud = center[1];
+                    this.data.longitud = center[0];
                 }else {
                     this.locations = [-33.4569397, -70.6482697];
                     this.maps.center = [-33.4569397, -70.6482697];
@@ -711,7 +729,14 @@ export default {
             })
 
         },
-
+        isLoged() {
+            axios.post(this.$root.base_url + 'isLoged')
+                .then(res => {
+                    if (res.data.isLoged) {
+                        this.usuario = res.data;
+                    }
+                })
+        },
     }
 }
 </script>

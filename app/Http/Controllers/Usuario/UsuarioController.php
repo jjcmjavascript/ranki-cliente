@@ -34,31 +34,32 @@ class UsuarioController extends Controller
 
             return response()->json($response, 200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        }
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
             return response($error, 500);
 
         }
-
     }
-
-    public function guardar( Request $request )
+    // Editar el iusuario
+    public function actualizar( Request $request )
     {
         $this->validate($request, [
-            'id' =>'required|exists:usuarios,id',
+            'id' =>'required|integer',
             'nombre'  => 'nullable|string|max:30',
             'apellidos'=> 'nullable|string|max:100',
             'direccion'  => 'nullable|string',
             'telefono_fijo'  => 'nullable|numeric',
             'telefono_movil'  => 'nullable|numeric',
             'avatar' => 'nullable|image|max:2048',
+            'nuevo_rut' => 'nullable|string'
         ]);
 
         try {
 
-            $ruta = 'api/usuarios/guardar';
+            $ruta = 'api/usuarios/actualizar';
             // Cargando avatar
             $multipart = [];
             if($request->avatar){
@@ -70,7 +71,7 @@ class UsuarioController extends Controller
                         'contents'  => fopen($request->avatar->getPathname(), 'r')
                     ],
                 ];
-                $multipart = $this->formatMultipartRequest($multipart, $request->except('avatar'));
+                $multipart = $this->formatDataMultipartRequest($multipart, $request->except('avatar'));
                 $response = (new ApiHelper)->sendApiRequest($ruta, null, $multipart);
             }else {
                 $response = (new ApiHelper)->sendApiRequest($ruta,$request->except('avatar'));
@@ -80,7 +81,7 @@ class UsuarioController extends Controller
 
             if(isset($response['error'])) throw new \Exception($response);
 
-            return response([ 'usuario' => $response ],200);
+            return response($response,200);
         }
         catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
@@ -89,15 +90,14 @@ class UsuarioController extends Controller
             return response($error, 500);
 
         }
-
     }
 
     public function editar_clave ( Request $request )
     {
         $this->validate($request, [
-            'id' =>'required|exists:usuarios,id',
-            'actual' => 'string|required',
-            'password' => 'string|confirmed|min:8',
+            'id' =>'required|integer',
+            'actual' => 'required|string',
+            'password' => 'required|string|confirmed|min:8',
         ]);
 
         try {
@@ -131,6 +131,7 @@ class UsuarioController extends Controller
             'email' => 'required|email:rfc,dns',
             // 'perfil_id' => 'required|exists:perfiles,id',
             'password' => 'required|confirmed|min:8',
+
         ]);
 
         $cliente = Usuario::where('email', $request->email)
@@ -154,7 +155,8 @@ class UsuarioController extends Controller
 
             return response(['url' => url()->previous() ],200);
 
-        }catch(\GuzzleHttp\Exception\BadResponseException $e){
+        }
+        catch(\GuzzleHttp\Exception\BadResponseException $e){
 
             DB::rollback();
 
@@ -197,6 +199,7 @@ class UsuarioController extends Controller
             return response($error, 500);
 
         }
+
     }
 
     public function logout()
@@ -229,6 +232,7 @@ class UsuarioController extends Controller
             return response($error, 500);
 
         }
+
     }
 
     public function mis_propiedades ( Request $request )
@@ -244,11 +248,13 @@ class UsuarioController extends Controller
                 'rows' => $response
             ],200);
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        }
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
             return response($error, 500);
+
         }
     }
 
@@ -335,7 +341,8 @@ class UsuarioController extends Controller
 
             return $this->generarExcel($datos, $cabeza , 'mis_favoritos_'.date('d-m-ys'));
 
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+        }
+        catch (\GuzzleHttp\Exception\BadResponseException $e) {
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);

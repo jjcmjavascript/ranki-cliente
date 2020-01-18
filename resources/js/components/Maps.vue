@@ -1,13 +1,15 @@
 <template>
     <div>
-        <div class="card mt-4">
+        <div class="card">
             <v-map ref="map" id='map' :zoom="zoom" :maxZoom="maxZoom" :center="center">
 
                 <v-tilelayer ref="tile" :url="tileProvider.url" :attribution="tileProvider.attribution"></v-tilelayer>
 
-                <template v-if="markers == 'simple' && locations">
-                    <v-marker ref="item" :lat-lng="locations" :icon="iconMarker([])" :draggable="true">
-                    </v-marker>
+                <template class="mt-4" v-if="markers == 'simple'">
+                    <template v-if="locations">
+                        <v-marker ref="item" :lat-lng="locations" :icon="iconMarker([])" :draggable="draggable">
+                        </v-marker>    
+                    </template>
                 </template>
 
                 <template v-else>
@@ -39,6 +41,10 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 export default {
     props: {
+        draggable: {
+            type: Boolean,
+            default: false
+        },
         markers: {
             type: String,
             default: '',
@@ -55,9 +61,7 @@ export default {
             type: Number,
             default: 13
         },
-        locations: {
-            type: Array,
-        },
+        locations: Array,
     },
     data() {
         return {
@@ -67,14 +71,14 @@ export default {
             maxZoom: 18,
             tileProvider: {
                 name: 'Maps',
-                url: '',
+                url: `https://api.mapbox.com/styles/v1/mapbox/streets-v8/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`,
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             },
         }
     },
     watch: {
         type() {
-            this.tileProvider.url = `https://api.mapbox.com/styles/v1/mapbox/${this.type}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`
+            
         }
     },
     components: {
@@ -126,9 +130,6 @@ export default {
         .catch(error => {
             this.$parent.alerta('error', 'Ha ocurrido un problema', error);
         });
-        // seteo por defecto del mapa
-        this.tileProvider.url =  `https://api.mapbox.com/styles/v1/mapbox/${this.type}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`;
-    
     },
     methods: {
         iconMarker(item){
@@ -141,11 +142,17 @@ export default {
                     });
                 }
                 else {
-                    return new L.Icon.Default({
+                    return L.divIcon({
+                        html: `<img style="width: 95%;" src="${this.$root.base_url}/public/images/vendor/leaflet/dist/marker-icon.png"/>`,
+                        className: 'marker-icon',
+                        iconSize: [20, 36]
+                    })
+                    /*return new L.Icon.Default({
                         shadowSize: [0,0],
                         iconSize:    [20, 36],
-                       /* iconSize: [25, 35]*/
-                    });
+                        iconUrl: '/portal/public/images/vendor/leaflet/dist/marker-icon.png'
+                       iconSize: [25, 35]
+                    });*/
                 }
             }
             else {
@@ -159,6 +166,9 @@ export default {
         seleccionarElemento(key) {
             this.$emit('buscarPropiedad', key);
         },
+        setTipoMapa(type) {
+            this.tileProvider.url = `https://api.mapbox.com/styles/v1/mapbox/${type}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`
+        }
     },
 }
 
@@ -189,5 +199,9 @@ export default {
         border-radius: 50%;
         display: inline-block;
         background: #6880FF;
+    }
+    .marker-icon {
+        border: 0;
+        background: none;
     }
 </style>

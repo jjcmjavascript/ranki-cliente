@@ -537,6 +537,7 @@
 
                     if(this.data.latitud && this.data.longitud ){
                         this.locations = [this.data.latitud, this.data.longitud];
+                        this.maps.center = [this.data.latitud, this.data.longitud];
                     }
 
 					// INICIALIZAR IMAGENES
@@ -572,8 +573,8 @@
 				let request = new FormData;
 				request.append('id', this.$route.params.id);
 				request.append('amoblada', this.data.amoblada);
-				request.append('anio_construccion', this.data.anio_construccion);
-				request.append('numero_piso', this.data.numero_piso);
+				this.data.anio_construccion && request.append('anio_construccion', this.data.anio_construccion);
+				this.data.numero_piso && request.append('numero_piso', this.data.numero_piso);
 				request.append('superficie_terraza', this.data.superficie_terraza);
 				this.data.banio && request.append('banio', this.data.banio);
 				this.data.privado && request.append('privado', this.data.privado);
@@ -605,7 +606,7 @@
 
 				if(this.data.codigo_telefono2 && this.data.telefono2) {
 					request.append('codigo_telefono2', this.data.codigo_telefono2);
-					request.append('telefono2', this.data.codigo_telefono2);
+					request.append('telefono2', this.data.telefono2);
 				}
 
 				if(this.data.tipo_piso) {

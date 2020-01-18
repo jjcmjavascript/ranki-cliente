@@ -19,6 +19,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/color.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('recursos/css/custom.css')}}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://use.fontawesome.com/09c81a14e0.js"></script>
 
 </head>
 
@@ -37,7 +38,7 @@
 
     @yield('script')
     <!-- ================== END PAGE LEVEL JS ================== -->
-    
+
     <!-- Scripts -->
     <!--script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script-->
     <script type="text/javascript" src="{{asset('recursos/js/jquery.min.js')}}"></script>

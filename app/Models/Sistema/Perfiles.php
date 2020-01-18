@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Perfiles extends Model
 {
+    protected $table = 'clt_perfiles';
     protected $fillable = ['nombre', 'activo'];
 
     public function scopeActivo($query)
@@ -15,10 +16,10 @@ class Perfiles extends Model
     public function scopeBuscar($query, $request)
     {
         if($request->id) {
-            $query->where('id', $request->id); 
+            $query->where('id', $request->id);
         }
         if($request->nombre) {
-            $query->where('nombre', 'LIKE', '%'.$request->nombre.'%');     
+            $query->where('nombre', 'LIKE', '%'.$request->nombre.'%');
         }
         if(isset($request->estado)) {
             $query->where('activo', $request->estado);

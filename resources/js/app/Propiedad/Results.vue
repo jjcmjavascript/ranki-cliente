@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <div class="row mt-5">
-            <div class="col-xs-12">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
                 <div class="mobile-list-controls fl-wrap mt-5">
                     <div class="container">
                         <div class="mlc show-hidden-column-map schm text-center"><i class="fal fa-map-marked-alt"></i> Show Map</div>
@@ -14,44 +14,77 @@
                 <h4> <span style="color:#F9B90F;text-shadow:0px 0px 1px rgba(0,0,0,0.5)">Buscar</span> <span style="color:#3AACED; text-shadow:0px 0px 1px rgba(0,0,0,0.5);">Propiedad</span></h4>
                 <hr>
                 <!-- lista de selects  -->
-                <v-select class="mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipo_operacion" :clearable="false" />
-                <v-select class="ml-1 mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.subtipos_propiedades" v-model="filters.subtipo_propiedad" :clearable="false" />
-                <v-select label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch" class="ml-1 mt-1 col-md-3 v-select-clearfix">
-                    <template slot="no-options">
-                        Busque su propiedad
-                    </template>
-                    <template slot="option" slot-scope="option">
-                        <div class="selected d-center">
-                            {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
+                <div class="row">
+
+                    <div class="col-xs-12 col-md-2 pr-0">
+                        <v-select label="nombre" :options="selects.tipos_operaciones" v-model="filters.tipo_operacion" :clearable="false" />
+                    </div>
+                    <div class="col-xs-12 col-md-2 pl-1 pr-0">
+                        <v-select label="nombre" :options="selects.subtipos_propiedades" v-model="filters.subtipo_propiedad" :clearable="false" />
+                    </div>
+                    <div class="col-xs-12 col-md-4 pl-1 pr-0">
+                        <v-select label="nombre" :filterable="false" :clearable="false" v-model="filters.localidad" :options="selects.results" @search="onSearch" class="v-select-clearfix">
+                            <template slot="no-options">
+                                Busque su propiedad
+                            </template>
+                            <template slot="option" slot-scope="option">
+                                <div class="selected d-center">
+                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
+                                </div>
+                            </template>
+                            <template slot="selected-option" slot-scope="option" class="clearfix">
+                                <div class="selected d-center">
+                                    {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
+                                </div>
+                            </template>
+                        </v-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-2 pl-1 pr-0">
+                        <v-select label="nombre" :options="selects.tipos_propiedades" placeholder="Tipo propiedad" v-model="filters.tipos_propiedades" :clearable="false" />
+                    </div>
+                    <div class="col-xs-12 col-lg-2 pl-1 pr-4">
+                        <v-select label="nombre" :options="selects.tipos_valores" placeholder="Moneda" v-model="filters.tipos_valores" :clearable="false" />
+                    </div>
+                </div>
+
+                <div class="row justify-content-end">
+                    <div class="mt-2 mr-2">
+                        <div class="col-sm-12 col-lg-12">
+                             <a class="btn btn-info" @click="showHide()" style="color:white; position:none !important; bottom:0px !important">
+                                <i class="far fa-plus" style="color:white"></i> Filtros
+                            </a>
+                            <a href="#" class="btn btn-warning" style="color:white;" @click="limpiarFiltros()">
+                                <i class="far fa-trash"></i> Limpiar
+                            </a>
+                            <a href="#" class="btn btn-success" @click="filtrar()">
+                                <i class="far fa-search"></i> Buscar
+                            </a>
                         </div>
-                    </template>
-                    <template slot="selected-option" slot-scope="option" class="clearfix">
-                        <div class="selected d-center">
-                            {{ option.nombre }}, {{option.lateral}} <small class="float-right">{{option.tipo}}</small>
-                        </div>
-                    </template>
-                </v-select>
-
-
-                <v-select class="ml-1 mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.tipos_propiedades" v-model="filters.tipos_propiedades" :clearable="false" />
-                <v-select class="ml-1 mt-1 col-xs-12 col-md-2" label="nombre" :options="selects.tipos_valores" v-model="filters.tipos_valores" :clearable="false" />
-
-                <a href="#" class="btn btn-warning col-xs-12 col-md-1 mt-1 ml-1" style="color:white;" @click="limpiarFiltros()">
-                    <i class="far fa-trash"></i> Limpiar
-                </a>
-                <a class="btn btn-info col-xs-12 col-md-1 mt-1 ml-1" @click="showHide()" style="color:white; position:none !important; bottom:0px !important">Filtros
-                    <i class="far fa-plus" style="color:white"></i>
-                </a>
-                <a href="#" class="col-xs-12 col-md-1 mt-1 ml-1 btn btn-success" @click="filtrar()">
-                    <i class="far fa-search"></i>
-                </a>
+                    </div>
+                </div>
 
                 <div class="hidden-listing-filter fl-wrap">
                     <div class="row">
-                        <v-select :options="numeros" v-model="filters.banio" :clearable="false" placeholder="Baños" class="ml-1 mt-1 col-md-2 v-select-clearfix" />
-                        <v-select :options="numeros" v-model="filters.privado" :clearable="false" placeholder="Privado" class="ml-1 mt-1 col-md-2 v-select-clearfix" />
-                        <v-select :options="numeros" v-model="filters.bodegas" :clearable="false" placeholder="Bodegas" class="ml-1 mt-1 col-md-2 v-select-clearfix" />
-                        <v-select :options="numeros" v-model="filters.estacionamiento" :clearable="false" placeholder="Estacionamiento" class="ml-1 mt-1 col-md-2 v-select-clearfix" />
+                        <div class="form-group col-xs-12 col-md-3 mt-1">
+                            <label> Rango de Precio: {{filters.costo[0]}} - {{filters.costo[1]}} {{filters.tipos_valores ? filters.tipos_valores.nombre : ''}} </label>
+                            <vue-slider  v-model="filters.costo" :interval="50000" :min="0" :max="10000000"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-2 mt-1">
+                            <label> Baños</label>
+                            <vue-slider  v-model="filters.banio"  :min="0" :max="9"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-2 mt-1">
+                            <label> Privado</label>
+                            <vue-slider  v-model="filters.privado"  :min="0" :max="9"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-2 mt-1">
+                            <label> Bodegas</label>
+                            <vue-slider  v-model="filters.bodegas"  :min="0" :max="9"/>
+                        </div>
+                        <div class="form-group col-xs-12 col-md-2 mt-1">
+                            <label> Estacionamiento</label>
+                            <vue-slider  v-model="filters.estacionamiento"  :min="0" :max="9"/>
+                        </div>
                     </div>
                 </div>
 
@@ -59,7 +92,7 @@
         </div>
 
         <div class="row" style="height:70vh;">
-            <div class="col-xs-12 col-md-8" style="height:100%">
+            <div class="col-xs-12 col-md-8 mt-4" style="height:100%">
                 <maps style="height:100%" @buscarPropiedad="buscarPropiedad" :type="this.maps.type" :center="this.maps.center" :zoom="this.maps.zoom" :locations="this.maps.locations"></maps>
             </div>
             <div class="col-md-4">
@@ -94,7 +127,22 @@
                                     Moneda: {{selected && selected._tipo_valor ? selected._tipo_valor.nombre : ''}}
                                     Monto : {{selected && selected.precio | currency}} <br>
                                     Propiedad : {{selected && selected._subtipo_propiedad ? selected._subtipo_propiedad.nombre : ''}}<br>
-                                    <a target="_blank" :href="$root.base_url+'propiedad/'+selected.id+'/detalle'" class="float-right" title="Ir a la propiedad"> <i class="fal fa-eye "></i> </a>
+                                    <a target="_blank" :href="$root.base_url+'propiedad/'+selected.id+'/detalle'" class="float-right" title="Ir a la propiedad"> <i class="fa fa-eye "></i> </a>
+                                    <template v-if="selected && selected.favorito">
+                                        <a href="#" @click.prevent="marcarFavorito(selected)" class="float-right" :class="{ 'text-danger' : (selected._favorito && selected._favorito.length > 0)}">
+                                            <template v-if="selected._favorito && selected._favorito.length > 0">
+                                                <i class="fa fa-heart " title="Eliminar Favorito"></i>
+                                            </template>
+                                            <template v-else>
+                                                <i class="fal fa-heart " title="Agregar favorito"></i>
+                                            </template>
+                                        </a>
+                                    </template>
+                                    <template v-else>
+                                        <a href="#" class="float-right">
+                                            <i class="fal fa-heart" title="favorito"></i>
+                                        </a>
+                                    </template>
                                 </p>
                             </div>
                         </article>
@@ -110,7 +158,7 @@
         <div class="container">
             <!-- list-main-wrap-title-->
             <div class="list-main-wrap-title fl-wrap">
-                <h2>Resutaldos para :
+                <h2>Resultados para :
                     <span v-if="filters.resultFor">
                         {{filters.resultFor.nombre}}, {{filters.resultFor.lateral}}
                     </span>
@@ -135,7 +183,7 @@
                                             </a>
                                         </h3>
                                         <div class="geodir-category-location fl-wrap">
-                                            <a href="#" class="map-item"><i class="fas fa-map-marker-alt"></i>
+                                            <a href="#" class="map-item">
                                                 {{val && val.numero_calle ? val.numero_calle : ''}}
                                                 {{val && val.calle ? val.calle : ''}}
                                                 /
@@ -175,10 +223,14 @@
 
 <script>
 import Maps from '../../components/Maps';
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/antd.css'
 
 export default {
+
     data() {
         return {
+
             url: this.$root.base_url + this.$route.path,
             usuario: {
                 nombre: null,
@@ -199,6 +251,7 @@ export default {
                 total: 0,
             },
             filters: {
+                costo : [0,0],
                 estado: {
                     label: 'Activo',
                     value: 1
@@ -262,7 +315,8 @@ export default {
         }
     },
     components: {
-        Maps
+        Maps,
+        VueSlider
     },
     mounted() {
         this.filtrar();
@@ -324,9 +378,9 @@ export default {
                     request.append('privado', this.filters.privado);
                 }
 
-                if (this.filters.bodega) {
-                    params += 'bodega=' + this.filters.bodega + '&';
-                    request.append('bodega', this.filters.bodega);
+                if (this.filters.bodegas) {
+                    params += 'bodegas=' + this.filters.bodegas + '&';
+                    request.append('bodegas', this.filters.bodegas);
                 }
 
                 if (this.filters.estacionamiento) {
@@ -340,6 +394,13 @@ export default {
                 if (this.filters.tipos_valores) {
                     params += 'id_tipo_valor=' + this.filters.tipos_valores.id + '&';
                     request.append('id_tipo_valor', this.filters.tipos_valores.id);
+                }
+                // si el segundo valor tiene algo diferente de 0
+                if (this.filters.costo[1]) {
+                    params += 'costo_desde=' + this.filters.costo[0] + '&';
+                    params += 'costo_hasta=' + this.filters.costo[1] + '&';
+                    request.append('costo_desde',this.filters.costo[0]);
+                    request.append('costo_hasta',this.filters.costo[1]);
                 }
 
                 if (this.filters.localidad && this.filters.localidad.tipo) {
@@ -385,60 +446,77 @@ export default {
             }
 
             axios.post(this.url, request)
-            .then(res => {
-                let map_params;
+                .then(res => {
+                    let search = {
+                        type: '',
+                        params: ''
+                    };
 
-                this.rows = res.data.propiedades;
-                this.filters.localidad = this.filters.resultFor = res.data.localidad;
-                this.selected = this.rows.data[0];
-                this.maps.locations = [];
+                    this.rows = res.data.propiedades;
+                    this.filters.localidad = this.filters.resultFor = res.data.localidad;
+                    this.selected = this.rows.data[0];
+                    this.maps.locations = [];
 
-                this.rows.data.forEach((row, key) => {
-                    // Verificando si publicación tiene coordenadas
-                    if(row.latitud && row.longitud) {
-                        this.maps.locations.push({
-                            id: row.id,
-                            latlng: L.latLng(row.latitud, row.longitud),
-                            text: row.titulo,
-                            marker: {
-                                background: '#6880FF'
+                    this.rows.data.forEach((row, key) => {
+                        // Verificando si publicación tiene coordenadas
+                        if (row.latitud && row.longitud) {
+                            this.maps.locations.push({
+                                id: row.id,
+                                latlng: L.latLng(row.latitud, row.longitud),
+                                text: row.titulo,
+                                marker: {
+                                    background: '#6880FF'
+                                }
+                            });
+                        }
+                    });
+
+                    if (this.filters.localidad) {
+
+                        let localidad = this.filters.localidad;
+                        search.params = localidad.nombre + '%2C%20' + localidad.lateral;
+
+
+                        if (request.get('region_id')) {
+                            search.type = 'region';
+                        } else {
+                            search.type = 'place'
+                        }
+
+                    } else {
+                        search.params = 'santiago%2C%20metropolitana';
+                        search.type = 'region'
+                    }
+
+                    search.params += '%2C%20Chile';
+
+                    return {
+                        'params': search.params,
+                        'type': search.type
+                    }
+
+                })
+                .then(search => {
+                    axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${search['params']}.json?types=${search['type']}&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`)
+                        .then(response => {
+                            if (response.data && response.data.features && response.data.features[0]) {
+                                let center = response.data.features[0].center;
+                                this.maps.center = [center[1], center[0]];
                             }
-                        });
-                    }
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                        .finally(() => {
+                            this.stop();
+                        })
+                })
+                .finally(() => {
+                    this.maps.type = 'streets-v8';
+                    this.filters.first = false;
+                    this.filtrando = false;
+                    window.history.pushState('', '', params);
                 });
-
-                if(this.filters.localidad) {
-                    let localidad = this.filters.localidad;
-                    map_params = localidad.nombre+'%2C%20'+localidad.lateral;
-                }
-                else {
-                    map_params = 'santiago%2C%20metropolitana';
-                }
-
-                return map_params;
-
-            })
-            .then((map_params)=>{
-                axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${map_params}.json?types=place&access_token=pk.eyJ1IjoiYW5nZWxzZWx5ZXIiLCJhIjoiY2s0cTdjZWJzMGxoYjNrbGF0MGQwNTZrZiJ9.TuvQmfea2eqCX1XXqIaxnw`)
-                .then(response => {
-                    if(response.data && response.data.features && response.data.features[0]) {
-                        let center = response.data.features[0].center;
-                        this.maps.center = [center[1], center[0]];
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-                .finally(()=>{
-                    this.stop();
-                })
-            })
-            .finally(() => {
-                this.maps.type = 'streets-v8';
-                this.filters.first = false;
-                this.filtrando = false;
-                window.history.pushState('','', params);
-            });
         },
 
         getFiltros() {
@@ -550,8 +628,39 @@ export default {
             this.filters.privado = null;
             this.filters.bodegas = null;
             this.filters.estacionamiento = null;
-        }
-    }
+            this.filters.costo = [0,0];
+
+        },
+
+        marcarFavorito(posicion) {
+            let index ;
+
+            if(typeof posicion == 'object'){
+                index = posicion.id;
+
+            }else {
+                index = this.rows[posicion].id;
+            }
+            this.start();
+
+            axios.post(this.$root.base_url + 'propiedad/marcar', {
+                'id': index
+            })
+            .then(res => {
+                if(typeof posicion == 'object'){
+                    this.selected = res.data.propiedad;
+                }else {
+                    this.rows.data[posicion] = res.data.propiedad;
+                }
+                this.stop();
+            })
+            .catch(err => {
+                this.stop();
+                this.alerta('error', 'Un error ha ocurrido.', err);
+            })
+        },
+    },
+
 }
 </script>
 
@@ -566,10 +675,13 @@ export default {
 }
 
 .fal.fa-eye,
+.fal.fa-heart,
 .fal.fa-map-marked-alt {
     color: #3AACED;
 }
-
+.fal.fa-eye{
+    margin-left: 3px;
+}
 .show-more-filters.act-hiddenpanel.btn.btn-info.col-xs-12.col-md-2.mt-1.ml-1 {
     position: relative !important;
 }
@@ -577,5 +689,9 @@ export default {
 .show-more-filters.active-hidden-opt-btn {
     background-color: #6cb2eb !important;
     border-color: #6cb2eb !important;
+}
+.slider {
+  /* overwrite slider styles */
+  width: 200px;
 }
 </style>

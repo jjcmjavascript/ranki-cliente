@@ -16,7 +16,7 @@ Route::middleware(['auth','verifyToken'])->group(function() {
 		Route::get('/','UsuarioController@vue')->name('.perfil');
 	    Route::post('/','UsuarioController@perfil')->name('.perfil');
 
-	    Route::post('guardar','UsuarioController@guardar')->name('.guardar');
+	    Route::post('actualizar','UsuarioController@actualizar')->name('.actualizar');
 	    Route::post('clave','UsuarioController@editar_clave')->name('.editar_clave');
 	    Route::get('logout', 'UsuarioController@logout')->name('.salir');
         Route::post('desactivar', 'UsuarioController@desactivar')->name('.desactivar');

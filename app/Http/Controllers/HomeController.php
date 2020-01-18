@@ -20,11 +20,18 @@ class HomeController extends Controller
         return view('vue');
     }
 
-    public function ultimas_propieades ()
+    public function ultimas_propiedades ()
     {
         try {
 
-            $response = (new ApiHelper)->publicRequest('api/propiedades/recientes');
+            if( Auth::check() ){
+
+                $response = (new ApiHelper)->publicRequest('api/propiedades/recientes', ['usuario_id'=> Auth::user()->id ]);
+
+            }else{
+
+                $response = (new ApiHelper)->publicRequest('api/propiedades/recientes');
+            }
 
             if(isset($response['error'])) throw new \Exception($response);
 
@@ -124,14 +131,22 @@ class HomeController extends Controller
 
             $response = $e->getResponse();
             $error = json_decode($response->getBody()->getContents(),true);
-            
+
             return response($error, 500);
         }
     }
 
     public function isLoged( Request $request )
     {
-        return response([ 'isLoged' => Auth::check() ],200);
+        if( Auth::check() ){
+
+            return response([
+                'isLoged' => Auth::check(),
+                'rut' => Auth::user()->rut 
+            ],200);
+        }
+
+        return response ([ 'isLoged' => false ],200);
     }
 
 }
