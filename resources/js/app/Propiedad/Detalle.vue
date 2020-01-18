@@ -277,14 +277,14 @@
                                         </template>
                                     </template>
                                     <template v-else>
-                                        <template v-if="comentarios.cargando">
+                                        <span v-if="comentarios.cargando">
                                             Cargando comentarios... <i class="fa fa-spinner fa-spin fa-2x"></i>
-                                        </template>
-                                        <template v-else>
+                                        </span>
+                                        <span v-else>
                                             <h3>
                                                 No hay comentarios, se el primero en comentar!
                                             </h3>
-                                        </template>
+                                        </span>
                                     </template>
 
 
