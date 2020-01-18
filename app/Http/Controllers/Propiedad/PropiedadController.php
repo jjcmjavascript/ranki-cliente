@@ -351,7 +351,7 @@ class PropiedadController extends Controller
     {
         $this->validate($request,[
             'id'=>'required|integer',
-            'comentario'=>'required|string|min:20|max:2000'
+            // 'comentario'=>'required|string|min:20|max:2000'
         ]);
 
         try {

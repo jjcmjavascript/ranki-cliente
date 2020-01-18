@@ -1,5 +1,5 @@
 <template>
-<div class="modal-main hide-modal-c" :id="id">
+<div class="modal-main hide-modal-c mb-5" :id="id">
     <div class="dialog-modal-c">
         <div class="header-modal-c">
             <slot name="header"> </slot>
@@ -9,6 +9,7 @@
             </slot>
         </div>
         <div class="footer-modal-c">
+            <button type="button" name="button" class="btn btn-danger float-right ml-2" @click="close()" >Cerrar</button>
             <slot name="footer"> </slot>
         </div>
     </div>
