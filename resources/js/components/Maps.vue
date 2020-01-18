@@ -8,7 +8,7 @@
                 <template class="mt-4" v-if="markers == 'simple'">
                     <template v-if="locations">
                         <v-marker ref="item" :lat-lng="locations" :icon="iconMarker([])" :draggable="draggable">
-                        </v-marker>    
+                        </v-marker>
                     </template>
                 </template>
 
@@ -41,6 +41,10 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 export default {
     props: {
+        lazy :{
+            type : Array,
+            default : [0,0]
+        },
         draggable: {
             type: Boolean,
             default: false
@@ -78,8 +82,11 @@ export default {
     },
     watch: {
         type() {
+
+        },
+        lazy(){
             
-        }
+        },
     },
     components: {
         'v-map': LMap,
@@ -138,28 +145,22 @@ export default {
                     return L.divIcon({
                         html: `<span style="width: 100%;" style="background: ${item.marker.background}">`,
                         className: 'dot',
-                        iconSize: [12, 12]
+                        iconSize: [22, 22]
                     });
                 }
                 else {
                     return L.divIcon({
                         html: `<img style="width: 95%;" src="${this.$root.base_url}/public/images/vendor/leaflet/dist/marker-icon.png"/>`,
                         className: 'marker-icon',
-                        iconSize: [20, 36]
+                        iconSize: [32, 46]
                     })
-                    /*return new L.Icon.Default({
-                        shadowSize: [0,0],
-                        iconSize:    [20, 36],
-                        iconUrl: '/portal/public/images/vendor/leaflet/dist/marker-icon.png'
-                       iconSize: [25, 35]
-                    });*/
                 }
             }
             else {
                 return L.divIcon({
                     html: `<img style="width: 100%;" src="/images/${item.image}.jpg"/>`,
                     className: 'image-icon',
-                    iconSize: [12, 12]
+                    iconSize: [22, 22]
                 })
             }
         },
