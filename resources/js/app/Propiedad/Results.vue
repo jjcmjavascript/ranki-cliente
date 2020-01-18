@@ -93,7 +93,12 @@
 
         <div class="row" style="height:70vh;">
             <div class="col-xs-12 col-md-8 mt-4" style="height:100%">
-                <maps style="height:100%" @buscarPropiedad="buscarPropiedad" :type="this.maps.type" :center="this.maps.center" :zoom="this.maps.zoom" :locations="this.maps.locations"></maps>
+                <!-- mapa componente -->
+                <maps style="height:100%"
+                    @buscarPropiedad="buscarPropiedad"
+                    :type="this.maps.type" :center="this.maps.center"
+                    :zoom="this.maps.zoom" :locations="this.maps.locations"
+                    :lazy="maps.lazy"></maps>
             </div>
             <div class="col-md-4">
                 <div class="listing-item-container init-grid-items fl-wrap mt-4" v-if="selected">
@@ -309,7 +314,8 @@ export default {
                 type: '',
                 center: [-33.4569397, -70.6482697],
                 zoom: 13,
-                locations: []
+                locations: [],
+                lazy : [-33.4569397, -70.6482697],
             },
             selected: null,
         }
@@ -501,7 +507,12 @@ export default {
                         .then(response => {
                             if (response.data && response.data.features && response.data.features[0]) {
                                 let center = response.data.features[0].center;
-                                this.maps.center = [center[1], center[0]];
+                                // ir A la primera Ubicacion lazy
+                                setTimeout(()=>{
+                                    if(this.rows.data[0]){
+                                        this.maps.center = [this.rows.data[0].latitud, this.rows.data[0].longitud];
+                                    }
+                                },0)
                             }
                         })
                         .catch(error => {
@@ -619,6 +630,9 @@ export default {
             window.scrollTo(0, 100);
             this.maps.center = [val.latitud, val.longitud];
             this.maps.zoom = 15;
+            // console.log([val.latitud, val.longitud]);
+            // this.goto(val);
+            return true;
         },
 
         limpiarFiltros() {
