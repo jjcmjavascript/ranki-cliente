@@ -108,11 +108,11 @@
               <div>
                   @if(isset(Auth::user()->rut))
                   <a class="add_propiedad btn-info" href="{{route('propiedad.crear')}}">
-                      Publicar  <i class="fa fa-plus"></i>
+                      Publicar 
                   </a>
                   @else
                   <a class="add_propiedad btn-info" id="openModal" title="Registre rut para publicar">
-                      Publicar  <i class="fa fa-plus"></i>
+                      Publicar 
                   </a>
                   @endif
             @endauth

@@ -6,7 +6,11 @@
             Alerta!
         </div>
         <div class="body-modal-c text-center">
-            <label class="text-center"> Debe registrar un rut para poder realizar una publicación</label>
+            <label class="text-center">Por favor completa tu registro antes de publicar</label>
+            <br>
+            <div class="">
+                <a href="{{route('usuario.perfil')}}" class="text-primary ">Editar Perfil</a>
+            </div>
         </div>
         <div class="footer-modal-c">
             <button class="btn btn-warning" id="closeModal" >Cerrar</button>
