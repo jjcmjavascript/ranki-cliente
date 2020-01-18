@@ -27,20 +27,20 @@
                     </div>
                     <a href="{{route('propiedad.crear')}}" class="ed-btn btn-info">
                         Publicar
-                    </a>                                        
+                    </a>
                     <div class="user-stats fl-wrap">
                         <ul>
                             <li>
-                                Publicaciones    
-                                <span>4</span>
+                                Publicaciones
+                                <span id="totalPublicaciones">0</span>
                             </li>
                             <li>
                                 Favoritos
-                                <span>32</span> 
+                                <span id="totalFavoritos">0</span>
                             </li>
                             <li>
-                                Reseñas 
-                                <span>2</span>  
+                                Reseñas
+                                <span id="totalResena">0</span>
                             </li>
                         </ul>
                     </div>

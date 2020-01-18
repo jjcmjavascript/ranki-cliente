@@ -268,8 +268,9 @@
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <p v-html="$options.filters.nl2br(val._comentario.comentario)"></p>
-                                                    <div class="reviews-comments-item-date">
-                                                        <span> <i class="far fa-calendar-check"></i>{{val._comentario.created_at | dateTime}}</span>
+                                                        <div class="reviews-comments-item-date">
+                                                            <span> <i class="far fa-calendar-check"></i>{{val._comentario.created_at | dateTime}}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
