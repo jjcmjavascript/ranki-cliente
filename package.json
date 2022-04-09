@@ -30,7 +30,7 @@
         "fuse.js": "^3.4.6",
         "laravel-vue-pagination": "^2.3.1",
         "leaflet": "^1.6.0",
-        "moment": "^2.24.0",
+        "moment": "^2.29.2",
         "moment-timezone": "^0.5.27",
         "path": "^0.12.7",
         "sweetalert2": "^9.3.1",
