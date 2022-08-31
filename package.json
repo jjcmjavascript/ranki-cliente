@@ -31,7 +31,7 @@
         "laravel-vue-pagination": "^2.3.1",
         "leaflet": "^1.6.0",
         "moment": "^2.24.0",
-        "moment-timezone": "^0.5.27",
+        "moment-timezone": "^0.5.35",
         "path": "^0.12.7",
         "sweetalert2": "^9.3.1",
         "vue-custom-range-slider": "^0.2.1",
